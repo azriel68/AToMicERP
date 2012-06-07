@@ -16,6 +16,5 @@
 		<td>[tier.nom]</td>
 	</tr>
 </table>
-<input type="button" class="valider" value="Valider" name="bt_valid" />
-<input type="button" class="valider" value="Valider" name="bt_valid" />
+[buttons;no_conv]
 [footer;no_conv]
