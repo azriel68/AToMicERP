@@ -258,11 +258,11 @@ class TObjetStd{
 		return $this->get_date('dt_maj','d/m/Y');
 	}
 	function set_dtcre($date){
-		$this->set_date('dt_cre', $date)	
+		$this->set_date('dt_cre', $date);	
 			
 	}
 	function set_dtmaj($date){
-		$this->set_date('dt_maj', $date)	
+		$this->set_date('dt_maj', $date);	
 	}
 	
 	function get_tab() {

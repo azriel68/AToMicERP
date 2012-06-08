@@ -1,4 +1,4 @@
-[header;no_conv]
+[tpl.header;htmlconv=no]
 <script language="JavaScript">
 	var tier = new TTier;
 	<?
@@ -10,11 +10,11 @@
 	?>	
 	
 </script>
-<table class="tableForm">
+<table class="tableForm" border="1">
 	<tr>
 		<td>Nom</td>
 		<td>[tier.nom]</td>
 	</tr>
 </table>
-[buttons;no_conv]
-[footer;no_conv]
+[tpl.buttons;htmlconv=no]
+[tpl.footer;htmlconv=no]
