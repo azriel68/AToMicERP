@@ -5,7 +5,7 @@
 	 * 
 	 */
 
-	 define('THEME','atom');
+	 
 	
 	 define('TEMPLATE_DIR',ROOT.'templates/');
 	 define('THEME_TEMPLATE_DIR',TEMPLATE_DIR.THEME.'/');
