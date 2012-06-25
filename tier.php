@@ -1,8 +1,6 @@
 <?
 	/*
-	 * 
-	 * Utilise la librairie TBS pour afficher ce front-end
-	 * 
+	 * front-end 
 	 */
 
 	require('config.php');
