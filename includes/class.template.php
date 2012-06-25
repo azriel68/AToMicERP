@@ -7,11 +7,11 @@ class TTemplate {
 			'tpl'=>array(
 					'header'=>TTemplate::header($TParam)
 					,'footer'=>TTemplate::footer($TParam)
+					,'buttons'=>TTemplate::getButtons()
 				)
 		));
 		
 		print TTemplate::render($tpl, $TBlock, $TField, $TParam);
-		
 	}
 	function render($tpl, $TBlock=array(), $TField=array(), $TParam=array()) {
 			
@@ -63,5 +63,37 @@ class TTemplate {
 			, array( 'weborama'=> array('subsection'=>$subsection) )	); 
 		
 	}
+	
+	function field($name, $param) {
+		
+		$type = isset($param['type'])?$param['type']:'none';
+		
+		switch ($type) {
+			case 'text':
+				$r = '<input name="'.$name.'" id="xfield_'.$name.'" value="" class="xfield" />';
+				
+				break;
+			case 'textarea':
+				$r = '<textarea name="'.$name.'" id="xfield_'.$name.'" class="xfield"></textarea>';
+				
+				break;
+			
+			default:
+				$r = '<span id="xfield_'.$name.'" class="xfield"></span>';
+				break;
+		}
+		
+		
+		return $r;
+		
+	}
+
+	function getButtons() {
+		
+		$r='<input type="button" name="bt_valid" value="valider" />';
+		
+		return $r;		
+	}
 }
+
 ?>
