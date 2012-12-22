@@ -92,7 +92,9 @@ global $TExtraFields;
 	
 }
 /*
- * Effectue les actions courantes de l'interface	 
+ * Effectue les actions courantes de l'interface	
+ * E : dbConnection, StdObjet
+ * S : actions effectuée 
  */
 function actions(&$db, &$objet) {
  	
@@ -122,5 +124,24 @@ function actions(&$db, &$objet) {
 	else {
 		return false;
 	}
+	
+}
+
+function fiche(&$objet, $template) {
+	
+	$tbs=new TTemplateTBS;
+	
+	
+	print $tbs->render($template
+		,array()
+		,array(
+			'tier'=>$objet->get_values()
+			,'tpl'=>array(
+				'header'=>file_get_contents(TPL_HEADER)
+				,'footer'=>file_get_contents(TPL_FOOTER)
+			)
+		)
+	); 
+	
 	
 }
