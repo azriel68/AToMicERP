@@ -1,6 +1,6 @@
 <?
 
-	reqquire('../inc.php');
+	require('../inc.php');
 	
 	$db=new Tdb;
 	

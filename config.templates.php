@@ -13,4 +13,4 @@
 	 define('TPL_TIER',THEME_TEMPLATE_DIR.'tier.php');
 	 
 
-?>
+	require(THEME_TEMPLATE_DIR.'config.php');

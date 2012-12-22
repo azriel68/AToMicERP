@@ -1,6 +1,6 @@
 <?
-	require('../config.php');
-	$dbname = DB_BASE;
+	require('../inc.php');
+	$dbname = DB_NAME;
 
 	$db=new Tdb;
 	$db->Execute('SHOW TABLES FROM '.$dbname);

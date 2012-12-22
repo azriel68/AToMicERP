@@ -30,10 +30,14 @@ global $TExtraFields;
  * S : null
  */
 function createExtraFields(&$db, &$objet, $typeObjet) {
+global $TExtraFields;	
+	print '<h2>Créations des champs de thème supplémentaires pour '.$typeObjet.'</h2>';
 	
 	$Tab = isset($TExtraFields[$typeObjet]) ? $TExtraFields[$typeObjet] : array();  
+
+
 	foreach($Tab as $field=>$info) {
-		
+		print "Test du champs : $field...";
 		$to_index=false;
 		if(is_array($info)) {
 			$type_champs= isset( $info['type'] ) ? $info['type'] : $info[0];	
@@ -55,6 +59,8 @@ function createExtraFields(&$db, &$objet, $typeObjet) {
 			 * Le champs est à créer
 			 */
 			
+			print "Création";
+			
 			switch ($type_champs) {
 				case 'chaine':
 					$mysqlType = 'VARCHAR( '.$length.' )';
@@ -74,9 +80,47 @@ function createExtraFields(&$db, &$objet, $typeObjet) {
 			if($to_index) $db->Execute("ALTER TABLE `".$objet->get_table()."` ADD INDEX (`".$field."`) ");
 			
 					
+		}
+		else {
+			print "Existant";
 		}	
 		
+		print '<br/>';
+		
 		unset($length);
+	}
+	
+}
+/*
+ * Effectue les actions courantes de l'interface	 
+ */
+function actions(&$db, &$objet) {
+ 	
+	if(isset($_REQUEST['action'])) {
+		switch ($_REQUEST['action']) {
+			case 'NEW':
+								
+				return 'new';
+				break;
+		
+			case 'VIEW':
+				$objet->load($db, $_REQUEST['id']);
+				break; 
+			case 'SAVE':
+			
+				$objet->set_values($db, $_POST);
+				return 'save';
+				break; 
+			case 'DELETE':
+				$objet->delete($db);
+				return 'delete';
+				break; 
+			
+		}
+		
+	}
+	else {
+		return false;
 	}
 	
 }
