@@ -9,12 +9,12 @@
 	$db=new Tdb;
 	actions($db, $tier);
 	
-	TTemplate::show(TPL_TIER
+	print TTemplateTBS::render(TPL_TIER
 		,array()
 		,array(
 			'tier'=>$tier->get_values()
 		 )
-	)); 
+	); 
 	
 
 	
