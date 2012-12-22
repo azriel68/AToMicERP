@@ -3,7 +3,8 @@
 	 * front-end 
 	 */
 
-	require('config.php');
+	require('inc.php');
+	
 	
 	TTemplate::show(TPL_TIER,array(
 		'tier'=>array(
