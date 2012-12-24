@@ -137,11 +137,48 @@ function fiche(&$objet, $template) {
 		,array(
 			'tier'=>$objet->get_values()
 			,'tpl'=>array(
-				'header'=>file_get_contents(TPL_HEADER)
-				,'footer'=>file_get_contents(TPL_FOOTER)
+				'header'=>_header()
+				,'footer'=>_footer()
+				,'buttons'=>_buttons()
+				,'self'=>$_SERVER['PHP_SELF']
 			)
 		)
 	); 
 	
 	
+}
+function _header() {
+	$tbs=new TTemplateTBS;
+	
+	print $tbs->render(TPL_HEADER,
+		array()
+		,array(
+			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE)
+		)
+	);
+	
+}
+function _footer() {
+	$tbs=new TTemplateTBS;
+	
+	print $tbs->render(TPL_FOOTER,
+		array()
+		,array(
+		
+		)
+	);
+	
+}
+function _buttons() {
+	ob_start();		
+	
+	?><input type="button" name="cancel" class="cancel" value="Annuler" /><?
+		
+	if(isset($_REQUEST['VIEW'])) {
+		?><input type="button" name="delete" class="delete" value="Supprimer" /><?
+	}
+	
+	?><input type="submit" name="valid" class="valid" value="Valider" /><?
+	
+	return ob_get_clean();
 }
