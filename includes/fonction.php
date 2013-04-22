@@ -64,7 +64,7 @@ function _header(&$conf) {
 	print $tbs->render(TPL_HEADER,
 		array('menuTop'=>$conf->menu->top)
 		,array(
-			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE)
+			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
 		)
 	);
 	
