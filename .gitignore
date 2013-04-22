@@ -1,4 +1,4 @@
 .settings/
 .project
-config.php
+./config.php
 view/
