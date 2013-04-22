@@ -20,7 +20,6 @@ class TAtomic {
 		$handle = opendir($dir); 
 		
 		while (false !== ($file = readdir($handle))) {
-			set_time_limit(30);  
 		   	if($file!='.' && $file!='..'){
 				if(is_dir($dir.$file)){
 						
