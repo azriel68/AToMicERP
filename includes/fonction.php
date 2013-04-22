@@ -131,11 +131,12 @@ function fiche(&$objet, $template) {
 	
 	$tbs=new TTemplateTBS;
 	
+	$className = get_class($objet);
 	
 	print $tbs->render($template
 		,array()
 		,array(
-			'tier'=>$objet->get_values()
+			$className=>$objet->get_values()
 			,'tpl'=>array(
 				'header'=>_header()
 				,'footer'=>_footer()
