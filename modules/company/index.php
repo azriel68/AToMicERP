@@ -4,7 +4,13 @@
 	
 	$company=new TCompany;
 	$db=new TPDOdb;
-	actions($db, $company);
-	fiche($conf, $company, TAtomic::getTemplate($conf, $company));
+
+	if($res = actions($db, $company) !==false ) {
+		fiche($conf, $company, TAtomic::getTemplate($conf, $company));
+		
+	}
+	else {
+		liste($db, $company);
+	}
 	
 	$db->close();

@@ -36,6 +36,13 @@ function actions(&$db, &$object) {
 	
 }
 
+function liste(&$db, &$object) {
+	
+	$r=new TSSRenderControler($object);
+	$r->liste($db);
+	
+}
+
 function fiche(&$conf, &$object, $template) {
 	
 	$tbs=new TTemplateTBS;
@@ -60,9 +67,12 @@ function fiche(&$conf, &$object, $template) {
 function _header(&$conf) {
 	$tbs=new TTemplateTBS;
 	
-	
+	//print_r($conf);
 	return $tbs->render(TPL_HEADER,
-		array('menuTop'=>$conf->menu->top)
+		array(
+			'menuTop'=>$conf->menu->top
+			,'js'=>$conf->js
+		)
 		,array(
 			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
 		)

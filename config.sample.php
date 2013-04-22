@@ -7,7 +7,7 @@
 
 	define('DB_HOST','localhost');
 	define('DB_NAME','atomicERP');
-	define('DB_USER','ROOT');
+	define('DB_USER','root');
 	define('DB_PASS','**********'); /* Your user password Here */
 	define('DB_DRIVER','mysqli');
 
