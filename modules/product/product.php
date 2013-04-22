@@ -10,6 +10,6 @@
 	
 	actions($db, $product);
 	
-	fiche($product, TPL_TIER);
+	fiche($product, TAtomic::getTemplate($conf, $product));
 	
 	$ATMdb->close();

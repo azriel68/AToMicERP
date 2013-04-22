@@ -3,7 +3,7 @@ class TDocument extends TObjetStd {
 	function __construct() { 
 		parent::set_table('document');
 		parent::add_champs('number','type=chaine;');
-		parent::add_champs('id_tier','type=entier;index;');
+		parent::add_champs('id_company','type=entier;index;');
 		
 		TAtomic::initExtraFields($this);
 		
@@ -30,9 +30,9 @@ class TDocumentLigne extends TObjetStd {
 }
 
 
-class TDocumentReglement extends TObjetStd {
+class TReglement extends TObjetStd {
 	function __construct() { 
-		parent::set_table('document_reglement');
+		parent::set_table('reglement');
 		parent::add_champs('title,description','type=chaine;');
 		parent::add_champs('price','type=float;');
 		parent::add_champs('id_document','type=entier;index;');
