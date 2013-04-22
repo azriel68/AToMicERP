@@ -26,7 +26,7 @@ class TAtomic {
 					if(is_file($dir.$file.'/config/config.php')) require($dir.$file.'/config/config.php');
 					if(is_file($dir.$file.'/lib/function.php')) require($dir.$file.'/lib/function.php');
 					
-					if(is_file($dir.$file.'/js/scripts.js')) $conf->js[]=HTTP.'modules/'.$file.'/js/scripts.js';
+					if(is_file($dir.$file.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$file.'/js/script.js';
 					if(is_dir($dir.$file.'/class/')) {
 						TAtomic::loadClass($conf, $dir.$file.'/class/');
 					}

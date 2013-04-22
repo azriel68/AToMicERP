@@ -60,9 +60,12 @@ function fiche(&$objet, $template) {
 function _header(&$conf) {
 	$tbs=new TTemplateTBS;
 	
-	
+	//print_r($conf);
 	return $tbs->render(TPL_HEADER,
-		array('menuTop'=>$conf->menu->top)
+		array(
+			'menuTop'=>$conf->menu->top
+			,'js'=>$conf->js
+		)
 		,array(
 			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
 		)
