@@ -35,7 +35,12 @@ function actions(&$db, &$objet) {
 	}
 	
 }
-
+function liste(&$db, &$object) {
+	
+	$r=new TSSRenderControler($object);
+	$r->liste($db);
+	
+}
 function fiche(&$objet, $template) {
 	
 	$tbs=new TTemplateTBS;

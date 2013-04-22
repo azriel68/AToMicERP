@@ -2,7 +2,7 @@
 class TCompany extends TObjetStd {
 	function __construct() { 
 		parent::set_table('company');
-		//parent::add_champs('','type=entier;');
+		parent::add_champs('isEntity','type=entier;index;');
 		parent::add_champs('name','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
