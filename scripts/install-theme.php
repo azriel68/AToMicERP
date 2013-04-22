@@ -4,9 +4,9 @@
 	
 	$db=new Tdb;
 	
-	$tier=new TTier;
+	$company=new TCompany;
 	
-	createExtraFields($db, $tier , 'tier' );
+	createExtraFields($db, $company , 'company' );
 
 	
 	$db->close();
