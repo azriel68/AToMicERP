@@ -43,7 +43,7 @@ class TAtomic {
 		
 		while (false !== ($file = readdir($handle))) {
 			set_time_limit(30);  
-		   	if(substr($file,0,4)=='class'){
+		   	if(substr($file,0,5)=='class'){
 					require($dir.$file);
 			}
 	   }
