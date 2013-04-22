@@ -5,8 +5,8 @@ class TAtomic {
 	static function getTemplate(&$conf, &$object, $mode='fiche') {
 		$objectName = get_class($object);
 		
-		if(isset($conf->template->{$objectName}->{$mode})) {
-			return $conf->template->{$objectName}->{$mode};
+		if(isset($conf->template->{$object->objectName}->{$mode})) {
+			return $conf->template->{$object->objectName}->{$mode};
 		}
 		else {
 			return 'ErrorBadTemplateDefinition';
