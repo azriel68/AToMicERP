@@ -61,7 +61,7 @@ function _header(&$conf) {
 	$tbs=new TTemplateTBS;
 	
 	
-	print $tbs->render(TPL_HEADER,
+	return $tbs->render(TPL_HEADER,
 		array('menuTop'=>$conf->menu->top)
 		,array(
 			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
@@ -72,7 +72,7 @@ function _header(&$conf) {
 function _footer(&$conf) {
 	$tbs=new TTemplateTBS;
 	
-	print $tbs->render(TPL_FOOTER,
+	return $tbs->render(TPL_FOOTER,
 		array()
 		,array(
 		
