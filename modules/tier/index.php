@@ -1,13 +1,9 @@
 <?
-	/*
-	 * front-end 
-	 */
-
-	require('inc.php');
+	require('../../inc.php');
 	
 	$tier=new TTier;
 	$db=new Tdb;
 	actions($db, $tier);
-	fiche($tier, TPL_TIER);
+	fiche($tier, TAtomic::getTemplate($conf, $tier));
 	
 	$db->close();

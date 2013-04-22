@@ -8,6 +8,7 @@
 	require('class.atomic.php'); 
 	
 	$conf = new stdClass;
+	$conf->menu = new stdClass;
 	$conf->menu->top = array();
 	$conf->menu->left = array();
 	$conf->modules = array();

@@ -57,18 +57,19 @@ function fiche(&$objet, $template) {
 	
 	
 }
-function _header() {
+function _header(&$conf) {
 	$tbs=new TTemplateTBS;
 	
+	
 	print $tbs->render(TPL_HEADER,
-		array()
+		array('menuTop'=>$conf->menu->top)
 		,array(
 			'tpl'=>array('templateRoot'=>HTTP_TEMPLATE)
 		)
 	);
 	
 }
-function _footer() {
+function _footer(&$conf) {
 	$tbs=new TTemplateTBS;
 	
 	print $tbs->render(TPL_FOOTER,

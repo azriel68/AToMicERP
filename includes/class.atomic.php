@@ -2,10 +2,22 @@
 
 class TAtomic {
 	
+	static function getTemplate(&$conf, &$object, $mode='fiche') {
+		$objectName = get_class($object);
+		
+		if(isset($conf->template->{$objectName}->{$mode})) {
+			return $conf->template->{$objectName}->{$mode};
+		}
+		else {
+			return 'ErrorBadTemplateDefinition';
+		}
+		
+	}
+	
 	static function loadModule(&$conf) {
 		
 		$dir = ROOT.'modules/';
-		$handle = readdir($dir); 
+		$handle = opendir($dir); 
 		
 		while (false !== ($file = readdir($handle))) {
 			set_time_limit(30);  
@@ -28,7 +40,7 @@ class TAtomic {
 	}
 	
 	static function loadClass(&$conf, $dir) {
-		$handle = readdir($dir); 
+		$handle = opendir($dir); 
 		
 		while (false !== ($file = readdir($handle))) {
 			set_time_limit(30);  
