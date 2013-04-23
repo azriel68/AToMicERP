@@ -57,12 +57,12 @@ class TAtomic {
 	   closedir($handle);
 	}
 	
-	static function createMenu(&$conf) {
+	static function sortMenu(&$conf) {
 		$menu = array();
 		foreach ($conf->menu->top as $menuElement) {
 			$menu[$menuElement['position']] = $menuElement;
 		}
-		sort($menu, SORT_NUMERIC);
+		ksort($menu, SORT_NUMERIC);
 		$conf->menu->top = $menu;
 	}
 	

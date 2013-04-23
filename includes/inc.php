@@ -15,5 +15,5 @@
 	$conf->js = array();
 	
 	TAtomic::loadModule($conf);
-	TAtomic::createMenu($conf);
+	TAtomic::sortMenu($conf);
 	
