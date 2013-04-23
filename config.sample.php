@@ -13,4 +13,15 @@
 
 	define('THEME','atom');
 	
-	
+	/*
+	 * Suite au prob de sens parsing répertoire, et temporairement jusqu'à prise de décision
+	 */
+	$conf->moduleEnabled=array(
+		'address'=>true
+		,'bank'=>true
+		,'company'=>true
+		,'contact'=>true
+		,'document'=>true
+		,'product'=>true
+		,'user'=>true
+	);

@@ -6,7 +6,7 @@ class TPrice extends TObjetStd {
 		parent::add_champs('id_product','type=entier;index;');
 		parent::add_champs('price,priceHT,tva','type=float;');
 		
-		initExtraFields($this);
+		TAtomic::initExtraFields($this);
 		
 		parent::start();
 		parent::_init_vars();

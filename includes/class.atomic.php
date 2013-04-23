@@ -41,7 +41,7 @@ class TAtomic {
 	static function loadModule(&$conf) {
 		
 		$dir = ROOT.'modules/';
-		$handle = opendir($dir); 
+		/*$handle = opendir($dir); 
 		
 		while (false !== ($file = readdir($handle))) {
 		   	if($file!='.' && $file!='..'){
@@ -59,6 +59,22 @@ class TAtomic {
 			}
 	   }
 	   closedir($handle);
+		*/
+		print_r($conf->moduleEnabled);
+	   foreach($conf->moduleEnabled as $module=>$options) {
+	   				
+	   			if(is_dir($dir.$module)){
+						
+					if(is_file($dir.$module.'/config/config.php')) require($dir.$module.'/config/config.php');
+					if(is_file($dir.$module.'/lib/function.php')) require($dir.$module.'/lib/function.php');
+					
+					if(is_file($dir.$module.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$module.'/js/script.js';
+					if(is_dir($dir.$module.'/class/')) {
+						TAtomic::loadClass($conf, $dir.$module.'/class/');
+					}
+					
+				}
+	   }	
 		
 	}
 	

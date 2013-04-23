@@ -5,7 +5,7 @@ class TProduct extends TObjetStd {
 		//parent::add_champs('','type=entier;');
 		parent::add_champs('name','type=chaine;');
 		
-		initExtraFields($this);
+		TAtomic::initExtraFields($this);
 		
 		parent::start();
 		

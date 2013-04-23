@@ -5,7 +5,7 @@
 		'name'=>"Company"
 		,'id'=>'company'
 		,'position'=>1
-		,'url'=>HTTP.'modules/company/index.php'
+		,'url'=>HTTP.'modules/company/company.php'
 	);
 
 	
