@@ -60,7 +60,7 @@ class TAtomic {
 	   }
 	   closedir($handle);
 		*/
-		print_r($conf->moduleEnabled);
+	//	print_r($conf->moduleEnabled);
 	   foreach($conf->moduleEnabled as $module=>$options) {
 	   				
 	   			if(is_dir($dir.$module)){
@@ -126,75 +126,4 @@ class TAtomic {
 		
 	}
 	
-	/*
-	 * Fonction d'initialisation des ExtraFields du thème en cours dans la base
-	 * E : dbConnector, objet standart , 'type extrafields'
-	 * S : null
-	 */
-	static function createExtraFields(&$db, &$objet, $typeObjet='') {
-		// AA à remplacer par la méthode standard
-	global $TExtraFields;	
-	
-		if($typeObjet=='') $typeObjet = get_class($objet);
-	
-		print '<h2>Créations des champs de thème supplémentaires pour '.$typeObjet.'</h2>';
-		
-		$Tab = isset($TExtraFields[$typeObjet]) ? $TExtraFields[$typeObjet] : array();  
-	
-	
-		foreach($Tab as $field=>$info) {
-			print "Test du champs : $field...";
-			$to_index=false;
-			if(is_array($info)) {
-				$type_champs= isset( $info['type'] ) ? $info['type'] : $info[0];	
-				$length = isset( $info['length'] ) ? $info['lenght'] : $info[1];	
-				$to_index =  isset( $info['index'] ) ? $info['index'] : $info[2];					
-			}
-			else {
-				$type_champs=$info;
-			}
-			
-			if(!isset($length)) {
-				if($type_champs=='chaine')$length = 255;
-				else if($type_champs=='entier')$length = 11;
-			}
-			
-			$db->Execute("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '".$objet->get_table()."' AND column_name LIKE '".$field."'");
-			if(!$db->Get_line()) {
-				/*
-				 * Le champs est à créer
-				 */
-				
-				print "Création";
-				
-				switch ($type_champs) {
-					case 'chaine':
-						$mysqlType = 'VARCHAR( '.$length.' )';
-						break;
-					case 'entier':
-						$mysqlType = 'INT( '.$length.' )';
-						break;
-					case 'texte':
-						$mysqlType = 'TEXT';
-						break;
-					case 'date':
-						$mysqlType = 'DATETIME';
-						break;
-				}
-				
-				$db->Execute("ALTER TABLE `".$objet->get_table()."` ADD  `".$field."` ".$mysqlType." NOT NULL ");		
-				if($to_index) $db->Execute("ALTER TABLE `".$objet->get_table()."` ADD INDEX (`".$field."`) ");
-				
-						
-			}
-			else {
-				print "Existant";
-			}	
-			
-			print '<br/>';
-			
-			unset($length);
-		}
-		
-	}
 }
