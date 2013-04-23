@@ -9,9 +9,9 @@
 		,array('TBoxe'=>$TBoxe)
 		,array(
 			'tpl'=>array(
-				'header'=>_header($conf)
-				,'footer'=>_footer($conf)
-				,'buttons'=>_buttons()
+				'header'=>TTemplate::header($conf)
+				,'footer'=>TTemplate::footer($conf)
+				,'buttons'=>TTemplate::buttons()
 				,'self'=>$_SERVER['PHP_SELF']
 			)
 		)
