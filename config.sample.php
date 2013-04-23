@@ -13,6 +13,8 @@
 
 	define('THEME','atom');
 	
+	define('ADMIN','admin');
+	
 	/*
 	 * Suite au prob de sens parsing répertoire, et temporairement jusqu'à prise de décision
 	 */

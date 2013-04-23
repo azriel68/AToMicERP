@@ -2,7 +2,7 @@
 class TContact extends TObjetStd {
 	function __construct() { 
 		parent::set_table('contact');
-		parent::add_champs('isUser,idAdmin','type=entier;index;');
+		parent::add_champs('isUser,isAdmin,id_company','type=entier;index;');
 		parent::add_champs('login,password','type=chaine;index;');
 		parent::add_champs('name,firstname,phone1,phone2,fax','type=chaine;');
 		
