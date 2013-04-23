@@ -6,4 +6,18 @@ body {
 	margin:0 0 0 0;
 	font-family: arial;
 	font-size: 14px;
+	background: url("../images/background.jpg") no-repeat fixed center center / cover transparent;
+	color: #464646;
+}
+a {
+	color: #2AA8B9;
+    font-weight: bold
+}
+div.header {
+	background-color: rgba(255, 255, 255, 0.8);
+    text-align:left;
+    
+}
+div.header h1 {
+	float:left;	
 }

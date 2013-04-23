@@ -12,7 +12,7 @@ class TAtomic {
 		}
 		
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
-			$user->login($_REQUEST['login'], $_REQUEST['password']);
+			$user->login($db, $_REQUEST['login'], $_REQUEST['password']);
 		}
 		
 		return $user;
@@ -26,8 +26,13 @@ class TAtomic {
 		return $translated_sentence;
 	}
 	
-	static function getTemplate(&$conf, &$object, $mode='fiche') {
-		$objectName = get_class($object);
+	static function getTemplate(&$conf, $object, $mode='fiche') {
+		if(is_object($object)) {
+			$objectName = get_class($object);
+		}
+		else {
+			$objectName = $object;
+		}	
 		
 		if(isset($conf->template->{$objectName}->{$mode})) {
 			return $conf->template->{$objectName}->{$mode};

@@ -6,15 +6,13 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<link rel="stylesheet" href="[tpl.templateRoot]css/jquery.mobile-1.3.1.min.css" />
-		<link rel="stylesheet" href="[tpl.templateRoot]css/jquery.mobile.theme-1.3.1.min.css" />
-		<link rel="stylesheet" href="[tpl.templateRoot]css/jquery.mobile.structure-1.3.1.min.css" />
-		<link rel="stylesheet" href="[tpl.templateRoot]css/atom.min.css" />
+		<link rel="stylesheet" href="[tpl.templateRoot]css/jquery-ui.css" />
 		<link rel="stylesheet" href="[tpl.templateRoot]css/atom.css" />
+		
 
 		<script type="text/javascript" src="[tpl.templateRoot]js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="[tpl.templateRoot]js/jquery.mobile-1.3.1.min.js"></script>
-
+		<script type="text/javascript" src="[tpl.templateRoot]js/jquery-ui.min.js"></script>
+	
 		<script type="text/javascript" src="[js.val;block=script]"></script>
 
 	</head>
@@ -23,14 +21,15 @@
 
 		<!-- front start -->
 		<div data-role="page" id="[tpl.id]" data-title="[tpl.title]">
-			<div data-role="header">
-				<h1>AToMic - ERP - Community Edition</h1>
-			</div>
-
-			<div data-role="navbar">
+			<div class="header" data-role="header">
+				<h1>AToMic ERP</h1>
+				<div class="menu">
 				<ul>
 					<li>
 						<a href="[menuTop.url;block=li]">[menuTop.name]</a>
 					</li>
 				</ul>
+				</div>
 			</div>
+
+			

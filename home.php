@@ -5,7 +5,7 @@
 	$TBoxe=array();
 
 	$tbs = new TTemplateTBS;
-	print $tbs->render(TPL_HOME
+	print $tbs->render(TAtomic::getTemplate($conf, 'home')
 		,array('TBoxe'=>$TBoxe)
 		,array(
 			'tpl'=>array(
