@@ -49,6 +49,16 @@ class TAtomic {
 	   }
 	   closedir($handle);
 	}
+	
+	static function createMenu(&$conf) {
+		$menu = array();
+		foreach ($conf->menu->top as $menuElement) {
+			$menu[$menuElement['position']] = $menuElement;
+		}
+		sort($menu, SORT_NUMERIC);
+		$conf->menu->top = $menu;
+	}
+	
 	/*
 	 * Fonction d'initialisation des ExtraFields du thème en cours pour l'objet
 	 * E : objet standart , 'type extrafields'

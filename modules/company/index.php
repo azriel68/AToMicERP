@@ -1,6 +1,5 @@
 <?
 	require('../../inc.php');
-	pre($conf);
 	
 	$company=new TCompany;
 	$db=new TPDOdb;
