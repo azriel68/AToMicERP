@@ -6,6 +6,7 @@
 	$conf->menu->left = array();
 	$conf->modules = array();
 	$conf->js = array();
+	$conf->list = array();
 
 	require('config.php');
 	

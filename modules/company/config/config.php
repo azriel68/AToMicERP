@@ -17,3 +17,7 @@
 
 	@$conf->template->company->fiche = './template/company.html';
 	
+	@$conf->list->company->index=array(
+		'sql'=>"SELECT * FROM company ORDER BY name"
+		,'param'=>array()
+	);
