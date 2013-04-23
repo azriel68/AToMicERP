@@ -1,11 +1,11 @@
 <?
 	require('../../inc.php');
-	pre($conf);
 	
 	$company=new TCompany;
 	$db=new TPDOdb;
+
 	if($res = actions($db, $company) !==false ) {
-		fiche($company, TAtomic::getTemplate($conf, $company));
+		fiche($conf, $company, TAtomic::getTemplate($conf, $company));
 		
 	}
 	else {

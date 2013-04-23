@@ -15,7 +15,7 @@ function __tr($sentence) {
  * E : dbConnection, StdObjet
  * S : actions effectuée 
  */
-function actions(&$db, &$objet) {
+function actions(&$db, &$object) {
  	
 	if(isset($_REQUEST['action'])) {
 		switch ($_REQUEST['action']) {
@@ -25,15 +25,15 @@ function actions(&$db, &$objet) {
 				break;
 		
 			case 'VIEW':
-				$objet->load($db, $_REQUEST['id']);
+				$object->load($db, $_REQUEST['id']);
 				break; 
 			case 'SAVE':
 			
-				$objet->set_values($db, $_POST);
+				$object->set_values($db, $_POST);
 				return 'save';
 				break; 
 			case 'DELETE':
-				$objet->delete($db);
+				$object->delete($db);
 				return 'delete';
 				break; 
 			
@@ -45,25 +45,27 @@ function actions(&$db, &$objet) {
 	}
 	
 }
+
 function liste(&$db, &$object) {
 	
 	$r=new TSSRenderControler($object);
 	$r->liste($db);
 	
 }
-function fiche(&$objet, $template) {
+
+function fiche(&$conf, &$object, $template) {
 	
 	$tbs=new TTemplateTBS;
 	
-	$className = get_class($objet);
+	$className = get_class($object);
 	
 	print $tbs->render($template
 		,array()
 		,array(
-			$className=>$objet->get_values()
+			$object->objectName=>$object->get_values()
 			,'tpl'=>array(
-				'header'=>_header()
-				,'footer'=>_footer()
+				'header'=>_header($conf)
+				,'footer'=>_footer($conf)
 				,'buttons'=>_buttons()
 				,'self'=>$_SERVER['PHP_SELF']
 			)

@@ -12,8 +12,8 @@ class TAtomic {
 	static function getTemplate(&$conf, &$object, $mode='fiche') {
 		$objectName = get_class($object);
 		
-		if(isset($conf->template->{$objectName}->{$mode})) {
-			return $conf->template->{$objectName}->{$mode};
+		if(isset($conf->template->{$object->objectName}->{$mode})) {
+			return $conf->template->{$object->objectName}->{$mode};
 		}
 		else {
 			return 'ErrorBadTemplateDefinition';
@@ -56,6 +56,16 @@ class TAtomic {
 	   }
 	   closedir($handle);
 	}
+	
+	static function createMenu(&$conf) {
+		$menu = array();
+		foreach ($conf->menu->top as $menuElement) {
+			$menu[$menuElement['position']] = $menuElement;
+		}
+		sort($menu, SORT_NUMERIC);
+		$conf->menu->top = $menu;
+	}
+	
 	/*
 	 * Fonction d'initialisation des ExtraFields du thème en cours pour l'objet
 	 * E : objet standart , 'type extrafields'
