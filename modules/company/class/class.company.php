@@ -1,7 +1,7 @@
 <?
 class TCompany extends TObjetStd {
 	function __construct() {
-		$this->objectName = 'company';
+		
 		parent::set_table('company');
 		
 		parent::add_champs('isEntity','type=entier;index;');

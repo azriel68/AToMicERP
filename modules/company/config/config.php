@@ -15,9 +15,9 @@
 		,'class'=>array('TCompany')
 	);
 
-	@$conf->template->company->fiche = './template/company.html';
+	@$conf->template->TCompany->fiche = './template/company.html';
 	
-	@$conf->list->company->index=array(
+	@$conf->list->TCompany->index=array(
 		'sql'=>"SELECT * FROM company ORDER BY name"
 		,'param'=>array()
 	);
