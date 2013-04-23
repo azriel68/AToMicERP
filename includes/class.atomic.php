@@ -2,6 +2,23 @@
 
 class TAtomic {
 	
+	static function getUser(&$db) {
+			
+		if(isset($_SESSION['user'])) {
+			$user = $_SESSION['user'];
+		}
+		else {
+			$user = new TUser;
+		}
+		
+		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
+			$user->login($_REQUEST['login'], $_REQUEST['password']);
+		}
+		
+		return $user;
+		
+	}
+	
 	static function translate(&$conf, $sentence) {
 		
 		$translated_sentence = $sentence;

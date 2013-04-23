@@ -2,17 +2,13 @@
 
 	require('inc.php');
 
-	$TBoxe=array();
+	$db=new TPDOdb;
 
-	$tbs = new TTemplateTBS;
-	print $tbs->render(TPL_HOME
-		,array('TBoxe'=>$TBoxe)
-		,array(
-			'tpl'=>array(
-				'header'=>_header($conf)
-				,'footer'=>_footer($conf)
-				,'buttons'=>_buttons()
-				,'self'=>$_SERVER['PHP_SELF']
-			)
-		)
-	); 
+	$user = TAtomic::getUser($db);
+
+	if($user->isLogged()) {
+		header('location:home.php');		
+	}
+	else {
+		login();
+	}

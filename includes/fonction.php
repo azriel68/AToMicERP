@@ -9,7 +9,9 @@ function __tr($sentence) {
 	return TAtomic::translate($conf, $sentence);
 	
 }
-
+function login() {
+	
+}
 /*
  * Effectue les actions courantes de l'interface	
  * E : dbConnection, StdObjet
