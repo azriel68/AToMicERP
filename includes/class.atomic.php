@@ -2,6 +2,13 @@
 
 class TAtomic {
 	
+	static function translate(&$conf, $sentence) {
+		
+		$translated_sentence = $sentence;
+		
+		return $translated_sentence;
+	}
+	
 	static function getTemplate(&$conf, &$object, $mode='fiche') {
 		$objectName = get_class($object);
 		

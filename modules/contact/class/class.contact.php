@@ -9,6 +9,9 @@ class TContact extends TObjetStd {
 		
 		parent::start();
 		parent::_init_vars();
+
+		$this->setChild('TAddress', 'id_contact');
+
 	}
 }
 
