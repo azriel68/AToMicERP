@@ -8,7 +8,10 @@ class TProduct extends TObjetStd {
 		initExtraFields($this);
 		
 		parent::start();
+		
 		parent::_init_vars();
+		
+		$this->setChild('TPrice','id_product');
 	}
 }
 
