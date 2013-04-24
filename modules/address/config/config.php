@@ -1,7 +1,6 @@
 <?php
 
-	$conf->modules[]=array(
+	$conf->modules['address']=array(
 		'name'=>'Adresses'
-		,'id'=>'address'
 		,'class'=>array('TAddress')
 	);

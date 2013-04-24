@@ -7,7 +7,10 @@ require ('../inc.php');
 
 $db = new TPDOdb;
 
-foreach ($conf->modules as $module) {
+foreach (array_merge($conf->moduleCore, $conf->moduleEnabled) as $moduleName=>$options) {
+	
+	$module = $conf->modules[$moduleName];
+	
 	if (isset($module['class'])) {
 
 		foreach ($module['class'] as $className) {

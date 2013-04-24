@@ -1,5 +1,5 @@
 <?php
-class TAddress extends TObjetStd {
+class TDictionnary extends TObjetStd {
 	function __construct() { 
 		parent::set_table('dictionnary');
 		//parent::add_champs('','type=entier;');

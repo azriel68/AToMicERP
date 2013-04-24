@@ -15,12 +15,14 @@ function __tr($sentence) {
  */
 function GetLanguageCodeISO6391()
 {
-	$hi_code = "";
+	$hi_code = '';
 	$hi_quof = 0;
-	$langs = explode(",",$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+	$langs = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+	
 	foreach($langs as $lang)
 	{
-		list($codelang,$quoficient) = explode(";",$lang);
+		
+		@list($codelang,$quoficient) = explode(';',$lang);
 		if($quoficient == NULL) $quoficient = 1;
 		if($quoficient > $hi_quof)
 		{

@@ -1,7 +1,6 @@
 <?php
 
-	$conf->modules[]=array(
+	$conf->modules['dictionnary']=array(
 		'name'=>'Dictionnary'
-		,'id'=>'dictionnary'
 		,'class'=>array('TDictionnary')
 	);
