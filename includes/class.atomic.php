@@ -78,7 +78,7 @@ class TAtomic {
 		$dir = ROOT.'modules/';
 
 		if(empty($langCode) || $langCode == 'auto') {
-			$langCode=empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])? DEFAULT_LANG : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
+			$langCode=empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])? DEFAULT_LANG : GetLanguageCodeISO6391();
 		}
 		
 		// Load lang files from modules only if core or enabled module
