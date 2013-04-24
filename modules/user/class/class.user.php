@@ -35,8 +35,8 @@ class TUser extends TContact {
 	function login (&$db, $login, $pwd, $id_entity=0) {
 			
 		$db->Execute("SELECT id FROM ".$this->get_table()." 
-			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd))."
-			AND status = 1";
+			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd)."
+			AND status = 1");
 			
 		if($db->Get_line()) {
 			
