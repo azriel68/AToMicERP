@@ -9,41 +9,41 @@ class TUser extends TContact {
 		$this->setChild('TGroupUser', 'id_user');
 		
 		$this->t_connexion = 0;
-		$this->lang = 'fr';
-		$this->rights = new stdClass;
+		$this->id_entity = 0;
+		
+		$this->lang = DEFAULT_LANG;
+		$this->rights = array();
 		
 	}
 	
-	function load(&$db, $id, $entity) {
+	function load(&$db, $id) {
 		parent::load($db, $id);
-		$this->load_right($db, $entity);
+		$this->load_right($db);
 	}
 	
-	function load_right(&$db, $id_entity) {
+	function load_right(&$db) {
 		foreach($this->TGroupUser as $groupUser) {
-			if($groupUser->id_entity == $id_entity) {
 				$TRight = TRequeteCore::get_id_from_what_you_want($db, 'right', array('id_group'=>$groupUser->id_group));
 				foreach($TRight as $id_right) {
 					$right = new TRight;
 					$right->load($db, $id_right);
-					$this->rights->{$right->module}->{$right->submodule}->{$right->action} = true;
+					$this->rights[$groupUser->id_entity]->{$right->module}->{$right->submodule}->{$right->action} = true;
 				}
-			}
 		}
 	}
 	
-	function login (&$db, $login, $pwd, $id_entity=0) {
-			
-		$db->Execute("SELECT id FROM ".$this->get_table()." 
+	function login (&$db, $login, $pwd, $id_entity) {
+		
+		$sql = "SELECT id FROM ".$this->get_table()." 
 			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd)."
-			AND status = 1");
+			AND status = 1";
+		$db->Execute($sql);
 			
 		if($db->Get_line()) {
-			
+			$this->id_entity = $id_entity;	
 			$this->t_connexion = time();
-			
-			return $this->load($db, $db->Get_field('id'), $id_entity);
-			
+			$db->debug=true;
+			return $this->load($db, $db->Get_field('id'));
 		}	
 		/*else  {
 			print "ErrorBadLogin";
@@ -54,7 +54,7 @@ class TUser extends TContact {
 	
 	function isLogged() {
 		
-		if(!empty($_SESSION['user']) && $this->t_connexion > 0 ) {
+		if(!empty($_SESSION['user']) && !empty($this->rights[$this->id_entity])  && $this->t_connexion > 0 ) {
 			return true;
 			
 		}
@@ -64,7 +64,7 @@ class TUser extends TContact {
 	function right($module='main', $submodule='main', $action='view') {
 		
 		if($this->isAdmin) return true;
-		else if(!empty($this->rights->{$module}->{$submodule}->{$action})) return true;
+		else if(!empty($this->rights[$this->id_entity]->{$module}->{$submodule}->{$action})) return true;
 		
 		return false;
 		

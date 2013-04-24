@@ -12,7 +12,7 @@ class TAtomic {
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
 			$db=new TPDOdb;
 			//$db->debug=true;
-			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['entity']);
+			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['id_entity']);
 			$db->close();
 			/*print_r($user);
 			exit;*/

@@ -12,5 +12,5 @@
 	$conf->modules['user']=array(
 		'name'=>'User'
 		,'id'=>'TUser'
-		,'class'=>array('TUser')
+		,'class'=>array('TUser','TRight','TGroup','TGroupUser')
 	);
