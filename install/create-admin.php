@@ -17,9 +17,10 @@
 	$company->TContact[$i]->isUser = 1;
 	$company->TContact[$i]->isAdmin = 1;
 
-	$company->TContact[$i]->name = ADMIN;
+	$company->TContact[$i]->lastname = ADMIN;
 	$company->TContact[$i]->login = ADMIN;
 	$company->TContact[$i]->password = $password;
+	$company->TContact[$i]->status = 1;
 
 	$company->save($db);
 	
