@@ -42,7 +42,7 @@ class TUser extends TContact {
 			
 			$this->t_connexion = time();
 			
-			return $this->load($db, $db->Get_field('id'), $entity);
+			return $this->load($db, $db->Get_field('id'), $id_entity);
 			
 		}	
 		/*else  {
