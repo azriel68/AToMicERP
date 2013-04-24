@@ -9,8 +9,7 @@
 	);
 
 	
-	$conf->modules[]=array(
+	$conf->modules['product']=array(
 		'name'=>'Produit'
-		,'id'=>'TProduct'
 		,'class'=>array('TProduct','TPrice')
 	);
