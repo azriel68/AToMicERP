@@ -16,10 +16,10 @@ class TGroup extends TObjetStd {
 
 }
 
-class TGroupRight extends TObjetStd {
+class TGroupUser extends TObjetStd {
 	function __construct() {
-		parent::set_table('group_right');
-		parent::add_champs('id_group,id_right','type=entier;index;');
+		parent::set_table('group_user');
+		parent::add_champs('id_entity,id_group,id_user','type=entier;index;');
 		
 		TAtomic::initExtraFields($this);
 		
