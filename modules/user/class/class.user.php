@@ -62,11 +62,9 @@ class TUser extends TContact {
 	function right($module='main', $action='view') {
 		
 		if($this->isAdmin) return true;
-		
+		else if(!empty($this->rights->{$module}->{$module}->{$action})) return true;
 		
 		return false;
 		
 	}
-	
-	
 }
