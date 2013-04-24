@@ -12,7 +12,7 @@ class TAtomic {
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
 			$db=new TPDOdb;
 			//$db->debug=true;
-			$user->login($db, $_REQUEST['login'], $_REQUEST['password']);
+			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['entity']);
 			$db->close();
 			/*print_r($user);
 			exit;*/
@@ -24,7 +24,7 @@ class TAtomic {
 	
 	static function translate(&$conf, $sentence) {
 		
-		$translated_sentence = $sentence;
+		$translated_sentence = !empty($conf->lang[$sentence]) ? $conf->lang[$sentence] : $sentence;
 		
 		return $translated_sentence;
 	}
@@ -47,43 +47,31 @@ class TAtomic {
 	}
 	
 	static function loadModule(&$conf) {
-		
 		$dir = ROOT.'modules/';
-		/*$handle = opendir($dir); 
 		
+		// Load conf of all existing modules
+		$handle = opendir($dir); 
 		while (false !== ($file = readdir($handle))) {
-		   	if($file!='.' && $file!='..'){
+			if($file!='.' && $file!='..'){
 				if(is_dir($dir.$file)){
-						
 					if(is_file($dir.$file.'/config/config.php')) require($dir.$file.'/config/config.php');
-					if(is_file($dir.$file.'/lib/function.php')) require($dir.$file.'/lib/function.php');
-					
-					if(is_file($dir.$file.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$file.'/js/script.js';
-					if(is_dir($dir.$file.'/class/')) {
-						TAtomic::loadClass($conf, $dir.$file.'/class/');
-					}
-					
 				}
 			}
-	   }
-	   closedir($handle);
-		*/
-	//	print_r($conf->moduleEnabled);
-	   foreach($conf->moduleEnabled as $module=>$options) {
-	   				
-	   			if(is_dir($dir.$module)){
-						
-					if(is_file($dir.$module.'/config/config.php')) require($dir.$module.'/config/config.php');
-					if(is_file($dir.$module.'/lib/function.php')) require($dir.$module.'/lib/function.php');
-					
-					if(is_file($dir.$module.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$module.'/js/script.js';
-					if(is_dir($dir.$module.'/class/')) {
-						TAtomic::loadClass($conf, $dir.$module.'/class/');
-					}
-					
+		}
+		closedir($handle);
+
+		// Load files from modules only if core or enabled module
+		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
+		foreach($moduleToLoad as $moduleName=>$options) {
+			if(!empty($conf->modules[$moduleName])) {
+				if(is_file($dir.$moduleName.'/config/config.php')) require($dir.$moduleName.'/config/config.php');
+				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
+				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$moduleName.'/js/script.js';
+				if(is_dir($dir.$moduleName.'/class/')) {
+					TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
 				}
-	   }	
-		
+			}
+		}
 	}
 	
 	static function loadClass(&$conf, $dir) {

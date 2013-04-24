@@ -9,6 +9,7 @@ class TUser extends TContact {
 		$this->setChild('TGroupUser', 'id_user');
 		
 		$this->t_connexion = 0;
+		$this->rights = new stdClass;
 		
 	}
 	
@@ -17,9 +18,9 @@ class TUser extends TContact {
 		$this->load_right($db, $entity);
 	}
 	
-	function load_right(&$db, $entity) {
+	function load_right(&$db, $id_entity) {
 		foreach($this->TGroupUser as $groupUser) {
-			if($groupUser->id_entity == $entity) {
+			if($groupUser->id_entity == $id_entity) {
 				$TRight = TRequeteCore::get_id_from_what_you_want($db, 'right', array('id_group'=>$groupUser->id_group));
 				foreach($TRight as $id_right) {
 					$right = new TRight;
@@ -30,7 +31,7 @@ class TUser extends TContact {
 		}
 	}
 	
-	function login (&$db, $login, $pwd, $entity=0) {
+	function login (&$db, $login, $pwd, $id_entity=0) {
 			
 		$db->Execute("SELECT id FROM ".$this->get_table()." 
 			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd))."
@@ -59,10 +60,10 @@ class TUser extends TContact {
 		
 		return false;
 	}
-	function right($module='main', $action='view') {
+	function right($module='main', $submodule='main', $action='view') {
 		
 		if($this->isAdmin) return true;
-		else if(!empty($this->rights->{$module}->{$module}->{$action})) return true;
+		else if(!empty($this->rights->{$module}->{$submodule}->{$action})) return true;
 		
 		return false;
 		

@@ -9,8 +9,8 @@
 	);
 
 	
-	$conf->modules[]=array(
-		'name'=>'Société'
+	$conf->modules['company']=array(
+		'name'=>'Company'
 		,'id'=>'TCompany'
 		,'class'=>array('TCompany')
 	);

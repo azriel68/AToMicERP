@@ -1,6 +1,6 @@
 <?php
 
-	$conf->modules[]=array(
+	$conf->modules['contact']=array(
 		'name'=>'Contact'
 		,'id'=>'contact'
 		,'class'=>array('TContact')

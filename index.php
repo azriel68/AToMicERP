@@ -6,7 +6,7 @@
 	
 
 	if($user->isLogged()) {
-		header('location:home.php');		
+		header('location:home.php');
 	}
 	else {
 		
