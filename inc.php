@@ -21,3 +21,5 @@
 
 	session_name('atomic');
 	session_start();
+
+	$user = TAtomic::getUser();

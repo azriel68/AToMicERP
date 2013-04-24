@@ -21,3 +21,88 @@ div.header {
 div.header h1 {
 	float:left;	
 }
+
+input, input.flat, textarea, textarea.flat, form.flat select, select.flat {
+   	color: #464646;
+   	font-family: "ProximaNova","Lucida Sans","Lucida Grande",sans-serif;
+   	
+	background: #FDFDFD;
+    border: 1px solid #3CC3D2;
+    padding: 1px 1px 1px 1px;
+    margin: 0px 0px 0px 0px;
+}
+input, textarea, select {
+	padding:2px;
+	margin-left:1px;
+	margin-bottom:1px;
+	margin-top:1px;
+}
+select.flat, form.flat select {
+	font-weight: normal;
+}
+
+
+.button {
+   	color: #2AA8B9;
+   	font-family: "ProximaNova","Lucida Sans","Lucida Grande",sans-serif;
+   	border: 1px solid #3CC3D2;
+    padding:5px 10px;
+    margin: 0em 0.5em;
+
+    -moz-box-shadow: 2px 2px 3px #2AA8B9;
+    -webkit-box-shadow: 2px 2px 3px #2AA8B9;
+    box-shadow: 2px 2px 3px #2AA8B9;
+    cursor:pointer;
+}
+.button:focus  {
+    color: #222244;
+	
+}
+.button:hover   {
+	background: #2AA8B9;
+	color:#fff;
+}
+.button:disabled {
+	background: #ddd;
+}
+
+div.fiche a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused {
+    background-color: #37BFCD;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
+    color: #FFFFFF;
+    font-weight: 700;
+    height: 52px;
+    letter-spacing: 1px;
+    line-height: 52px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);
+    width: 155px;
+
+    background-clip: padding-box;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    display: block;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    text-align: center;
+    width: 240px;
+    float:left;
+    
+    margin: 20px 20px 20px 20px;
+    text-decoration: none;
+    padding:10px 0;
+}
+div.fiche a.butAction:hover,div.fiche span.butAction:hover {
+	background-color:#31b5c5;
+}
+
+div.fiche span.butActionDelete , div.fiche a.butActionDelete{
+	background-color: #cc7777;
+}
+div.fiche a.butActionRefused {
+	background-color: #cc9999;
+}
+div.fiche span.butActionDelete:hover, div.fiche a.butActionDelete:hover,div.fiche a.butActionRefused:hover {
+	background-color: #662222;
+}

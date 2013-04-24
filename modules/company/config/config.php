@@ -3,7 +3,7 @@
 
 	$conf->menu->top[] = array(
 		'name'=>"Company"
-		,'id'=>'company'
+		,'id'=>'TCompany'
 		,'position'=>1
 		,'url'=>HTTP.'modules/company/company.php'
 	);
@@ -11,7 +11,7 @@
 	
 	$conf->modules[]=array(
 		'name'=>'Société'
-		,'id'=>'company'
+		,'id'=>'TCompany'
 		,'class'=>array('TCompany')
 	);
 

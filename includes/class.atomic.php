@@ -2,17 +2,20 @@
 
 class TAtomic {
 	
-	static function getUser(&$db) {
+	static function getUser() {
 			
-		if(isset($_SESSION['user'])) {
-			$user = $_SESSION['user'];
+		if(!isset($_SESSION['user'])) {
+			$_SESSION['user'] = new TUser;
 		}
-		else {
-			$user = new TUser;
-		}
+		$user = & $_SESSION['user'];
 		
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
+			$db=new TPDOdb;
+			//$db->debug=true;
 			$user->login($db, $_REQUEST['login'], $_REQUEST['password']);
+			$db->close();
+			/*print_r($user);
+			exit;*/
 		}
 		
 		return $user;

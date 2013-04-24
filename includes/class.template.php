@@ -4,7 +4,8 @@ class TTemplate {
 	
 	
 	static function login() {
-		
+		header('location:'.HTTP.'?logout');
+		exit;
 	}
 	/*
 	 * Effectue les actions courantes de l'interface	
@@ -89,8 +90,7 @@ class TTemplate {
 		//print_r($conf);
 		return $tbs->render(TPL_HEADER,
 			array(
-				'menuTop'=>$conf->menu->top
-				,'js'=>$conf->js
+				'js'=>$conf->js
 			)
 			,array(
 				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
@@ -121,5 +121,26 @@ class TTemplate {
 		?><input type="submit" name="valid" class="valid" value="Valider" /><?
 		
 		return ob_get_clean();
+	}
+	
+	static function menu(&$conf, &$user) {
+		
+		$tbs=new TTemplateTBS;
+		
+		$menuTop = array();
+		
+		foreach($conf->menu->top as $menu) {
+			if( $user->right($menu['id']) ) {
+				$menuTop[] = $menu;
+			}			
+		}
+		
+		//print_r($conf);
+		return $tbs->render(TPL_MENU,
+			array(
+				'menuTop'=>$menuTop
+			)
+		);
+		
 	}
 }

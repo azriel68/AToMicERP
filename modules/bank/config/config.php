@@ -3,7 +3,7 @@
 
 	$conf->menu->top[] = array(
 		'name'=>"Banque"
-		,'id'=>'bank'
+		,'id'=>'TBank'
 		,'position'=>3
 		,'url'=>HTTP.'modules/bank/'
 	);
@@ -11,5 +11,5 @@
 	
 	$conf->modules[]=array(
 		'name'=>'Banque'
-		,'id'=>'bank'
+		,'id'=>'TBank'
 	);
