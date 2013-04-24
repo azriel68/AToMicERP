@@ -3,6 +3,7 @@
 class TPayment extends TObjetStd {
 	function __construct() { 
 		parent::set_table('payment');
+		parent::add_champs('id_bank','type=entier;index;');
 		parent::add_champs('title,description','type=chaine;');
 		parent::add_champs('amount','type=float;');
 		
