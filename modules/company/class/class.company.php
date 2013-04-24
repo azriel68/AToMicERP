@@ -15,5 +15,12 @@ class TCompany extends TObjetStd {
 		$this -> setChild('TAddress', 'id_company');
 		$this -> setChild('TContact', 'id_company');
 	}
-
+	
+	static function getEntityForCombo(&$db) {
+		
+		$sql="SELECT id,name FROM company WHERE isEntity=1";
+		
+		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'name');
+		
+	}
 }
