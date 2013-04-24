@@ -13,7 +13,7 @@ class TUser extends TContact {
 	function login (&$db, $login, $pwd) {
 			
 		$db->Execute("SELECT id FROM ".$this->get_table()." 
-			WHERE login='".$db->quote($login)."' AND password='".$db->quote($pwd)."'")	;
+			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd))	;
 			
 		if($db->Get_line()) {
 			
@@ -22,6 +22,9 @@ class TUser extends TContact {
 			return $this->load($db, $db->Get_field('id'));
 			
 		}	
+		/*else  {
+			print "ErrorBadLogin";
+		}*/
 			
 		return false;
 	}
@@ -35,7 +38,7 @@ class TUser extends TContact {
 		
 		return false;
 	}
-	function rights($module='main', $action='view') {
+	function right($module='main', $action='view') {
 		
 		if($this->isAdmin) return true;
 		

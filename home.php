@@ -2,6 +2,10 @@
 
 	require('inc.php');
 
+	if(!$user->isLogged()) {
+		TTemplate::login();		
+	}
+
 	$TBoxe=array();
 
 	$tbs = new TTemplateTBS;
@@ -13,6 +17,7 @@
 				,'footer'=>TTemplate::footer($conf)
 				,'buttons'=>TTemplate::buttons()
 				,'self'=>$_SERVER['PHP_SELF']
+				,'menu'=>TTemplate::menu($conf, $user)
 			)
 		)
 	); 
