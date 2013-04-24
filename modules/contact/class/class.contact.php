@@ -2,9 +2,9 @@
 class TContact extends TObjetStd {
 	function __construct() { 
 		parent::set_table('contact');
-		parent::add_champs('isUser,isAdmin,id_company','type=entier;index;');
+		parent::add_champs('isUser,isAdmin,status','type=entier;index;');
 		parent::add_champs('login,password','type=chaine;index;');
-		parent::add_champs('name,firstname,phone1,phone2,fax','type=chaine;');
+		parent::add_champs('lastname,firstname,phone,fax,email','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
 		
@@ -12,7 +12,20 @@ class TContact extends TObjetStd {
 		parent::_init_vars();
 
 		$this->setChild('TAddress', 'id_contact');
+		$this->setChild('TContactCompany', 'id_contact');
 
 	}
 }
 
+class TContactCompany extends TObjetStd {
+	function __construct() {
+		parent::set_table('contact_company');
+		parent::add_champs('id_contact,id_company','type=entier;index;');
+		parent::add_champs('function','type=chaine;');
+		
+		TAtomic::initExtraFields($this);
+		
+		parent::start();
+		parent::_init_vars();
+	}
+}
