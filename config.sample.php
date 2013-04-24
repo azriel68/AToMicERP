@@ -13,6 +13,7 @@
 
 	define('THEME','atom');
 	
+	define('DEFAULT_LANG','fr');
 	define('ADMIN','admin');
 	
 	/*

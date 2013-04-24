@@ -74,6 +74,25 @@ class TAtomic {
 		}
 	}
 	
+	static function loadLang(&$conf, $langCode) {
+		$dir = ROOT.'modules/';
+
+		if(empty($langCode) || $langCode == 'auto') {
+			$langCode=empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])? DEFAULT_LANG : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
+		}
+		
+		// Load lang files from modules only if core or enabled module
+		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
+		foreach($moduleToLoad as $moduleName=>$options) {
+			if(!empty($conf->modules[$moduleName])) {
+				if(is_file($dir.$moduleName.'/lang/'.$langCode.'.php')) {
+					require($dir.$moduleName.'/lang/'.$langCode.'.php');
+					$conf->lang = array_merge($language, $conf->lang);
+				}
+			}
+		}
+	}
+	
 	static function loadClass(&$conf, $dir) {
 		$handle = opendir($dir); 
 		

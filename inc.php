@@ -28,3 +28,4 @@
 	session_start();
 
 	$user = TAtomic::getUser();
+	TAtomic::loadLang($conf, $user->lang);

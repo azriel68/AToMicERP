@@ -9,6 +9,7 @@ class TUser extends TContact {
 		$this->setChild('TGroupUser', 'id_user');
 		
 		$this->t_connexion = 0;
+		$this->lang = 'fr';
 		$this->rights = new stdClass;
 		
 	}
