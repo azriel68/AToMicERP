@@ -12,6 +12,7 @@ class TGroup extends TObjetStd {
 		parent::_init_vars();
 		
 		$this->setChild('TGroupRight', 'id_group');
+		$this->setChild('TGroupUser', 'id_group');
 	}
 
 }
