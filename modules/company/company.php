@@ -9,7 +9,7 @@
 		
 	}
 	else {
-		TTemplate::liste($conf, $user, $db, $company);
+		print TTemplate::liste($conf, $user, $db, $company);
 	}
 	
 	$db->close();

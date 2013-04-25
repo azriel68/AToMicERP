@@ -15,11 +15,34 @@ a {
 }
 div.header {
 	background-color: rgba(255, 255, 255, 0.8);
-    text-align:left;
-    
+	text-align:left;
+	margin: 10px 0px;
 }
 div.header h1 {
-	float:left;	
+	float:left;
+	margin: 0px;
+	padding: 10px;
+}
+
+div.menu {
+	float: left;
+	padding: 20px 0px;
+}
+
+div.menu ul {
+	padding: 0px;
+	margin: 0px
+}
+
+div.menu li {
+	list-style: none;
+	display: inline;
+	padding: 5px;
+}
+
+div.profile {
+	float: right;
+	padding: 20px 10px 20px 0px;
 }
 
 input, input.flat, textarea, textarea.flat, form.flat select, select.flat {

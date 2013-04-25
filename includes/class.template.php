@@ -176,6 +176,14 @@ class TTemplate {
 			array(
 				'menuTop'=>$menuTop
 			)
+			,array(
+				'profile'=>array(
+					'user_url'=>HTTP.'user/user.php?id='.$user->getId()
+					,'user_name'=>$user->login
+					,'logout_url'=>HTTP.'?logout'
+					,'logout'=>'logout'
+				)
+			)
 		);
 		
 	}

@@ -18,6 +18,6 @@
 	@$conf->template->TCompany->fiche = './template/company.html';
 	
 	@$conf->list->TCompany->index=array(
-		'sql'=>"SELECT * FROM ".DB_PREFIX."company WHERE entity=@user->id_entity@ ORDER BY name"
+		'sql'=>"SELECT * FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@ ORDER BY name"
 		,'param'=>array()
 	);
