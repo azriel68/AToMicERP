@@ -10,10 +10,11 @@
 
 	$conf->modules['project']=array(
 		'name'=>'Project'
-		,'class'=>array('TProject','TTask')
+		,'class'=>array('TProject','TTask','TTaskTime')
 	);
 	
 	@$conf->template->TProject->fiche = './template/project.html';
+	@$conf->template->TProject->scrum = './template/scrum.html';
 	
 	$conf->list->TProject=new stdClass;
 	$conf->list->TProject->index=array(

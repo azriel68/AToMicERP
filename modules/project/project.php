@@ -21,7 +21,7 @@
 		print $tbs->render(TTemplate::getTemplate($conf, $project)
 			,array()
 			,array(
-				'TProject'=>$TForm
+				'project'=>$TForm
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)

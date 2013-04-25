@@ -1,0 +1,43 @@
+[tpl.header;strconv=no]
+[tpl.menu;strconv=no]
+		<div class="fiche">
+		[tpl.tabs;strconv=no]
+			<table>
+				<tr>
+					<td>__tr(toDo)__</td></td>
+					<td>__tr(inProgress)__</td></td>
+					<td>__tr(finish)__</td></td>
+				</tr>
+				<tr>
+					<td>
+						<ul id="task-todo" class="task-list">
+						
+						</ul>
+					</td>
+					<td>
+						<ul id="task-inprogress" class="task-list">
+						
+						</ul>
+					</td>
+					<td>
+						<ul id="task-finish" class="task-list">
+						
+						</ul>
+					</td>
+				</tr>
+			</table>
+		
+			[tpl.buttons;htmlconv=no]
+		
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				project_get_task($([project.id], '#task-todo'), 'todo');
+				project_get_task($([project.id], '#task-inprogress'), 'inProgress');
+				project_get_task($([project.id], '#task-finish'), 'finish');
+				
+			});
+		</script>
+		
+[tpl.footer;strconv=no]
