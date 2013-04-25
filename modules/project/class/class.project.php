@@ -2,7 +2,7 @@
 class TProject extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'project');
-		parent::add_champs('status','type=entier;index;');
+		parent::add_champs('status,id_entity','type=entier;index;');
 		parent::add_champs('name','type=chaine;');
 		
 		TAtomic::initExtraFields($this);

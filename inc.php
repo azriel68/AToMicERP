@@ -7,7 +7,7 @@
 	$conf->menu->left = array();
 	$conf->modules = array();
 	$conf->js = array();
-	$conf->list = array();
+	$conf->list = new stdClass;
 	$conf->lang = array();
 
 	$conf->template = new stdClass;

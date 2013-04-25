@@ -52,23 +52,6 @@ class TAtomic {
 		return $translated_sentence;
 	}
 	
-	static function getTemplate(&$conf, $object, $mode='fiche') {
-		if(is_object($object)) {
-			$objectName = get_class($object);
-		}
-		else {
-			$objectName = $object;
-		}	
-		
-		if(isset($conf->template->{$objectName}->{$mode})) {
-			return $conf->template->{$objectName}->{$mode};
-		}
-		else {
-			return 'ErrorBadTemplateDefinition';
-		}
-		
-	}
-	
 	static function loadModule(&$conf) {
 		$dir = ROOT.'modules/';
 		

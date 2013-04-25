@@ -17,7 +17,7 @@
 			'name'=>$form->texte('', 'name', $project->name, 80)
 		);
 		$tbs=new TTemplateTBS;
-		print $tbs->render(TAtomic::getTemplate($conf, $project)
+		print $tbs->render(TTemplate::getTemplate($conf, $project)
 			,array()
 			,array(
 				'TProject'=>$TForm
@@ -33,7 +33,7 @@
 		
 	}
 	else {
-		TTemplate::liste($conf, $user, $db, $project);
+		print TTemplate::liste($conf, $user, $db, $project);
 	}
 	
 	$db->close();

@@ -10,6 +10,6 @@
 	
 	actions($db, $product);
 	
-	fiche($product, TAtomic::getTemplate($conf, $product));
+	fiche($product, TTemplate::getTemplate($conf, $product));
 	
 	$ATMdb->close();

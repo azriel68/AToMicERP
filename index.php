@@ -17,7 +17,7 @@
 		
 		$form=new TFormCore;
 		
-		print $tbs->render(TAtomic::getTemplate($conf, 'login')
+		print $tbs->render(TTemplate::getTemplate($conf, 'login')
 			,array()
 			,array(
 				'form'=>array(
@@ -29,7 +29,6 @@
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
-					,'buttons'=>TTemplate::buttons()
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'self'=>$_SERVER['PHP_SELF']
 				)

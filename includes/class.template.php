@@ -49,23 +49,58 @@ class TTemplate {
 		}
 		
 	}
-	
-	static function liste(&$conf, &$user, &$db, &$object, $param=array(), $buttons=array()) {
+	static function getTemplate(&$conf, $object, $mode='fiche') {
+		if(is_object($object)) {
+			$objectName = get_class($object);
+		}
+		else {
+			$objectName = $object;
+		}	
+		
+		if(isset($conf->template->{$objectName}->{$mode})) {
+			return $conf->template->{$objectName}->{$mode};
+		}
+		else if($mode=='list') {
+			return THEME_TEMPLATE_DIR.'list.html';
+		}
+		else {
+			TAtomic::errorlog( 'ErrorBadTemplateDefinition' );
+		}
+		
+	}
+	static function liste(&$conf, &$user, &$db, &$object, $listname='index', $param=array()) {
 		/*
 		 * Fonction à changer, non conforme à une démarche module
 		 */
-		 
-		print TTemplate::header($conf);
-		print TTemplate::menu($conf, $user);
+		$className = get_class($object);
+		$l = new TListviewTBS('list_'.$className);
 		
-		?><div class="fiche"><?
+		$sql = strtr($conf->list->{$className}->{$listname}['sql'],array(
+			'@user->id_entity@'=>$user->id_entity
+		));
 		
-		$r=new TSSRenderControler($object);
-		$r->liste($db);
+		$param = array_merge($conf->list->{$className}->{$listname}['param'] , $param);
 		
-		?><a href="?action=new" class="butAction"><?=__tr('new'.get_class($object))?></a> </div><?
+		$tbs=new TTemplateTBS;
 		
-		print TTemplate::footer($conf);
+		$template = TTemplate::getTemplate($conf, $object,'list');
+		
+		return $tbs->render($template
+			,array(
+				'button'=>TTemplate::buttons($user, $object, 'list')
+			)
+			,array(
+				'tpl'=>array(
+					'header'=>TTemplate::header($conf)
+					,'footer'=>TTemplate::footer($conf)
+					,'menu'=>TTemplate::menu($conf, $user)
+					,'self'=>$_SERVER['PHP_SELF']
+					,'list'=>$l->render($db, $sql, $param)
+				)
+			)
+		); 
+		
+		
 	}
 	
 	
@@ -94,18 +129,34 @@ class TTemplate {
 		);
 		
 	}
-	static function buttons() {
-		ob_start();		
+	static function buttons(&$user, &$object, $mode='fiche') {
+		$TButton=array();
 		
-		?><input type="button" name="cancel" class="cancel" value="Annuler" /><?
+		if($mode=='list') {
+			
+			$TButton[]=array(
+				'href'=>'?action=new'
+				,'class'=>'butAction'
+				,'label'=>__tr('new'.get_class($object))
+			);
+			
+		}
+		else{
+			/*
+			?><input type="button" name="cancel" class="cancel" value="Annuler" /><?
 			
 		if(isset($_REQUEST['VIEW'])) {
 			?><input type="button" name="delete" class="delete" value="Supprimer" /><?
 		}
 		
 		?><input type="submit" name="valid" class="valid" value="Valider" /><?
+			*/
+		}
 		
-		return ob_get_clean();
+		
+		
+		
+		return $TButton;
 	}
 	
 	static function menu(&$conf, &$user) {

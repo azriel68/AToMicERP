@@ -15,8 +15,9 @@
 	
 	@$conf->template->TProject->fiche = './template/project.html';
 	
-	@$conf->list->TProject->index=array(
-		'sql'=>"SELECT * FROM ".DB_PREFIX."project  WHERE entity=@user->id_entity@ ORDER BY name"
+	$conf->list->TProject=new stdClass;
+	$conf->list->TProject->index=array(
+		'sql'=>"SELECT * FROM ".DB_PREFIX."project  WHERE id_entity=@user->id_entity@ ORDER BY name"
 		,'param'=>array()
 	);
 	
