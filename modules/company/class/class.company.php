@@ -13,8 +13,12 @@ class TCompany extends TObjetStd {
 		parent::_init_vars();
 
 		$this -> setChild('TAddress', 'id_company');
-		$this -> setChild('TContact', 'id_company');
+		$this -> setChild('TContactToObject', array('id_object', 'class') );
 	}
+	
+}
+
+class TEntity extends TCompany {
 	
 	static function getEntityForCombo(&$db) {
 		
@@ -23,4 +27,5 @@ class TCompany extends TObjetStd {
 		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'name');
 		
 	}
+	
 }
