@@ -16,20 +16,27 @@ class TTemplate {
 	 	
 		if(isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
-				case 'NEW':
+				case 'new':
 									
-					return 'new';
+					return 'edit';
 					break;
 			
-				case 'VIEW':
+				case 'edit':
 					$object->load($db, $_REQUEST['id']);
+					return 'edit';
 					break; 
-				case 'SAVE':
+				case 'view':
+					$object->load($db, $_REQUEST['id']);
+					return 'view';
+					break; 
+				case 'save':
 				
-					$object->set_values($db, $_POST);
+					$object->set_values($_POST);
+					$bject->save($db);
+					
 					return 'save';
 					break; 
-				case 'DELETE':
+				case 'delete':
 					$object->delete($db);
 					return 'delete';
 					break; 
@@ -43,47 +50,25 @@ class TTemplate {
 		
 	}
 	
-	static function liste(&$conf, &$db, &$object) {
-		
+	static function liste(&$conf, &$user, &$db, &$object, $param=array(), $buttons=array()) {
+		/*
+		 * Fonction à changer, non conforme à une démarche module
+		 */
+		 
 		print TTemplate::header($conf);
+		print TTemplate::menu($conf, $user);
+		
+		?><div class="fiche"><?
 		
 		$r=new TSSRenderControler($object);
 		$r->liste($db);
 		
+		?><a href="?action=new" class="butAction"><?=__tr('new'.get_class($object))?></a> </div><?
+		
 		print TTemplate::footer($conf);
-		
-		$className = get_class($object);
-		
-		if($className=='TCompany') {
-			?>
-			
-			<?
-		}
-		
-		
 	}
 	
-	static function fiche(&$conf, &$object, $template) {
-		
-		$tbs=new TTemplateTBS;
-		
-		$className = get_class($object);
-		
-		print $tbs->render($template
-			,array()
-			,array(
-				$object->objectName=>$object->get_values()
-				,'tpl'=>array(
-					'header'=>TTemplate::header($conf)
-					,'footer'=>TTemplate::footer($conf)
-					,'buttons'=>TTemplate::buttons()
-					,'self'=>$_SERVER['PHP_SELF']
-				)
-			)
-		); 
-		
-		
-	}
+	
 	static function header(&$conf) {
 		$tbs=new TTemplateTBS;
 		

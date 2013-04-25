@@ -23,7 +23,7 @@ class TContact extends TObjetStd {
  */
 class TContactToObject extends TObjetStd {
 	function __construct() {
-		parent::set_table('contact_to_object');
+		parent::set_table(DB_PREFIX.'contact_to_object');
 		parent::add_champs('id_contact,id_object','type=entier;index;');
 		parent::add_champs('objectType,type','type=chaine;index;');
 		
