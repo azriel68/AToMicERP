@@ -45,9 +45,9 @@ class TUser extends TContact {
 			$db->debug=true;
 			return $this->load($db, $db->Get_field('id'));
 		}	
-		/*else  {
-			print "ErrorBadLogin";
-		}*/
+		else  {
+			TAtomic::errorlog("ErrorBadLogin ($login $pwd)");
+		}
 			
 		return false;
 	}
