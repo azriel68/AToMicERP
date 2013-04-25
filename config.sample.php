@@ -28,5 +28,5 @@
 		,'document'=>true
 		,'product'=>true
 		,'user'=>true
-		,'dictionnary'=>true
+		,'dictionary'=>true
 	);
