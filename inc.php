@@ -12,7 +12,9 @@
 
 	$conf->template = new stdClass;
 	$conf->moduleCore = array(
-		'company'=>true
+		'dictionary'=>true
+		
+		,'company'=>true
 		,'contact'=>true
 		,'user'=>true
 	);

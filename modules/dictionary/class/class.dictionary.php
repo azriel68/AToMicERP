@@ -1,7 +1,7 @@
 <?php
-class TDictionnary extends TObjetStd {
+class TDictionary extends TObjetStd {
 	function __construct() { 
-		parent::set_table(DB_PREFIX.'dictionnary');
+		parent::set_table(DB_PREFIX.'dictionary');
 		//parent::add_champs('','type=entier;');
 		parent::add_champs('label','type=chaine;');
 		parent::add_champs('code,type','type=chaine;index;');
