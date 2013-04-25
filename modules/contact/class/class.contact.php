@@ -24,7 +24,7 @@ class TContactToObject extends TObjetStd {
 	function __construct() {
 		parent::set_table('contact_to_object');
 		parent::add_champs('id_contact,id_object','type=entier;index;');
-		parent::add_champs('class,type','type=chaine;index;');
+		parent::add_champs('objectType,type','type=chaine;index;');
 		
 		TAtomic::initExtraFields($this);
 		
