@@ -9,7 +9,7 @@
 	);
 
 	
-	$conf->modules[]=array(
+	$conf->modules['bank']=array(
 		'name'=>'Banque'
 		,'id'=>'TBank'
 	);

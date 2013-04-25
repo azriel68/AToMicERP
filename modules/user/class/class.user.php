@@ -42,7 +42,6 @@ class TUser extends TContact {
 		if($db->Get_line()) {
 			$this->id_entity = $id_entity;	
 			$this->t_connexion = time();
-			$db->debug=true;
 			return $this->load($db, $db->Get_field('id'));
 		}	
 		/*else  {
