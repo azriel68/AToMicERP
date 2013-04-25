@@ -61,6 +61,8 @@ class TUser extends TContact {
 	}
 	function right($module='main', $submodule='main', $action='view') {
 		
+		if(empty($submodule)) $submodule = 'main';
+		
 		if($this->isAdmin) return true;
 		else if($module == 'login' && !empty($this->rights[$this->id_entity])) return true;
 		else if(!empty($this->rights[$this->id_entity]->{$module}->{$submodule}->{$action})) return true;

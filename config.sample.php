@@ -29,4 +29,5 @@
 		,'product'=>true
 		,'user'=>true
 		,'dictionary'=>true
+		,'project'=>true
 	);

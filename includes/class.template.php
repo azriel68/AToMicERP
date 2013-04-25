@@ -159,6 +159,37 @@ class TTemplate {
 		return $TButton;
 	}
 	
+	static function tabs(&$conf, &$user, &$object, $idActive=null) {
+		
+		$tbs=new TTemplateTBS;
+		
+		$Tab = array();
+		
+		$className = get_class($object);
+		
+		foreach($conf->tabs->{$className} as $id=>$tab) {
+			
+			$mode = !empty($tab['mode']) ? $tab['mode'] : 'main';
+			$submodule = !empty($tab['submodule']) ? $tab['submodule'] : 'main';
+			
+			if( $user->right($className, $submodule, $mode) ) {
+				
+				@$tab['class'] .= ($id==$idActive) ? ' active' : ' inactive';
+				
+				$Tab[] = $tab;
+			}			
+		}
+		
+		//print_r($conf);
+		return $tbs->render(TPL_TABS,
+			array(
+				'tab'=>$Tab
+			)
+		);
+		
+		
+	}
+	
 	static function menu(&$conf, &$user) {
 		
 		$tbs=new TTemplateTBS;

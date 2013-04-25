@@ -21,3 +21,10 @@
 		,'param'=>array()
 	);
 	
+	$conf->tabs->TProject=array(
+		'fiche'=>array('label'=>'Fiche','url'=>'project.php?id=@id@')
+		,'task'=>array('label'=>'Task','url'=>'task.php?id_project=@id@')
+		,'contact'=>array('label'=>'Contact','url'=>'contact.php?id_project=@id@')
+	);
+	
+	

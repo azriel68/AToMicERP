@@ -10,6 +10,8 @@
 	$conf->list = new stdClass;
 	$conf->lang = array();
 
+	$conf->tabs = new stdClass;
+
 	$conf->template = new stdClass;
 	$conf->moduleCore = array(
 		'dictionary'=>true

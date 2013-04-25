@@ -3,8 +3,8 @@
 	
 	$project=new TProject;
 	$db=new TPDOdb;
-
-	if($action = TTemplate::actions($db, $project) !==false ) {
+	$action = TTemplate::actions($db, $project);
+	if($action!==false ) {
 
 		if($action=='delete') {
 			header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
@@ -17,6 +17,7 @@
 			'name'=>$form->texte('', 'name', $project->name, 80)
 		);
 		$tbs=new TTemplateTBS;
+		
 		print $tbs->render(TTemplate::getTemplate($conf, $project)
 			,array()
 			,array(
@@ -25,7 +26,8 @@
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'buttons'=>TTemplate::buttons()
+					,'buttons'=>TTemplate::buttons($user, $project, 'edit')
+					,'tabs'=>TTemplate::tabs($conf, $user, $project, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
