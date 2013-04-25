@@ -1,7 +1,7 @@
 <?php
 class TDocument extends TObjetStd {
 	function __construct() { 
-		parent::set_table('document');
+		parent::set_table(DB_PREFIX.'document');
 		parent::add_champs('number','type=chaine;');
 		parent::add_champs('id_company','type=entier;index;');
 		

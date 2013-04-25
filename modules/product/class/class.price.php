@@ -2,7 +2,7 @@
 
 class TPrice extends TObjetStd {
 	function __construct() { 
-		parent::set_table('price');
+		parent::set_table(DB_PREFIX.'price');
 		parent::add_champs('id_product','type=entier;index;');
 		parent::add_champs('price,price_ht,vat_rate','type=float;');
 		
