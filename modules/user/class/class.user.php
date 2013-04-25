@@ -23,7 +23,7 @@ class TUser extends TContact {
 	
 	function load_right(&$db) {
 		foreach($this->TGroupUser as $groupUser) {
-				$TRight = TRequeteCore::get_id_from_what_you_want($db, 'right', array('id_group'=>$groupUser->id_group));
+				$TRight = TRequeteCore::get_id_from_what_you_want($db, DB_TABLE_PREFIX.'right', array('id_group'=>$groupUser->id_group));
 				foreach($TRight as $id_right) {
 					$right = new TRight;
 					$right->load($db, $id_right);

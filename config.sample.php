@@ -10,6 +10,7 @@
 	define('DB_USER','root');
 	define('DB_PASS','**********'); /* Your user password Here */
 	define('DB_DRIVER','mysqli');
+	define('DB_PREFIX','atom_');
 
 	define('THEME','atom');
 	

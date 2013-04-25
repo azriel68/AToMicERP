@@ -2,7 +2,7 @@
 
 class TGroup extends TObjetStd {
 	function __construct() {
-		parent::set_table('group');
+		parent::set_table(DB_PREFIX.'group');
 		parent::add_champs('name', 'type=chaine;index;');
 		parent::add_champs('description', 'type=chaine;');
 
