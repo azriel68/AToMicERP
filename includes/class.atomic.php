@@ -2,6 +2,29 @@
 
 class TAtomic {
 	
+	static function errorlog ($message) {
+		
+		$trace=debug_backtrace();       
+	      
+        $log=$message; 
+        foreach($trace as $row) {
+                if((!empty($row['class']) && $row['class']==__CLASS__) 
+                        || (!empty($row['function']) && $row['function']==__FUNCTION__)
+                        || (!empty($row['function']) && $row['function']=='call_user_func')) continue;
+                        
+                $log.=' < L. '.$row['line'];
+                if(!empty($row['class']))$log.=' '.$row['class'];
+                $log.=' '.$row['function'].'() dans '.$row['file'];
+				//print $log;
+        }
+		
+		
+		$f1 = fopen(ROOT.'error.log','a');
+		fputs($f1, $log."\n");
+		fclose($f1);
+		
+	}
+	
 	static function getUser() {
 			
 		if(!isset($_SESSION['user'])) {

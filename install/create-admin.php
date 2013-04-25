@@ -12,15 +12,19 @@
 	
 	$company->name = $companyName;
 	
-	$i = $company->addChild($db, 'TContact');
 	
-	$company->TContact[$i]->isUser = 1;
-	$company->TContact[$i]->isAdmin = 1;
+	$contact = new TContact;
+	$contact->isUser = 1;
+	$contact->isAdmin = 1;
 
-	$company->TContact[$i]->lastname = ADMIN;
-	$company->TContact[$i]->login = ADMIN;
-	$company->TContact[$i]->password = $password;
-	$company->TContact[$i]->status = 1;
+	$contact->lastname = ADMIN;
+	$contact->login = ADMIN;
+	$contact->password = $password;
+	$contact->status = 1;
+	
+	$contact->save($db);
+	
+	$company->addChild($db, 'TContactToObject_company', $contact->getId());
 
 	$company->save($db);
 	

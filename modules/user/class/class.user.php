@@ -44,9 +44,9 @@ class TUser extends TContact {
 			$this->t_connexion = time();
 			return $this->load($db, $db->Get_field('id'));
 		}	
-		/*else  {
-			print "ErrorBadLogin";
-		}*/
+		else  {
+			TAtomic::errorlog("ErrorBadLogin ($login $pwd)");
+		}
 			
 		return false;
 	}
