@@ -17,33 +17,33 @@ class TTemplate {
 		if(isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
 				case 'new':
-									
 					return 'edit';
 					break;
-			
+					
 				case 'edit':
 					$object->load($db, $_REQUEST['id']);
 					return 'edit';
-					break; 
+					break;
+					
 				case 'view':
 					$object->load($db, $_REQUEST['id']);
 					return 'view';
-					break; 
+					break;
+					
 				case 'save':
-				
 					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
 					$object->save($db);
-					
 					return 'save';
-					break; 
+					break;
+					
 				case 'delete':
+					$object->load($db, $_REQUEST['id']);
 					$object->delete($db);
 					return 'delete';
-					break; 
-				
+					break;
+					
 			}
-			
 		}
 		else {
 			return false;
