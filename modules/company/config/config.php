@@ -7,7 +7,11 @@
 		,'position'=>1
 		,'url'=>HTTP.'modules/company/company.php'
 	);
-
+	
+	$conf->tabs->TCompany=array(
+		'fiche'=>array('label'=>__tr('Fiche'),'url'=>'company.php?id=@id@')
+		,'contact'=>array('label'=>__tr('Contact'),'url'=>'contact.php?id_project=@id@')
+	);
 	
 	$conf->modules['company']=array(
 		'name'=>'Company'
@@ -18,13 +22,17 @@
 	@$conf->template->TCompany->fiche = './template/company.html';
 	
 	@$conf->list->TCompany->companyList=array(
-		'sql'=>"SELECT name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@ ORDER BY name"
+		'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@ ORDER BY name"
 		,'param'=>array(
 			'title'=>array(
 				'name'=>__tr('Name')
 				,'phone'=>__tr('Phone')
 				,'email'=>__tr('Email')
 				,'web'=>__tr('Web')
+			)
+			,'hide'=>array('id')
+			,'link'=>array(
+				'name'=>'<a href="?action=view&id=@id@">@name@</a>'
 			)
 		)
 	);

@@ -13,6 +13,10 @@ a {
 	color: #2AA8B9;
     font-weight: bold
 }
+a.logo {
+	color: #000000;
+	text-decoration: none;
+}
 div.header {
 	background-color: rgba(255, 255, 255, 0.8);
 	text-align:left;
@@ -89,7 +93,8 @@ select.flat, form.flat select {
 	background: #ddd;
 }
 
-div.fiche a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused {
+div.fiche a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused,
+div.list a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused {
     background-color: #37BFCD;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
     color: #FFFFFF;

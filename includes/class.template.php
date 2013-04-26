@@ -31,8 +31,9 @@ class TTemplate {
 					break; 
 				case 'save':
 				
+					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
-					$bject->save($db);
+					$object->save($db);
 					
 					return 'save';
 					break; 
@@ -133,26 +134,47 @@ class TTemplate {
 		$TButton=array();
 		
 		if($mode=='list') {
-			
-			$TButton[]=array(
-				'href'=>'?action=new'
-				,'class'=>'butAction'
-				,'label'=>__tr('new'.get_class($object))
-			);
-			
+			//if($user->right(get_class($object), 'main', 'create')) {
+				$TButton[]=array(
+					'href'=>'?action=new'
+					,'class'=>'butAction'
+					,'label'=>__tr('new'.get_class($object))
+				);
+			//}
 		}
-		else{
-			/*
-			?><input type="button" name="cancel" class="cancel" value="Annuler" /><?
-			
-		if(isset($_REQUEST['VIEW'])) {
-			?><input type="button" name="delete" class="delete" value="Supprimer" /><?
+		else if($mode=='save' || $mode=='view') {
+			//if($user->right(get_class($object), 'main', 'create')) {
+				$TButton[]=array(
+					'href'=>'?action=edit&id='.$object->getId()
+					,'class'=>'butAction'
+					,'label'=>__tr('edit'.get_class($object))
+				);
+			//}
+			//if($user->right(get_class($object), 'main', 'delete')) {
+				$TButton[]=array(
+					'href'=>'?action=delete&id='.$object->getId()
+					,'class'=>'butAction'
+					,'label'=>__tr('delete'.get_class($object))
+				);
+			//}
 		}
-		
-		?><input type="submit" name="valid" class="valid" value="Valider" /><?
-			*/
+		else if($mode=='edit') {
+			//if($user->right(get_class($object), 'main', 'create')) {
+				$formName = 'form'.get_class($object);
+				$TButton[]=array(
+					'href'=>'javascript:document.forms[\''.$formName.'\'].submit()'
+					,'class'=>'butAction'
+					,'label'=>__tr('save'.get_class($object))
+				);
+			//}
+			//if($user->right(get_class($object), 'main', 'delete')) {
+				$TButton[]=array(
+					'href'=>'?action=cancel'
+					,'class'=>'butAction'
+					,'label'=>__tr('cancel'.get_class($object))
+				);
+			//}
 		}
-		
 		
 		
 		
@@ -208,7 +230,11 @@ class TTemplate {
 				'menuTop'=>$menuTop
 			)
 			,array(
-				'profile'=>array(
+				'atomicerp'=>array(
+					'url'=>HTTP
+					,'logo'=>ATOMIC_LOGO
+				)
+				,'profile'=>array(
 					'user_url'=>HTTP.'user/user.php?id='.$user->getId()
 					,'user_name'=>$user->login
 					,'logout_url'=>HTTP.'?logout'

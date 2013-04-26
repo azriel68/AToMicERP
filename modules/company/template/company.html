@@ -1,28 +1,38 @@
 [tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
 
-	<form name="formCompany" action="[tpl.self]" method="post">
+<div class="fiche">
+	
+	[tpl.tabs;strconv=no]
+
+	<form name="formTCompany" action="[tpl.self]" method="post">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="id" value="[company.id]" />
+		<input type="hidden" name="id_entity" value="[company.id_entity]" />
+	
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><strong>Nom</strong></div>
+			<div class="ui-block-b">[company.name;htmlconv=no]</div>
+
+			<div class="ui-block-a"><strong>Phone</strong></div>
+			<div class="ui-block-b">[company.phone;htmlconv=no]</div>
+
+			<div class="ui-block-a"><strong>Email</strong></div>
+			<div class="ui-block-b">[company.email;htmlconv=no]</div>
+
+			<div class="ui-block-a"><strong>Web</strong></div>
+			<div class="ui-block-b">[company.web;htmlconv=no]</div>
+
+			<div class="ui-block-a">Date de création</div>
+			<div class="ui-block-b">[company.dt_cre;htmlconv=no]</div>
+			
+			<div class="ui-block-a">Date de modification</div>
+			<div class="ui-block-b">[company.dt_maj;htmlconv=no]</div>
+		</div>
 		
-		
-		
-			<div class="ui-grid-a">
-				<div class="ui-block-a"><strong>Nom</strong></div>
-				<div class="ui-block-b">[company.name;htmlconv=no]</div>
-
-				<div class="ui-block-a"><strong>Adresse</strong></div>
-				<div class="ui-block-b">[company.address;htmlconv=no]</div>
-
-				<div class="ui-block-a"><strong>Code poste</strong></div>
-				<div class="ui-block-b">[company.cp;htmlconv=no]</div>
-
-				<div class="ui-block-a"><strong>Ville</strong></div>
-				<div class="ui-block-b">[company.city;htmlconv=no]</div>
-
-				<div class="ui-block-a">Date de création</div>
-				<div class="ui-block-b">[company.dt_cre;htmlconv=no]</div>
-
-			</div>
-		
-	[tpl.buttons;htmlconv=no]
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a> 
 	</form>
+	
+</div>
 
 [tpl.footer;htmlconv=no]
