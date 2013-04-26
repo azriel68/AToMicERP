@@ -13,6 +13,13 @@
 		$form=new TFormCore;
 		$form->Set_typeaff($action);
 		
+		$listContact = new TListviewTBS('list_TContact');
+		$sqlContact = strtr($conf->list->TContact->contactListOnCompany['sql'],array(
+			'@id_company@'=>$company->getId()
+		));
+		
+		$paramContact = $conf->list->TContact->contactListOnCompany['param'];
+		
 		$TForm=array(
 			'name'=>$form->texte('', 'name', $company->name, 80)
 			,'phone'=>$form->texte('', 'phone', $company->phone, 80)
@@ -22,6 +29,8 @@
 			,'id'=>$company->getId()
 			,'dt_cre'=>$company->get_date('dt_cre')
 			,'dt_maj'=>$company->get_date('dt_maj')
+			
+			,'contactList'=>$listContact->render($db, $sqlContact, $paramContact)
 		);
 		$tbs=new TTemplateTBS;
 		
@@ -37,6 +46,7 @@
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'tabs'=>TTemplate::tabs($conf, $user, $company, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
+					,'mode'=>$action
 				)
 			)
 		)); 

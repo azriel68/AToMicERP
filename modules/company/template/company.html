@@ -29,9 +29,14 @@
 			<div class="ui-block-b">[company.dt_maj;htmlconv=no]</div>
 		</div>
 		
-		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a> 
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		<div style="clear: both"><hr></div>
 	</form>
 	
+	[onshow; block=begin; when [tpl.mode]=='view']
+	<h1>__tr(ContactList)__</h1>
+	[company.contactList;strconv=no]
+	[onshow; block=end]
 </div>
 
 [tpl.footer;htmlconv=no]

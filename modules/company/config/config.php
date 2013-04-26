@@ -25,10 +25,10 @@
 		'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@ ORDER BY name"
 		,'param'=>array(
 			'title'=>array(
-				'name'=>__tr('Name')
-				,'phone'=>__tr('Phone')
-				,'email'=>__tr('Email')
-				,'web'=>__tr('Web')
+				'name'=>'__tr(Name)__'
+				,'phone'=>'__tr(Phone)__'
+				,'email'=>'__tr(Email)__'
+				,'web'=>'__tr(Web)__'
 			)
 			,'hide'=>array('id')
 			,'link'=>array(

@@ -9,4 +9,8 @@ $language=array(
 
 	// Buttons
 	,'newTCompany'=>'Nouvelle société'
+	,'editTCompany'=>'Modifier'
+	,'deleteTCompany'=>'Supprimer'
+	,'saveTCompany'=>'Enregistrer'
+	,'cancelTCompany'=>'Annuler'
 );

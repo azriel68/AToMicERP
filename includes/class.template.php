@@ -91,7 +91,7 @@ class TTemplate {
 		
 		$template = TTemplate::getTemplate($conf, $object,'list');
 		
-		return $tbs->render($template
+		return __tr_view($tbs->render($template
 			,array(
 				'button'=>TTemplate::buttons($user, $object, 'list')
 			)
@@ -104,7 +104,7 @@ class TTemplate {
 					,'list'=>$l->render($db, $sql, $param)
 				)
 			)
-		); 
+		)); 
 		
 		
 	}
