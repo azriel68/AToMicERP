@@ -33,7 +33,6 @@ class TTemplate {
 				case 'save':
 					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
-					
 					if(empty($object->id_entity)) {
 						$object->id_entity = $user->id_entity;
 					}
@@ -202,8 +201,7 @@ class TTemplate {
 			$submodule = !empty($tab['submodule']) ? $tab['submodule'] : 'main';
 			
 			if( $user->right($className, $submodule, $mode) ) {
-				
-				@$tab['url']=strtr($tab['url'], array('@id@', $object->id));
+				$tab['url']=strtr($tab['url'], array('@id@'=> $object->getId() ));
 				@$tab['class'] .= ($id==$idActive) ? ' active' : ' inactive';
 				
 				$Tab[] = $tab;
