@@ -49,6 +49,26 @@ div.profile {
 	padding: 20px 10px 20px 0px;
 }
 
+div.tabs {
+	float: left;
+	padding: 10px 0px;
+}
+
+div.tabs ul {
+	padding: 0px;
+	margin: 0px
+}
+
+div.tabs li {
+	list-style: none;
+	display: inline;
+	padding: 5px;
+}
+
+div.tabs li.active {
+	border: 1px solid #2AA8B9;
+}
+
 input, input.flat, textarea, textarea.flat, form.flat select, select.flat {
    	color: #464646;
    	font-family: "ProximaNova","Lucida Sans","Lucida Grande",sans-serif;
