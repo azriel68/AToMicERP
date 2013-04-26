@@ -93,8 +93,7 @@ select.flat, form.flat select {
 	background: #ddd;
 }
 
-div.fiche a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused,
-div.list a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, div.fiche a.butActionDelete, div.fiche a.butActionRefused {
+div.content  a.butAction,div.content  span.butAction,div.content  span.butActionDelete, div.content  a.butActionDelete, div.content  a.butActionRefused {
     background-color: #37BFCD;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
     color: #FFFFFF;
@@ -121,16 +120,60 @@ div.list a.butAction,div.fiche span.butAction,div.fiche span.butActionDelete, di
     text-decoration: none;
     padding:10px 0;
 }
-div.fiche a.butAction:hover,div.fiche span.butAction:hover {
+div.content  a.butAction:hover,div.content  span.butAction:hover {
 	background-color:#31b5c5;
 }
 
-div.fiche span.butActionDelete , div.fiche a.butActionDelete{
+div.content  span.butActionDelete , div.content  a.butActionDelete{
 	background-color: #cc7777;
 }
-div.fiche a.butActionRefused {
+div.content  a.butActionRefused {
 	background-color: #cc9999;
 }
-div.fiche span.butActionDelete:hover, div.fiche a.butActionDelete:hover,div.fiche a.butActionRefused:hover {
+div.content  span.butActionDelete:hover, div.content  a.butActionDelete:hover,div.content  a.butActionRefused:hover {
 	background-color: #662222;
+}
+div.content  {
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 3px 10px 10px 3px;
+}
+
+#page-login {
+	margin:20px 0;
+}
+#page-login label {
+	display:inline-block;
+	width:200px;
+}
+table.liste {
+	border-collapse: collapse;
+	background: #fff;
+	border: 1px solid #E8E8E8;
+    box-shadow: 2px 2px 2px #999999;
+}	
+table.liste a {
+	text-decoration: none;
+}
+table.liste tr.liste_titre {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #2AA8B9;
+}
+table.liste tr.liste_titre th {
+	border-bottom: 1px solid #2AA8B9;	
+}
+
+table.liste tr.impair td {
+    background: #F2F2F2;
+    border: 0 none;
+    color: #202020;
+    font-family: arial,tahoma,verdana,helvetica;
+    margin-bottom: 1px;
+}
+table.liste tr.pair td {
+    background: #fff;
+    border: 0 none;
+    color: #202020;
+    font-family: arial,tahoma,verdana,helvetica;
+    margin-bottom: 1px;
 }

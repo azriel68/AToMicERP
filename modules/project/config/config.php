@@ -19,7 +19,10 @@
 	$conf->list->TProject=new stdClass;
 	$conf->list->TProject->index=array(
 		'sql'=>"SELECT * FROM ".DB_PREFIX."project  WHERE id_entity=@user->id_entity@ ORDER BY name"
-		,'param'=>array()
+		,'param'=>array(
+			'type'=>array('dt_cre'=>'date', 'dt_maj'=>'date')
+			,'link'=>array('name'=>'<a href="?id=@id@&action=view">@val@</a>')
+		)
 	);
 	
 	$conf->tabs->TProject=array(

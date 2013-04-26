@@ -15,11 +15,13 @@
 		
 		$TForm=array(
 			'name'=>$form->texte('', 'name', $project->name, 80)
+			,'id'=>$project->getId()
+			
 		);
 		$tbs=new TTemplateTBS;
 		
 		print __tr_view( $tbs->render(TTemplate::getTemplate($conf, $project)
-			,array('button'=>TTemplate::buttons($user, $project, 'edit'))
+			,array('button'=>TTemplate::buttons($user, $project, $action))
 			,array(
 				'project'=>$TForm
 				,'tpl'=>array(

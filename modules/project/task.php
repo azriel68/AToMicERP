@@ -3,7 +3,7 @@
 	
 	$task=new TProject;
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $task);
+	$action = TTemplate::actions($db, $user, $task);
 	if($action!==false)  {
 
 		if($action=='delete') {
@@ -18,38 +18,37 @@
 		);
 		$tbs=new TTemplateTBS;
 		
-		print $tbs->render(TTemplate::getTemplate($conf, $task)
-			,array()
+		print __tr_view( $tbs->render(TTemplate::getTemplate($conf, $task)
+			,array('button'=>TTemplate::buttons($user, $task, $action))
 			,array(
 				'task'=>$TForm
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'buttons'=>TTemplate::buttons($user, $task, 'edit')
+					
 					,'tabs'=>TTemplate::tabs($conf, $user, $task, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
-		); 
+		) ); 
 		
 	}
 	else {
 		$tbs=new TTemplateTBS;
 		
-		print $tbs->render(TTemplate::getTemplate($conf, $task, 'scrum')
-			,array()
+		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $task, 'scrum')
+			,array('button'=>TTemplate::buttons($user, $task, $action))
 			,array(
 				'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'buttons'=>TTemplate::buttons($user, $task, 'edit')
 					,'tabs'=>TTemplate::tabs($conf, $user, $task, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
-		); 
+		)); 
 		
 	}
 	
