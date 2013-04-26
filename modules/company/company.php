@@ -3,7 +3,7 @@
 	
 	$company=new TCompany;
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $company);
+	$action = TTemplate::actions($db, $user, $company);
 	if($action!==false ) {
 
 		if($action=='delete') {
@@ -20,7 +20,6 @@
 			,'web'=>$form->texte('', 'web', $company->web, 80)
 			
 			,'id'=>$company->getId()
-			,'id_entity'=>$user->id_entity
 			,'dt_cre'=>$company->get_date('dt_cre')
 			,'dt_maj'=>$company->get_date('dt_maj')
 		);

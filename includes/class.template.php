@@ -12,7 +12,7 @@ class TTemplate {
 	 * E : dbConnection, StdObjet
 	 * S : actions effectuée 
 	 */
-	static function actions(&$db, &$object) {
+	static function actions(&$db, &$user, &$object) {
 	 	
 		if(isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
@@ -33,6 +33,11 @@ class TTemplate {
 				case 'save':
 					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
+					
+					if(empty($object->id_entity)) {
+						$object->id_entity = $user->id_entity;
+					}
+					
 					$object->save($db);
 					return 'save';
 					break;
@@ -183,6 +188,8 @@ class TTemplate {
 	
 	static function tabs(&$conf, &$user, &$object, $idActive=null) {
 		
+		if($object->getId()==0) return '';
+		
 		$tbs=new TTemplateTBS;
 		
 		$Tab = array();
@@ -196,6 +203,7 @@ class TTemplate {
 			
 			if( $user->right($className, $submodule, $mode) ) {
 				
+				@$tab['url']=strtr($tab['url'], array('@id@', $object->id));
 				@$tab['class'] .= ($id==$idActive) ? ' active' : ' inactive';
 				
 				$Tab[] = $tab;

@@ -3,7 +3,7 @@
 	
 	$project=new TProject;
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $project);
+	$action = TTemplate::actions($db, $user, $project);
 	if($action!==false ) {
 
 		if($action=='delete') {
@@ -19,14 +19,13 @@
 		$tbs=new TTemplateTBS;
 		
 		print __tr_view( $tbs->render(TTemplate::getTemplate($conf, $project)
-			,array()
+			,array('button'=>TTemplate::buttons($user, $project, 'edit'))
 			,array(
 				'project'=>$TForm
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'buttons'=>TTemplate::buttons($user, $project, 'edit')
 					,'tabs'=>TTemplate::tabs($conf, $user, $project, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
 				)
