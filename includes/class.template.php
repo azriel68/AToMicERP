@@ -73,6 +73,21 @@ class TTemplate {
 		}
 		
 	}
+	static function getBoxes(&$conf, &$user) {
+		
+		$Tab=array();
+		
+		foreach($conf->boxes as $module=>$TBoxe) {
+			foreach($TBoxe as $boxe) {
+				$url = $boxe.'?id_entity='.$user->id_entity;
+				
+				array_push( $Tab, file_get_contents($url) );	
+			}
+			
+		}
+		
+		return $Tab;
+	}
 	static function liste(&$conf, &$user, &$db, &$object, $listname='index', $param=array()) {
 		/*
 		 * Fonction à changer, non conforme à une démarche module

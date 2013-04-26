@@ -177,3 +177,25 @@ table.liste tr.pair td {
     font-family: arial,tahoma,verdana,helvetica;
     margin-bottom: 1px;
 }
+
+div.boxe  {
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 10px 10px 10px 10px;
+	
+	border: 1px solid #E8E8E8;
+    box-shadow: 2px 2px 2px #999999;
+    
+    border-radius: 10px;
+    
+    float:left;
+    width:400px;
+    height : 400px;
+    overflow: hidden;
+    margin:0 10px 20px 10px;
+    
+}
+div.boxe h2 {
+	font-size:14px;
+	margin:0 0 0 0;
+}

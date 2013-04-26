@@ -76,6 +76,9 @@ class TAtomic {
 				if(is_dir($dir.$moduleName.'/class/')) {
 					TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
 				}
+				if(is_dir($dir.$moduleName.'/boxe/')) {
+					TAtomic::loadBoxe($conf, $moduleName);
+				}
 			}
 		}
 	}
@@ -99,12 +102,21 @@ class TAtomic {
 		}
 	}
 	
+	static function loadBoxe(&$conf, $module) {
+		
+		$handle = opendir(ROOT.'modules/'.$module.'/boxe/'); 
+		while (false !== ($file = readdir($handle))) {
+			if($file[0]!='.') {
+				$conf->boxes[$module][$file] = HTTP.'modules/'.$module.'/boxe/'.$file;	
+			}
+	   }
+	}
+	
 	static function loadClass(&$conf, $dir) {
 		$handle = opendir($dir); 
 		
 		while (false !== ($file = readdir($handle))) {
-			set_time_limit(30);  
-		   	if(substr($file,0,5)=='class'){
+			if(substr($file,0,5)=='class'){
 					require($dir.$file);
 			}
 	   }

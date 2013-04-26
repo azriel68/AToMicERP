@@ -6,11 +6,11 @@
 		TTemplate::login();		
 	}
 
-	$TBoxe=array();
+	
 
 	$tbs = new TTemplateTBS;
 	print $tbs->render(TTemplate::getTemplate($conf, 'home')
-		,array('TBoxe'=>$TBoxe)
+		,array('boxe'=>TTemplate::getBoxes($conf, $user))
 		,array(
 			'tpl'=>array(
 				'header'=>TTemplate::header($conf)

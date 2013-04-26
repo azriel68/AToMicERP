@@ -22,7 +22,7 @@
 	@$conf->template->TCompany->fiche = './template/company.html';
 	
 	@$conf->list->TCompany->companyList=array(
-		'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@ ORDER BY name"
+		'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@user->id_entity@"
 		,'param'=>array(
 			'title'=>array(
 				'name'=>'__tr(Name)__'
