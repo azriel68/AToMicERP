@@ -217,20 +217,22 @@ class TTemplate {
 			
 			if( $user->right($className, $submodule, $mode) ) {
 				$tab['url']=strtr($tab['url'], array('@id@'=> $object->getId() ));
-				@$tab['class'] .= ($id==$idActive) ? ' active' : ' inactive';
+				$tab['class'] = ($id==$idActive) ? 'active' : 'inactive';
 				
 				$Tab[] = $tab;
-			}			
+			}
 		}
 		
-		//print_r($conf);
 		return $tbs->render(TPL_TABS,
 			array(
 				'tab'=>$Tab
 			)
+			,array(
+				'tpl'=>array(
+					'tabtitle'=>__tr(get_class($object))
+				)
+			)
 		);
-		
-		
 	}
 	
 	static function menu(&$conf, &$user) {

@@ -13,4 +13,7 @@ $language=array(
 	,'deleteTCompany'=>'Supprimer'
 	,'saveTCompany'=>'Enregistrer'
 	,'cancelTCompany'=>'Annuler'
+	
+	// Other
+	,'TCompany'=>'Société'
 );

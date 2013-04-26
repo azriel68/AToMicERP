@@ -9,7 +9,7 @@
 	);
 	
 	$conf->tabs->TCompany=array(
-		'fiche'=>array('label'=>__tr('Fiche'),'url'=>'company.php?id=@id@')
+		'fiche'=>array('label'=>__tr('Fiche'),'url'=>'company.php?action=view&id=@id@')
 		,'contact'=>array('label'=>__tr('Contact'),'url'=>'contact.php?id_project=@id@')
 	);
 	
