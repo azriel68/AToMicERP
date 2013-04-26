@@ -21,7 +21,7 @@
 			)
 			,'hide'=>array('id')
 			,'link'=>array(
-				'name'=>'<a href="?action=view&id=@id@">@name@</a>'
+				'name'=>'<a href="'.HTTP.'modules/contact/contact.php?action=view&id=@id@">@name@</a>'
 				,'email'=>'<a href="mailto:@email@">@email@</a>'
 			)
 		)
