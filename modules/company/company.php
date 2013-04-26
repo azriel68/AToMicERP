@@ -26,7 +26,7 @@
 		);
 		$tbs=new TTemplateTBS;
 		
-		print $tbs->render(TTemplate::getTemplate($conf, $company)
+		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company)
 			,array(
 				'button'=>TTemplate::buttons($user, $company, $action)
 			)
@@ -40,7 +40,7 @@
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
-		); 
+		)); 
 		
 	}
 	else {
