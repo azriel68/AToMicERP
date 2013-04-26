@@ -1,6 +1,10 @@
 <?
 	require('../../inc.php');
 	
+	if(!$user->isLogged()) {
+		TTemplate::login();		
+	}
+	
 	$company=new TCompany;
 	$db=new TPDOdb;
 	$action = TTemplate::actions($db, $user, $company);
