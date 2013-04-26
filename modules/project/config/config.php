@@ -3,7 +3,7 @@
 	$conf->menu->top[] = array(
 		'name'=>"Project"
 		,'id'=>'TProject'
-		,'position'=>2
+		,'position'=>4
 		,'url'=>HTTP.'modules/project/project.php'
 	);
 	

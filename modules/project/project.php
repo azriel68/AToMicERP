@@ -18,7 +18,7 @@
 		);
 		$tbs=new TTemplateTBS;
 		
-		print $tbs->render(TTemplate::getTemplate($conf, $project)
+		print __tr_view( $tbs->render(TTemplate::getTemplate($conf, $project)
 			,array()
 			,array(
 				'project'=>$TForm
@@ -31,7 +31,7 @@
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
-		); 
+		) ); 
 		
 	}
 	else {

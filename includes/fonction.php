@@ -9,7 +9,16 @@ function __tr($sentence) {
 	return TAtomic::translate($conf, $sentence);
 	
 }
-
+function __tr_view($source) {
+	$resultat='';
+	$resultat .= preg_replace_callback(
+		'|__tr\((.*?)\)__|'
+		, create_function('$matches', 'return __tr($matches[1]);')
+		,$source
+	);
+	
+	return $resultat;
+}
 /*
  * Récupération de la langue du navigateur
  */
