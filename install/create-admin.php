@@ -27,6 +27,8 @@
 	$company->addChild($db, 'TContactToObject_company', $contact->getId());
 
 	$company->save($db);
+	$company->id_entity = $company->getId();
+	$company->save($db);
 	
 	
 //pre($company);	
