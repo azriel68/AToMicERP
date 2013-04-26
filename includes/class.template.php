@@ -169,7 +169,7 @@ class TTemplate {
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton[]=array(
-					'href'=>'?action=cancel'
+					'href'=>'?action=view&id='.$object->getId()
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))
 				);
