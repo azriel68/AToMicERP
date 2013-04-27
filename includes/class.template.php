@@ -242,15 +242,30 @@ class TTemplate {
 		$menuTop = array();
 		
 		foreach($conf->menu->top as $menu) {
-			if( $user->right($menu['id']) ) {
+			if(empty($menu['rights'])){
 				$menuTop[] = $menu;
-			}			
+			}
+			else if( $user->right($menu['rights'][0],$menu['rights'][1],$menu['rights'][2]) ) {
+				$menuTop[] = $menu;
+			}
+						
+		}
+		
+		$menuAdmin = array();
+		foreach($conf->menu->admin as $menu) {
+			if(empty($menu['rights'])){
+				$menuAdmin[] = $menu;
+			}
+			else if( $user->right($menu['rights'][0],$menu['rights'][1],$menu['rights'][2]) ) {
+				$menuAdmin[] = $menu;
+			}
 		}
 		
 		//print_r($conf);
 		return $tbs->render(TPL_MENU,
 			array(
 				'menuTop'=>$menuTop
+				,'menuAdmin'=>$menuAdmin
 			)
 			,array(
 				'atomicerp'=>array(

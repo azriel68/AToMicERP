@@ -9,7 +9,14 @@
 	</div>
 	<div class="profile">
 		<a href="[profile.user_url]">[profile.user_name]</a>
-		<a href="[profile.logout_url]">[profile.logout]</a>
+		<ul>
+			<li>
+				<a href="[menuAdmin.url; block=li]">[menuAdmin.name]</a>
+			</li>	
+			<li>
+				<a href="[profile.logout_url]">__tr(logout)__</a>
+			</li>	
+		</ul>
 	</div>
-	<div style="clear: both"><hr></div>
+	<div style="clear: both"></div>
 </div>
