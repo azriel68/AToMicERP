@@ -227,17 +227,31 @@ div.profile {
 div.profile ul {
 	display:none;
 	position:absolute;
-	top:40px;
+	top:45px;
 	right:0;
 	margin:0 0 0 0;
 	padding:0 0 0 0;
 	width:200px;
+	border-bottom:1px solid #295B8E;
+	border-left:1px solid #295B8E;
+	border-right:1px solid #295B8E;    
 }
 div.profile ul li {
 	background: #fff;
-	border-bottom: #295B8E;
-	padding:10px 3px;	
+	border-bottom:1px solid #295B8E;
+	padding:10px 3px;
+	display:block;	
+	list-style: none;
+	text-decoration: none;
 }
+
+div.profile ul li:hover {
+	background:#2AA8B9;
+}
+div.profile ul li:hover a {
+	color:#fff;
+}
+
 div.profile:hover ul {
 	display:block;	
 }

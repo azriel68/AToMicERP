@@ -42,3 +42,33 @@
 	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php.php?id=@id@');
 	$conf->tabs->TGroup['user']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/user.php.php?id_group=@id@');
 	
+	@$conf->template->TUser->fiche = './template/user.html';
+	
+	@$conf->list->TUser->userList=array(
+		'sql'=>"SELECT * FROM ".DB_PREFIX."contact WHERE id_entity=@user->id_entity@ AND isUser=1"
+		,'param'=>array(
+			'title'=>array(
+				'firstname'=>'__tr(Firstname)__'
+				,'lastname'=>'__tr(Lastname)__'
+				,'login'=>'__tr(Login)__'
+			)
+			,'hide'=>array('id')
+			,'link'=>array(
+				'login'=>'<a href="?action=view&id=@id@">@name@</a>'
+			)
+		)
+	);
+	
+	@$conf->template->TUser->fiche = './template/group.html';
+	
+	@$conf->list->TGroup->groupList=array(
+		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity=@user->id_entity@"
+		,'param'=>array(
+			'hide'=>array('id')
+			,'link'=>array(
+				'name'=>'<a href="?action=view&id=@id@">@name@</a>'
+			)
+		)
+	);
+	
+	
