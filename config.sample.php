@@ -17,6 +17,8 @@
 	define('DEFAULT_LANG','fr_FR');
 	define('ADMIN','admin');
 	
+	define('ATOMIC_LOGO','AtomicERP');
+	
 	/*
 	 * Suite au prob de sens parsing répertoire, et temporairement jusqu'à prise de décision
 	 */

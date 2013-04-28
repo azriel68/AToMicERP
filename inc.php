@@ -9,6 +9,7 @@
 	$conf->js = array();
 	$conf->list = new stdClass;
 	$conf->lang = array();
+	$conf->rigths = array();
 
 	$conf->boxes=array();
 

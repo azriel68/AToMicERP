@@ -9,7 +9,7 @@
 	
 
 	$tbs = new TTemplateTBS;
-	print $tbs->render(TTemplate::getTemplate($conf, 'home')
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, 'home')
 		,array('boxe'=>TTemplate::getBoxes($conf, $user))
 		,array(
 			'tpl'=>array(
@@ -19,4 +19,4 @@
 				,'menu'=>TTemplate::menu($conf, $user)
 			)
 		)
-	); 
+	)); 

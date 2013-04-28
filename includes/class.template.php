@@ -124,7 +124,7 @@ class TTemplate {
 	}
 	
 	
-	static function header(&$conf) {
+	static function header(&$conf, $title='AtomicERP', $id="page") {
 		$tbs=new TTemplateTBS;
 		
 		//print_r($conf);
@@ -133,7 +133,7 @@ class TTemplate {
 				'js'=>$conf->js
 			)
 			,array(
-				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
+				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>$id, 'title'=>$title, 'http'=>HTTP)
 			)
 		);
 		
@@ -209,7 +209,6 @@ class TTemplate {
 		$Tab = array();
 		
 		$className = get_class($object);
-		
 		foreach($conf->tabs->{$className} as $id=>$tab) {
 			
 			$mode = !empty($tab['mode']) ? $tab['mode'] : 'main';
@@ -242,27 +241,41 @@ class TTemplate {
 		$menuTop = array();
 		
 		foreach($conf->menu->top as $menu) {
-			if( $user->right($menu['id']) ) {
+			if(empty($menu['rights'])){
 				$menuTop[] = $menu;
-			}			
+			}
+			else if( $user->right($menu['rights'][0],$menu['rights'][1],$menu['rights'][2]) ) {
+				$menuTop[] = $menu;
+			}
+						
+		}
+		
+		$menuAdmin = array();
+		foreach($conf->menu->admin as $menu) {
+			
+			$menu['url'] = strtr($menu['url'],array('@id@'=>$user->getId()));
+			
+			if(empty($menu['rights'])){
+				$menuAdmin[] = $menu;
+			}
+			else if( $user->right($menu['rights'][0],$menu['rights'][1],$menu['rights'][2]) ) {
+				$menuAdmin[] = $menu;
+			}
 		}
 		
 		//print_r($conf);
 		return $tbs->render(TPL_MENU,
 			array(
 				'menuTop'=>$menuTop
+				,'menuAdmin'=>$menuAdmin
 			)
 			,array(
-				'atomicerp'=>array(
-					'url'=>HTTP
+				'tpl'=>array(
+					'http'=>HTTP
 					,'logo'=>ATOMIC_LOGO
-				)
-				,'profile'=>array(
-					'user_url'=>HTTP.'user/user.php?id='.$user->getId()
-					,'user_name'=>$user->login
 					,'logout_url'=>HTTP.'?logout'
-					,'logout'=>'logout'
 				)
+				,'user'=>$user
 			)
 		);
 		

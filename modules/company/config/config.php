@@ -9,8 +9,8 @@
 	);
 	
 	$conf->tabs->TCompany=array(
-		'fiche'=>array('label'=>__tr('Fiche'),'url'=>'company.php?action=view&id=@id@')
-		,'contact'=>array('label'=>__tr('Contact'),'url'=>'contact.php?id_project=@id@')
+		'fiche'=>array('label'=>'__tr(Card)__','url'=>'company.php?action=view&id=@id@')
+		,'contact'=>array('label'=>'__tr(Contact)__','url'=>'contact.php?id_project=@id@')
 	);
 	
 	$conf->modules['company']=array(
