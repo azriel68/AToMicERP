@@ -1,5 +1,5 @@
 <div class="header" data-role="header">
-	<h1><a href="[atomicerp.url]" class="logo">[atomicerp.logo]</a></h1>
+	<h1><a href="[tpl.http]" class="logo">[tpl.logo]</a></h1>
 	<div class="menu">
 		<ul>
 			<li>
@@ -8,7 +8,7 @@
 		</ul>
 	</div>
 	<div class="profile">
-		<a href="[profile.user_url]">[profile.user_name]</a>
+		[user.gravatar; strconv=no] [user.firstname] [user.lastname]
 		<ul>
 			<li>
 				<a href="[menuAdmin.url; block=li]">[menuAdmin.name]</a>

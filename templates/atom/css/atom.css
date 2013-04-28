@@ -241,3 +241,6 @@ div.profile ul li {
 div.profile:hover ul {
 	display:block;	
 }
+div.profile img {
+	height:20px;
+}

@@ -252,6 +252,9 @@ class TTemplate {
 		
 		$menuAdmin = array();
 		foreach($conf->menu->admin as $menu) {
+			
+			$menu['url'] = strtr($menu['url'],array('@id@'=>$user->getId()));
+			
 			if(empty($menu['rights'])){
 				$menuAdmin[] = $menu;
 			}
@@ -267,16 +270,12 @@ class TTemplate {
 				,'menuAdmin'=>$menuAdmin
 			)
 			,array(
-				'atomicerp'=>array(
-					'url'=>HTTP
+				'tpl'=>array(
+					'http'=>HTTP
 					,'logo'=>ATOMIC_LOGO
-				)
-				,'profile'=>array(
-					'user_url'=>HTTP.'user/user.php?id='.$user->getId()
-					,'user_name'=>$user->login
 					,'logout_url'=>HTTP.'?logout'
-					,'logout'=>'logout'
 				)
+				,'user'=>$user
 			)
 		);
 		
