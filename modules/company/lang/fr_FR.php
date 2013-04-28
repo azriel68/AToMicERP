@@ -16,4 +16,6 @@ $language=array(
 	
 	// Other
 	,'TCompany'=>'Société'
+	,'Card'=>'Fiche'
+	,'Contact'=>'Contact'
 );

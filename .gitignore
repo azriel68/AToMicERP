@@ -1,5 +1,7 @@
 .settings/
 .project
+
 /config.php
 view/
 *.log
+test/
