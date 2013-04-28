@@ -70,7 +70,6 @@ class TAtomic {
 		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
 		foreach($moduleToLoad as $moduleName=>$options) {
 			if(!empty($conf->modules[$moduleName])) {
-				if(is_file($dir.$moduleName.'/config/config.php')) require($dir.$moduleName.'/config/config.php');
 				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
 				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$moduleName.'/js/script.js';
 				if(is_dir($dir.$moduleName.'/class/')) {
