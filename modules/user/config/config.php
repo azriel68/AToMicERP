@@ -37,12 +37,8 @@
 	$conf->rigths[]=array('user','me','view');
 	$conf->rigths[]=array('user','me','edit');
 	
-	$conf->tabs->TCompany[]=array(
-		'user'=>array('label'=>'__tr(User)__','url'=>HTTP.'modules/user/user.php.php?id=@id@')
-	);
+	$conf->tabs->TContact['user']=array('label'=>'__tr(User)__','url'=>HTTP.'modules/user/user.php.php?id=@id@');
 	
-	$conf->tabs->TGroup[]=array(
-		'group'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php.php?id=@id@')
-		,'user'=>array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/user.php.php?id_group=@id@')
-	);
+	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php.php?id=@id@');
+	$conf->tabs->TGroup['user']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/user.php.php?id_group=@id@');
 	

@@ -124,7 +124,7 @@ class TTemplate {
 	}
 	
 	
-	static function header(&$conf) {
+	static function header(&$conf, $title='AtomicERP', $id="page") {
 		$tbs=new TTemplateTBS;
 		
 		//print_r($conf);
@@ -133,7 +133,7 @@ class TTemplate {
 				'js'=>$conf->js
 			)
 			,array(
-				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>'test', 'title'=>'test')
+				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>$id, 'title'=>$title, 'http'=>HTTP)
 			)
 		);
 		
@@ -209,7 +209,6 @@ class TTemplate {
 		$Tab = array();
 		
 		$className = get_class($object);
-		
 		foreach($conf->tabs->{$className} as $id=>$tab) {
 			
 			$mode = !empty($tab['mode']) ? $tab['mode'] : 'main';
