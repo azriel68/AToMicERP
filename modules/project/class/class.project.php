@@ -11,6 +11,13 @@ class TProject extends TObjetStd {
 		parent::_init_vars();
 
 		$this->setChild('TTask', 'id_project');
+		
+		$this->TStatus = array(
+			0=>'Non débuté'
+			,1=>'En cours'
+			,2=>'En recette'
+			,3=>'Terminé'
+		);
 	}
 }
 

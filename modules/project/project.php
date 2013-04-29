@@ -19,6 +19,7 @@
 		
 		$TForm=array(
 			'name'=>$form->texte('', 'name', $project->name, 80)
+			,'status'=>$form->combo('', 'status', $project->TStatus, $project->status)
 			,'id'=>$project->getId()
 			
 		);
@@ -40,7 +41,7 @@
 		
 	}
 	else {
-		print TTemplate::liste($conf, $user, $db, $project);
+		print TTemplate::liste($conf, $user, $db, $project, 'index',array('translate'=>array('status'=>$project->TStatus)));
 	}
 	
 	$db->close();
