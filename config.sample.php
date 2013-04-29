@@ -12,7 +12,6 @@
 	define('DB_DRIVER','mysqli');
 	define('DB_PREFIX','atom_');
 
-	define('DEFAULT_THEME','atom');
 	define('DEFAULT_LANG','fr_FR');
 	define('ATOMIC_LOGO','AToMic ERP');
 
