@@ -4,6 +4,7 @@ class TGroup extends TObjetStd {
 	function __construct() {
 		parent::set_table(DB_PREFIX.'group');
 		parent::add_champs('name', 'type=chaine;index;');
+		parent::add_champs('id_entity', 'type=entier;index;');
 		parent::add_champs('description', 'type=chaine;');
 
 		TAtomic::initExtraFields($this);
@@ -11,7 +12,7 @@ class TGroup extends TObjetStd {
 		parent::start();
 		parent::_init_vars();
 		
-		$this->setChild('TGroupRight', 'id_group');
+		$this->setChild('TRight', 'id_group');
 		$this->setChild('TGroupUser', 'id_group');
 	}
 

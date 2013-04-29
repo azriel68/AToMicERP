@@ -1,0 +1,26 @@
+[tpl.header;strconv=no]
+[tpl.menu;strconv=no]
+	<form name="formTGroup" action="[tpl.self]" method="post">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="id" value="[group.id]" />
+		<div class="content">
+			
+		[tpl.tabs;strconv=no]
+			<table>
+				<tr>
+					<td>__tr(groupName)__</td><td>[group.name;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Description)__</td><td>[group.description;strconv=no]</td>
+				</tr>
+				
+			</table>
+		
+			<a href="[button.href;block=a]" class="[button.class]">[button.label]</a> 
+		
+		</div>
+		
+		
+	</form>
+
+[tpl.footer;strconv=no]

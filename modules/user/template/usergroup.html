@@ -1,0 +1,29 @@
+[tpl.header;strconv=no]
+[tpl.menu;strconv=no]
+		<div class="content">
+			
+		[tpl.tabs;strconv=no]
+			<table>
+				<tr>
+					<td colspan="2">[group.name]</td>
+				</tr>
+				<tr>
+					<td class="userDrag"><h2>__tr(userIn)__</h2>
+						<ul>
+							<li>[userIn.name; block=li]</li>
+						</ul>
+					</td>
+					
+					
+					<td class="userDrag"><h2>__tr(userOut)__</h2>
+						<ul>
+							<li>[userOut.name; block=li]</li>
+						</ul>
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		
+	
+[tpl.footer;strconv=no]

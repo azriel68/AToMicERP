@@ -16,7 +16,9 @@ class TUser extends TContact {
 		$this->rights = array();
 		
 	}
-	
+	function name() {
+		return $this->fisrtname.' '.$this->lastname;
+	}
 	function load(&$db, $id) {
 		parent::load($db, $id);
 		$this->load_right($db);

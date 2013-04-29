@@ -37,10 +37,11 @@
 	$conf->rigths[]=array('user','me','view');
 	$conf->rigths[]=array('user','me','edit');
 	
-	$conf->tabs->TContact['user']=array('label'=>'__tr(User)__','url'=>HTTP.'modules/user/user.php.php?id=@id@');
+	$conf->tabs->TContact['user']=array('label'=>'__tr(User)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
 	
-	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php.php?id=@id@');
-	$conf->tabs->TGroup['user']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/user.php.php?id_group=@id@');
+	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php?id=@id@&action=view');
+	$conf->tabs->TGroup['usergroup']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/usergroup.php?id_group=@id@');
+	$conf->tabs->TGroup['right']=array('label'=>'__tr(Rights)__','url'=>HTTP.'modules/user/right.php?id_group=@id@');
 	
 	@$conf->template->TUser->fiche = './template/user.html';
 	
@@ -62,7 +63,8 @@
 		)
 	);
 	
-	@$conf->template->TUser->fiche = './template/group.html';
+	@$conf->template->TGroup->fiche = './template/group.html';
+	@$conf->template->TGroup->usergroup = './template/usergroup.html';
 	
 	@$conf->list->TGroup->groupList=array(
 		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity=@user->id_entity@"

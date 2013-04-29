@@ -21,6 +21,7 @@
 		
 		$TForm=array(
 			'name'=>$form->texte('', 'name', $group->name, 80)
+			,'description'=>$form->zonetexte('', 'description', $group->description, 80)
 			
 			,'id'=>$group->getId()
 			
