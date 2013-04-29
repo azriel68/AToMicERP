@@ -21,15 +21,13 @@
 	$contact->login = ADMIN;
 	$contact->password = $password;
 	$contact->status = 1;
+	print "Création contact : ".$contact->save($db).'<br>';
 	
-	$contact->save($db);
+	$company->addContact($contact);
 	
-	$company->addChild($db, 'TContactToObject_company', $contact->getId());
-
 	$company->save($db);
 	$company->id_entity = $company->getId();
 	$company->save($db);
-	
 	
 //pre($company);	
 	$db->close();

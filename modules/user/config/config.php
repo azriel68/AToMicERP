@@ -45,7 +45,10 @@
 	@$conf->template->TUser->fiche = './template/user.html';
 	
 	@$conf->list->TUser->userList=array(
-		'sql'=>"SELECT * FROM ".DB_PREFIX."contact WHERE id_entity=@user->id_entity@ AND isUser=1"
+		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
+			LEFT JOIN ".DB_PREFIX."contactToObject c ON (u.id=c.id_user) 
+			LEFT JOIN ".DB_PREFIX."company e ON (e.id=c.id_object AND objectType='TCompany')  
+					WHERE e.id_entity=@user->id_entity@ AND u.isUser=1"
 		,'param'=>array(
 			'title'=>array(
 				'firstname'=>'__tr(Firstname)__'

@@ -16,6 +16,13 @@ class TCompany extends TObjetStd {
 		$this -> setChild('TContactToObject', array('id_object', 'company') );
 	}
 	
+	function addContact(&$contact) {
+		
+		$iLien = $this->addChild($db, 'TContactToObject_company');
+		$this->TContactToObject_company[$iLien]->id_contact = $contact->getId();
+		
+	}
+	
 }
 
 class TEntity extends TCompany {

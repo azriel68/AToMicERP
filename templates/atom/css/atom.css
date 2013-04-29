@@ -235,6 +235,7 @@ div.profile ul {
 	border-bottom:1px solid #295B8E;
 	border-left:1px solid #295B8E;
 	border-right:1px solid #295B8E;    
+	z-index:999;
 }
 div.profile ul li {
 	background: #fff;
