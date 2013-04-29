@@ -18,21 +18,18 @@
 <script>
 	$(document).ready(function() {
 		$('#[tpl.listName]').dataTable( {
-			"sDom": '<"H"Tfr>t<"F"ip>',
-			"bProcessing": true,
-			"bServerSide": true,
-			"sPaginationType": "full_numbers",
-			"bJQueryUI": true,
-			"sAjaxSource": "[tpl.url_ajax_data_table;strconv=no]",
-			"fnServerData": function ( sSource, aoData, fnCallback ) {
-				/* Add some extra data to the sender */
+			"bProcessing": true
+			,"bServerSide": true
+			,"sAjaxSource": "[tpl.url_ajax_data_table;strconv=no]"
+			,"fnServerData": function ( sSource, aoData, fnCallback ) {
 				aoData.push( { "name": "id_entity", "value": "[tpl.id_entity]" } );
-				$.getJSON( sSource, aoData, function (json) { 
-					/* Do whatever additional processing you want on the callback, then tell DataTables */
+				$.getJSON( sSource, aoData, function (json) {
 					fnCallback(json)
 				} );
-			},
-			"oLanguage": {
+			}
+			,"bJQueryUI": true
+			,"sPaginationType": "full_numbers"
+			,"oLanguage": {
 				"sUrl": "[tpl.url_lang_data_table;strconv=no]"
 			}
 		} );

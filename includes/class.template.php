@@ -150,7 +150,7 @@ class TTemplate {
 					'listName'=>$listName
 					,'http'=>HTTP
 					,'url_ajax_data_table'=>$url
-					,'url_lang_data_table'=>HTTP.'templates/atom/js/test/DataTables-1.9.4/language/dataTables.french.txt'
+					,'url_lang_data_table'=>HTTP.'modules/core/lang/fr_FR.txt'
 					,'column_count'=>count($header)
 					,'id_entity'=>$user->id_entity
 				)
