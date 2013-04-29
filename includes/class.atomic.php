@@ -71,7 +71,7 @@ class TAtomic {
 		foreach($moduleToLoad as $moduleName=>$options) {
 			if(!empty($conf->modules[$moduleName])) {
 				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
-				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[]=HTTP.'modules/'.$moduleName.'/js/script.js';
+				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js';
 				if(is_dir($dir.$moduleName.'/class/')) {
 					TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
 				}
@@ -101,25 +101,36 @@ class TAtomic {
 		}
 	}
 	
+	static function loadStyle(&$conf) {
+		if(is_dir(THEME_TEMPLATE_DIR.'/css/')) {
+			$handle = opendir(THEME_TEMPLATE_DIR.'/css/'); 
+			while (false !== ($file = readdir($handle))) {
+				if(substr($file,-3)=='css'){
+					$conf->css[] = HTTP_TEMPLATE.'css/'.$file;
+				}
+			}
+			closedir($handle);
+		}
+	}
+	
 	static function loadBoxe(&$conf, $module) {
-		
 		$handle = opendir(ROOT.'modules/'.$module.'/boxe/'); 
 		while (false !== ($file = readdir($handle))) {
 			if($file[0]!='.') {
 				$conf->boxes[$module][$file] = HTTP.'modules/'.$module.'/boxe/'.$file;	
 			}
-	   }
+		}
+		closedir($handle);
 	}
 	
 	static function loadClass(&$conf, $dir) {
 		$handle = opendir($dir); 
-		
 		while (false !== ($file = readdir($handle))) {
 			if(substr($file,0,5)=='class'){
-					require($dir.$file);
+				require($dir.$file);
 			}
-	   }
-	   closedir($handle);
+		}
+		closedir($handle);
 	}
 	
 	static function sortMenu(&$conf) {

@@ -12,6 +12,7 @@ class TUser extends TContact {
 		$this->id_entity = 0;
 		
 		$this->lang = DEFAULT_LANG;
+		$this->theme = DEFAULT_THEME;
 		$this->rights = array();
 		
 	}

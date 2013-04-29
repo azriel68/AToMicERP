@@ -12,12 +12,11 @@
 	define('DB_DRIVER','mysqli');
 	define('DB_PREFIX','atom_');
 
-	define('THEME','atom');
-	
+	define('DEFAULT_THEME','atom');
 	define('DEFAULT_LANG','fr_FR');
+	define('ATOMIC_LOGO','AToMic ERP');
+
 	define('ADMIN','admin');
-	
-	define('ATOMIC_LOGO','AtomicERP');
 	
 	/*
 	 * Suite au prob de sens parsing répertoire, et temporairement jusqu'à prise de décision

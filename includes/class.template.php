@@ -68,6 +68,9 @@ class TTemplate {
 		else if($mode=='list') {
 			return THEME_TEMPLATE_DIR.'list.html';
 		}
+		else if($mode=='data-table') {
+			return THEME_TEMPLATE_DIR.'data-table.html';
+		}
 		else {
 			TAtomic::errorlog( 'ErrorBadTemplateDefinition' );
 		}
@@ -123,6 +126,35 @@ class TTemplate {
 		
 	}
 	
+	static function listeDataTable(&$conf, &$user, &$db, &$object, $listName, $TParam=array()) {
+		$tbs=new TTemplateTBS;
+		
+		$className = get_class($object);
+		$template = TTemplate::getTemplate($conf, $object,'data-table');
+		
+		$params = '&TParam[@user->id_entity]='.$user->id_entity;
+		$url = HTTP.'script/ajax-data-table.php?className='.$className.'&listName='.$listName;
+		
+		$header = $conf->list->{$className}->{$listName}['header'];
+		
+		return $tbs->render($template
+			,array(
+				'button'=>TTemplate::buttons($user, $object, 'list')
+				,'columns'=>$header
+			)
+			,array(
+				'tpl'=>array(
+					'listName'=>$listName
+					,'http'=>HTTP
+					,'url_ajax_data_table'=>$url
+					,'url_lang_data_table'=>HTTP.'templates/atom/js/test/DataTables-1.9.4/language/dataTables.french.txt'
+					,'column_count'=>count($header)
+					,'id_entity'=>$user->id_entity
+				)
+			)
+		);
+	}
+	
 	
 	static function header(&$conf, $title='AtomicERP', $id="page") {
 		$tbs=new TTemplateTBS;
@@ -131,6 +163,7 @@ class TTemplate {
 		return $tbs->render(TPL_HEADER,
 			array(
 				'js'=>$conf->js
+				,'css'=>$conf->css
 			)
 			,array(
 				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>$id, 'title'=>$title, 'http'=>HTTP)

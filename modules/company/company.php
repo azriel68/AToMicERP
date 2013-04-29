@@ -58,10 +58,10 @@ if($action!==false ) {
 	
 }
 else {
-	print TTemplate::liste($conf, $user, $db, $company, 'companyList');
+	//print TTemplate::liste($conf, $user, $db, $company, 'companyList');
 	
 	// Data table test
-	/*$tbs=new TTemplateTBS;
+	$tbs=new TTemplateTBS;
 	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company,'list')
 		,array(
@@ -72,11 +72,12 @@ else {
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
+				,'http'=>HTTP
 				,'self'=>$_SERVER['PHP_SELF']
-				,'list'=>TTemplate::_constructListTable($conf, $user, $db, $company, 'companyList')
+				,'list'=>TTemplate::listeDataTable($conf, $user, $db, $company, 'companyListDT')
 			)
 		)
-	));*/ 
+	));
 }
 
 $db->close();

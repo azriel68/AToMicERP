@@ -1,0 +1,22 @@
+<div class="header" data-role="header">
+	<h1><a href="[tpl.http]" class="logo">[tpl.logo]</a></h1>
+	<div class="menu">
+		<ul>
+			<li>
+				<a href="[menuTop.url;block=li]">[menuTop.name]</a>
+			</li>
+		</ul>
+	</div>
+	<div class="profile">
+		[user.gravatar; strconv=no] [user.firstname] [user.lastname]
+		<ul>
+			<li>
+				<a href="[menuAdmin.url; block=li]">[menuAdmin.name]</a>
+			</li>	
+			<li>
+				<a href="[tpl.logout_url]">__tr(logout)__</a>
+			</li>	
+		</ul>
+	</div>
+	<div style="clear: both"></div>
+</div>
