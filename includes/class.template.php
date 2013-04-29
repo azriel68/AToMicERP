@@ -47,6 +47,9 @@ class TTemplate {
 					return 'delete';
 					break;
 					
+				default:
+					return false;
+					break;
 			}
 		}
 		else {
@@ -221,7 +224,7 @@ class TTemplate {
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton[]=array(
-					'href'=>'?action=view&id='.$object->getId()
+					'href'=> ($object->getId() > 0) ? '?action=view&id='.$object->getId() : '?action=list'
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))
 				);
