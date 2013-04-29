@@ -13,7 +13,7 @@ class TContact extends TObjetStd {
 		parent::_init_vars();
 
 		$this->setChild('TAddress', 'id_contact');
-		$this->setChild('TContactToObject', array('id_contact', 'company'));
+		$this->setChild('TContactToObject', 'id_contact');
 
 	}
 }
