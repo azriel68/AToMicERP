@@ -269,10 +269,12 @@ td.userDrag {
 	border:1px solid #2AA8B9;
 	width:50%;
 	padding:10px 20px;
+	
 }
 .userDrag ul {
 	margin:0 0 0 0;
 	padding:0 0 0 0;
+	min-height: 500px;
 }
 .userDrag ul li:hover {
 	cursor: pointer;	
