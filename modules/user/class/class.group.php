@@ -15,7 +15,23 @@ class TGroup extends TObjetStd {
 		$this->setChild('TRight', 'id_group');
 		$this->setChild('TGroupUser', 'id_group');
 	}
-
+	
+	function hasRight($module, $submodule, $action) {
+		foreach($this->TRight as $i => $right) {
+			if($right->module == $module && $right->submodule == $submodule && $right->action == $action) return $i;
+		}
+		return false;
+	}
+	
+	function addRight($module, $submodule, $action) {
+		
+		$iLien = $this->addChild($db, 'TRight');
+		if(!isset($this->TContactToObject_company[$iLien]))$this->TContactToObject_company[$iLien]=new TRight;
+		$this->TRight[$iLien]->module = $module;
+		$this->TRight[$iLien]->submodule = $submodule;
+		$this->TRight[$iLien]->action = $action;
+		
+	}
 }
 
 class TGroupUser extends TObjetStd {

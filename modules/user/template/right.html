@@ -1,0 +1,41 @@
+[tpl.header;strconv=no]
+[tpl.menu;strconv=no]
+	<form name="formTGroupRight" action="[tpl.self]" method="post">
+		<input type="hidden" name="id_group" value="[group.id]" />
+		<div class="content">
+			
+		[tpl.tabs;strconv=no]
+			<table>
+				<tr>
+					<td>__tr(groupName)__</td><td>[group.name;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Description)__</td><td>[group.description;strconv=no]</td>
+				</tr>
+				
+			</table>
+		
+			<table width="100%">
+				<tr>
+					<th>__tr(Module)__</th>
+					<th>__tr(Submodule)__</th>
+					<th>__tr(action)__</th>
+					<th>__tr(Status)__</th>
+				</tr>
+				<tr>
+					<td>[right.module;block=tr;strconv=no]</td>
+					<td>[right.submodule;strconv=no]</td>
+					<td>[right.action;strconv=no]</td>
+					<td>
+						<a class="right_status" data-module="[right.module]" data-submodule="[right.submodule]" data-action="[right.action]" data-status="[right.status]">
+							[right.status]
+						</a>
+					</td>
+				</tr>
+				
+			</table>
+		
+		</div>
+	</form>
+
+[tpl.footer;strconv=no]

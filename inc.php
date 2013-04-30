@@ -10,7 +10,7 @@
 	$conf->css = array();
 	$conf->list = new stdClass;
 	$conf->lang = array();
-	$conf->rigths = array();
+	$conf->rights = array();
 
 	$conf->boxes=array();
 

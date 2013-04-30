@@ -32,10 +32,10 @@
 		,'class'=>array('TUser','TRight','TGroup','TGroupUser')
 	);
 
-	$conf->rigths[]=array('user','all','view');
-	$conf->rigths[]=array('user','all','edit');
-	$conf->rigths[]=array('user','me','view');
-	$conf->rigths[]=array('user','me','edit');
+	$conf->rights[]=array('user','all','view');
+	$conf->rights[]=array('user','all','edit');
+	$conf->rights[]=array('user','me','view');
+	$conf->rights[]=array('user','me','edit');
 	
 	$conf->tabs->TUser['user']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
 	$conf->tabs->TUser['group']=array('label'=>'__tr(Group)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
@@ -66,6 +66,7 @@
 	
 	@$conf->template->TGroup->fiche = './template/group.html';
 	@$conf->template->TGroup->usergroup = './template/usergroup.html';
+	@$conf->template->TGroup->right = './template/right.html';
 	
 	@$conf->list->TGroup->groupList=array(
 		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity=@user->id_entity@"
