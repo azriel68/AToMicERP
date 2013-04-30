@@ -284,11 +284,21 @@ td.userDrag {
 	background: #2AA8B9;
 	color:#fff;
 	font-size:14px;
-	padding:10px 30px;
+	padding:10px 20px 10px 40px;
+	overflow: hidden;
 	position:relative;
 	border-radius: 10px;
 	box-shadow: 2px 2px 2px #999999;
+	
 }
 .userDrag ul li.userDragOut {
 	background: #333;
+	overflow: hidden;
+}
+
+.userDrag ul li img {
+	position:absolute;
+	top:0;
+	left:0;
+	max-height: 36px;
 }

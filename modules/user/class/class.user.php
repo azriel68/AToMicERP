@@ -36,7 +36,7 @@ class TUser extends TContact {
 			foreach($TRight as $id_right) {
 				$right = new TRight;
 				$right->load($db, $id_right);
-				$this->rights[$groupUser->id_entity]->{$right->module}->{$right->submodule}->{$right->action} = true;
+				@$this->rights[$groupUser->id_entity]->{$right->module}->{$right->submodule}->{$right->action} = true;
 			}
 		}
 	}
