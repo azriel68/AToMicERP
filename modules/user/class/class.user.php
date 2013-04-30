@@ -10,6 +10,7 @@ class TUser extends TContact {
 		
 		$this->t_connexion = 0;
 		$this->id_entity = 0;
+		$this->company = new TCompany;
 		
 		$this->lang = DEFAULT_LANG;
 		$this->theme = DEFAULT_THEME;
@@ -23,6 +24,10 @@ class TUser extends TContact {
 	function load(&$db, $id) {
 		parent::load($db, $id);
 		$this->load_right($db);
+		
+		if(!empty($this->id_entity)) {
+			$this->company->load($db, $this->id_entity);
+		}
 	}
 	
 	function load_right(&$db) {
