@@ -9,15 +9,15 @@
 				</tr>
 				<tr>
 					<td class="userDrag droppable" id="userInBoxe"><h2>__tr(userIn)__</h2>
-						<ul class="draggable">
-							<li id="[userIn.id]">[userIn.gravatar;strconv=no][userIn.name; block=li]</li>
+						<ul>
+							<li id="[userIn.id]" class="draggable">[userIn.gravatar;strconv=no][userIn.name; block=li]</li>
 						</ul>
 					</td>
 					
 					
 					<td class="userDrag userDragOut droppable" id="userOutBoxe"><h2>__tr(userOut)__</h2>
-						<ul class="draggable">
-							<li id="[userOut.id]" class="userDragOut">[userOut.gravatar;strconv=no][userOut.name; block=li]</li>
+						<ul>
+							<li id="[userOut.id]" class="userDragOut draggable">[userOut.gravatar;strconv=no][userOut.name; block=li]</li>
 						</ul>
 					</td>
 				</tr>
@@ -31,7 +31,7 @@
 			 $( ".droppable" ).droppable({
 		      drop: function( event, ui ) {
 		        
-		        idUser = ui.draggable.find('li').attr('id');
+		        idUser = ui.draggable.attr('id');
 		        
 		        if($(this).attr('id')=='userInBoxe') {
 		        	$('#'+idUser).removeClass('userDragOut');

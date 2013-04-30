@@ -16,6 +16,8 @@
 		
 		// Titles
 		,'ContactList'=>'Liste des utilisateurs'
+		,'userIn'=>'Utilisateurs faisant parti du groupe'
+		,'userOut'=>'Utilisateurs disponibles'
 		
 		// Other
 		,'TUser'=>'Utilisateur'
