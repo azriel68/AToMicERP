@@ -7,7 +7,8 @@
 	}
 	
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $user, $user);
+	$u = new TUser;
+	$action = TTemplate::actions($db, $user, $u);
 	if($action!==false ) {
 
 		if($action=='delete') {
@@ -18,19 +19,19 @@
 		$form->Set_typeaff($action);
 		
 		$TForm=array(
-			'lastname'=>$form->texte('', 'lastname', $user->lastname, 80)
-			,'firstname'=>$form->texte('', 'lastname', $user->firstname, 80)
-			,'password'=>$form->texte('', 'lastname', $user->password, 80)
-			,'login'=>$form->texte('', 'login', $user->login, 80)
+			'lastname'=>$form->texte('', 'lastname', $u->lastname, 80)
+			,'firstname'=>$form->texte('', 'firstname', $u->firstname, 80)
+			,'password'=>$form->texte('', 'password', $u->password, 80)
+			,'login'=>$form->texte('', 'login', $u->login, 80)
 			
-			,'id'=>$user->getId()
+			,'id'=>$u->getId()
 			
 		);
 		$tbs=new TTemplateTBS;
 		
-		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $user)
+		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $u)
 			,array(
-				'button'=>TTemplate::buttons($user, $user, $action)
+				'button'=>TTemplate::buttons($user, $u, $action)
 			)
 			,array(
 				'user'=>$TForm
@@ -38,7 +39,7 @@
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'tabs'=>TTemplate::tabs($conf, $user, $user, 'fiche')
+					,'tabs'=>TTemplate::tabs($conf, $user, $u, 'fiche')
 					,'self'=>$_SERVER['PHP_SELF']
 					,'mode'=>$action
 				)
@@ -47,7 +48,7 @@
 		
 	}
 	else {
-		print TTemplate::liste($conf, $user, $db, $user, 'userList');
+		print TTemplate::liste($conf, $user, $db, $u, 'userList');
 	}
 	
 	$db->close();

@@ -13,11 +13,12 @@ class TUser extends TContact {
 		
 		$this->lang = DEFAULT_LANG;
 		$this->theme = DEFAULT_THEME;
+		
 		$this->rights = array();
 		
 	}
 	function name() {
-		return $this->fisrtname.' '.$this->lastname;
+		return $this->firstname.' '.$this->lastname;
 	}
 	function load(&$db, $id) {
 		parent::load($db, $id);

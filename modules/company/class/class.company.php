@@ -36,4 +36,13 @@ class TEntity extends TCompany {
 		
 	}
 	
+	static function getEntityUsers(&$db, $id_entity=0) {
+		$sql = "SELECT u.id FROM ".DB_PREFIX."contact u ";
+		$sql.= "LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact) ";
+		$sql.= "LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company') ";
+		$sql.= "WHERE c.id_entity=$id_entity AND u.isUser=1";
+		
+		return TRequeteCore::_get_id_by_sql($db, $sql);
+	} 
+	
 }

@@ -11,9 +11,22 @@
 	$group = new TGroup;
 	$group->load($db, $_REQUEST['id_group']);
 	
-	
 	$TUserIn=array();
+	foreach($group->TGroupUser as $groupuser) {
+		$u = new TUser;
+		$u->load($db, $groupuser->id_user);
+		$TUserIn[$u->getId()] = $u->get_values();
+	}
+	
 	$TUserOut=array();
+	$TUserList=TEntity::getEntityUsers($db, $user->id_entity);
+	foreach($TUserList as $userid) {
+		if(empty($TUserIn[$userid])) {
+			$u = new TUser;
+			$u->load($db, $userid);
+			$TUserOut[$u->getId()] = $u->get_values();
+		}
+	}
 	
 	$tbs=new TTemplateTBS;
 	

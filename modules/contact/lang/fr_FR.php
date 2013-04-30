@@ -11,7 +11,7 @@ $language=array(
 	,'Lang'=>'Langue'
 
 	// Buttons
-	,'newTContact'=>'Nouveeau contact'
+	,'newTContact'=>'Nouveau contact'
 	,'editTContact'=>'Modifier'
 	,'deleteTContact'=>'Supprimer'
 	,'saveTContact'=>'Enregistrer'

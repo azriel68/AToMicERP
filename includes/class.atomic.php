@@ -26,23 +26,18 @@ class TAtomic {
 	}
 	
 	static function getUser() {
-			
 		if(!isset($_SESSION['user'])) {
 			$_SESSION['user'] = new TUser;
 		}
 		$user = & $_SESSION['user'];
 		
-		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
+		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password']) && !empty($_REQUEST['action']) && $_REQUEST['action'] == 'login') {
 			$db=new TPDOdb;
-			//$db->debug=true;
 			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['id_entity']);
 			$db->close();
-			/*print_r($user);
-			exit;*/
 		}
 		
 		return $user;
-		
 	}
 	
 	static function translate(&$conf, $sentence) {

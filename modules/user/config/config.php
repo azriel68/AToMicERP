@@ -37,7 +37,8 @@
 	$conf->rigths[]=array('user','me','view');
 	$conf->rigths[]=array('user','me','edit');
 	
-	$conf->tabs->TContact['user']=array('label'=>'__tr(User)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
+	$conf->tabs->TUser['user']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
+	$conf->tabs->TUser['group']=array('label'=>'__tr(Group)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
 	
 	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php?id=@id@&action=view');
 	$conf->tabs->TGroup['usergroup']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/usergroup.php?id_group=@id@');
@@ -47,9 +48,9 @@
 	
 	@$conf->list->TUser->userList=array(
 		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
-			LEFT JOIN ".DB_PREFIX."contactToObject c ON (u.id=c.id_user) 
-			LEFT JOIN ".DB_PREFIX."company e ON (e.id=c.id_object AND objectType='TCompany')  
-					WHERE e.id_entity=@user->id_entity@ AND u.isUser=1"
+			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact) 
+			LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
+					WHERE c.id = @user->id_entity@ AND u.isUser = 1"
 		,'param'=>array(
 			'title'=>array(
 				'firstname'=>'__tr(Firstname)__'
@@ -58,7 +59,7 @@
 			)
 			,'hide'=>array('id')
 			,'link'=>array(
-				'login'=>'<a href="?action=view&id=@id@">@name@</a>'
+				'login'=>'<a href="?action=view&id=@id@">@val@</a>'
 			)
 		)
 	);
