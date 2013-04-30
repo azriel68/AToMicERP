@@ -58,8 +58,8 @@ if($action!==false ) {
 	
 }
 else {
-	//print TTemplate::liste($conf, $user, $db, $company, 'companyList');
-	
+	print TTemplate::liste($conf, $user, $db, $company, 'companyList');
+	/*
 	// Data table test
 	$tbs=new TTemplateTBS;
 	
@@ -78,6 +78,8 @@ else {
 			)
 		)
 	));
+	 * 
+	 */
 }
 
 $db->close();

@@ -6,7 +6,10 @@
 	 */
 
 	 
-	
+	 if(!empty($user) || !is_dir(ROOT.'templates/'.$user->theme.'/')) {
+	 	$user->theme = DEFAULT_THEME;
+	 } 
+	 	
 	 define('TEMPLATE_DIR',ROOT.'templates/');
 	 define('THEME_TEMPLATE_DIR',TEMPLATE_DIR.$user->theme.'/');
 	 define('DEFAULT_TEMPLATE_DIR',TEMPLATE_DIR.'default/');
@@ -17,9 +20,6 @@
 	 define('TPL_TABS',is_file(THEME_TEMPLATE_DIR.'tabs.html') ? THEME_TEMPLATE_DIR.'tabs.html' : DEFAULT_TEMPLATE_DIR.'tabs.html' );
 	
 	
-	 if(!is_dir(ROOT.'templates/'.$user->theme.'/')) {
-	 	$user->theme = DEFAULT_THEME;
-	 } 
 	  
 	 define('HTTP_TEMPLATE', HTTP.'templates/'.$user->theme.'/');	 
 
