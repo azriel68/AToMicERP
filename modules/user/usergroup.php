@@ -15,7 +15,7 @@
 	foreach($group->TGroupUser as $groupuser) {
 		$u = new TUser;
 		$u->load($db, $groupuser->id_user);
-		$TUserIn[$u->getId()] = $u->get_values();
+		$TUserIn[$u->getId()] = $u;
 	}
 	
 	$TUserOut=array();
@@ -24,7 +24,7 @@
 		if(empty($TUserIn[$userid])) {
 			$u = new TUser;
 			$u->load($db, $userid);
-			$TUserOut[$u->getId()] = $u->get_values();
+			$TUserOut[$u->getId()] = $u;
 		}
 	}
 	
