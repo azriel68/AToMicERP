@@ -9,26 +9,21 @@
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="id" value="[company.id]" />
 		
-		<div class="ui-grid-a">
-			<div class="ui-block-a"><strong>__tr(Name)__</strong></div>
-			<div class="ui-block-b">[company.name;htmlconv=no]</div>
-
-			<div class="ui-block-a"><strong>__tr(Phone)__</strong></div>
-			<div class="ui-block-b">[company.phone;htmlconv=no]</div>
-
-			<div class="ui-block-a"><strong>__tr(Email)__</strong></div>
-			<div class="ui-block-b">[company.email;htmlconv=no]</div>
-
-			<div class="ui-block-a"><strong>__tr(Web)__</strong></div>
-			<div class="ui-block-b">[company.web;htmlconv=no]</div>
-
-			<div class="ui-block-a">Date de création</div>
-			<div class="ui-block-b">[company.dt_cre;htmlconv=no]</div>
-			
-			<div class="ui-block-a">Date de modification</div>
-			<div class="ui-block-b">[company.dt_maj;htmlconv=no]</div>
-		</div>
-		
+		<table class="grille">
+			<tr>
+				<td>__tr(Name)__</td><td>[company.name;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Phone)__</td><td>[company.phone;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Email)__</td><td>[company.email;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Web)__</td><td>[company.web;htmlconv=no]</td>
+			</tr>
+		</table>
+				
 		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
 		<div style="clear: both"><hr></div>
 	</form>

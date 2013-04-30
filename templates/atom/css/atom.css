@@ -113,7 +113,19 @@ select.flat, form.flat select {
 .button:disabled {
 	background: #ddd;
 }
-
+div.content table.grille {
+	border-collapse: collapse;
+	border: 1px solid #464646;
+	width:100%;
+}
+div.content table.grille td {
+	border: 1px solid #464646;
+	padding:5px;
+}
+div.content table.grille td:first-child {
+	width:20%;
+	font-weight: bold;
+}
 div.content  a.butAction,div.content  span.butAction,div.content  span.butActionDelete, div.content  a.butActionDelete, div.content  a.butActionRefused {
     background-color: #37BFCD;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
@@ -259,11 +271,11 @@ div.profile:hover ul {
 div.profile img {
 	height:20px;
 }
-#userGroupDrag {
+#userGroupDrag, #scrum {
 	width:100%;
 	border-spacing: 10px;
 }
-td.userDrag {
+td.userDrag, td.projectDrag {
 	vertical-align: top;
 	background: #fff;
 	border:1px solid #2AA8B9;
@@ -271,15 +283,18 @@ td.userDrag {
 	padding:10px 20px;
 	
 }
-.userDrag ul {
+td.projectDrag {
+	width:33%;	
+}
+.userDrag ul,.projectDrag ul {
 	margin:0 0 0 0;
 	padding:0 0 0 0;
 	min-height: 500px;
 }
-.userDrag ul li:hover {
+.userDrag ul li:hover, .projectDrag ul li:hover {
 	cursor: pointer;	
 }
-.userDrag ul li {
+.userDrag ul li,.projectDrag ul li {
 	display:block;
 	background: #2AA8B9;
 	color:#fff;
@@ -291,6 +306,7 @@ td.userDrag {
 	box-shadow: 2px 2px 2px #999999;
 	
 }
+
 .userDrag ul li.userDragOut {
 	background: #333;
 	overflow: hidden;

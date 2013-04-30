@@ -2,25 +2,25 @@
 [tpl.menu;strconv=no]
 		<div class="content">
 		[tpl.tabs;strconv=no]
-			<table>
+			<table id="scrum">
 				<tr>
 					<td>__tr(toDo)__</td></td>
 					<td>__tr(inProgress)__</td></td>
 					<td>__tr(finish)__</td></td>
 				</tr>
 				<tr>
-					<td>
-						<ul id="task-todo" class="task-list">
+					<td class="projectDrag droppable" id="task-inprogress">
+						<ul id="list-task-todo" class="task-list">
 						
 						</ul>
 					</td>
-					<td>
-						<ul id="task-inprogress" class="task-list">
+					<td class="projectDrag droppable" id="task-inprogress">
+						<ul id="list-task-inprogress" class="task-list">
 						
 						</ul>
 					</td>
-					<td>
-						<ul id="task-finish" class="task-list">
+					<td class="projectDrag droppable" id="task-finish">
+						<ul id="list-task-finish" class="task-list">
 						
 						</ul>
 					</td>
