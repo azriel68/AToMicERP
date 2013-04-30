@@ -68,6 +68,21 @@ class TUser extends TContact {
 		
 		return false;
 	}
+	function getEntity($mode='sql') {
+		/* retour l'entité possible en fonction de ses droits */
+		$TEntity = array();
+		foreach($this->rights as $id_entity=>$right) {
+			$TEntity[] = $id_entity;
+		}
+		
+		$TEntity[]=$this->id_entity;
+		
+		if($mode=='sql') return implode(',', $TEntity);
+		else return $TEntity;
+		
+	}
+	
+	
 	function right($module='main', $submodule='main', $action='view') {
 		
 		if(empty($submodule)) $submodule = 'main';

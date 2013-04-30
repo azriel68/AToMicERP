@@ -50,7 +50,7 @@
 		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
 			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact) 
 			LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
-					WHERE c.id = @user->id_entity@ AND u.isUser = 1"
+					WHERE c.id IN (@getEntity@) AND u.isUser = 1"
 		,'param'=>array(
 			'title'=>array(
 				'firstname'=>'__tr(Firstname)__'
@@ -69,7 +69,7 @@
 	@$conf->template->TGroup->right = './template/right.html';
 	
 	@$conf->list->TGroup->groupList=array(
-		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity=@user->id_entity@"
+		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'hide'=>array('id')
 			,'link'=>array(

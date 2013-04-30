@@ -103,6 +103,7 @@ class TTemplate {
 		
 		$sql = strtr($conf->list->{$className}->{$listname}['sql'],array(
 			'@user->id_entity@'=>$user->id_entity
+			,'@getEntity@'=>$user->getEntity()
 		));
 		
 		$param = array_merge($conf->list->{$className}->{$listname}['param'] , $param);
