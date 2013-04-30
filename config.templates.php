@@ -15,8 +15,13 @@
 	 define('TPL_FOOTER',is_file(THEME_TEMPLATE_DIR.'footer.html') ? THEME_TEMPLATE_DIR.'footer.html' : DEFAULT_TEMPLATE_DIR.'footer.html' );
 	 define('TPL_MENU',is_file(THEME_TEMPLATE_DIR.'menu.html') ? THEME_TEMPLATE_DIR.'menu.html' : DEFAULT_TEMPLATE_DIR.'menu.html' );
 	 define('TPL_TABS',is_file(THEME_TEMPLATE_DIR.'tabs.html') ? THEME_TEMPLATE_DIR.'tabs.html' : DEFAULT_TEMPLATE_DIR.'tabs.html' );
-	 
-	 define('HTTP_TEMPLATE', HTTP.'templates/'.$user->theme.'/'); 
+	
+	
+	 if(!is_dir(ROOT.'templates/'.$user->theme.'/')) {
+	 	$user->theme = DEFAULT_THEME;
+	 } 
+	  
+	 define('HTTP_TEMPLATE', HTTP.'templates/'.$user->theme.'/');	 
 
 	 @$conf->template->home->fiche = THEME_TEMPLATE_DIR.'home.html';	 
 	 @$conf->template->login->fiche = THEME_TEMPLATE_DIR.'login.html';

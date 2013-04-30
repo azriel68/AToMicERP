@@ -26,8 +26,37 @@ function _put(&$db, $case) {
 			__out(_setRight($db, $_REQUEST['id_group'], $_REQUEST['module'], $_REQUEST['submodule'], $_REQUEST['action']));
 
 			break;
+		case 'addGroup':
+			__out(_add_group($db, $_REQUEST['id_group'], $_REQUEST['id_user']));
+			break;
+		case 'removeGroup':
+			__out(_remove_group($db, $_REQUEST['id_group'], $_REQUEST['id_user']));
+			
+			break;
 	}
 
+}
+
+function _add_group(&$db, $id_group, $id_user) {
+	
+	$gu=new TGroupUser;
+	$gu->id_group = $id_group;
+	$gu->id_user = $id_user;
+	
+	$gu->save($db);
+	
+	return 1;
+}
+function _remove_group(&$db, $id_group, $id_user) {
+	
+	$gu=new TGroupUser;
+	//$gu->loadByGroupUser($db, $id_group, $id_user );
+	
+	//$gu->delete($db);
+	
+	$db->Execute("DELETE FROM ".DB_PREFIX."group_user WHERE id_group=$id_group AND id_user=$id_user"); //flemmard !
+	
+	return 1;
 }
 
 function _setRight(&$db, $id_group, $module, $submodule, $action) {

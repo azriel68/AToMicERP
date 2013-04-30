@@ -43,6 +43,7 @@
 				,'menu'=>TTemplate::menu($conf, $user)
 				,'tabs'=>TTemplate::tabs($conf, $user, $group, 'usergroup')
 				,'self'=>$_SERVER['PHP_SELF']
+				,'http'=>HTTP
 				
 			)
 		)

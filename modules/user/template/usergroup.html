@@ -3,27 +3,68 @@
 		<div class="content">
 			
 		[tpl.tabs;strconv=no]
-			<table>
+			<table id="userGroupDrag">
 				<tr>
 					<td colspan="2">[group.name]</td>
 				</tr>
 				<tr>
-					<td class="userDrag"><h2>__tr(userIn)__</h2>
-						<ul>
-							<li>[userIn.name; block=li]</li>
+					<td class="userDrag droppable" id="userInBoxe"><h2>__tr(userIn)__</h2>
+						<ul class="draggable">
+							<li id="[userIn.id]">[userIn.name; block=li]</li>
 						</ul>
 					</td>
 					
 					
-					<td class="userDrag"><h2>__tr(userOut)__</h2>
-						<ul>
-							<li>[userOut.name; block=li]</li>
+					<td class="userDrag userDragOut droppable" id="userOutBoxe"><h2>__tr(userOut)__</h2>
+						<ul class="draggable">
+							<li id="[userOut.id]" class="userDragOut">[userOut.name; block=li]</li>
 						</ul>
 					</td>
 				</tr>
 				
 			</table>
 		</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 $( ".draggable" ).draggable();
+			 
+			 $( ".droppable" ).droppable({
+		      drop: function( event, ui ) {
+		        
+		        idUser = ui.draggable.find('li').attr('id');
+		        
+		        if($(this).attr('id')=='userInBoxe') {
+		        	$('#'+idUser).removeClass('userDragOut');
+		        	
+		        	$.ajax({
+		        		url: "[tpl.http]modules/user/script/interface.php"
+		        		,data : {
+		        			put:'addGroup'
+		        			,id_group: [group.id]
+		        			,id_user:idUser
+		        		}
+		        	});
+		        	
+		        }
+		        else {
+		        	$('#'+idUser).addClass('userDragOut');	
+		        	
+		        	$.ajax({
+		        		url: "[tpl.http]modules/user/script/interface.php"
+		        		,data : {
+		        			put:'removeGroup'
+		        			,id_group: [group.id]
+		        			,id_user:idUser
+		        		}
+		        	});
+		        	
+		        }
+		        
+		      }
+		    });
+		});
 		
+	
+	</script>	
 	
 [tpl.footer;strconv=no]

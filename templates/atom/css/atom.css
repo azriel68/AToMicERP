@@ -259,3 +259,34 @@ div.profile:hover ul {
 div.profile img {
 	height:20px;
 }
+#userGroupDrag {
+	width:100%;
+	border-spacing: 10px;
+}
+td.userDrag {
+	vertical-align: top;
+	background: #fff;
+	border:1px solid #2AA8B9;
+	width:50%;
+	padding:10px 20px;
+}
+.userDrag ul {
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+.userDrag ul li:hover {
+	cursor: pointer;	
+}
+.userDrag ul li {
+	display:block;
+	background: #2AA8B9;
+	color:#fff;
+	font-size:14px;
+	padding:10px 30px;
+	position:relative;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #999999;
+}
+.userDrag ul li.userDragOut {
+	background: #333;
+}

@@ -44,4 +44,9 @@ class TGroupUser extends TObjetStd {
 		parent::start();
 		parent::_init_vars();
 	}
+	function loadByGroupUser($db, $id_group, $id_user ){
+		
+		
+		
+	}
 }
