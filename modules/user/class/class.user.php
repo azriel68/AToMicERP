@@ -18,9 +18,7 @@ class TUser extends TContact {
 		$this->rights = array();
 		
 	}
-	function name() {
-		return $this->firstname.' '.$this->lastname;
-	}
+	
 	function load(&$db, $id) {
 		parent::load($db, $id);
 		$this->load_right($db);
@@ -94,9 +92,5 @@ class TUser extends TContact {
 		return false;
 		
 	}
-	function gravatar($size=100) {
-		$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "?s=" . $size;
-		return '<img src="'.$grav_url.'" alt="'.$this->login.'" />';
 
-	}
 }

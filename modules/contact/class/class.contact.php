@@ -2,7 +2,7 @@
 class TContact extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'contact');
-		parent::add_champs('isUser,isAdmin,status','type=entier;index;');
+		parent::add_champs('isUser,isAdmin,status,id_entity','type=entier;index;');
 
 		parent::add_champs('login,password','type=chaine;index;');
 		parent::add_champs('lastname,firstname,phone,fax,email,lang','type=chaine;');
@@ -15,6 +15,15 @@ class TContact extends TObjetStd {
 		$this->setChild('TAddress', 'id_contact');
 		$this->setChild('TContactToObject', 'id_contact');
 
+	}
+	
+	function name() {
+		return $this->firstname.' '.$this->lastname;
+	}
+	
+	function gravatar($size=100) {
+		$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "?s=" . $size;
+		return '<img src="'.$grav_url.'" alt="'.$this->login.'" />';
 	}
 }
 
