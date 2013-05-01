@@ -3,7 +3,7 @@
 	require('../../inc.php');
 	
 	if(!$user->isLogged()) {
-		TTemplate::login();		
+		TTemplate::login();
 	}
 	
 	$db=new TPDOdb;
@@ -28,6 +28,7 @@
 			,'login'=>$form->texte('', 'login', $u->login, 80)
 			
 			,'id'=>$u->getId()
+			,'gravatar'=>$u->gravatar()
 			
 		);
 		$tbs=new TTemplateTBS;
