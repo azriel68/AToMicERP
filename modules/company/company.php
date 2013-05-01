@@ -3,7 +3,7 @@
 require('../../inc.php');
 
 if(!$user->isLogged()) {
-	TTemplate::login();		
+	TTemplate::login($user);		
 }
 
 $company=new TCompany;
@@ -46,7 +46,7 @@ if($action!==false ) {
 		,array(
 			'company'=>$TForm
 			,'tpl'=>array(
-				'header'=>TTemplate::header($conf)
+				'header'=>TTemplate::header($conf, __tr('Company : ').$company->name  )
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
 				,'tabs'=>TTemplate::tabs($conf, $user, $company, 'fiche')

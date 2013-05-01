@@ -18,3 +18,21 @@ $(document).ready(function() {
 		}); 
 	});
 });
+
+function fillSelectEntity(login) {
+	
+	$.ajax({
+		url : './modules/user/script/interface.php'
+		,data: {
+			json : 1
+			,get : 'validEntities'
+			,login : login
+		}
+		,dataType:'json'
+		
+	}).done(function(data) {
+		$.each(data, function(index, row) {
+			
+		});
+	});
+}

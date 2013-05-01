@@ -3,8 +3,16 @@
 class TTemplate {
 	
 	
-	static function login() {
-		header('location:'.HTTP.'?logout');
+	static function login(&$user) {
+		//print_r($user);exit;
+		if(!empty($user->errorLogin)) {
+			header('location:'.HTTP.'?error=Bad login or password');
+		}
+		else {
+			header('location:'.HTTP.'?logout');	
+		}
+		
+		
 		exit;
 	}
 	/*
@@ -160,8 +168,18 @@ class TTemplate {
 	}
 	
 	
-	static function header(&$conf, $title='AtomicERP', $id="page") {
+	static function header(&$conf, $title='AtomicERP', $successMessage='', $errorMessage='', $id="page") {
 		$tbs=new TTemplateTBS;
+		
+		if(isset($_REQUEST['success'])) {
+			$success = TTemplate::success($_REQUEST['success']);
+		}
+		else if(!empty($successMessage)) {
+			$success = TTemplate::success($successMessage);
+		}
+		else {
+			$success = '';
+		}
 		
 		//print_r($conf);
 		return $tbs->render(TPL_HEADER,
@@ -170,10 +188,92 @@ class TTemplate {
 				,'css'=>$conf->css
 			)
 			,array(
-				'tpl'=>array('templateRoot'=>HTTP_TEMPLATE, 'id'=>$id, 'title'=>$title, 'http'=>HTTP)
+				'tpl'=>array(
+					'templateRoot'=>HTTP_TEMPLATE
+					, 'id'=>$id
+					, 'title'=>$title
+					, 'http'=>HTTP
+					, 'error'=> isset($_REQUEST['error']) ? TTemplate::error($_REQUEST['error']) :''
+					, 'success'=> $success
+					)
 			)
 		);
 		
+	}
+	static function success($message) {
+		ob_start();
+		
+		?><script type="text/javascript">
+		$(document).ready(function() {
+			
+		
+		jSuccess(
+			'<?=addslashes($message) ?>',
+			{
+			  autoHide : true, // added in v2.0
+			  MinWidth : 250,
+			  TimeShown : 2000,
+			  ShowTimeEffect : 200,
+			  HideTimeEffect : 200,
+			  LongTrip :20,
+			  HorizontalPosition : 'right',
+			  VerticalPosition : 'top',
+			  ShowOverlay : false,
+	   		  ColorOverlay : '#000',
+			  onClosed : function(){ // added in v2.0
+			   
+			  },
+			  onCompleted : function(){ // added in v2.0
+			   
+			  }
+			});
+		  });
+	  		
+		</script>
+		
+		
+		<?
+		
+		return ob_get_clean();
+		
+	}
+	
+	static function error($message) {
+		ob_start();
+		
+		?><script type="text/javascript">
+		$(document).ready(function() {
+			
+			  jError(
+				'<?=addslashes($message) ?>',
+				{
+				  autoHide : true, // added in v2.0
+				  clickOverlay : true, // added in v2.0
+				  MinWidth : 250,
+				  TimeShown : 3000,
+				  ShowTimeEffect : 200,
+				  HideTimeEffect : 200,
+				  LongTrip :20,
+				  HorizontalPosition : 'center',
+				  VerticalPosition : 'top',
+				  ShowOverlay : true,
+		   		  ColorOverlay : '#000',
+				  OpacityOverlay : 0.3,
+				  onClosed : function(){ // added in v2.0
+				   
+				  },
+				  onCompleted : function(){ // added in v2.0
+				   
+				  }
+				});
+		});
+			
+		</script>
+		
+		
+		<?
+		
+		return ob_get_clean();
 	}
 	static function footer(&$conf) {
 		$tbs=new TTemplateTBS;

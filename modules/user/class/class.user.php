@@ -52,6 +52,8 @@ class TUser extends TContact {
 		}	
 		else  {
 			TAtomic::errorlog("ErrorBadLogin ($login $pwd)");
+			$this->errorLogin = true;
+			
 		}
 			
 		return false;

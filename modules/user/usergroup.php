@@ -3,7 +3,7 @@
 	require('../../inc.php');
 	
 	if(!$user->isLogged()) {
-		TTemplate::login();		
+		TTemplate::login($user);		
 	}
 	
 	$db=new TPDOdb;

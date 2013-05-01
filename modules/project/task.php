@@ -2,7 +2,7 @@
 	require('../../inc.php');
 	
 	if(!$user->isLogged()) {
-		TTemplate::login();		
+		TTemplate::login($user);		
 	}
 	
 	$task=new TProject;
