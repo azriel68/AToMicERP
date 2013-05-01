@@ -52,22 +52,37 @@ div.profile {
 
 div.tabs {
 	float: left;
-	padding: 10px 0px;
+	padding: 10px 0px 0 0px;
+	border-bottom:1px solid #2AA8B9;
+	width:100%;
+	margin:0 0 5px 0;
+	overflow: visible;
+	z-index:1;
 }
 
 div.tabs ul {
 	padding: 0px;
-	margin: 0px
+	margin: 0px;
+	position:relative;
+	z-index:998;
 }
 
 div.tabs li {
 	list-style: none;
-	display: inline;
-	padding: 5px;
+	display: inline-block;
+	padding: 5px 5px 3px 5px;
+	margin: 0 5px 0 0;
+	background: #fff;
+	position:relative;
+	
 }
 
-div.tabs li.active {
-	border: 1px solid #2AA8B9;
+div.tabs li.active, div.tabs li:hover {
+	border-top: 1px solid #2AA8B9;
+	border-left: 1px solid #2AA8B9;
+	border-right: 1px solid #2AA8B9;
+	top:1px;
+	
 }
 
 input, input.flat, textarea, textarea.flat, form.flat select, select.flat {

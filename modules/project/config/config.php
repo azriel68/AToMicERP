@@ -28,7 +28,7 @@
 	);
 	
 	$conf->tabs->TProject=array(
-		'fiche'=>array('label'=>'Fiche','url'=>'project.php?id=@id@')
+		'fiche'=>array('label'=>'Fiche','url'=>'project.php?id=@id@&action=view')
 		,'task'=>array('label'=>'Task','url'=>'task.php?id_project=@id@')
 		,'contact'=>array('label'=>'Contact','url'=>'contact.php?id_project=@id@')
 	);
