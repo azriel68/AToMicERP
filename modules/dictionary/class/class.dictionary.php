@@ -13,10 +13,16 @@ class TDictionary extends TObjetStd {
 		parent::_init_vars();
 	}
 	
-	static function get($type, $code='') {
+	static function get(&$db, $type, $code='') {
+		$TRes = TRequeteCore::get_id_from_what_you_want($db, DB_PREFIX.'dictionary', array('type'=>$type, 'valid'=>1), 'code');
 		
+		$TList = array();
+		foreach($TRes as $key) {
+			$TList[$key] = __tr($key);
+		}
+		return $TList;
 	}
-	static function set($type, $code) {
+	static function set(&$db, $type, $code) {
 		
 	}
 }

@@ -25,6 +25,7 @@ if($action!==false ) {
 		,'fax'=>$form->texte('', 'fax', $contact->fax, 80)
 		,'email'=>$form->texte('', 'email', $contact->email, 80)
 		,'lang'=>$form->texte('', 'lang', $contact->lang, 80)
+		,'lang'=>$form->combo('', 'lang', TDictionary::get($db, 'lang'), $contact->lang)
 		
 		,'id'=>$contact->getId()
 		,'dt_cre'=>$contact->get_date('dt_cre')
@@ -53,7 +54,38 @@ if($action!==false ) {
 	
 }
 else {
-	print TTemplate::liste($conf, $user, $db, $contact, 'contactList');
+	//print TTemplate::liste($conf, $user, $db, $contact, 'contactList');
+	
+	$listName = 'contactList';
+	$className = get_class($contact);
+	$l = new TListviewTBS('list_'.$className);
+	
+	$sql = strtr($conf->list->{$className}->{$listName}['sql'],array(
+		'@user->id_entity@'=>$user->id_entity
+		,'@getEntity@'=>$user->getEntity()
+		,'@id_company@'=>$_REQUEST['id_company']
+	));
+	
+	$param = $conf->list->{$className}->{$listName}['param'];
+	
+	$tbs=new TTemplateTBS;
+	
+	$template = TTemplate::getTemplate($conf, $contact,'list');
+	
+	print __tr_view($tbs->render($template
+		,array(
+			'button'=>TTemplate::buttons($user, $contact, 'list')
+		)
+		,array(
+			'tpl'=>array(
+				'header'=>TTemplate::header($conf)
+				,'footer'=>TTemplate::footer($conf)
+				,'menu'=>TTemplate::menu($conf, $user)
+				,'self'=>$_SERVER['PHP_SELF']
+				,'list'=>$l->render($db, $sql, $param)
+			)
+		)
+	)); 
 }
 
 $db->close();

@@ -31,7 +31,9 @@ $conf->tabs->TContact=array(
  ******************************************************************************************/
 @$conf->list->TContact->contactList=array(
 	'sql'=>"SELECT c.id, CONCAT(c.firstname, ' ', c.lastname) as name, c.phone, c.fax, c.email, c.lang FROM ".DB_PREFIX."contact c
-			WHERE id_entity=@getEntity@
+			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON cto.id_contact = c.id
+			WHERE cto.objectType = 'company' AND cto.id_object = @id_company@
+			AND id_entity IN (@getEntity@)
 			ORDER BY lastname"
 	,'param'=>array(
 		'title'=>array(
