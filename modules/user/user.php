@@ -14,8 +14,8 @@
 		if($action=='delete') {
 			header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 		} else if($action=='save') {
-			$user->company->addContact($u);
-			$user->company->save($db);
+			$user->entity->addContact($u);
+			$user->entity->save($db);
 		}
 
 		$form=new TFormCore;
