@@ -122,7 +122,7 @@ class TUser extends TContact {
 
 	static function getAvailableEntityTags(&$db, $idUser) {
 		
-		$db->Execute("SELECT DISTINCT CONCAT(e.id,':',e.name) as 'tag'
+		$db->Execute("SELECT DISTINCT CONCAT(e.id,'. ',e.name) as 'tag'
 		FROM ".DB_PREFIX."group_entity ge LEFT JOIN ".DB_PREFIX."company e ON (e.id=ge.id_entity)
 			LEFT JOIN ".DB_PREFIX."group_user gu ON (ge.id_group=gu.id_group)
 		WHERE gu.id_user=".$idUser);

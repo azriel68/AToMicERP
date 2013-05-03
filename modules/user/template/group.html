@@ -16,7 +16,7 @@
 							<li>[entity.val;block=li;strconv=no]</li>
 						</ul>
 						
-						<input type="hidden" id="group_entities_input" name="group_entities_input" value="" />
+						<input type="text" id="group_entities_input" name="group_entities_input" value="" />
 					</td>
 				</tr>
 				<tr>
@@ -34,7 +34,50 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
- 	$("#group_entities").tagit();
+	
+	$.ajax({
+		url:'./script/interface.php'
+		,data: {
+			get:'entities'
+			,id_user:[user.id]
+			,json:1
+		}
+		,dataType:'json'
+	}).done(function(data){
+		listEntityAvailable=[];
+		$.each(data, function(i,value) {
+			listEntityAvailable.push(value);
+		});
+		
+		
+	 	$("#group_entities").tagit({
+	 		allowSpaces:true
+	 		,availableTags: data
+	 		,placeholderText:"__tr(Enter entity name to link it)__"
+	 		,showAutocompleteOnFocus:true
+	 		,beforeTagRemoved:function(event, ui) {
+	 			
+	 			if($("#group_entities").tagit("assignedTags").length<=1) {
+	 				alert("__tr(The group have to be to at least one entity)__");
+	 				return false;
+	 			}
+	 			
+	 			return true;
+	 			
+	 		}
+	 		,beforeTagAdded: function(event, ui) {
+	 			
+	 			
+		        /*if(listEntityAvailable.indexOf(ui.tag) == -1 ) {
+		        	alert("__tr(You have no rights to add this entity)__");
+		        	return false;
+		        }
+		        return true;*/
+		    }
+	 	});
+		
+	});
+	
 	
 })	;
 	
