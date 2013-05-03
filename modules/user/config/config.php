@@ -69,7 +69,7 @@
 	@$conf->template->TGroup->right = './template/right.html';
 	
 	@$conf->list->TGroup->groupList=array(
-		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g WHERE g.id_entity IN (@getEntity@)"
+		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g LEFT JOIN ".DB_PREFIX."group_entity ge ON (g.id=ge.id_group) WHERE ge.id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'hide'=>array('id')
 			,'link'=>array(

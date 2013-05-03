@@ -45,6 +45,7 @@
 		        		}
 		        	});
 		        	
+		        	$('#'+idUser).appendTo('#userInBoxe ul');
 		        }
 		        else {
 		        	$('#'+idUser).addClass('userDragOut');	
@@ -58,7 +59,12 @@
 		        		}
 		        	});
 		        	
+		        	$('#'+idUser).appendTo('#userOutBoxe ul');
 		        }
+
+	        	$('#'+idUser).css('top','');
+	        	$('#'+idUser).css('left','');
+
 		        
 		      }
 		    });

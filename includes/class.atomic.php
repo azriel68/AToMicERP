@@ -36,7 +36,8 @@ class TAtomic {
 			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['id_entity']);
 			$db->close();
 		}
-		
+		/*pre($user);
+		exit;*/
 		return $user;
 	}
 	

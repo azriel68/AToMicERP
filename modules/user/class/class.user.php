@@ -18,7 +18,6 @@ class TUser extends TContact {
 		$this->theme = DEFAULT_THEME;
 		
 		$this->rights = array();
-		
 	}
 	
 	function load(&$db, $id) {
@@ -32,11 +31,34 @@ class TUser extends TContact {
 	
 	function load_right(&$db) {
 		foreach($this->TGroupUser as $groupUser) {
-			$TRight = TRequeteCore::get_id_from_what_you_want($db, DB_PREFIX.'right', array('id_group'=>$groupUser->id_group));
-			foreach($TRight as $id_right) {
-				$right = new TRight;
-				$right->load($db, $id_right);
-				@$this->rights[$groupUser->id_entity]->{$right->module}->{$right->submodule}->{$right->action} = true;
+			
+			
+			$sql = "SELECT r.id,g.code,ge.id_entity 
+			FROM ".DB_PREFIX."group g LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group=g.id) 
+				LEFT OUTER JOIN ".DB_PREFIX."right r ON (g.id=r.id_group)
+			WHERE g.id=".$groupUser->id_group."
+			";
+			$db->Execute($sql);
+			$TRight = $db->Get_All();
+			foreach($TRight as $row) {
+				$id_right = (int)$row->id;
+				$code =$row->code;
+				$id_entity =$row->id_entity;
+				
+				if($id_right>0) {
+					$right = new TRight;
+					$right->load($db, $id_right);
+					@$this->rights[$id_entity]->{$right->module}->{$right->submodule}->{$right->action} = true;
+				}
+				
+				if($code=='users') {
+					@$this->rights[$id_entity]->isUser=true;
+
+					if($groupUser->isAdmin==1) {
+						@$this->rights[$id_entity]->isAdmin=true;
+					}
+
+				}
 			}
 		}
 	}
@@ -63,7 +85,7 @@ class TUser extends TContact {
 	
 	function isLogged() {
 		
-		if(!empty($_SESSION['user']) && $this->right('login') && $this->t_connexion > 0 ) {
+		if(!empty($_SESSION['user']) && $this->right($this->id_entity, 'login') && $this->t_connexion > 0 ) {
 			return true;
 			
 		}
@@ -85,13 +107,14 @@ class TUser extends TContact {
 	}
 	
 	
-	function right($module='main', $submodule='main', $action='view') {
+	function right($id_entity, $module='main', $submodule='main', $action='view') {
 		
 		if(empty($submodule)) $submodule = 'main';
 		
-		if($this->isAdmin) return true;
-		else if($module == 'login' && !empty($this->rights[$this->id_entity])) return true;
-		else if(!empty($this->rights[$this->id_entity]->{$module}->{$submodule}->{$action})) return true;
+		if($this->isSuperadmin) return true;
+		elseif(!empty($this->rights[$id_entity]->isAdmin)) return true;
+		else if($module == 'login' && !empty($this->rights[$id_entity]->isUser)) return true;
+		else if(!empty($this->rights[$id_entity]->{$module}->{$submodule}->{$action})) return true;
 		
 		return false;
 		
