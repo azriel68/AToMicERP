@@ -26,6 +26,7 @@
 			,'firstname'=>$form->texte('', 'firstname', $u->firstname, 80)
 			,'password'=>$form->texte('', 'password', $u->password, 80)
 			,'login'=>$form->texte('', 'login', $u->login, 80)
+			,'email'=>$form->texte('', 'email', $u->email, 80)
 			
 			,'id'=>$u->getId()
 			,'gravatar'=>$u->gravatar()

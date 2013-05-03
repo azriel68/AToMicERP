@@ -133,6 +133,9 @@ div.content table.grille {
 	border: 1px solid #464646;
 	width:100%;
 }
+div.content table.grille img {
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
+}
 div.content table.grille td {
 	border: 1px solid #464646;
 	padding:5px;
@@ -309,7 +312,7 @@ td.projectDrag {
 .userDrag ul li:hover, .projectDrag ul li:hover {
 	cursor: pointer;	
 }
-.userDrag ul li,.projectDrag ul li {
+.projectDrag ul li {
 	display:block;
 	background: #2AA8B9;
 	color:#fff;
@@ -317,19 +320,30 @@ td.projectDrag {
 	padding:10px 20px 10px 40px;
 	overflow: hidden;
 	position:relative;
-	border-radius: 10px;
-	box-shadow: 2px 2px 2px #999999;
-	
+	box-shadow: 1px 1px 1px #999999;
+	border:1px solid #2AA8B9;
 }
-
+.userDrag ul li {
+	display:inline-block;
+	width:100px;
+	background: #2AA8B9;
+	color:#fff;
+	font-size:14px;
+	padding:5px 5px 5px 5px;
+	overflow: hidden;
+	position:relative;
+	box-shadow: 1px 1px 1px #999999;
+	border:1px solid #2AA8B9;
+	text-align:center;
+}
 .userDrag ul li.userDragOut {
 	background: #333;
 	overflow: hidden;
 }
 
 .userDrag ul li img {
-	position:absolute;
+	position:relative;
 	top:0;
 	left:0;
-	max-height: 36px;
+	max-height: 90px;
 }

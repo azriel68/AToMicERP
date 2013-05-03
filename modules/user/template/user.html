@@ -7,10 +7,10 @@
 		<div class="content">
 			
 		[tpl.tabs;strconv=no]
-			<table>
+			<table class="grille">
 				<tr>
-					<td rowspan="4">[user.gravatar;strconv=no]</td>
 					<td>__tr(Lastname)__</td><td>[user.lastname;strconv=no]</td>
+					<td rowspan="5">[user.gravatar;strconv=no]</td>
 				</tr>
 				<tr>
 					<td>__tr(Firstname)__</td><td>[user.firstname;strconv=no]</td>
@@ -20,6 +20,9 @@
 				</tr>
 				<tr>
 					<td>__tr(Password)__</td><td>[user.password;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Email)__</td><td>[user.email;strconv=no]</td>
 				</tr>
 			</table>
 		
