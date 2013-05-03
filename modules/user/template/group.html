@@ -11,6 +11,15 @@
 					<td>__tr(groupName)__</td><td>[group.name;strconv=no]</td>
 				</tr>
 				<tr>
+					<td>__tr(Entities)__</td><td>
+						<ul id="group_entities">
+							<li>[entity.name;block=li;strconv=no]</li>
+						</ul>
+						
+						<input type="hidden" id="group_entities_input" name="group_entities_input" value="" />
+					</td>
+				</tr>
+				<tr>
 					<td>__tr(Description)__</td><td>[group.description;strconv=no]</td>
 				</tr>
 				
@@ -23,4 +32,32 @@
 		
 	</form>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#group_entities").tagHandler({
+	    getData: { id_user: [user.id], get: 'entities', json:1 }
+	    ,getURL: './script/interface.php'
+	    ,autocomplete: true
+	    ,afterAdd: function(tag) { 
+			$('#group_entities_input').val($("#group_entities").tagHandler("getTags"));
+		}
+    	,afterDelete: function(tag) { 
+			$('#group_entities_input').val($("#group_entities").tagHandler("getTags"));
+		}
+    	,onDelete: function(tag) { 
+    		Tags = $("#group_entities").tagHandler("getTags");
+    		if(Tags.length==1) {
+    			alert('__tr(You can\'t delete the last link to an entity. However you can delete the group)__');
+    			return false;
+    		}
+    		return true;
+    	}
+	});
+	
+	$('#group_entities_input').val($("#group_entities").tagHandler("getTags"));
+	
+})	;
+	
+</script>
 [tpl.footer;strconv=no]

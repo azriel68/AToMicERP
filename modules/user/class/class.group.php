@@ -42,6 +42,15 @@ class TGroup extends TObjetStd {
 		return false;
 		
 	}
+	
+	static function getEntityTags(&$db, $idGroup) {
+		
+		$db->Execute("SELECT DISTINCT CONCAT(e.id,':',e.name) as 'tag'
+		FROM ".DB_PREFIX."group_entity ge LEFT JOIN ".DB_PREFIX."company e ON (e.id=ge.id_entity)
+		WHERE ge.id_group=".$idGroup);
+		
+		return $db->Get_all(PDO::FETCH_NUM);
+	}
 }
 class TGroupEntity extends TObjetStd {
 	function __construct() {

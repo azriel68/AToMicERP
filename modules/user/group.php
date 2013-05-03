@@ -34,6 +34,7 @@
 			)
 			,array(
 				'group'=>$TForm
+				,'user'=>$user
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)

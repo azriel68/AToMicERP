@@ -12,9 +12,9 @@ $db->close();
 
 function _get(&$db, $case) {
 	switch ($case) {
-		case '??' :
+		case 'entities' :
 			
-			__out(_tasks($db, $_REQUEST['??'], $_REQUEST['??']));
+			__out(TUser::getAvailableEntityTags($db, $_REQUEST['id_user']));
 
 			break;
 	}

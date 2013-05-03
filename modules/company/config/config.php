@@ -36,7 +36,7 @@ $conf->tabs->TCompany=array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TCompany->companyList=array(
-	'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity=@getEntity@"
+	'sql'=>"SELECT id, name, phone, email, web FROM ".DB_PREFIX."company WHERE id_entity IN (@getEntity@)"
 	,'param'=>array(
 		'title'=>array(
 			'name'=>'__tr(Name)__'
