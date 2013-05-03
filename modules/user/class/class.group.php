@@ -49,7 +49,13 @@ class TGroup extends TObjetStd {
 		FROM ".DB_PREFIX."group_entity ge LEFT JOIN ".DB_PREFIX."company e ON (e.id=ge.id_entity)
 		WHERE ge.id_group=".$idGroup);
 		
-		return $db->Get_all(PDO::FETCH_NUM);
+		$Tab=array();
+		
+		while($db->Get_line()) {
+			$Tab[] = $db->Get_field('tag');
+		}
+		
+		return $Tab;
 	}
 }
 class TGroupEntity extends TObjetStd {

@@ -31,6 +31,7 @@
 		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $group)
 			,array(
 				'button'=>TTemplate::buttons($user, $group, $action)
+				,'entity'=>TGroup::getEntityTags($db, $group->id)
 			)
 			,array(
 				'group'=>$TForm
