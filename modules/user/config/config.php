@@ -29,7 +29,7 @@
 	$conf->modules['user']=array(
 		'name'=>'User'
 		,'id'=>'TUser'
-		,'class'=>array('TUser','TRight','TGroup','TGroupUser')
+		,'class'=>array('TUser','TRight','TGroup','TGroupUser','TGroupEntity')
 	);
 
 	$conf->rights[]=array('user','all','view');

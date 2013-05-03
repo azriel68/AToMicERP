@@ -3,7 +3,7 @@
 class TGroup extends TObjetStd {
 	function __construct() {
 		parent::set_table(DB_PREFIX.'group');
-		parent::add_champs('name', 'type=chaine;index;');
+		parent::add_champs('name,code', 'type=chaine;index;');
 		parent::add_champs('id_entity', 'type=entier;index;');
 		parent::add_champs('description', 'type=chaine;');
 
@@ -14,6 +14,7 @@ class TGroup extends TObjetStd {
 		
 		$this->setChild('TRight', 'id_group');
 		$this->setChild('TGroupUser', 'id_group');
+		$this->setChild('TGroupEntity', 'id_group');
 	}
 	
 	function hasRight($module, $submodule, $action) {
@@ -32,18 +33,43 @@ class TGroup extends TObjetStd {
 		$this->TRight[$iLien]->action = $action;
 		
 	}
+	function loadByCode(&$db, $code, $id_entity) {
+		$TId = TRequeteCore::_get_id_by_sql($db, "SELECT DISTINCT id FROM ".$this->get_table()." g LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group=g.id)
+		WHERE g.code='".$code."' AND ge.id_entity=".$id_entity);
+		if(!empty($TId)) {
+			return $this->load($db, $TId[0]);
+		}
+		return false;
+		
+	}
 }
-
-class TGroupUser extends TObjetStd {
+class TGroupEntity extends TObjetStd {
 	function __construct() {
-		parent::set_table(DB_PREFIX.'group_user');
-		parent::add_champs('id_entity,id_group,id_user','type=entier;index;');
+		parent::set_table(DB_PREFIX.'group_entity');
+		parent::add_champs('id_entity,id_group','type=entier;index;');
 		
 		TAtomic::initExtraFields($this);
 		
 		parent::start();
 		parent::_init_vars();
 	}
+	function loadByGroupUser($db, $id_group, $id_user ){
+		
+		
+		
+	}
+}
+class TGroupUser extends TObjetStd {
+	function __construct() {
+		parent::set_table(DB_PREFIX.'group_user');
+		parent::add_champs('id_group,id_user,isAdmin','type=entier;index;');
+		
+		TAtomic::initExtraFields($this);
+		
+		parent::start();
+		parent::_init_vars();
+	}
+	
 	function loadByGroupUser($db, $id_group, $id_user ){
 		
 		

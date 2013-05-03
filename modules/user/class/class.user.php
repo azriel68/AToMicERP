@@ -4,6 +4,8 @@ class TUser extends TContact {
 	
 	function __construct() {
 		
+		parent::add_champs('isSuperadmin','type=entier;index;');
+		
 		parent::__construct();
 		
 		$this->setChild('TGroupUser', 'id_user');

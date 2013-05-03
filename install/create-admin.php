@@ -13,21 +13,36 @@
 	$company->name = $companyName;
 	
 	
-	$contact = new TContact;
-	$contact->isUser = 1;
-	$contact->isAdmin = 1;
-
+	$contact = new TUser;
+	$contact->isSuperadmin = 1;
 	$contact->lastname = ADMIN;
 	$contact->login = ADMIN;
 	$contact->password = $password;
 	$contact->status = 1;
-	print "Création contact : ".$contact->save($db).'<br>';
+	print "Création user : ".$contact->save($db).'<br>';
 	
 	$company->addContact($contact);
 	
 	$company->save($db);
 	$company->id_entity = $company->getId();
 	$company->save($db);
+
+	print "Création de l'entité ".$company->save($db).'<br>';
+	
+	$group=new TGroup;
+	$group->code='users';
+	$group->name='Users';
+	$group->description='Group determinate users'; 
+	$i=$group->addChild($db, 'TGroupEntity');
+	$group->TGroupEntity[$i]->id_entity = $company->getId();
+	
+	$i = $group->addChild($db, 'TGroupUser');
+	$group->TGroupUser[$i]->isAdmin=1;
+	$group->TGroupUser[$i]->id_user=$contact->getId();
+	
+	print "Création du Groupe Users : ". $group->save($db).'<br>';
+	
+	
 	
 //pre($company);	
 	$db->close();
