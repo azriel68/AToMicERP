@@ -4,7 +4,7 @@
 		[tpl.tabs;strconv=no]
 			<table id="scrum">
 				<tr>
-					<td>__tr(Ideas)__ <a href="javascript:addTask()">__tr(Add task)__</a></td></td>
+					<td>__tr(Ideas)__ <a href="javascript:project_create_task([project.id])">__tr(Add task)__</a></td></td>
 					<td>__tr(toDo)__</td></td>
 					<td>__tr(inProgress)__</td></td>
 					<td>__tr(finish)__</td></td>
@@ -36,12 +36,25 @@
 			<a href="[button.href;block=a]" class="[button.class]">[button.label]</a> 
 		
 		</div>
+		
+		<div style="display:none">
+			
+			<ul><li id="task-blank" class="draggable">
+				
+				<a class="title">title</a> 
+				
+				</li>
+			</ul>
+			
+		</div>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
-				project_get_task($([project.id], '#task-todo'), 'todo');
-				project_get_task($([project.id], '#task-inprogress'), 'inProgress');
-				project_get_task($([project.id], '#task-finish'), 'finish');
+				project_get_task([project.id], 'list-task-idea', 'idea');
+				project_get_task([project.id], 'list-task-todo', 'todo');
+				project_get_task([project.id], 'list-task-inprogress', 'inProgress');
+				project_get_task([project.id], 'list-task-finish', 'finish');
 				
 			});
 		</script>

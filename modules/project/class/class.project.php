@@ -26,7 +26,7 @@ class TTask extends TObjetStd {
 		parent::set_table(DB_PREFIX.'project_task');
 		parent::add_champs('id_project,status','type=entier;index;');
 		parent::add_champs('weight,status','type=entier;');
-		parent::add_champs('name','type=chaine;index;');
+		parent::add_champs('name,type','type=chaine;index;');
 		
 		TAtomic::initExtraFields($this);
 		

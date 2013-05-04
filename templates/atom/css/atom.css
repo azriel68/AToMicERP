@@ -323,6 +323,10 @@ td.projectDrag {
 	position:relative;
 	box-shadow: 1px 1px 1px #999999;
 	border:1px solid #2AA8B9;
+	border-bottom: 1px solid #194B7E;
+}
+.projectDrag ul li a {
+	color:#fff;
 }
 .userDrag ul li {
 	display:inline-block;

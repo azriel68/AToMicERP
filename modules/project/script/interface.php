@@ -23,15 +23,36 @@ function _get(&$db, $case) {
 function _put(&$db, $case) {
 	switch ($case) {
 		case 'task' :
-			print 'ok';
-
+			__out(_task($db, __get('id',0), $_REQUEST));
 			break;
 	}
 
 }
 
+function _task(&$db, $id_task, $values) {
+	$task=new TTask;
+	if($id_task) $task->load($db, $id_task);
+	$task->set_values($values);
+	
+	$task->save($db);
+	
+	if(empty($task->name)) {
+		$task->name = __tr("Task").' '.$task->getId();
+		$task->save($db);	
+	}
+	return $task->get_values();
+}
+
 function _tasks(&$db, $id_project, $type) {
 	
-	//return TRequeteCore::id_from...($db, $sql, 'id', 'name');
+	$TId = TRequeteCore::_get_id_by_sql($db, "SELECT id FROM ".DB_PREFIX."project_task WHERE id_project=".$id_project." AND type='".$type."'");
+	$TTask = array();
+	foreach($TId as $id) {
+		$t=new TTask;
+		$t->load($db, $id);
+		
+		$TTask[] = $t->get_values();
+	}
 	
+	return $TTask;
 }

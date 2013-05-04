@@ -5,7 +5,9 @@
 		TTemplate::login($user);		
 	}
 	
-	$task=new TProject;
+	$project=new TProject;
+	$task=new TTask;
+	
 	$db=new TPDOdb;
 	$action = TTemplate::actions($db, $user, $task);
 	if($action!==false)  {
@@ -41,14 +43,15 @@
 	else {
 		$tbs=new TTemplateTBS;
 		
-		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $task, 'scrum')
-			,array('button'=>TTemplate::buttons($user, $task, $action))
+		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $project, 'scrum')
+			,array('button'=>TTemplate::buttons($user, $project, $action))
 			,array(
-				'tpl'=>array(
+				'project'=>$project
+				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
-					,'tabs'=>TTemplate::tabs($conf, $user, $task, 'fiche')
+					,'tabs'=>TTemplate::tabs($conf, $user, $project, 'task')
 					,'self'=>$_SERVER['PHP_SELF']
 				)
 			)
