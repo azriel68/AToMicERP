@@ -10,23 +10,23 @@
 					<td>__tr(finish)__</td></td>
 				</tr>
 				<tr>
-					<td class="projectDrag droppable" id="task-idea">
-						<ul id="list-task-idea" class="task-list">
+					<td class="projectDrag droppable" id="task-idea" rel="idea">
+						<ul id="list-task-idea" class="task-list" rel="idea">
 						
 						</ul>
 					</td>
-					<td class="projectDrag droppable" id="task-todo">
-						<ul id="list-task-todo" class="task-list">
+					<td class="projectDrag droppable" id="task-todo" rel="todo">
+						<ul id="list-task-todo" class="task-list" rel="todo">
 						
 						</ul>
 					</td>
-					<td class="projectDrag droppable" id="task-inprogress">
-						<ul id="list-task-inprogress" class="task-list">
+					<td class="projectDrag droppable" id="task-inprogress" rel="inprogress">
+						<ul id="list-task-inprogress" class="task-list" rel="inprogress">
 						
 						</ul>
 					</td>
-					<td class="projectDrag droppable" id="task-finish">
-						<ul id="list-task-finish" class="task-list">
+					<td class="projectDrag droppable" id="task-finish" rel="finish">
+						<ul id="list-task-finish" class="task-list" rel="finish">
 						
 						</ul>
 					</td>
@@ -39,7 +39,7 @@
 		
 		<div style="display:none">
 			
-			<ul><li id="task-blank" class="draggable">
+			<ul><li id="task-blank">
 				
 				<a class="title">title</a> 
 				
@@ -51,11 +51,12 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
-				project_get_task([project.id], 'list-task-idea', 'idea');
-				project_get_task([project.id], 'list-task-todo', 'todo');
-				project_get_task([project.id], 'list-task-inprogress', 'inProgress');
-				project_get_task([project.id], 'list-task-finish', 'finish');
+				project_get_tasks([project.id], 'list-task-idea', 'idea');
+				project_get_tasks([project.id], 'list-task-todo', 'todo');
+				project_get_tasks([project.id], 'list-task-inprogress', 'inprogress');
+				project_get_tasks([project.id], 'list-task-finish', 'finish');
 				
+				project_init_change_type([project.id]);
 			});
 		</script>
 		

@@ -325,6 +325,24 @@ td.projectDrag {
 	border:1px solid #2AA8B9;
 	border-bottom: 1px solid #194B7E;
 }
+.projectDrag ul li.idea {
+	background: #eee;
+}
+.projectDrag ul li.idea a {
+	color:#000;	
+}
+.projectDrag ul li.inprogress {
+	background: green;
+}
+.projectDrag ul .ui-state-highlight {
+	background: #fff;
+	height:30px;
+	border:1px solid yellow;
+}
+.projectDrag ul li.finish {
+	background: grey;
+}
+
 .projectDrag ul li a {
 	color:#fff;
 }

@@ -21,7 +21,7 @@
 		'sql'=>"SELECT id,name,status FROM ".DB_PREFIX."project  WHERE id_entity=@user->id_entity@"
 		,'param'=>array(
 			'type'=>array('dt_cre'=>'date', 'dt_maj'=>'date')
-			,'link'=>array('name'=>'<a href="?id=@id@&action=view">@val@</a>')
+			,'link'=>array('name'=>'<a href="'.HTTP.'modules/project/project.php?id=@id@&action=view">@val@</a>')
 			,'hide'=>array('id')
 			
 		)

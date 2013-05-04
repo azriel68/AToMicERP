@@ -5,10 +5,12 @@
 		TTemplate::login($user);		
 	}
 	
+	$db=new TPDOdb;
 	$project=new TProject;
+	$project->load($db, $_REQUEST['id_project']);
+	
 	$task=new TTask;
 	
-	$db=new TPDOdb;
 	$action = TTemplate::actions($db, $user, $task);
 	if($action!==false)  {
 
