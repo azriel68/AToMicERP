@@ -302,7 +302,8 @@ td.userDrag, td.projectDrag {
 	
 }
 td.projectDrag {
-	width:33%;	
+	width:25%;
+	min-width: 200px;	
 }
 .userDrag ul,.projectDrag ul {
 	margin:0 0 0 0;

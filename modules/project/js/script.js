@@ -1,7 +1,7 @@
 function project_get_task(id_project, liste, type) {
 	
 	$.ajax({
-		url : HTTP_PROJECT_INTERFACE
+		url : "./script/interface.php"
 		,data: {
 			json:1
 			,get : 'tasks'
