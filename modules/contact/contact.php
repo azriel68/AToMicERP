@@ -8,7 +8,7 @@ if(!$user->isLogged()) {
 
 $contact=new TContact;
 $db=new TPDOdb;
-$action = TTemplate::actions($db, $user, $contact);
+$action = TTemplate::actions($db, $conf, $user, $contact);
 if($action!==false ) {
 
 	if($action=='delete') {

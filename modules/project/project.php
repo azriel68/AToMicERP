@@ -7,7 +7,7 @@
 	
 	$project=new TProject;
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $user, $project);
+	$action = TTemplate::actions($db, $conf, $user, $project);
 	if($action!==false ) {
 
 		if($action=='delete') {

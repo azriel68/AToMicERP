@@ -9,7 +9,7 @@
 	$group = new TGroup;
 	
 	$db=new TPDOdb;
-	$action = TTemplate::actions($db, $user, $group);
+	$action = TTemplate::actions($db, $conf, $user, $group);
 	if($action!==false ) {
 
 		if($action=='delete') {
