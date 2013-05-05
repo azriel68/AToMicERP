@@ -19,7 +19,7 @@ class TNumbering extends TObjetStd {
 			//return '(DRAFT'.$object->getID().')';
 		}
 		if($mask == '') {
-			return $object->getID();
+			//return $object->getID();
 		}
 		if(empty($date)) $date = time();
 		
@@ -40,7 +40,7 @@ class TNumbering extends TObjetStd {
 		$num = new TNumbering;
 		$TNum = TRequeteCore::get_id_from_what_you_want($db, $num->get_table(), $params);
 		if(!empty($TNum[0])) {
-			$num->load($TNum[0]);
+			$num->load($db, $TNum[0]);
 		} else {
 			$num->module = $module;
 			$num->id_entity = $user->id_entity;
@@ -50,7 +50,9 @@ class TNumbering extends TObjetStd {
 		
 		$num->numberValue++;
 		$num->save($db);
-		$ref = preg_replace('|{0.*?}|', $num->numberValue, $maskToSearch);
+		
+		preg_match('|{0.*?}|', $maskToSearch, $matche);
+		$ref = preg_replace('|{0.*?}|', str_pad($num->numberValue, strlen($matche[0])-2, '0', STR_PAD_LEFT), $maskToSearch);
 		
 		return $ref;
 	}
