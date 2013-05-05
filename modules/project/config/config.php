@@ -10,7 +10,7 @@
 
 	$conf->modules['project']=array(
 		'name'=>'Project'
-		,'class'=>array('TProject','TTask','TTaskTime')
+		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
 	);
 	
 	@$conf->template->TProject->fiche = './template/project.html';

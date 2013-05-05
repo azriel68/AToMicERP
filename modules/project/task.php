@@ -45,10 +45,21 @@
 	else {
 		$tbs=new TTemplateTBS;
 		
+		$form=new TFormCore;
+		$form->Set_typeaff('edit');
+		$TForm=array(
+			'title'=>$form->texte('', 'title', '', 80)
+			,'description'=>$form->zonetexte('', 'description', '', 60,3)		
+			,'type'=>$form->combo('','type', $task->TType, false)
+			,'status'=>$form->combo('','type', $task->TStatus, false)
+			,'point'=>$form->combo('','point', $task->TPoint, 0)
+		);
+		
 		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $project, 'scrum')
 			,array('button'=>TTemplate::buttons($user, $project, $action))
 			,array(
 				'project'=>$project
+				,'form'=>$TForm
 				,'tpl'=>array(
 					'header'=>TTemplate::header($conf)
 					,'footer'=>TTemplate::footer($conf)

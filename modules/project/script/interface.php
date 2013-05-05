@@ -14,7 +14,7 @@ function _get(&$db, $case) {
 	switch ($case) {
 		case 'tasks' :
 			
-			__out(_tasks($db, $_REQUEST['id_project'], $_REQUEST['type']));
+			__out(_tasks($db, $_REQUEST['id_project'], $_REQUEST['status']));
 
 			break;
 		case 'task' :
@@ -65,9 +65,9 @@ function _task(&$db, $id_task, $values) {
 	return $task->get_values();
 }
 
-function _tasks(&$db, $id_project, $type) {
+function _tasks(&$db, $id_project, $status) {
 	
-	$TId = TRequeteCore::_get_id_by_sql($db, "SELECT id FROM ".DB_PREFIX."project_task WHERE id_project=".$id_project." AND type='".$type."' ORDER BY rank");
+	$TId = TRequeteCore::_get_id_by_sql($db, "SELECT id FROM ".DB_PREFIX."project_task WHERE id_project=".$id_project." AND status='".$status."' ORDER BY rank");
 	$TTask = array();
 	foreach($TId as $id) {
 		$t=new TTask;

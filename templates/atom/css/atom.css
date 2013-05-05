@@ -339,6 +339,11 @@ td.projectDrag {
 	height:30px;
 	border:1px solid yellow;
 }
+
+.projectDrag ul li div.view {
+	display: none;
+}
+
 .projectDrag ul li.finish {
 	background: grey;
 }

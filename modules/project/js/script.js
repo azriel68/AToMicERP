@@ -1,11 +1,11 @@
-function project_get_tasks(id_project, liste, type) {
+function project_get_tasks(id_project, liste, status) {
 	
 	$.ajax({
 		url : "./script/interface.php"
 		,data: {
 			json:1
 			,get : 'tasks'
-			,type : type
+			,status : status
 			,id_project : id_project
 			,async:false
 		}
@@ -26,7 +26,7 @@ function project_create_task(id_project) {
 			json:1
 			,put : 'task'
 			,id_project : id_project
-			,type:'idea'
+			,status:'idea'
 		}
 		,dataType: 'json'
 	})
@@ -49,7 +49,11 @@ function project_refresh_task(task) {
 	$item.attr('task-id', task.id);
 	
 	$item.removeClass('idea todo inprogress finish');
-	$item.addClass(task.type);
+	$item.addClass(task.status);
+	
+	$item.find('input[name=title]').val(task.name);
+	$item.find('input[name=status]').val(task.status);
+	$item.find('input[name=type]').val(task.type);
 	
 	var link_title = $item.find('a.title');
 	link_title.attr("href", 'javascript:project_develop_task('+task.id+');');
@@ -77,35 +81,18 @@ function project_get_task(id_project, id_task) {
 	return taskReturn;
 }
 function project_init_change_type(id_project) {
-	/*$('.droppable').droppable({
-      drop: function( event, ui ) {
-			task=project_get_task(id_project, ui.draggable.attr('task-id'));
-			task.type = $(this).attr('rel');
-			
-			$('#task-'+task.id).css('top','');
-	        $('#task-'+task.id).css('left','');	
-			$('#list-task-'+task.type).prepend( $('#task-'+task.id) );	
-			console.log('#task-'+task.id+' --> '+'#list-task-'+task.type);	
-			
-			project_save_task(id_project, task);
-			
-			
-			
-							        
-	  }  
-    });
-    */
+	
     $('.task-list').sortable( {
     	connectWith: ".task-list"
     	, placeholder: "ui-state-highlight"
     	,receive: function( event, ui ) {
 			task=project_get_task(id_project, ui.item.attr('task-id'));
-			task.type = $(this).attr('rel');
+			task.status = $(this).attr('rel');
 			
 			$('#task-'+task.id).css('top','');
 	        $('#task-'+task.id).css('left','');	
-			$('#list-task-'+task.type).prepend( $('#task-'+task.id) );	
-			console.log('#task-'+task.id+' --> '+'#list-task-'+task.type);	
+			$('#list-task-'+task.status).prepend( $('#task-'+task.id) );	
+			console.log('#task-'+task.id+' --> '+'#list-task-'+task.status);	
 			
 			project_save_task(id_project, task);
 									        
@@ -143,7 +130,7 @@ function project_save_task(id_project, task) {
 			json:1
 			,put : 'task'
 			,id : task.id
-			,type : task.type
+			,status : task.status
 			,id_project : id_project
 		}
 		,dataType: 'json'
@@ -152,4 +139,7 @@ function project_save_task(id_project, task) {
 		project_refresh_task(task);
 	}); 
 	
+}
+function project_develop_task(id_task) {
+	$('#task-'+id_task+' div.view').toggle();
 }
