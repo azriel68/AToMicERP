@@ -343,7 +343,14 @@ td.projectDrag {
 .projectDrag ul li div.view {
 	display: none;
 }
-
+.projectDrag ul li a.save {
+	font-weight: normal;
+	color:#fff;
+	text-decoration: none;
+	background: blue;
+	border-radius: 5px;
+	padding:3px;
+}
 .projectDrag ul li.finish {
 	background: grey;
 }

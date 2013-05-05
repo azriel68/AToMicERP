@@ -14,7 +14,7 @@ function project_get_tasks(id_project, liste, status) {
 	.done(function (tasks) {
 		
 		$.each(tasks, function(i, task) {
-			project_draw_task(task, $('#'+liste));
+			project_draw_task(id_project, task, $('#'+liste));
 		});
 				
 	}); 
@@ -32,16 +32,16 @@ function project_create_task(id_project) {
 	})
 	.done(function (task) {
 	
-		project_draw_task(task, $('#list-task-idea'));
+		project_draw_task(id_project, task, $('#list-task-idea'));
 		
 	}); 
 	
 }
-function project_draw_task(task, ul) {
+function project_draw_task(id_project, task, ul) {
 	$('#task-blank').clone().attr('id', 'task-'+task.id).appendTo(ul);
-	project_refresh_task(task);
+	project_refresh_task(id_project, task);
 }
-function project_refresh_task(task) {
+function project_refresh_task(id_project, task) {
 	
 	$item = $('#task-'+task.id);
 	
@@ -51,13 +51,15 @@ function project_refresh_task(task) {
 	$item.removeClass('idea todo inprogress finish');
 	$item.addClass(task.status);
 	
-	$item.find('input[name=title]').val(task.name);
-	$item.find('input[name=status]').val(task.status);
-	$item.find('input[name=type]').val(task.type);
+	$item.find('[rel=name]').attr('id','task-name-'+task.id).val(task.name);
+	$item.find('[rel=status]').attr('id','task-status-'+task.id).val(task.status);
+	$item.find('[rel=type]').attr('id','task-type-'+task.id).val(task.type);
+	$item.find('[rel=point]').attr('id','task-point-'+task.id).val(task.point);
+	$item.find('[rel=description]').attr('id','task-description-'+task.id).val(task.description);
 	
-	var link_title = $item.find('a.title');
-	link_title.attr("href", 'javascript:project_develop_task('+task.id+');');
-	link_title.html(task.name);
+	$item.find('a.title').attr("href", 'javascript:project_develop_task('+task.id+');').html(task.name);
+	$item.find('a.save').attr("href", 'javascript:project_getsave_task('+id_project+','+task.id+');');
+	
 	
 }
 function project_get_task(id_project, id_task) {
@@ -123,7 +125,22 @@ function project_init_change_type(id_project) {
     
     
 }
+function project_getsave_task(id_project, id_task) {
+	
+	task = project_get_task(id_project, id_task);
+	$item = $('#task-'+task.id);
+	
+	task.name = $item.find('[rel=name]').val();
+	task.status = $item.find('[rel=status]').val();
+	task.type = $item.find('[rel=type]').val();
+	task.point = $item.find('[rel=point]').val();
+	task.description = $item.find('[rel=description]').val();
+	
+	project_save_task(id_project, task);
+}
 function project_save_task(id_project, task) {
+	$('#task-'+task.id).css({ opacity:.5 });
+	
 	$.ajax({
 		url : "./script/interface.php"
 		,data: {
@@ -132,11 +149,18 @@ function project_save_task(id_project, task) {
 			,id : task.id
 			,status : task.status
 			,id_project : id_project
+			,type : task.type
+			,description: task.description
+			,point : task.point
+			,name : task.name
 		}
 		,dataType: 'json'
+		,type:'POST'
 	})
 	.done(function (task) {
-		project_refresh_task(task);
+		project_develop_task(task.id);
+		project_refresh_task(id_project, task);
+		$('#task-'+task.id).css({ opacity:1 });
 	}); 
 	
 }

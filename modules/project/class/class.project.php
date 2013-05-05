@@ -25,9 +25,10 @@ class TProject extends TObjetStd {
 class TTask extends TObjetStd {
 	function __construct() {
 		parent::set_table(DB_PREFIX.'project_task');
-		parent::add_champs('id_project,rank,id_requester','type=entier;index;');
+		parent::add_champs('id_project,rank,id_requester,point','type=entier;index;');
 		parent::add_champs('weight','type=entier;');
 		parent::add_champs('soldePrice','type=float;');
+		parent::add_champs('description','type=text;');
 		parent::add_champs('name,type,status','type=chaine;index;');
 		
 		TAtomic::initExtraFields($this);
