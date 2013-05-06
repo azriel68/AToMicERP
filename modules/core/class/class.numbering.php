@@ -14,15 +14,21 @@ class TNumbering extends TObjetStd {
 		parent::_init_vars();
 	}
 	
-	static function getNextRefValue(&$db, &$user, $module, $date, $mask='', $status=0) {
-		if($status == 0) {
-			//return '(DRAFT'.$object->getID().')';
-		}
-		if($mask == '') {
-			//return $object->getID();
-		}
-		if(empty($date)) $date = time();
+	static function getNextRefValue(&$db, &$object, $field) {
+		$module = get_class($object);
 		
+		// Get conf for the mask
+		$confMask = $module.'_autoRef_'.$field.'_mask';
+		$mask = TConf::get($db, $object->id_entity, $confMask);
+		if($mask === false) return false;
+		echo $mask;
+		
+		// Get conf for the date field
+		$confDateField = $module.'_autoRef_'.$field.'_dateField';
+		$dateField = TConf::get($db, $object->id_entity, $confDateField);
+		if($dateField === false) return false;
+		
+		$date = !empty($object->{$dateField}) ? $object->{$dateField} : time();
 		$maskToSearch = $mask;
 		
 		// Remplacement des variables de date
@@ -33,7 +39,7 @@ class TNumbering extends TObjetStd {
 		
 		$params = array(
 			'module' => $module
-			,'id_entity' => $user->id_entity
+			,'id_entity' => $object->id_entity
 			,'mask' => $maskToSearch
 		);
 		
@@ -43,7 +49,7 @@ class TNumbering extends TObjetStd {
 			$num->load($db, $TNum[0]);
 		} else {
 			$num->module = $module;
-			$num->id_entity = $user->id_entity;
+			$num->id_entity = $object->id_entity;
 			$num->mask = $maskToSearch;
 			$num->numberValue = 0;
 		}
@@ -51,8 +57,8 @@ class TNumbering extends TObjetStd {
 		$num->numberValue++;
 		$num->save($db);
 		
-		preg_match('|{0.*?}|', $maskToSearch, $matche);
-		$ref = preg_replace('|{0.*?}|', str_pad($num->numberValue, strlen($matche[0])-2, '0', STR_PAD_LEFT), $maskToSearch);
+		preg_match('|{0.*?}|', $maskToSearch, $matches);
+		$ref = preg_replace('|{0.*?}|', str_pad($num->numberValue, strlen($matches[0])-2, '0', STR_PAD_LEFT), $maskToSearch);
 		
 		return $ref;
 	}

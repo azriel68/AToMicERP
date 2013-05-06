@@ -3,7 +3,7 @@
 require('../../inc.php');
 
 if(!$user->isLogged()) {
-	TTemplate::login($user);		
+	TTemplate::login($user);
 }
 
 $company=new TCompany;
@@ -31,6 +31,10 @@ if($action!==false ) {
 		,'phone'=>$form->texte('', 'phone', $company->phone, 80)
 		,'email'=>$form->texte('', 'email', $company->email, 80)
 		,'web'=>$form->texte('', 'web', $company->web, 80)
+		,'customerRef'=>$form->texte('', 'customerRef', $company->customerRef, 80)
+		,'supplierRef'=>$form->texte('', 'supplierRef', $company->supplierRef, 80)
+		,'isCustomer'=>$form->combo('', 'isCustomer', array(0=>__tr('No'), 1=>__tr('Yes')), $company->isCustomer)
+		,'isSupplier'=>$form->combo('', 'isSupplier', array(0=>__tr('No'), 1=>__tr('Yes')), $company->isSupplier)
 		
 		,'id'=>$company->getId()
 		,'dt_cre'=>$company->get_date('dt_cre')

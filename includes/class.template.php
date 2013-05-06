@@ -44,7 +44,6 @@ class TTemplate {
 						$object->id_entity = $user->id_entity;
 					}
 					
-					TTemplate::setAutoRef($db, $conf, $user, $object);
 					$object->save($db);
 					return 'save';
 					break;
@@ -416,17 +415,5 @@ class TTemplate {
 			)
 		);
 		
-	}
-	
-	static function setAutoRef(&$db, &$conf, &$user, &$object) {
-		$className = get_class($object);
-		if(!empty($conf->autoref->{$className})) {
-			foreach($conf->autoref->{$className} as $params) {
-				if(empty($object->{$params['field']})) {
-					$ref = TNumbering::getNextRefValue($db, $user, $className, $object->{$params['dateField']}, $params['mask']);
-					$object->{$params['field']} = $ref;
-				}
-			}
-		}
 	}
 }

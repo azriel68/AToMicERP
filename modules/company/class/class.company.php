@@ -5,7 +5,8 @@ class TCompany extends TObjetStd {
 		parent::set_table(DB_PREFIX.'company');
 		
 		parent::add_champs('isEntity,id_entity','type=entier;index;');
-		parent::add_champs('name,phone,fax,email,web','type=chaine;');
+		parent::add_champs('isCustomer,isSupplier','type=entier;index;');
+		parent::add_champs('customerRef,supplierRef,name,phone,fax,email,web','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
 
@@ -14,6 +15,14 @@ class TCompany extends TObjetStd {
 
 		$this -> setChild('TAddress', 'id_company');
 		$this -> setChild('TContactToObject', array('id_object', 'company') );
+	}
+	
+	function save(&$db) {
+		// Set customerRef
+		if(empty($this->customerRef) && $this->isCustomer == 1) {
+			$this->customerRef = TNumbering::getNextRefValue($db, $this, 'customerRef');
+		}
+		parent::save($db);
 	}
 	
 	function addContact(&$contact) {
