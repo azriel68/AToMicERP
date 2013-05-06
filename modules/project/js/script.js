@@ -33,7 +33,7 @@ function project_create_task(id_project) {
 	.done(function (task) {
 	
 		project_draw_task(id_project, task, $('#list-task-idea'));
-		
+		project_develop_task(task.id);
 	}); 
 	
 }
@@ -58,7 +58,7 @@ function project_refresh_task(id_project, task) {
 	$item.find('[rel=description]').attr('id','task-description-'+task.id).val(task.description);
 	
 	$item.find('a.title').attr("href", 'javascript:project_develop_task('+task.id+');').html(task.name);
-	$item.find('a.save').attr("href", 'javascript:project_getsave_task('+id_project+','+task.id+');');
+	$item.find('a.save').attr("href", 'javascript:project_getsave_task('+id_project+','+task.id+');project_develop_task('+task.id+');');
 	
 	
 }
@@ -158,7 +158,6 @@ function project_save_task(id_project, task) {
 		,type:'POST'
 	})
 	.done(function (task) {
-		project_develop_task(task.id);
 		project_refresh_task(id_project, task);
 		$('#task-'+task.id).css({ opacity:1 });
 	}); 

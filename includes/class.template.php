@@ -291,7 +291,7 @@ class TTemplate {
 		
 		if($mode=='list') {
 			//if($user->right(get_class($object), 'main', 'create')) {
-				$TButton[]=array(
+				$TButton['new']=array(
 					'href'=>'?action=new'
 					,'class'=>'butAction'
 					,'label'=>__tr('new'.get_class($object))
@@ -300,14 +300,14 @@ class TTemplate {
 		}
 		else if($mode=='save' || $mode=='view') {
 			//if($user->right(get_class($object), 'main', 'create')) {
-				$TButton[]=array(
+				$TButton['edit']=array(
 					'href'=>'?action=edit&id='.$object->getId()
 					,'class'=>'butAction'
 					,'label'=>__tr('edit'.get_class($object))
 				);
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
-				$TButton[]=array(
+				$TButton['delete']=array(
 					'href'=>'?action=delete&id='.$object->getId()
 					,'class'=>'butAction'
 					,'label'=>__tr('delete'.get_class($object))
@@ -317,14 +317,14 @@ class TTemplate {
 		else if($mode=='edit') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$formName = 'form'.get_class($object);
-				$TButton[]=array(
+				$TButton['save']=array(
 					'href'=>'javascript:document.forms[\''.$formName.'\'].submit()'
 					,'class'=>'butAction'
 					,'label'=>__tr('save'.get_class($object))
 				);
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
-				$TButton[]=array(
+				$TButton['cancel']=array(
 					'href'=> ($object->getId() > 0) ? '?action=view&id='.$object->getId() : '?action=list'
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))

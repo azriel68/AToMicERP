@@ -28,9 +28,12 @@
 		);
 		$tbs=new TTemplateTBS;
 		
+		$TButton = TTemplate::buttons($user, $group, $action);
+		if($group->code!='') unset($TButton['delete']);
+		
 		print __tr_view($tbs->render(TTemplate::getTemplate($conf, $group)
 			,array(
-				'button'=>TTemplate::buttons($user, $group, $action)
+				'button'=>$TButton
 				,'entity'=>TGroup::getEntityTags($db, $group->id)
 			)
 			,array(
