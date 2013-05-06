@@ -19,7 +19,7 @@ class TTemplate {
 	 * E : dbConnection, StdObjet
 	 * S : actions effectuée 
 	 */
-	static function actions(&$db, &$conf, &$user, &$object) {
+	static function actions(&$db, &$user, &$object) {
 	 	
 		if(isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {

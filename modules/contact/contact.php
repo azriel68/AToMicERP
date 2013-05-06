@@ -3,12 +3,12 @@
 require('../../inc.php');
 
 if(!$user->isLogged()) {
-	TTemplate::login($user);		
+	TTemplate::login($user);
 }
 
 $contact=new TContact;
 $db=new TPDOdb;
-$action = TTemplate::actions($db, $conf, $user, $contact);
+$action = TTemplate::actions($db, $user, $contact);
 if($action!==false ) {
 
 	if($action=='delete') {

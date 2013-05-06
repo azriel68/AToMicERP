@@ -18,10 +18,16 @@ class TCompany extends TObjetStd {
 	}
 	
 	function save(&$db) {
-		// Set customerRef
+		// Set customer Ref
 		if(empty($this->customerRef) && $this->isCustomer == 1) {
 			$this->customerRef = TNumbering::getNextRefValue($db, $this, 'customerRef');
 		}
+		
+		// Set supplier Ref
+		if(empty($this->supplierRef) && $this->isSupplier == 1) {
+			$this->supplierRef = TNumbering::getNextRefValue($db, $this, 'supplierRef');
+		}
+		
 		parent::save($db);
 	}
 	
