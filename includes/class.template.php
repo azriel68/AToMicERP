@@ -2,7 +2,6 @@
 
 class TTemplate {
 	
-	
 	static function login(&$user) {
 		//print_r($user);exit;
 		if(!empty($user->errorLogin)) {
@@ -20,7 +19,7 @@ class TTemplate {
 	 * E : dbConnection, StdObjet
 	 * S : actions effectuée 
 	 */
-	static function actions(&$db, &$user, &$object) {
+	static function actions(&$db, &$conf, &$user, &$object) {
 	 	
 		if(isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
@@ -45,6 +44,7 @@ class TTemplate {
 						$object->id_entity = $user->id_entity;
 					}
 					
+					TTemplate::setAutoRef($db, $conf, $user, $object);
 					$object->save($db);
 					return 'save';
 					break;
@@ -416,5 +416,17 @@ class TTemplate {
 			)
 		);
 		
+	}
+	
+	static function setAutoRef(&$db, &$conf, &$user, &$object) {
+		$className = get_class($object);
+		if(!empty($conf->autoref->{$className})) {
+			foreach($conf->autoref->{$className} as $params) {
+				if(empty($object->{$params['field']})) {
+					$ref = TNumbering::getNextRefValue($db, $user, $className, $object->{$params['dateField']}, $params['mask']);
+					$object->{$params['field']} = $ref;
+				}
+			}
+		}
 	}
 }

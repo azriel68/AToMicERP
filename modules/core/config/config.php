@@ -3,7 +3,7 @@
 	$conf->modules['core']=array(
 		'name'=>'Core'
 		,'id'=>'Core'
-		,'class'=>array()
+		,'class'=>array('TNumbering')
 	);
 	
 	$conf->js[] = HTTP.'modules/core/js/jquery-1.9.1.min.js';

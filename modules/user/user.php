@@ -8,7 +8,7 @@
 	
 	$db=new TPDOdb;
 	$u = new TUser;
-	$action = TTemplate::actions($db, $user, $u);
+	$action = TTemplate::actions($db, $conf, $user, $u);
 	if($action!==false ) {
 
 		if($action=='delete') {

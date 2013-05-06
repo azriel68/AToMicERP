@@ -33,6 +33,14 @@ $conf->tabs->TCompany=array(
 @$conf->template->TCompany->fiche = './template/company.html';
 
 /******************************************************************************************
+ * Définition des références automatiques
+ ******************************************************************************************/
+@$conf->autoref->TCompany = array(
+	array('field' => 'customerRef', 'mask' => 'CL{yy}{0000}', 'dateField' => 'dt_cre')
+	,array('field' => 'supplierRef', 'mask' => 'FO{yy}{0000}', 'dateField' => 'dt_cre')
+);
+
+/******************************************************************************************
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TCompany->companyList=array(

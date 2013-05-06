@@ -11,7 +11,7 @@
 	
 	$task=new TTask;
 	
-	$action = TTemplate::actions($db, $user, $task);
+	$action = TTemplate::actions($db, $conf, $user, $task);
 	if($action!==false)  {
 
 		if($action=='delete') {

@@ -8,7 +8,8 @@ if(!$user->isLogged()) {
 
 $company=new TCompany;
 $db=new TPDOdb;
-$action = TTemplate::actions($db, $user, $company);
+$action = TTemplate::actions($db, $conf, $user, $company);
+
 if($action!==false ) {
 
 	if($action=='delete') {
