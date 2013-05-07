@@ -3,10 +3,8 @@
 	require('inc.php');
 
 	if(!$user->isLogged()) {
-		TTemplate::login($user);		
+		TTemplate::login($user);
 	}
-
-	
 
 	$tbs = new TTemplateTBS;
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, 'home')

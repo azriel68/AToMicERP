@@ -34,6 +34,7 @@ class TAtomic {
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password']) && !empty($_REQUEST['action']) && $_REQUEST['action'] == 'login') {
 			$db=new TPDOdb;
 			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['id_entity']);
+			$user->dictionary = TDictionary::loadDictionary($db, $_REQUEST['id_entity']);
 			$db->close();
 		}
 		/*pre($user);
