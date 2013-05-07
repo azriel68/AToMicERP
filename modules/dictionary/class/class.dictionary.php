@@ -13,8 +13,7 @@ class TDictionary extends TObjetStd {
 	}
 	
 	/**
-	 * Load dictionnary from database, translate labels and return array
-	 * Called only after login, translations based on user lang
+	 * Load dictionnary from database, translate labels based on user lang and return array
 	 */
 	static function loadDictionary(&$db, $id_entity) {
 		$sql = "SELECT type, code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 ORDER BY type";
@@ -30,7 +29,7 @@ class TDictionary extends TObjetStd {
 		return $TDict;
 	}
 	
-	static function get(&$db, $type, $code='') {
+	static function get(&$db, $type) {
 		$TRes = TRequeteCore::get_id_from_what_you_want($db, DB_PREFIX.'dictionary', array('type'=>$type, 'valid'=>1), 'code');
 		
 		$TList = array();

@@ -37,6 +37,8 @@
 
 	$user = TAtomic::getUser();
 	TAtomic::loadLang($conf, $user->lang);
+	TAtomic::getConf($user);
+	TAtomic::getDictionary($user);
 	
 	require('config.templates.php');
 	TAtomic::loadStyle($conf, $user->theme);

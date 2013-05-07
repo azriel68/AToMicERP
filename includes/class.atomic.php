@@ -34,12 +34,26 @@ class TAtomic {
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password']) && !empty($_REQUEST['action']) && $_REQUEST['action'] == 'login') {
 			$db=new TPDOdb;
 			$user->login($db, $_REQUEST['login'], $_REQUEST['password'], $_REQUEST['id_entity']);
-			$user->dictionary = TDictionary::loadDictionary($db, $_REQUEST['id_entity']);
 			$db->close();
 		}
-		/*pre($user);
-		exit;*/
+		
 		return $user;
+	}
+	
+	static function getDictionary(&$user) {
+		if(empty($user->dictionary)) {
+			$db=new TPDOdb;
+			$user->dictionary = TDictionary::loadDictionary($db, $user->id_entity);
+			$db->close();
+		}
+	}
+	
+	static function getConf(&$user) {
+		if(empty($user->conf)) {
+			$db=new TPDOdb;
+			$user->conf = TConf::loadConf($db, $user->id_entity);
+			$db->close();
+		}
 	}
 	
 	static function translate(&$conf, $sentence) {
