@@ -11,7 +11,7 @@ class TUser extends TContact {
 		$this->setChild('TGroupUser', 'id_user');
 		
 		$this->t_connexion = 0;
-		$this->id_entity = 0;
+		$this->id_entity_c = 0;
 		$this->entity = new TCompany;
 		
 		$this->lang = DEFAULT_LANG;
@@ -24,8 +24,8 @@ class TUser extends TContact {
 		parent::load($db, $id);
 		$this->load_right($db);
 		
-		if(!empty($this->id_entity)) {
-			$this->entity->load($db, $this->id_entity);
+		if(!empty($this->id_entity_c)) {
+			$this->entity->load($db, $this->id_entity_c);
 		}
 	}
 	
@@ -70,7 +70,7 @@ class TUser extends TContact {
 		$db->Execute($sql);
 			
 		if($db->Get_line()) {
-			$this->id_entity = $id_entity;
+			$this->id_entity_c = $id_entity;
 			$this->t_connexion = time();
 			return $this->load($db, $db->Get_field('id'));
 		}	
@@ -85,7 +85,7 @@ class TUser extends TContact {
 	
 	function isLogged() {
 		
-		if(!empty($_SESSION['user']) && $this->right($this->id_entity, 'login') && $this->t_connexion > 0 ) {
+		if(!empty($_SESSION['user']) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {
 			return true;
 			
 		}
@@ -99,7 +99,7 @@ class TUser extends TContact {
 			$TEntity[] = $id_entity;
 		}
 		
-		$TEntity[]=$this->id_entity;
+		$TEntity[]=$this->id_entity_c;
 		
 		if($mode=='sql') return implode(',', $TEntity);
 		else return $TEntity;

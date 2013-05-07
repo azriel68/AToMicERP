@@ -19,7 +19,7 @@
 	}
 	
 	$TUserOut=array();
-	$TUserList=TEntity::getEntityUsers($db, $user->id_entity);
+	$TUserList=TEntity::getEntityUsers($db, $user->id_entity_c);
 	foreach($TUserList as $userid) {
 		if(empty($TUserIn[$userid])) {
 			$u = new TUser;

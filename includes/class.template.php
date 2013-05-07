@@ -41,7 +41,7 @@ class TTemplate {
 					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
 					if(empty($object->id_entity)) {
-						$object->id_entity = $user->id_entity;
+						$object->id_entity = $user->id_entity_c;
 					}
 					
 					$object->save($db);
@@ -92,7 +92,7 @@ class TTemplate {
 		
 		foreach($conf->boxes as $module=>$TBoxe) {
 			foreach($TBoxe as $boxe) {
-				$url = $boxe.'?id_entity='.$user->id_entity;
+				$url = $boxe.'?id_entity='.$user->id_entity_c;
 				
 				array_push( $Tab, file_get_contents($url) );	
 			}
@@ -109,7 +109,7 @@ class TTemplate {
 		$l = new TListviewTBS('list_'.$className);
 		
 		$sql = strtr($conf->list->{$className}->{$listname}['sql'],array(
-			'@user->id_entity@'=>$user->id_entity
+			'@user->id_entity@'=>$user->id_entity_c
 			,'@getEntity@'=>$user->getEntity()
 		));
 		
@@ -143,7 +143,7 @@ class TTemplate {
 		$className = get_class($object);
 		$template = TTemplate::getTemplate($conf, $object,'data-table');
 		
-		$params = '&TParam[@user->id_entity]='.$user->id_entity;
+		$params = '&TParam[@user->id_entity]='.$user->id_entity_c;
 		$url = HTTP.'script/ajax-data-table.php?className='.$className.'&listName='.$listName;
 		
 		$header = $conf->list->{$className}->{$listName}['header'];
@@ -160,7 +160,7 @@ class TTemplate {
 					,'url_ajax_data_table'=>$url
 					,'url_lang_data_table'=>HTTP.'modules/core/lang/fr_FR.txt'
 					,'column_count'=>count($header)
-					,'id_entity'=>$user->id_entity
+					,'id_entity'=>$user->id_entity_c
 				)
 			)
 		);

@@ -61,7 +61,7 @@ else {
 	$l = new TListviewTBS('list_'.$className);
 	
 	$sql = strtr($conf->list->{$className}->{$listName}['sql'],array(
-		'@user->id_entity@'=>$user->id_entity
+		'@user->id_entity@'=>$user->id_entity_c
 		,'@getEntity@'=>$user->getEntity()
 		,'@id_company@'=>$_REQUEST['id_company']
 	));

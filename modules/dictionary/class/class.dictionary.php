@@ -13,7 +13,7 @@ class TDictionary extends TObjetStd {
 	}
 	
 	/**
-	 * Load dictionnary from database, translate labels based on user lang and return array
+	 * Load dictionary from database, translate labels based on user lang and return array
 	 */
 	static function loadDictionary(&$db, $id_entity) {
 		$sql = "SELECT type, code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 ORDER BY type";
