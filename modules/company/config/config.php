@@ -24,7 +24,8 @@ $conf->menu->top[] = array(
  ******************************************************************************************/
 $conf->tabs->TCompany=array(
 	'fiche'=>array('label'=>'__tr(Card)__','url'=>'company.php?action=view&id=@id@')
-	,'contact'=>array('label'=>'__tr(Contact)__','url'=>'../contact/contact.php?id_company=@id@')
+	,'contact'=>array('label'=>'__tr(Contact)__','url'=>'contact.php?id_company=@id@')
+	,'address'=>array('label'=>'__tr(Address)__','url'=>'address.php?id_company=@id@')
 );
 
 /******************************************************************************************
