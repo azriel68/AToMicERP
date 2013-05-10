@@ -31,8 +31,5 @@ $conf->modules['address']=array(
 		,'link'=>array(
 			'address'=>'<a href="?action=view&id=@id@">@val@</a>'
 		)
-		,'translate'=>array(
-			'country'=>$user->dictionary['country']
-		)
 	)
 );

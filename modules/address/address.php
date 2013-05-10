@@ -33,9 +33,9 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'address'=>$form->texte('', 'address', $address->address, 80)
-		,'zip'=>$form->texte('', 'zip', $address->zip, 80)
-		,'city'=>$form->texte('', 'city', $address->city, 80)
+		'address'=>$form->zonetexte('', 'address', $address->address, 40, 3)
+		,'zip'=>$form->texte('', 'zip', $address->zip, 7)
+		,'city'=>$form->texte('', 'city', $address->city, 30)
 		,'country'=>$form->combo('', 'country', $user->dictionary['country'], $address->country)
 		,'isBilling'=>$form->combo('', 'isBilling', $user->dictionary['yesno'], $address->isBilling)
 		,'isShipping'=>$form->combo('', 'isShipping', $user->dictionary['yesno'], $address->isShipping)
@@ -78,6 +78,9 @@ else {
 	));
 	
 	$param = $conf->list->{$className}->{$listName}['param'];
+	$param['translate'] = array(
+		'country'=>$user->dictionary['country']
+	);
 	
 	$tbs=new TTemplateTBS;
 	
