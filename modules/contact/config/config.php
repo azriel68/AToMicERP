@@ -24,7 +24,8 @@ $conf->tabs->TContact=array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TContact->fiche = './template/contact.html';
+@$conf->template->TContact->fiche = ROOT.'modules/contact/template/contact.html';
+@$conf->template->TContact->short = ROOT.'modules/contact/template/contact-short.html';
 
 /******************************************************************************************
  * Définition des listes

@@ -23,15 +23,16 @@ $conf->menu->top[] = array(
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
 $conf->tabs->TCompany=array(
-	'fiche'=>array('label'=>'__tr(Card)__','url'=>'company.php?action=view&id=@id@')
-	,'contact'=>array('label'=>'__tr(Contact)__','url'=>'contact.php?id_company=@id@')
-	,'address'=>array('label'=>'__tr(Address)__','url'=>'address.php?id_company=@id@')
+	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/company/company.php?action=view&id=@id@')
+	,'contact'=>array('label'=>'__tr(Contact)__','url'=>HTTP.'modules/contact/contact.php?id_company=@id@')
+	,'address'=>array('label'=>'__tr(Address)__','url'=>HTTP.'modules/address/address.php?id_company=@id@')
 );
 
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TCompany->fiche = './template/company.html';
+@$conf->template->TCompany->fiche = ROOT.'modules/company/template/company.html';
+@$conf->template->TCompany->short = ROOT.'modules/company/template/company-short.html';
 
 /******************************************************************************************
  * Définition des références automatiques

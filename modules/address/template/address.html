@@ -1,0 +1,37 @@
+[tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+	
+	[tpl.parentShort;strconv=no]
+	
+	<div class="content">
+		<form name="formTAddress" action="[tpl.self]" method="post">
+			<input type="hidden" name="action" value="save" />
+			<input type="hidden" name="success" value="__tr(The address has been saved)__" />
+			<input type="hidden" name="id" value="[address.id]" />
+			<input type="hidden" name="[id_parent_name]" value="[parent.id]" />
+			
+			<table class="grille">
+				<tr>
+					<td>__tr(Address)__</td><td>[address.address;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Zip)__</td><td>[address.zip;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(City)__</td><td>[address.city;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Country)__</td><td>[address.country;htmlconv=no]</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+</div>
+
+[tpl.footer;htmlconv=no]

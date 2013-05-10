@@ -285,13 +285,13 @@ class TTemplate {
 		);
 		
 	}
-	static function buttons(&$user, &$object, $mode='fiche') {
+	static function buttons(&$user, &$object, $mode='fiche', $more='') {
 		$TButton=array();
 		
 		if($mode=='list') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$TButton['new']=array(
-					'href'=>'?action=new'
+					'href'=>'?action=new'.$more
 					,'class'=>'butAction'
 					,'label'=>__tr('new'.get_class($object))
 				);
@@ -324,7 +324,7 @@ class TTemplate {
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton['cancel']=array(
-					'href'=> ($object->getId() > 0) ? '?action=view&id='.$object->getId() : '?action=list'
+					'href'=> ($object->getId() > 0) ? '?action=view&id='.$object->getId() : '?action=list'.$more
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))
 				);

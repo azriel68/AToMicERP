@@ -12,25 +12,27 @@ $conf->modules['address']=array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TAddress->fiche = './template/adress.html';
-@$conf->template->TAddress->companyAddressList = '../company/template/company_address.html';
+@$conf->template->TAddress->fiche = ROOT.'modules/address/template/address.html';
+@$conf->template->TAddress->companyAddressList = ROOT.'modules/address/template/address-list.html';
 
 /******************************************************************************************
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TAddress->companyAddressList=array(
-	'sql'=>"SELECT id, name, address, zip, city, country FROM ".DB_PREFIX."address WHERE id_company = @id_company@"
+	'sql'=>"SELECT id, address, zip, city, country FROM ".DB_PREFIX."address WHERE id_company = @id_company@"
 	,'param'=>array(
 		'title'=>array(
-			'name'=>'__tr(Name)__'
-			,'address'=>'__tr(Address)__'
+			'address'=>'__tr(Address)__'
 			,'zip'=>'__tr(Zip)__'
 			,'city'=>'__tr(City)__'
 			,'country'=>'__tr(Country)__'
 		)
 		,'hide'=>array('id')
 		,'link'=>array(
-			'name'=>'<a href="?action=view&id=@id@">@name@</a>'
+			'address'=>'<a href="?action=view&id=@id@">@val@</a>'
+		)
+		,'translate'=>array(
+			'country'=>$user->dictionary['country']
 		)
 	)
 );

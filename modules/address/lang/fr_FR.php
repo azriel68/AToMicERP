@@ -2,7 +2,7 @@
 
 $language=array(
 	// Fields
-	'Adress'=>'Adresse'
+	'Address'=>'Adresse'
 	,'Zip'=>'Code postal'
 	,'City'=>'Ville'
 	,'Country'=>'Pays'
@@ -16,5 +16,4 @@ $language=array(
 	
 	// Other
 	,'TAddress'=>'Adresse'
-	,'Card'=>'Fiche'
 );
