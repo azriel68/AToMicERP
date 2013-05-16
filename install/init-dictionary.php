@@ -1,11 +1,11 @@
 <?
 
 // Load csv files in dictionary/init folder and save it in database
-if(empty($company)) {
-	echo 'Dictionary not created';
+if(empty($company) && empty($_REQUEST['id_company'])) {
+	echo 'Dictionary not created, company missing';
 	return false;
 }
-$id_entity = $company->getId();
+$id_entity = empty($company) ? $_REQUEST['id_company'] : $company->getId();
 
 $db = new TPDOdb;
 $dir = ROOT.'modules/dictionary/init/';
@@ -29,4 +29,4 @@ while (false !== ($file = readdir($handle))) {
 }
 closedir($handle);
 
-print "Default dictionary loaded in database".'<br>';
+print "Default dictionaries loaded in database for entity ".$id_entity.'<br>';

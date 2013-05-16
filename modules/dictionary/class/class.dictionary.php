@@ -12,24 +12,25 @@ class TDictionary extends TObjetStd {
 		parent::_init_vars();
 	}
 	
-	
-	static function get(&$db, &$user, $type, $id_entity, $code='') {
+	static function get(&$db, &$user, $id_entity, $type, $code='') {
 		
-		if(isset($user->dictionary[$id_entity][$type])) {
+		if(isset($user->dictionary[$id_entity][$type])) { // Dictionnaire déjà chargé dans la session utilisateur
 			$TDictionnary= & $user->dictionary[$id_entity][$type];
-		}
-		else {
-			$TDictionnary = TRequeteCore::get_keyval_by_sql($db, "SELECT code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 AND type='".$type."'", 'code', 'label');	
+		} else {
+			// Récupération du dictionnaire
+			$TDictionnary = TRequeteCore::get_keyval_by_sql($db, "SELECT code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 AND type='".$type."'", 'code', 'label');
+
+			// Traduction et tri
+			foreach($TDictionnary as $key=>$value) {
+				$TDictionnary[$key] = __tr($value);
+			}
+			natsort($TDictionnary);
+			
+			// Stockage en session
+			$user->dictionary[$id_entity][$type] = $TDictionnary;
 		}
 		
-		$TList = array();
-		foreach($TDictionnary as $key=>$value) {
-			$TList[$key] = __tr($value);
-		}
-		
-		natsort($TList);
-		
-		return $TList;
+		return empty($code) ? $TDictionnary : $TDictionnary[$code];
 	}
 	static function set(&$db, $type, $code) {
 				
