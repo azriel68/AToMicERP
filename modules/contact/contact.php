@@ -25,7 +25,7 @@ if($action!==false ) {
 		,'fax'=>$form->texte('', 'fax', $contact->fax, 80)
 		,'email'=>$form->texte('', 'email', $contact->email, 80)
 		,'lang'=>$form->texte('', 'lang', $contact->lang, 80)
-		,'lang'=>$form->combo('', 'lang', TDictionary::get($db, 'lang'), $contact->lang)
+		,'lang'=>$form->combo('', 'lang', TDictionary::get($db, $user, $contact->id_entity, 'lang'), $contact->lang)
 		
 		,'id'=>$contact->getId()
 		,'dt_cre'=>$contact->get_date('dt_cre')

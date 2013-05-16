@@ -33,8 +33,8 @@ if($action!==false ) {
 		,'web'=>$form->texte('', 'web', $company->web, 80)
 		,'customerRef'=>$form->texte('', 'customerRef', $company->customerRef, 80)
 		,'supplierRef'=>$form->texte('', 'supplierRef', $company->supplierRef, 80)
-		,'isCustomer'=>$form->combo('', 'isCustomer', array(0=>__tr('No'), 1=>__tr('Yes')), $company->isCustomer)
-		,'isSupplier'=>$form->combo('', 'isSupplier', array(0=>__tr('No'), 1=>__tr('Yes')), $company->isSupplier)
+		,'isCustomer'=>$form->combo('', 'isCustomer', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isCustomer)
+		,'isSupplier'=>$form->combo('', 'isSupplier', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isSupplier)
 		
 		,'id'=>$company->getId()
 		,'dt_cre'=>$company->get_date('dt_cre')

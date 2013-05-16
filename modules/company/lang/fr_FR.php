@@ -6,6 +6,8 @@ $language=array(
 	,'Phone'=>'Téléphone'
 	,'Email'=>'E-mail'
 	,'Web'=>'Site web'
+	,'BillingAddress'=>'Adresse de facturation'
+	,'ShippingAddress'=>'Adresse de livraison'
 
 	// Buttons
 	,'newTCompany'=>'Nouvelle société'
