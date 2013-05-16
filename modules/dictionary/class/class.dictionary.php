@@ -12,33 +12,28 @@ class TDictionary extends TObjetStd {
 		parent::_init_vars();
 	}
 	
-	/**
-	 * Load dictionary from database, translate labels based on user lang and return array
-	 */
-	static function loadDictionary(&$db, $id_entity) {
-		$sql = "SELECT type, code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 ORDER BY type";
-		$db->Execute($sql);
-		
-		$TDict = array();
-		while ($db->Get_line()) {
-			if(empty($TDict[$db->Get_field('type')])) $TDict[$db->Get_field('type')] = array();
-			$TDict[$db->Get_field('type')][$db->Get_field('code')] = __tr($db->Get_field('label'));
-			// Alpha order for each type
-			asort($TDict[$db->Get_field('type')]);
-		}
-		return $TDict;
-	}
 	
-	static function get(&$db, $type) {
-		$TRes = TRequeteCore::get_id_from_what_you_want($db, DB_PREFIX.'dictionary', array('type'=>$type, 'valid'=>1), 'code');
+	static function get(&$db, &$user, $type, $id_entity, $code='') {
+		
+		if(isset($user->dictionary[$id_entity][$type])) {
+			$TDictionnary= & $user->dictionary[$id_entity][$type];
+		}
+		else {
+			$TDictionnary = TRequeteCore::get_keyval_by_sql($db, "SELECT code, label FROM ".DB_PREFIX."dictionary WHERE id_entity = ".$id_entity." AND valid = 1 AND type='".$type."'", 'code', 'label');	
+		}
 		
 		$TList = array();
-		foreach($TRes as $key) {
-			$TList[$key] = __tr($key);
+		foreach($TDictionnary as $key=>$value) {
+			$TList[$key] = __tr($value);
 		}
+		
+		natsort($TList);
+		
 		return $TList;
 	}
 	static function set(&$db, $type, $code) {
+				
+			
 		
 	}
 }

@@ -40,13 +40,6 @@ class TAtomic {
 		return $user;
 	}
 	
-	static function getDictionary(&$user) {
-		if(empty($user->dictionary)) {
-			$db=new TPDOdb;
-			$user->dictionary = TDictionary::loadDictionary($db, $user->id_entity_c);
-			$db->close();
-		}
-	}
 	
 	static function getConf(&$user) {
 		if(empty($user->conf)) {
