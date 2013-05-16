@@ -3,7 +3,7 @@
 class TAddress extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'address');
-		parent::add_champs('id_contact,id_company,isBilling,isShipping','type=entier;index;');
+		parent::add_champs('id_contact,id_company,isDefaultBilling,isDefaultShipping','type=entier;index;');
 		parent::add_champs('name,address,zip,city,country','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
@@ -15,14 +15,14 @@ class TAddress extends TObjetStd {
 	}
 	
 	function save(&$db) {
-		if($this->isBilling == 1) {
-			$sql = "UPDATE ".$this->get_table()." SET isBilling = 0 ";
+		if($this->isDefaultBilling == 1) {
+			$sql = "UPDATE ".$this->get_table()." SET isDefaultBilling = 0 ";
 			$sql.= "WHERE id_contact = ".$this->id_contact." AND id_company = ".$this->id_company;
 			$db->Execute($sql);
 		}
 		
-		if($this->isShipping == 1) {
-			$sql = "UPDATE ".$this->get_table()." SET isShipping = 0 ";
+		if($this->isDefaultShipping == 1) {
+			$sql = "UPDATE ".$this->get_table()." SET isDefaultShipping = 0 ";
 			$sql.= "WHERE id_contact = ".$this->id_contact." AND id_company = ".$this->id_company;
 			$db->Execute($sql);
 		}

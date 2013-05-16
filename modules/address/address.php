@@ -1,16 +1,19 @@
 <?
 
+// Includes global vars and configuration
 require('../../inc.php');
 
+// Check if user is connected to access this page
 if(!$user->isLogged()) {
 	TTemplate::login($user);
 }
 
+// Database connection and object actions
 $db=new TPDOdb;
-
 $address=new TAddress;
 $action = TTemplate::actions($db, $user, $address);
 
+// The address object can be related to a company or to a contact. We load the corresponding parent object
 if(!empty($address->id_company) || !empty($_REQUEST['id_company'])) {
 	$id_parent = !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
 	$parent = new TCompany;
@@ -36,9 +39,9 @@ if($action!==false ) {
 		'address'=>$form->zonetexte('', 'address', $address->address, 40, 3)
 		,'zip'=>$form->texte('', 'zip', $address->zip, 7)
 		,'city'=>$form->texte('', 'city', $address->city, 30)
-		,'country'=>$form->combo('', 'country', $user->dictionary['country'], $address->country)
-		,'isBilling'=>$form->combo('', 'isBilling', $user->dictionary['yesno'], $address->isBilling)
-		,'isShipping'=>$form->combo('', 'isShipping', $user->dictionary['yesno'], $address->isShipping)
+		,'country'=>$form->combo('', 'country', TDictionary::get($db, $user, $parent->id_entity, 'country'), $address->country)
+		,'isDefaultBilling'=>$form->combo('', 'isDefaultBilling', TDictionary::get($db, $user, $parent->id_entity, 'yesno'), $address->isDefaultBilling)
+		,'isDefaultShipping'=>$form->combo('', 'isDefaultShipping', TDictionary::get($db, $user, $parent->id_entity, 'yesno'), $address->isDefaultShipping)
 		
 		,'id'=>$address->getId()
 		,'dt_cre'=>$address->get_date('dt_cre')
@@ -79,7 +82,7 @@ else {
 	
 	$param = $conf->list->{$className}->{$listName}['param'];
 	$param['translate'] = array(
-		'country'=>$user->dictionary['country']
+		'country'=>TDictionary::get($db, $user, $parent->id_entity, 'country')
 	);
 	
 	$tbs=new TTemplateTBS;
