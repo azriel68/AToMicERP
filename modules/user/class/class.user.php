@@ -5,6 +5,7 @@ class TUser extends TContact {
 	function __construct() {
 		
 		parent::add_champs('isSuperadmin','type=entier;index;');
+		parent::add_champs('login,password','type=chaine;index;');
 		
 		parent::__construct();
 		
@@ -19,7 +20,32 @@ class TUser extends TContact {
 		
 		$this->rights = array();
 	}
-	
+	static function checkLoginExist(&$db, $login, $TIdExclude=array()) {
+		
+		$db->Execute("SELECT id FROM ".DB_PREFIX."user WHERE login='".$login."' AND id NOT IN (-1,".implode(',',$TIdExclude).")");
+		if($db->Get_line()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	function save(&$db) {
+		
+		if(TUser::checkLoginExist($db, $this->login, array($this->getId()) )) {
+			TAtomic::errorlog("ErrorLoginAlreadyExist ($login)");
+			
+			return false;
+		}
+		else {
+			parent::save($db);	
+		}
+		
+		
+		
+		
+	}
 	function load(&$db, $id) {
 		parent::load($db, $id);
 		$this->load_right($db);
