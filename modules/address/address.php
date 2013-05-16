@@ -72,12 +72,12 @@ if($action!==false ) {
 	
 }
 else {
-	$listName = 'companyAddressList';
+	$listName = get_class($parent).'AddressList';
 	$className = get_class($address);
 	$l = new TListviewTBS('list_'.$className);
 	
 	$sql = strtr($conf->list->{$className}->{$listName}['sql'],array(
-		'@id_company@'=>$_REQUEST['id_company']
+		'@'.$id_parent_name.'@'=>$id_parent
 	));
 	
 	$param = $conf->list->{$className}->{$listName}['param'];
@@ -87,7 +87,7 @@ else {
 	
 	$tbs=new TTemplateTBS;
 	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $address,'companyAddressList')
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $address, $listName)
 		,array(
 			'button'=>TTemplate::buttons($user, $address, 'list', '&'.$id_parent_name.'='.$id_parent)
 		)
