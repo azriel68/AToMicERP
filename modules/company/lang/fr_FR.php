@@ -17,6 +17,7 @@ $language=array(
 	,'cancelTCompany'=>'Annuler'
 	
 	// Other
+	,'Companies'=>'Sociétés'
 	,'TCompany'=>'Société'
 	,'Card'=>'Fiche'
 	,'Contact'=>'Contact'
