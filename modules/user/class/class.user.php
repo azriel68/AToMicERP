@@ -39,13 +39,10 @@ class TUser extends TContact {
 			return false;
 		}
 		else {
-			parent::save($db);	
+			return parent::save($db);
 		}
-		
-		
-		
-		
 	}
+	
 	function load(&$db, $id) {
 		parent::load($db, $id);
 		$this->load_right($db);

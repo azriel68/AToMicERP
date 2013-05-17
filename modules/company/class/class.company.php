@@ -28,7 +28,7 @@ class TCompany extends TObjetStd {
 			$this->supplierRef = TNumbering::getNextRefValue($db, $this, 'supplierRef');
 		}
 		
-		parent::save($db);
+		return parent::save($db);
 	}
 	
 	function addContact(&$contact) {
