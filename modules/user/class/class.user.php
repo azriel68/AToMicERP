@@ -22,7 +22,7 @@ class TUser extends TContact {
 	}
 	static function checkLoginExist(&$db, $login, $TIdExclude=array()) {
 		
-		$db->Execute("SELECT id FROM ".DB_PREFIX."user WHERE login='".$login."' AND id NOT IN (-1,".implode(',',$TIdExclude).")");
+		$db->Execute("SELECT id FROM ".DB_PREFIX."contact WHERE login='".$login."' AND id NOT IN (-1,".implode(',',$TIdExclude).")");
 		if($db->Get_line()) {
 			return true;
 		}
