@@ -16,6 +16,9 @@ $language=array(
 	,'saveTAddress'=>'Enregistrer'
 	,'cancelTAddress'=>'Annuler'
 	
+	// Messages
+	,'The address has been saved'=> 'L\'adresse a été enregistrée'
+	
 	// Other
 	,'TAddress'=>'Adresse'
 );

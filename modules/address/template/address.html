@@ -37,4 +37,21 @@
 	<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
 </div>
 
+[onshow;block=begin;when [tpl.mode]=='edit']
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#city').autocomplete({
+		source: function(request, response) {
+			search_city(request, response);
+		},
+		minLength: 3,
+		select: function( event, ui ) {
+			$('#country').val(ui.item.data.countryCode);
+			$('#city').val(ui.item.data.name);
+		}
+	});
+});
+</script>
+[onshow;block=end]
+
 [tpl.footer;htmlconv=no]
