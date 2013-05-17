@@ -17,6 +17,13 @@ $language=array(
 	,'saveTContact'=>'Enregistrer'
 	,'cancelTContact'=>'Annuler'
 	
+	// Messages
+	,'The contact has been saved'=> 'Le contact a été enregistré'
+	
 	// Titles
 	,'ContactList'=>'Liste des contacts'
+	
+	// Other
+	,'TContact'=>'Contact'
+	,'Card'=>'Fiche'
 );

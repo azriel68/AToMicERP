@@ -16,6 +16,9 @@ $language=array(
 	,'saveTCompany'=>'Enregistrer'
 	,'cancelTCompany'=>'Annuler'
 	
+	// Messages
+	,'The company has been saved'=> 'La société a été enregistrée'
+	
 	// Other
 	,'Companies'=>'Sociétés'
 	,'TCompany'=>'Société'

@@ -1,36 +1,39 @@
 [tpl.header;strconv=no]
 [tpl.menu;strconv=no]
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+
 	<form name="formTUser" action="[tpl.self]" method="post">
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="id" value="[user.id]" />
 		<input type="hidden" name="isUser" value="1" />
-		<div class="content">
-			
-		[tpl.tabs;strconv=no]
-			<table class="grille">
-				<tr>
-					<td>__tr(Lastname)__</td><td>[user.lastname;strconv=no]</td>
-					<td rowspan="5">[user.gravatar;strconv=no]</td>
-				</tr>
-				<tr>
-					<td>__tr(Firstname)__</td><td>[user.firstname;strconv=no]</td>
-				</tr>
-				<tr>
-					<td>__tr(Login)__</td><td>[user.login;strconv=no]</td>
-				</tr>
-				<tr>
-					<td>__tr(Password)__</td><td>[user.password;strconv=no]</td>
-				</tr>
-				<tr>
-					<td>__tr(Email)__</td><td>[user.email;strconv=no]</td>
-				</tr>
-			</table>
+		<input type="hidden" name="success" value="__tr(The user has been saved)__" />
 		
-			<a href="[button.href;block=a]" class="[button.class]">[button.label]</a> 
-		
-		</div>
-		
-		
+		<table class="grille">
+			<tr>
+				<td>__tr(Lastname)__</td><td>[user.lastname;strconv=no]</td>
+				<td rowspan="5" align="center">[user.gravatar;strconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Firstname)__</td><td>[user.firstname;strconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Login)__</td><td>[user.login;strconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Password)__</td><td>[user.password;strconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Email)__</td><td>[user.email;strconv=no]</td>
+			</tr>
+		</table>
+				
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		<div style="clear: both"><hr></div>
 	</form>
+
+</div>
 
 [tpl.footer;strconv=no]

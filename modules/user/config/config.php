@@ -37,7 +37,7 @@
 	$conf->rights[]=array('user','me','view');
 	$conf->rights[]=array('user','me','edit');
 	
-	$conf->tabs->TUser['user']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
+	$conf->tabs->TUser['fiche']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
 	$conf->tabs->TUser['group']=array('label'=>'__tr(Group)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
 	
 	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php?id=@id@&action=view');

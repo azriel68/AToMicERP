@@ -14,6 +14,9 @@
 		,'saveTUser'=>'Enregistrer'
 		,'cancelTUser'=>'Annuler'
 		
+		// Messages
+		,'The user has been saved'=> 'L\'utilisateur a été enregistré'
+		
 		// Menus
 		,'MyProfile'=>'Mon profil'
 		,'ManageUsers'=>'Gestion des utilisateurs'
