@@ -21,7 +21,6 @@ class TNumbering extends TObjetStd {
 		$confMask = $module.'_autoRef_'.$field.'_mask';
 		$mask = TConf::get($db, $object->id_entity, $confMask);
 		if($mask === false) return false;
-		echo $mask;
 		
 		// Get conf for the date field
 		$confDateField = $module.'_autoRef_'.$field.'_dateField';

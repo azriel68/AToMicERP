@@ -14,6 +14,12 @@
 		,'saveTUser'=>'Enregistrer'
 		,'cancelTUser'=>'Annuler'
 		
+		// Menus
+		,'MyProfile'=>'Mon profil'
+		,'ManageUsers'=>'Gestion des utilisateurs'
+		,'ManageGroups'=>'Gestion des groupes'
+		,'Logout'=>'Déconnexion'
+		
 		// Titles
 		,'ContactList'=>'Liste des utilisateurs'
 		,'userIn'=>'Utilisateurs faisant parti du groupe'

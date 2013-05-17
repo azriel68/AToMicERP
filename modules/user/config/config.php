@@ -2,7 +2,7 @@
 
 
 	$conf->menu->admin[] = array(
-		'name'=>"My profile"
+		'name'=>'__tr(MyProfile)__'
 		,'id'=>'profile'
 		,'position'=>1
 		,'url'=>HTTP.'modules/user/user.php?id=@id@&action=view'
@@ -11,7 +11,7 @@
 
 
 	$conf->menu->admin[] = array(
-		'name'=>"Manage users"
+		'name'=>'__tr(ManageUsers)__'
 		,'id'=>'MUsers'
 		,'position'=>2
 		,'url'=>HTTP.'modules/user/user.php'
@@ -19,7 +19,7 @@
 	);
 	
 	$conf->menu->admin[] = array(
-		'name'=>"Manage groups"
+		'name'=>'__tr(ManageGroups)__'
 		,'id'=>'MGroups'
 		,'position'=>3
 		,'url'=>HTTP.'modules/user/group.php'
