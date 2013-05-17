@@ -4,37 +4,42 @@
 <div class="content">
 	
 	[tpl.tabs;strconv=no]
+	
+	[tpl.parentShort;strconv=no]
 
-	<form name="formTContact" action="[tpl.self]" method="post">
-		<input type="hidden" name="action" value="save" />
-		<input type="hidden" name="id" value="[contact.id]" />
-		<input type="hidden" name="success" value="__tr(The contact has been saved)__" />
-		
-		<table class="grille">
-			<tr>
-				<td>__tr(Lastname)__</td><td>[contact.lastname;strconv=no]</td>
-				<td rowspan="6" align="center">[contact.gravatar;strconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(Firstname)__</td><td>[contact.firstname;strconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(Phone)__</td><td>[contact.phone;htmlconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(Fax)__</td><td>[contact.fax;htmlconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(Email)__</td><td>[contact.email;htmlconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(Lang)__</td><td>[contact.lang;htmlconv=no]</td>
-			</tr>
-		</table>
-				
-		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
-		<div style="clear: both"><hr></div>
-	</form>
+	<div class="content">
+		<form name="formTContact" action="[tpl.self]" method="post">
+			<input type="hidden" name="action" value="save" />
+			<input type="hidden" name="id" value="[contact.id]" />
+			<input type="hidden" name="success" value="__tr(The contact has been saved)__" />
+			<input type="hidden" name="[id_parent_name]" value="[parent.id]" />
+			
+			<table class="grille">
+				<tr>
+					<td>__tr(Lastname)__</td><td>[contact.lastname;strconv=no]</td>
+					<td rowspan="6" align="center">[contact.gravatar;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Firstname)__</td><td>[contact.firstname;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Phone)__</td><td>[contact.phone;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Fax)__</td><td>[contact.fax;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Email)__</td><td>[contact.email;htmlconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Lang)__</td><td>[contact.lang;htmlconv=no]</td>
+				</tr>
+			</table>
+					
+			<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+			<div style="clear: both"><hr></div>
+		</form>
+	</div>
 
 </div>
 

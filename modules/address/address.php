@@ -16,12 +16,12 @@ $action = TTemplate::actions($db, $user, $address);
 // The address object can be related to a company or to a contact. We load the corresponding parent object
 if(!empty($address->id_company) || !empty($_REQUEST['id_company'])) {
 	$id_parent = !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
-	$parent = new TCompany;
 	$id_parent_name = 'id_company';
+	$parent = new TCompany;
 } else if(!empty($address->id_contact) || !empty($_REQUEST['id_contact'])) {
 	$id_parent = !empty($address->id_contact) ? $address->id_contact : $_REQUEST['id_contact'];
-	$parent = new TContact;
 	$id_parent_name = 'id_contact';
+	$parent = new TContact;
 }
 
 $parent->load($db, $id_parent);

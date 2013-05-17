@@ -9,6 +9,15 @@ if(!$user->isLogged()) {
 $contact=new TContact;
 $db=new TPDOdb;
 $action = TTemplate::actions($db, $user, $contact);
+
+// Display from the company module, company is the parent
+if(!empty($_REQUEST['id_company'])) {
+	$id_parent = !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
+	$id_parent_name = 'id_company';
+	$parent = new TCompany;
+	$parent->load($db, $id_parent);
+}
+
 if($action!==false ) {
 
 	if($action=='delete') {
@@ -41,6 +50,9 @@ if($action!==false ) {
 		)
 		,array(
 			'contact'=>$TForm
+			,'parent'=>empty($parent) ? '' : $parent
+			,'parentClass'=>empty($parent) ? '' : get_class($parent)
+			,'id_parent_name'=>empty($parent) ? '' : $id_parent_name
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
@@ -48,41 +60,44 @@ if($action!==false ) {
 				,'tabs'=>TTemplate::tabs($conf, $user, $contact, 'fiche')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
+				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
 			)
 		)
 	)); 
 	
 }
 else {
-	//print TTemplate::liste($conf, $user, $db, $contact, 'contactList');
-	
-	$listName = 'contactList';
+	$listName = empty($parent) ? 'ContactList' : get_class($parent).'ContactList';
 	$className = get_class($contact);
 	$l = new TListviewTBS('list_'.$className);
 	
 	$sql = strtr($conf->list->{$className}->{$listName}['sql'],array(
-		'@user->id_entity@'=>$user->id_entity_c
-		,'@getEntity@'=>$user->getEntity()
-		,'@id_company@'=>$_REQUEST['id_company']
+		'@getEntity@'=>$user->getEntity()
+		,'@id_company@'=>!empty($_REQUEST['id_company']) ? $_REQUEST['id_company'] : ''
 	));
 	
 	$param = $conf->list->{$className}->{$listName}['param'];
+	$param['translate'] = array(
+		'lang'=>TDictionary::get($db, $user, $user->id_entity_c, 'lang')
+	);
+	
+	$buttonsMore = empty($parent) ? '' : '&'.$id_parent_name.'='.$id_parent;
 	
 	$tbs=new TTemplateTBS;
 	
-	$template = TTemplate::getTemplate($conf, $contact,'list');
-	
-	print __tr_view($tbs->render($template
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $contact, $listName)
 		,array(
-			'button'=>TTemplate::buttons($user, $contact, 'list')
+			'button'=>TTemplate::buttons($user, $contact, 'list', $buttonsMore)
 		)
 		,array(
 			'tpl'=>array(
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
+				,'tabs'=>empty($parent) ? '' : TTemplate::tabs($conf, $user, $parent, 'contact')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'list'=>$l->render($db, $sql, $param)
+				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
 			)
 		)
 	)); 

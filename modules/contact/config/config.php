@@ -27,15 +27,15 @@ $conf->tabs->TContact=array(
  ******************************************************************************************/
 @$conf->template->TContact->fiche = ROOT.'modules/contact/template/contact.html';
 @$conf->template->TContact->short = ROOT.'modules/contact/template/contact-short.html';
+@$conf->template->TContact->ContactList = ROOT.'modules/contact/template/contact-list.html';
+@$conf->template->TContact->TCompanyContactList = @$conf->template->TContact->ContactList;
 
 /******************************************************************************************
  * Définition des listes
  ******************************************************************************************/
-@$conf->list->TContact->contactList=array(
+@$conf->list->TContact->ContactList=array(
 	'sql'=>"SELECT c.id, CONCAT(c.firstname, ' ', c.lastname) as name, c.phone, c.fax, c.email, c.lang FROM ".DB_PREFIX."contact c
-			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON cto.id_contact = c.id
-			WHERE cto.objectType = 'company' AND cto.id_object = @id_company@
-			AND id_entity IN (@getEntity@)
+			WHERE c.id_entity IN (@getEntity@)
 			ORDER BY lastname"
 	,'param'=>array(
 		'title'=>array(
@@ -52,10 +52,11 @@ $conf->tabs->TContact=array(
 	)
 );
 
-@$conf->list->TContact->contactListOnCompany=array(
+@$conf->list->TContact->TCompanyContactList=array(
 	'sql'=>"SELECT c.id, CONCAT(c.firstname, ' ', c.lastname) as name, c.phone, c.fax, c.email, c.lang FROM ".DB_PREFIX."contact c
 			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON cto.id_contact = c.id
 			WHERE cto.objectType = 'company' AND cto.id_object = @id_company@
+			AND c.id_entity IN (@getEntity@)
 			ORDER BY lastname"
 	,'param'=>array(
 		'title'=>array(

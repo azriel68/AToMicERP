@@ -19,13 +19,6 @@ if($action!==false ) {
 	$form=new TFormCore;
 	$form->Set_typeaff($action);
 	
-	$listContact = new TListviewTBS('list_TContact');
-	$sqlContact = strtr($conf->list->TContact->contactListOnCompany['sql'],array(
-		'@id_company@'=>$company->getId()
-	));
-	
-	$paramContact = $conf->list->TContact->contactListOnCompany['param'];
-	
 	$TForm=array(
 		'name'=>$form->texte('', 'name', $company->name, 80)
 		,'phone'=>$form->texte('', 'phone', $company->phone, 80)
@@ -36,11 +29,11 @@ if($action!==false ) {
 		,'isCustomer'=>$form->combo('', 'isCustomer', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isCustomer)
 		,'isSupplier'=>$form->combo('', 'isSupplier', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isSupplier)
 		
+		,'logo_input'=>$form->fichier('', 'logo_input', '', 80)
+		
 		,'id'=>$company->getId()
 		,'dt_cre'=>$company->get_date('dt_cre')
 		,'dt_maj'=>$company->get_date('dt_maj')
-		
-		,'contactList'=>$listContact->render($db, $sqlContact, $paramContact)
 	);
 	$tbs=new TTemplateTBS;
 	
