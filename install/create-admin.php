@@ -42,6 +42,7 @@
 	
 	print "Création du Groupe Users : ". $group->save($db).'<br>';
 	
+	require('init-conf.php');
 	require('init-dictionary.php');
 	
 //pre($company);	

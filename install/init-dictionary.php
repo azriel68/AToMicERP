@@ -1,5 +1,7 @@
 <?
 
+require_once('../inc.php');
+
 // Load csv files in dictionary/init folder and save it in database
 if(empty($company) && empty($_REQUEST['id_company'])) {
 	echo 'Dictionary not created, company missing';
