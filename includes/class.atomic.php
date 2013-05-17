@@ -6,7 +6,7 @@ class TAtomic {
 		
 		$trace=debug_backtrace();       
 	      
-        $log=$message; 
+        $log=date('Y-m-d H:i:s').' - '.$message; 
         foreach($trace as $row) {
                 if((!empty($row['class']) && $row['class']==__CLASS__) 
                         || (!empty($row['function']) && $row['function']==__FUNCTION__)
