@@ -49,4 +49,7 @@
 	require('init-conf.php');
 	require('init-dictionary.php');
 	
+	// Create folders for document
+	require('init-folders.php');
+	
 	$db->close();

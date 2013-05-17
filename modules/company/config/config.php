@@ -7,6 +7,7 @@ $conf->modules['company']=array(
 	'name'=>'Company'
 	,'id'=>'TCompany'
 	,'class'=>array('TCompany')
+	,'folder'=>'company'
 );
 
 /******************************************************************************************
@@ -33,14 +34,6 @@ $conf->tabs->TCompany=array(
  ******************************************************************************************/
 @$conf->template->TCompany->fiche = ROOT.'modules/company/template/company.html';
 @$conf->template->TCompany->short = ROOT.'modules/company/template/company-short.html';
-
-/******************************************************************************************
- * Définition des références automatiques
- ******************************************************************************************/
-@$conf->autoref->TCompany = array(
-	array('field' => 'customerRef', 'mask' => 'CL{yy}{0000}', 'dateField' => 'dt_cre')
-	,array('field' => 'supplierRef', 'mask' => 'FO{yy}{0000}', 'dateField' => 'dt_cre')
-);
 
 /******************************************************************************************
  * Définition des listes

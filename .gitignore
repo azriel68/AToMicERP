@@ -2,6 +2,7 @@
 .project
 
 /config.php
+documents/
 view/
-*.log
 test/
+*.log

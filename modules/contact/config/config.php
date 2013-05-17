@@ -7,6 +7,7 @@ $conf->modules['contact']=array(
 	'name'=>'Contact'
 	,'id'=>'contact'
 	,'class'=>array('TContact', 'TContactToObject')
+	,'folder'=>'contact'
 );
 
 /******************************************************************************************

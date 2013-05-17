@@ -2,7 +2,7 @@
 
 require_once('../inc.php');
 
-// Load csv files in dictionary/init folder and save it in database
+// Load csv file containing default values for conf
 if(empty($company) && empty($_REQUEST['id_company'])) {
 	echo 'Standard conf not created, company missing';
 	return false;
