@@ -122,7 +122,7 @@ class TUser extends TContact {
 			$TEntity[] = $id_entity;
 		}
 		
-		$TEntity[]=$this->id_entity_c;
+		//$TEntity[]=$this->id_entity_c;
 		
 		if($mode=='sql') return implode(',', $TEntity);
 		else return $TEntity;

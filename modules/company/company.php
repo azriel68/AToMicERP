@@ -20,7 +20,7 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db), $company->id_entity)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $company->id_entity)
 		,'name'=>$form->texte('', 'name', $company->name, 80)
 		,'phone'=>$form->texte('', 'phone', $company->phone, 80)
 		,'email'=>$form->texte('', 'email', $company->email, 80)

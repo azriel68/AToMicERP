@@ -53,9 +53,12 @@ class TCompany extends TObjetStd {
 
 class TEntity extends TCompany {
 	
-	static function getEntityForCombo(&$db) {
+	static function getEntityForCombo(&$db, $idIn='', $idOut='') {
 		
 		$sql="SELECT id,name FROM ".DB_PREFIX."company WHERE isEntity=1";
+		if(!empty($idIn)) $sql.=' AND id IN ('.$idIn.') ';
+		if(!empty($idOut)) $sql.=' AND id NOT IN ('.$idOut.') ';
+		
 		
 		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'name');
 		
