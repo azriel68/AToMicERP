@@ -20,7 +20,7 @@ if(!empty($_REQUEST['id_company'])) {
 
 if($action!==false ) {
 
-	if($action=='save') {
+	if($action=='save' && !empty($parent) ) {
 		// User association with company
 		$parent->addContact($contact);	
 		$parent->save($db);
@@ -34,7 +34,9 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'firstname'=>$form->texte('', 'firstname', $contact->firstname, 80)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $contact->id_entity)
+		
+		,'firstname'=>$form->texte('', 'firstname', $contact->firstname, 80)
 		,'lastname'=>$form->texte('', 'lastname', $contact->lastname, 80)
 		,'phone'=>$form->texte('', 'phone', $contact->phone, 80)
 		,'fax'=>$form->texte('', 'fax', $contact->fax, 80)

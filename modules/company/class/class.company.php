@@ -31,6 +31,7 @@ class TCompany extends TObjetStd {
 		return parent::save($db);
 	}
 	function contactExist(&$contact) {
+		//pre($this->TContactToObject_company);	
 		foreach($this->TContactToObject_company as &$link) {
 			if($link->id_contact == $contact->getId()) return true;	
 		}

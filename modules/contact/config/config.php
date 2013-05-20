@@ -53,7 +53,7 @@ $conf->tabs->TContact=array(
 );
 
 @$conf->list->TContact->TCompanyContactList=array(
-	'sql'=>"SELECT c.id, CONCAT(c.firstname, ' ', c.lastname) as name, c.phone, c.fax, c.email, c.lang FROM ".DB_PREFIX."contact c
+	'sql'=>"SELECT c.email as 'gravatar', c.id, CONCAT(c.firstname, ' ', c.lastname) as name, c.phone, c.fax, c.email, c.lang FROM ".DB_PREFIX."contact c
 			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON cto.id_contact = c.id
 			WHERE cto.objectType = 'company' AND cto.id_object = @id_company@
 			AND c.id_entity IN (@getEntity@)
@@ -66,10 +66,13 @@ $conf->tabs->TContact=array(
 			,'email'=>'__tr(Email)__'
 			,'lang'=>'__tr(Lang)__'
 		)
-		,'hide'=>array('id')
+		,'hide'=>array('id','gravatar')
 		,'link'=>array(
 			'name'=>'<a href="'.HTTP.'modules/contact/contact.php?action=view&id=@id@">@name@</a>'
 			,'email'=>'<a href="mailto:@email@">@email@</a>'
+		)
+		,'eval'=>array(
+			'name'=>'TTemplate::gravatar("@gravatar@","", 30, "left") . \'@val@\' '
 		)
 	)
 );

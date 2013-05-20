@@ -18,7 +18,7 @@
 	
 	$conf->list->TProject=new stdClass;
 	$conf->list->TProject->index=array(
-		'sql'=>"SELECT id,name,status FROM ".DB_PREFIX."project  WHERE id_entity=@user->id_entity@"
+		'sql'=>"SELECT id,name,status FROM ".DB_PREFIX."project  WHERE id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'type'=>array('dt_cre'=>'date', 'dt_maj'=>'date')
 			,'link'=>array('name'=>'<a href="'.HTTP.'modules/project/project.php?id=@id@&action=view">@val@</a>')

@@ -101,6 +101,11 @@ class TTemplate {
 		
 		return $Tab;
 	}
+	static function gravatar($email, $title='gravatar', $size=100, $float="none") {
+		$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
+		return '<img src="'.$grav_url.'" alt="'.$title.'" style="float:'.$float.'" />';
+	}
+
 	static function liste(&$conf, &$user, &$db, &$object, $listname='index', $param=array()) {
 		/*
 		 * Fonction à changer, non conforme à une démarche module
