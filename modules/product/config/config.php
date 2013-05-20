@@ -4,7 +4,7 @@
  * Définition du module
  ******************************************************************************************/
 $conf->modules['product']=array(
-	'name'=>'Contact'
+	'name'=>'Product'
 	,'id'=>'product'
 	,'class'=>array('TProduct', 'TPrice')
 	,'folder'=>'product'
@@ -25,13 +25,15 @@ $conf->menu->top[] = array(
  ******************************************************************************************/
 $conf->tabs->TProduct=array(
 	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@')
-	,'prices'=>array('label'=>'__tr(Price)__','url'=>HTTP.'modules/product/price.php?id_product=@id@')
+	,'price'=>array('label'=>'__tr(Price)__','url'=>HTTP.'modules/product/price.php?id_product=@id@')
 );
 
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
 @$conf->template->TProduct->fiche = ROOT.'modules/product/template/product.html';
+@$conf->template->TProduct->short = ROOT.'modules/product/template/product-short.html';
+@$conf->template->TPrice->price = ROOT.'modules/product/template/price.html';
 
 /******************************************************************************************
  * Définition des listes
@@ -49,5 +51,32 @@ $conf->tabs->TProduct=array(
 		,'link'=>array(
 			'ref'=>'<a href="?action=view&id=@id@">@ref@</a>'
 		)
+	)
+);
+
+@$conf->list->TPrice->priceList=array(
+	'sql'=>"SELECT id, price_ht, vat_rate, dt_deb, dt_fin FROM ".DB_PREFIX."price WHERE id_entity IN (@getEntity@)"
+	,'param'=>array(
+		'title'=>array(
+			'price_ht'=>'__tr(Price)__'
+			,'vat_rate'=>'__tr(Vat_rate)__'
+			,'dt_deb'=>'__tr(Dt_deb)__'
+			,'dt_fin'=>'__tr(Dt_fin)__'
+		)
+		,'hide'=>array('id')
+	)
+);
+
+@$conf->list->TPrice->TProductPriceList=array(
+	'sql'=>"SELECT id, price_ht, vat_rate, dt_deb, dt_fin FROM ".DB_PREFIX."price WHERE id_entity IN (@getEntity@)
+			AND id_product = @id_product@"
+	,'param'=>array(
+		'title'=>array(
+			'price_ht'=>'__tr(Price)__'
+			,'vat_rate'=>'__tr(Vat_rate)__'
+			,'dt_deb'=>'__tr(Dt_deb)__'
+			,'dt_fin'=>'__tr(Dt_fin)__'
+		)
+		,'hide'=>array('id')
 	)
 );

@@ -29,6 +29,7 @@ $language=array(
 	 **********************************************/
 	,'Products'=>'Produits'
 	,'TProduct'=>'Produit'
+	,'Product : '=>'Produit : '
 	,'Card'=>'Fiche'
 	,'Price'=>'Prix'
 );
