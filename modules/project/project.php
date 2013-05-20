@@ -19,8 +19,12 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'name'=>$form->texte('', 'name', $project->name, 80)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $project->id_entity)
+		,'name'=>$form->texte('', 'name', $project->name, 80)
 		,'status'=>$form->combo('', 'status', $project->TStatus, $project->status)
+		,'soldePrice'=>$form->texte('', 'soldePrice', $project->soldePrice, 20)
+		,'dt_start'=>$form->calendrier('', 'dt_start', $project->dt_start, 10)
+		,'dt_end'=>$form->calendrier('', 'dt_end', $project->dt_end, 10)
 		,'id'=>$project->getId()
 		
 	);

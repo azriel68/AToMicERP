@@ -5,6 +5,7 @@ class TProject extends TObjetStd {
 		parent::add_champs('status,id_entity','type=entier;index;');
 		parent::add_champs('name','type=chaine;');
 		parent::add_champs('soldePrice','type=float;');
+		parent::add_champs('dt_start,dt_end','type=date;');
 		
 		TAtomic::initExtraFields($this);
 		
