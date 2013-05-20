@@ -44,12 +44,14 @@ class TUser extends TContact {
 	}
 	
 	function load(&$db, $id) {
-		parent::load($db, $id);
+		$res = parent::load($db, $id);
 		$this->load_right($db);
 		
 		if(!empty($this->id_entity_c)) {
 			$this->entity->load($db, $this->id_entity_c);
 		}
+		
+		return $res;
 	}
 	
 	function load_right(&$db) {

@@ -33,8 +33,15 @@ class TAtomic {
 		
 		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password']) && !empty($_REQUEST['action']) && $_REQUEST['action'] == 'login') {
 			$db=new TPDOdb;
-			$user->login($db, $_REQUEST['login'], $_REQUEST['password']/*, $_REQUEST['id_entity']*/);
+			if($user->login($db, $_REQUEST['login'], $_REQUEST['password']/*, $_REQUEST['id_entity']*/)) {
+				
+				if(isset($_REQUEST['back'])) {
+					header('location:'.$_REQUEST['back']);
+				}
+				
+			}
 			$db->close();
+			
 		}
 		
 		return $user;

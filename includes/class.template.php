@@ -8,7 +8,7 @@ class TTemplate {
 			header('location:'.HTTP.'?error=Bad login or password');
 		}
 		else {
-			header('location:'.HTTP.'?logout');	
+			header('location:'.HTTP.'?logout&back='.urlencode($_SERVER["REQUEST_URI"]));	
 		}
 		
 		
