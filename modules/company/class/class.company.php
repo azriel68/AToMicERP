@@ -30,12 +30,22 @@ class TCompany extends TObjetStd {
 		
 		return parent::save($db);
 	}
-	
-	function addContact(&$contact) {
+	function contactExist(&$contact) {
+		foreach($this->TContactToObject_company as &$link) {
+			if($link->id_contact == $contact->getId()) return true;	
+		}
 		
-		$iLien = $this->addChild($db, 'TContactToObject_company');
-		if(!isset($this->TContactToObject_company[$iLien]))$this->TContactToObject_company[$iLien]=new TContactToObject;
-		$this->TContactToObject_company[$iLien]->id_contact = $contact->getId();
+		return false;
+	}
+	function addContact(&$contact) {
+		if(!$this->contactExist($contact)) {
+			$iLien = $this->addChild($db, 'TContactToObject_company');
+			
+			if(!isset($this->TContactToObject_company[$iLien]))$this->TContactToObject_company[$iLien]=new TContactToObject; // A quoi sert  cette ligne ? 
+	
+			$this->TContactToObject_company[$iLien]->id_contact = $contact->getId();
+			
+		}
 		
 	}
 	
