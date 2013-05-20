@@ -1,7 +1,9 @@
 <?php
 
 $language=array(
-	// Fields
+	/*************************************************
+	 * Fields
+	 *************************************************/
 	'Name'=>'Raison sociale'
 	,'Phone'=>'Téléphone'
 	,'Email'=>'E-mail'
@@ -9,17 +11,23 @@ $language=array(
 	,'CustomerRef'=>'Code client'
 	,'SupplierRef'=>'Code fournisseur'
 
-	// Buttons
+	/***********************************************
+	 * Buttons
+	 ***********************************************/ 
 	,'newTCompany'=>'Nouvelle société'
 	,'editTCompany'=>'Modifier'
 	,'deleteTCompany'=>'Supprimer'
 	,'saveTCompany'=>'Enregistrer'
 	,'cancelTCompany'=>'Annuler'
 	
-	// Messages
+	/**********************************************
+	 * Messages
+	 **********************************************/
 	,'The company has been saved'=> 'La société a été enregistrée'
 	
-	// Other
+	/**********************************************
+	 * Other
+	 **********************************************/
 	,'Companies'=>'Sociétés'
 	,'TCompany'=>'Société'
 	,'Card'=>'Fiche'

@@ -1,0 +1,37 @@
+[tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+
+	<form name="formTProduct" action="[tpl.self]" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="success" value="__tr(The product has been saved)__" />
+		<input type="hidden" name="id" value="[product.id]" />
+		
+		<table class="grille">
+			<tr>
+				<td>__tr(Entity)__</td><td>[product.id_entity;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Ref)__</td><td>[product.ref;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Label)__</td><td>[product.label;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Description)__</td><td>[product.description;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Price)__</td><td>[product.price;htmlconv=no]</td>
+			</tr>
+		</table>
+				
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		<div style="clear: both"><hr></div>
+	</form>
+
+</div>
+
+[tpl.footer;htmlconv=no]

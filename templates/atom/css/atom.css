@@ -135,6 +135,7 @@ div.content table.grille {
 	border: 1px solid #464646;
 	width:100%;
 	margin-bottom:3px;
+	background-color: white;
 }
 div.content table.grille img {
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
