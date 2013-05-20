@@ -14,7 +14,7 @@ $conf->modules['product']=array(
  * Définition des menus (top / left)
  ******************************************************************************************/
 $conf->menu->top[] = array(
-	'name'=>'__tr(TProduct)__'
+	'name'=>'Products'
 	,'id'=>'TProduct'
 	,'position'=>2
 	,'url'=>HTTP.'modules/product/product.php'

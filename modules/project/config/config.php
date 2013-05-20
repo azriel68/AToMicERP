@@ -9,7 +9,7 @@
 	
 
 	$conf->modules['project']=array(
-		'name'=>'Project'
+		'name'=>'Projects'
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
 	);
 	

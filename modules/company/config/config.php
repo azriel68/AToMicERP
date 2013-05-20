@@ -14,7 +14,7 @@ $conf->modules['company']=array(
  * Définition des menus (top / left)
  ******************************************************************************************/
 $conf->menu->top[] = array(
-	'name'=>'__tr(Companies)__'
+	'name'=>'Companies'
 	,'id'=>'TCompany'
 	,'position'=>1
 	,'url'=>HTTP.'modules/company/company.php'
