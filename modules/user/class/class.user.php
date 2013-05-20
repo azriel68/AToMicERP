@@ -86,7 +86,7 @@ class TUser extends TContact {
 		}
 	}
 	
-	function login (&$db, $login, $pwd, $id_entity) {
+	function login (&$db, $login, $pwd, $id_entity=0) {
 		$sql = "SELECT id FROM ".$this->get_table()." 
 			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd)."
 			AND status = 1";

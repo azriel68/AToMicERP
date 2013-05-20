@@ -12,7 +12,7 @@ $action = TTemplate::actions($db, $user, $contact);
 
 // Display from the company module, company is the parent
 if(!empty($_REQUEST['id_company'])) {
-	$id_parent = !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
+	$id_parent = $_REQUEST['id_company']; // où est défini adresse ? :: !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
 	$id_parent_name = 'id_company';
 	$parent = new TCompany;
 	$parent->load($db, $id_parent);
@@ -20,7 +20,13 @@ if(!empty($_REQUEST['id_company'])) {
 
 if($action!==false ) {
 
-	if($action=='delete') {
+	if($action=='save') {
+		// User association with company
+		$parent->addContact($contact);	
+		$parent->save($db);
+		
+	}
+	else if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
 
@@ -44,20 +50,29 @@ if($action!==false ) {
 	);
 	$tbs=new TTemplateTBS;
 	
+	
+	
+	$buttonsMore='';
+	if(!empty($parent)) {
+		$buttonsMore = '&'.$id_parent_name.'='.$id_parent;
+	}
+	
+	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $contact)
 		,array(
-			'button'=>TTemplate::buttons($user, $contact, $action)
+			'button'=>TTemplate::buttons($user, $contact, $action, $buttonsMore)
 		)
 		,array(
 			'contact'=>$TForm
-			,'parent'=>empty($parent) ? '' : $parent
-			,'parentClass'=>empty($parent) ? '' : get_class($parent)
+			,'parent'=>empty($parent) ? array() : $parent
+			/* Apparement inutilisé
+			 *,'parentClass'=>empty($parent) ? '' : get_class($parent)*/
 			,'id_parent_name'=>empty($parent) ? '' : $id_parent_name
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $contact, 'fiche')
+				,'tabs'=>!empty($parent) ? TTemplate::tabs($conf, $user, $parent, 'contact') : TTemplate::tabs($conf, $user, $contact, 'fiche')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
@@ -81,7 +96,13 @@ else {
 		'lang'=>TDictionary::get($db, $user, $user->id_entity_c, 'lang')
 	);
 	
-	$buttonsMore = empty($parent) ? '' : '&'.$id_parent_name.'='.$id_parent;
+	$buttonsMore='';
+	if(!empty($parent)) {
+		$param['link']['name']='<a href="'.HTTP.'modules/contact/contact.php?action=view&id=@id@&id_company='.$parent->getId().'">@name@</a>';
+		$buttonsMore = '&'.$id_parent_name.'='.$id_parent;
+	}
+	
+	
 	
 	$tbs=new TTemplateTBS;
 	

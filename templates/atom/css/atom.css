@@ -65,6 +65,7 @@ div.tabs ul {
 	margin: 0px;
 	position:relative;
 	z-index:998;
+	font-weight: normal;
 }
 
 div.tabs li {
@@ -72,15 +73,16 @@ div.tabs li {
 	display: inline-block;
 	padding: 5px 5px 3px 5px;
 	margin: 0 5px 0 0;
-	background: #fff;
 	position:relative;
-	
+	background: inherit;
 }
 
 div.tabs li.active, div.tabs li:hover {
 	border-top: 1px solid #2AA8B9;
 	border-left: 1px solid #2AA8B9;
 	border-right: 1px solid #2AA8B9;
+	border-bottom: 1px solid #fff;
+	
 	top:1px;
 	
 }
@@ -132,6 +134,7 @@ div.content table.grille {
 	border-collapse: collapse;
 	border: 1px solid #464646;
 	width:100%;
+	margin-bottom:3px;
 }
 div.content table.grille img {
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;

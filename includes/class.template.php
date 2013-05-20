@@ -41,7 +41,7 @@ class TTemplate {
 					$object->load($db, $_REQUEST['id']);
 					$object->set_values($_POST);
 					if(empty($object->id_entity)) {
-						$object->id_entity = $user->id_entity_c;
+						$object->id_entity = $user->id_entity;
 					}
 					
 					$object->save($db);
@@ -300,14 +300,14 @@ class TTemplate {
 		else if($mode=='save' || $mode=='view') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$TButton['edit']=array(
-					'href'=>'?action=edit&id='.$object->getId()
+					'href'=>'?action=edit&id='.$object->getId().$more
 					,'class'=>'butAction'
 					,'label'=>__tr('edit'.get_class($object))
 				);
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton['delete']=array(
-					'href'=>'?action=delete&id='.$object->getId()
+					'href'=>'?action=delete&id='.$object->getId().$more
 					,'class'=>'butAction'
 					,'label'=>__tr('delete'.get_class($object))
 				);
