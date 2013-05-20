@@ -98,7 +98,7 @@ else {
 	
 	$buttonsMore='';
 	if(!empty($parent)) {
-		$param['link']['name']='<a href="'.HTTP.'modules/contact/contact.php?action=view&id=@id@&id_company='.$parent->getId().'">@name@</a>';
+		$param['link']['name']='<a href="'.HTTP.'modules/contact/contact.php?action=view&id=@id@&'.$id_parent_name.'='.$parent->getId().'">@name@</a>';
 		$buttonsMore = '&'.$id_parent_name.'='.$id_parent;
 	}
 	

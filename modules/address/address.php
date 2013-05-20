@@ -84,6 +84,8 @@ else {
 	$param['translate'] = array(
 		'country'=>TDictionary::get($db, $user, $parent->id_entity, 'country')
 	);
+	$param['link']['address']='<a href="?action=view&id=@id@&'.$id_parent_name.'='.$parent->getId().'">@val@</a>';
+	
 	
 	$tbs=new TTemplateTBS;
 	
