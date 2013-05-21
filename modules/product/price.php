@@ -23,39 +23,39 @@ if($action!==false ) {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
 	
-	$form=new TFormCore;
+	/*$form=new TFormCore;
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $product->id_entity)
-		,'ref'=>$form->texte('', 'ref', $product->ref, 80)
-		,'label'=>$form->texte('', 'label', $product->label, 80)
-		,'description'=>$form->texte('', 'description', $product->description, 80)
-		,'price'=>$form->texte('', 'price', $product->price, 80)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $parent->id_entity)
+		,'ref'=>$form->texte('', 'ref', $parent->ref, 80)
+		,'label'=>$form->texte('', 'label', $parent->label, 80)
+		,'description'=>$form->texte('', 'description', $parent->description, 80)
+		,'price'=>$form->texte('', 'price', $parent->price, 80)
 		
-		,'id'=>$product->getId()
-		,'dt_cre'=>$product->get_date('dt_cre')
-		,'dt_maj'=>$product->get_date('dt_maj')
+		,'id'=>$parent->getId()
+		,'dt_cre'=>$parent->get_date('dt_cre')
+		,'dt_maj'=>$parent->get_date('dt_maj')
 	);
 	
 	$tbs=new TTemplateTBS;
 	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $product)
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $parent)
 		,array(
-			'button'=>TTemplate::buttons($user, $product, $action)
+			'button'=>TTemplate::buttons($user, $parent, $action)
 		)
 		,array(
 			'product'=>$TForm
 			,'tpl'=>array(
-				'header'=>TTemplate::header($conf, __tr('Product : ').$product->label  )
+				'header'=>TTemplate::header($conf, __tr('Product : ').$parent->label  )
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $product, 'fiche')
+				,'tabs'=>TTemplate::tabs($conf, $user, $parent, 'fiche')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 			)
 		)
-	));
+	));*/
 }
 else { // Liste de tous les prix associé au produit
 	$listName = empty($parent) ? 'priceList' : get_class($parent).'PriceList';
@@ -80,7 +80,8 @@ else { // Liste de tous les prix associé au produit
 	
 	$tbs=new TTemplateTBS;
 	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $price, 'price')
+	//echo $listName;
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $price, $listName)
 		,array(
 			'button'=>TTemplate::buttons($user, $price, 'list', $buttonsMore)
 		)

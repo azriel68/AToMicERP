@@ -33,7 +33,8 @@ $conf->tabs->TProduct=array(
  ******************************************************************************************/
 @$conf->template->TProduct->fiche = ROOT.'modules/product/template/product.html';
 @$conf->template->TProduct->short = ROOT.'modules/product/template/product-short.html';
-@$conf->template->TPrice->price = ROOT.'modules/product/template/price.html';
+@$conf->template->TPrice->priceList = ROOT.'modules/contact/template/contact-list.html';
+@$conf->template->TPrice->TProductPriceList = @$conf->template->TPrice->priceList;
 
 /******************************************************************************************
  * Définition des listes
@@ -77,6 +78,6 @@ $conf->tabs->TProduct=array(
 			,'dt_deb'=>'__tr(Dt_deb)__'
 			,'dt_fin'=>'__tr(Dt_fin)__'
 		)
-		,'hide'=>array('id')
+	,'hide'=>array('id')
 	)
 );
