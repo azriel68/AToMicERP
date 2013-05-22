@@ -41,7 +41,7 @@ class TTask extends TObjetStd {
 		
 		$this->TType = array(
 			'feature'=>__tr('feature')
-			,'chrore'=>__tr('chrore')
+			,'chore'=>__tr('chore')
 			,'bug'=>__tr('bug')
 			,'release'=>__tr('release')
 		);
