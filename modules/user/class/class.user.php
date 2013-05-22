@@ -15,7 +15,6 @@ class TUser extends TContact {
 		$this->id_entity_c = 0;
 		$this->entity = new TCompany;
 		
-		$this->lang = DEFAULT_LANG;
 		$this->theme = DEFAULT_THEME;
 		
 		$this->rights = array();
