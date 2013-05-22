@@ -5,7 +5,7 @@ class TUser extends TContact {
 	function __construct() {
 		
 		parent::add_champs('isSuperadmin','type=entier;index;');
-		parent::add_champs('login,password','type=chaine;index;');
+		parent::add_champs('login,password,UId','type=chaine;index;');
 		
 		parent::__construct();
 		
@@ -30,6 +30,13 @@ class TUser extends TContact {
 		}
 		
 	}
+	private function setUId() {
+		
+		if(empty($this->UId)) {
+			$this->UId = md5(time().$this->login).'@'.rand(0,100000);
+		}
+	}
+	
 	function save(&$db) {
 		
 		if(TUser::checkLoginExist($db, $this->login, array($this->getId()) )) {
@@ -38,6 +45,8 @@ class TUser extends TContact {
 			return false;
 		}
 		else {
+			$this->setUId();
+		
 			return parent::save($db);
 		}
 	}
@@ -106,7 +115,24 @@ class TUser extends TContact {
 			
 		return false;
 	}
-	
+	function loginUId(&$db, $UId) {
+		$sql = "SELECT id FROM ".$this->get_table()." 
+			WHERE UId=".$db->quote($UId)."
+			AND status = 1";
+		$db->Execute($sql);
+			
+		if($db->Get_line()) {
+			$this->t_connexion = time();
+			return $this->load($db, $db->Get_field('id'));
+		}	
+		else  {
+			TAtomic::errorlog("Error UID bad definition ($UId)");
+			exit('Error UID bad definition ('.$UId.')');
+			
+		}
+			
+		return false;
+	}
 	function isLogged() {
 		
 		if(!empty($_SESSION['user']) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {

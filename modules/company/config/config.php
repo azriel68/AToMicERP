@@ -49,7 +49,7 @@ $conf->tabs->TCompany=array(
 		)
 		,'hide'=>array('id')
 		,'link'=>array(
-			'name'=>'<a href="?action=view&id=@id@">@name@</a>'
+			'name'=>'<a href="'.HTTP.'modules/company/company.php?action=view&id=@id@">@name@</a>'
 		)
 	)
 );

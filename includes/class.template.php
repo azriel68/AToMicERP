@@ -89,15 +89,15 @@ class TTemplate {
 	static function getBoxes(&$conf, &$user) {
 		
 		$Tab=array();
-		
 		foreach($conf->boxes as $module=>$TBoxe) {
 			foreach($TBoxe as $boxe) {
-				$url = $boxe.'?id_entity='.$user->id_entity_c;
+				$url = $boxe.'?UId='.$user->UId;
 				
 				array_push( $Tab, file_get_contents($url) );	
 			}
 			
 		}
+		
 		
 		return $Tab;
 	}

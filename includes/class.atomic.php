@@ -43,6 +43,11 @@ class TAtomic {
 			$db->close();
 			
 		}
+		else if(isset($_REQUEST['UId'])) {
+			$db=new TPDOdb;
+			$user->loginUId($db, $_REQUEST['UId']);
+			$db->close();
+		}
 		
 		return $user;
 	}

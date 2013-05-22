@@ -44,12 +44,6 @@ div.menu li {
 	display: inline;
 	padding: 5px;
 }
-
-div.profile {
-	float: right;
-	padding: 20px 10px 20px 0px;
-}
-
 div.tabs {
 	float: left;
 	padding: 10px 0px 0 0px;
@@ -136,6 +130,7 @@ div.content table.grille {
 	width:100%;
 	margin-bottom:3px;
 	background-color: white;
+	box-shadow: 1px 1px 1px #999999; 
 }
 div.content table.grille img {
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
@@ -162,19 +157,21 @@ div.content  a.butAction,div.content  span.butAction,div.content  span.butAction
     background-clip: padding-box;
     border-radius: 4px 4px 4px 4px;
     cursor: pointer;
-    display: block;
+    display: inline-block;
     font-size: 18px;
     height: 30px;
     line-height: 30px;
     position: relative;
     text-align: center;
     width: 240px;
-    float:left;
+    /*float:left;*/
     
     margin: 20px 20px 20px 20px;
     text-decoration: none;
     padding:10px 0;
 }
+
+
 div.content  a.butAction:hover,div.content  span.butAction:hover {
 	background-color:#31b5c5;
 }
@@ -233,7 +230,7 @@ table.liste tr.pair td {
     margin-bottom: 1px;
 }
 
-div.boxe  {
+div#boxes  div.boxe  {
 	background-color: rgb(255, 255, 255);
 	background-color: rgba(255, 255, 255, 0.8);
 	padding: 10px 10px 10px 10px;
@@ -249,15 +246,51 @@ div.boxe  {
     overflow: hidden;
     margin:0 10px 20px 10px;
     
+    position:relative;
 }
-div.boxe h2 {
+div#boxes div.boxe div.buttons {
+	position:absolute;
+	bottom:10px;
+	right:-10px;
+}
+div#boxes  a.butAction {
+    background-color: #37BFCD;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
+    color: #FFFFFF;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);
+    width: 100px;
+
+    background-clip: padding-box;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 15px;
+    line-height: 15px;
+    position: relative;
+    text-align: center;
+    width: 160px;
+    
+    margin: 20px 20px 0px 0px;
+    text-decoration: none;
+    padding:10px 0;
+
+}
+
+div#boxes  div.boxe h2 {
 	font-size:14px;
 	margin:0 0 0 0;
+	cursor: pointer;
 }
 div.profile {
 	position:relative;
 	overflow: visible;
+	float: right;
+	padding: 20px 10px 20px 20px;
 }
+
 div.profile ul {
 	display:none;
 	position:absolute;
@@ -266,10 +299,9 @@ div.profile ul {
 	margin:0 0 0 0;
 	padding:0 0 0 0;
 	width:200px;
-	border-bottom:1px solid #295B8E;
-	border-left:1px solid #295B8E;
-	border-right:1px solid #295B8E;    
+	border:1px solid #295B8E;
 	z-index:999;
+	box-shadow: -3px 3px 3px #999999; 
 }
 div.profile ul li {
 	background: #fff;
@@ -287,6 +319,10 @@ div.profile ul li:hover a {
 	color:#fff;
 }
 
+div.profile:hover {
+	background: #2AA8B9;
+	color:#fff;
+}
 div.profile:hover ul {
 	display:block;	
 }

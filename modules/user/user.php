@@ -22,14 +22,16 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'lastname'=>$form->texte('', 'lastname', $u->lastname, 80)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $u->id_entity)
+		
+		,'lastname'=>$form->texte('', 'lastname', $u->lastname, 80)
 		,'firstname'=>$form->texte('', 'firstname', $u->firstname, 80)
 		,'password'=>$form->texte('', 'password', $u->password, 80)
 		,'login'=>$form->texte('', 'login', $u->login, 80)
 		,'email'=>$form->texte('', 'email', $u->email, 80)
 		
 		,'id'=>$u->getId()
-		,'gravatar'=>$u->gravatar()
+		,'gravatar'=>$u->gravatar(200)
 		
 	);
 	$tbs=new TTemplateTBS;
