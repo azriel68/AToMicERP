@@ -15,11 +15,11 @@ $file = 'standard-conf.conf';
 
 $fileHandler = fopen($dir.$file, 'r');
 while($dataline = fgetcsv($fileHandler, 1024)) {
-	$conf = new TConf;
-	$conf->id_entity = $id_entity;
-	$conf->confKey = $dataline[0];
-	$conf->confVal = $dataline[1];
-	$conf->save($db);
+	$config = new TConf;
+	$config->id_entity = $id_entity;
+	$config->confKey = $dataline[0];
+	$config->confVal = $dataline[1];
+	$config->save($db);
 }
 fclose($fileHandler);
 
