@@ -13,6 +13,8 @@ class TDictionary extends TObjetStd {
 	}
 	
 	static function get(&$db, &$user, $id_entity, $type, $code='') {
+		// Si pas d'entity, on prend l'entité par défaut du user, voir à stocker dans un cookie / session si l'utilisateur choisi une autre entité
+		if($id_entity == 0) $id_entity = $user->id_entity;
 		
 		if(isset($user->dictionary[$id_entity][$type])) { // Dictionnaire déjà chargé dans la session utilisateur
 			$TDictionnary= & $user->dictionary[$id_entity][$type];

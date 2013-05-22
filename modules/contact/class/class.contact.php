@@ -3,17 +3,17 @@ class TContact extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'contact');
 		parent::add_champs('status,id_entity','type=entier;index;');
-
 		parent::add_champs('lastname,firstname,phone,fax,email,lang','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
 		
 		parent::start();
 		parent::_init_vars();
-
+		
+		$this->lang = DEFAULT_LANG;
+		
 		$this->setChild('TAddress', 'id_contact');
 		$this->setChild('TContactToObject', 'id_contact');
-
 	}
 	
 	function name() {
@@ -22,7 +22,6 @@ class TContact extends TObjetStd {
 	
 	function gravatar($size=100) {
 		return TTemplate::gravatar($this->email, $this->name(), $size);
-		
 	}
 }
 
@@ -41,5 +40,3 @@ class TContactToObject extends TObjetStd {
 		parent::_init_vars();
 	}
 }
-
- 
