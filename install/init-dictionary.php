@@ -31,4 +31,6 @@ while (false !== ($file = readdir($handle))) {
 }
 closedir($handle);
 
+$db->close();
+
 print "Default dictionaries loaded in database for entity ".$id_entity.'<br>';

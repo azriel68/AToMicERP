@@ -36,6 +36,16 @@ $conf->tabs->TCompany=array(
 @$conf->template->TCompany->short = ROOT.'modules/company/template/company-short.html';
 
 /******************************************************************************************
+ * Définition de la conf par défaut du module
+ ******************************************************************************************/
+$conf->defaultConf['company'] = array(
+	'TCompany_autoref_customerRef_mask' => 'CU{00000}'
+	,'TCompany_autoref_customerRef_dateField' => 'dt_cre'
+	,'TCompany_autoref_supplierRef_mask' => 'SU{00000}'
+	,'TCompany_autoref_supplierRef_dateField' => 'dt_cre'
+);
+
+/******************************************************************************************
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TCompany->companyList=array(
