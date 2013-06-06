@@ -289,6 +289,7 @@ div.profile {
 	overflow: visible;
 	float: right;
 	padding: 20px 10px 20px 20px;
+	
 }
 
 div.profile ul {
@@ -328,6 +329,7 @@ div.profile:hover ul {
 }
 div.profile img {
 	height:20px;
+	vertical-align: middle;
 }
 #userGroupDrag, #scrum {
 	width:100%;

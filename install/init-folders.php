@@ -7,6 +7,9 @@ if(empty($company) && empty($_REQUEST['id_company'])) {
 	echo 'Dictionary not created, company missing';
 	return false;
 }
+
+@mkdir(DOCROOT,0777);
+
 $id_entity = empty($company) ? $_REQUEST['id_company'] : $company->getId();
 
 $moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);

@@ -2,7 +2,7 @@
 
 	define('ROOT', '/var/www/ATM/AToMicERP/');
 	define('HTTP', 'http://127.0.0.1/ATM/AToMicERP/');
-	define('DOCROOT', '/var/www/ATM/AToMicERP/documents/');
+	define('DOCROOT', ROOT.'documents/');
 	define('COREROOT', '/var/www/ATM/atm-core/');
 	define('COREHTTP', 'http://127.0.0.1/ATM/atm-core/');
 

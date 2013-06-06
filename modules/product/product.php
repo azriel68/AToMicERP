@@ -24,8 +24,8 @@ if($action!==false ) {
 		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $product->id_entity)
 		,'ref'=>$form->texte('', 'ref', $product->ref, 80)
 		,'label'=>$form->texte('', 'label', $product->label, 80)
-		,'description'=>$form->texte('', 'description', $product->description, 80)
-		,'price'=>$form->texte('', 'price', $product->price, 80)
+		,'description'=>$form->zonetexte('', 'description', $product->description, 80)
+		,'price'=>$form->texte('', 'price', $product->price, 10)
 		
 		,'id'=>$product->getId()
 		,'dt_cre'=>$product->get_date('dt_cre')
