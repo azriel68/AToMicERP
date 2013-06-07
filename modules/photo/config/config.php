@@ -32,13 +32,13 @@ TTemplate::addTabs($conf, 'TProduct', array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TPhoto->list=array(
-	'sql'=>"SELECT id, ref, label, description, price FROM ".DB_PREFIX."photo WHERE id_entity IN (@getEntity@)"
+	'sql'=>"SELECT id, title,source,legend, description, filename FROM ".DB_PREFIX."photo WHERE 1"
 	,'param'=>array(
 		'title'=>array(
-			'ref'=>'__tr(Ref)__'
-			,'label'=>'__tr(Label)__'
+			'title'=>'__tr(Title)__'
+			,'source'=>'__tr(Source)__'
 			,'description'=>'__tr(Description)__'
-			,'price'=>'__tr(Price)__'
+			,'legend'=>'__tr(Legend)__'
 		)
 		,'hide'=>array('id')
 		,'link'=>array(

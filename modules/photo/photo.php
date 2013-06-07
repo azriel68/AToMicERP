@@ -16,24 +16,36 @@ if(!empty($_REQUEST['id_product'])) {
 	$parent = new TProduct;
 	$parent->load($db, $id_parent);
 	$moreButton.='&'.$id_parent_name.'='.$parent->getId()	;
+	$typeObject='product';
 }
-
+else{
+	$typeObject='photo';
+}
+$db->debug=true;
 $action = TTemplate::actions($db, $user, $photo);
-
+//exit;
 if($action!==false ) {
 	
 	if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
+	elseif($action=='save') {
+		if(!empty($_FILES['filename'])) {
+			$photo->addFile($_FILES['filename'], $typeObject, $id_parent, $parent->id_entity);
+			$photo->save($db);
+		}
+	
+		
+	}
 	
 	$form=new TFormCore;
 	$form->Set_typeaff($action);
 	$TForm=array(
-		'title'=>$form->texte('', 'legend', $photo->title, 80)
+		'title'=>$form->texte('', 'title', $photo->title, 80)
 		,'legend'=>$form->texte('', 'legend', $photo->legend, 80)
 		,'source'=>$form->texte('', 'source', $photo->source, 80)
 		,'description'=>$form->zonetexte('', 'description', $photo->description, 80)
-		,'filename'=>$form->fichier('', 'filename', $photo->filename , 80)
+		,'filename'=>($form->type_aff=='edit') ? $form->fichier('', 'filename', $photo->filename , 80) : '<img src="get.php?id='.$photo->getId().'" />'
 		
 		,'id'=>$photo->getId()
 		,'dt_cre'=>$photo->get_date('dt_cre')
@@ -72,6 +84,10 @@ else { // Liste de tous les produits
 		$sql = strtr($conf->list->TPhoto->list['sql'],array(
 			'@getEntity@'=>$user->getEntity()
 		));
+		
+		if(!empty($_REQUEST['id_product'])) {
+			$sql.=" AND id_product=".$id_parent;	
+		}
 		
 		$param =$conf->list->TPhoto->list['param'] ;
 		
