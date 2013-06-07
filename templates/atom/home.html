@@ -1,7 +1,7 @@
 [tpl.header;htmlconv=no]
 [tpl.menu;strconv=no]
 <div id="boxes">
-	<div class="boxe">
+	<div class="boxe" id="boxe_[boxe.#]">
 		[boxe.val;block=div; strconv=no]
 	</div>
 </div>
@@ -9,9 +9,72 @@
 	$(document).ready(function() {
 		$('#boxes').sortable({ 
 			cursor: "move" 
-			
+			,update: function() { getOrder(); }
 		});	
+		
+		
+		restoreOrder();
 	});
+	
+	
+	function getOrder() {
+	// save custom order to cookie
+		$.cookie('atomicBoxesOrder', $('#boxes').sortable("toArray"), { expires: 360, path: "/" });
+	}
+	 
+	// function that restores the list order from a cookie
+	function restoreOrder() {
+		var list = $('#boxes');
+		if (list == null) return;
+	 
+		// fetch the cookie value (saved order)
+		var cookie = $.cookie('atomicBoxesOrder');
+		if (!cookie) return;
+	 
+		// make array from saved order
+		var IDs = cookie.split(",");
+	 	if(IDs.length<=1) return;
+	 	
+	 	
+		// fetch current order
+		var items = list.sortable("toArray");
+	 
+		// make array from current order
+		var rebuild = new Array();
+		len=items.length;
+		for ( var v=0; v<len;v++) {
+			rebuild[items[v]] = items[v];
+		}
+	 	
+	 	n = IDs.length
+		for (var i = 0; i< n; i++) {
+	 
+			// item id from saved order
+			var itemID = IDs[i];
+	 
+			if (itemID in rebuild) {
+	 
+				// select item id from current order
+				var item = rebuild[itemID];
+	 
+				// select the item according to current order
+				var child = $("#boxes").children("#" + item);
+	 
+				// select the item according to the saved order
+				var savedOrd = $("#boxes").children("#" + itemID);
+	 
+				// remove all the items
+				child.remove();
+	 
+				// add the items in turn according to saved order
+				// we need to filter here since the "ui-sortable"
+				// class is applied to all ul elements and we
+				// only want the very first!  You can modify this
+				// to support multiple lists - not tested!
+				$("#boxes").filter(":first").append(savedOrd);
+			}
+		}
+	}
 	
 </script>
 [tpl.footer;htmlconv=no]
