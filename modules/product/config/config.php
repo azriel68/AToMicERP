@@ -23,10 +23,12 @@ $conf->menu->top[] = array(
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TProduct=array(
+TTemplate::addTabs($conf, 'TProduct', array(
 	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@')
 	,'price'=>array('label'=>'__tr(Price)__','url'=>HTTP.'modules/product/price.php?id_product=@id@')
-);
+));
+ 
+
 
 /******************************************************************************************
  * Définition des templates à utiliser

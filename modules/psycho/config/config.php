@@ -2,7 +2,7 @@
 
 
 	$conf->modules['user']=array(
-		'name'=>'Psycho'
+		'name'=>'psycho'
 		,'id'=>'TPsycho'
 		,'class'=>array('TPsycho')
 	);

@@ -340,7 +340,20 @@ class TTemplate {
 		
 		return $TButton;
 	}
-	
+	static function addTabs(&$conf, $className, $Tab) {
+		
+		if(!isset($conf->tabs->{$className}))$conf->tabs->{$className}=array();
+		
+		foreach($Tab as $name=>$content) {
+			
+			if(empty($content['rank'])){
+				$content['rank'] = count($conf->tabs->{$className});
+			} 
+			
+			$conf->tabs->{$className}[$name] = $content;	
+		}
+		
+	}
 	static function tabs(&$conf, &$user, &$object, $idActive=null) {
 		
 		if($object->getId()==0) return '';
@@ -363,6 +376,8 @@ class TTemplate {
 			}
 		}
 		
+		usort($Tab, array('TTemplate', 'tabsRankOrder'));
+		
 		return $tbs->render(TPL_TABS,
 			array(
 				'tab'=>$Tab
@@ -374,7 +389,16 @@ class TTemplate {
 			)
 		);
 	}
-	
+	static function tabsRankOrder($a, $b) {
+		if($a['rank']>$b['rank']) {
+			return 1;
+		}
+		else if($a['rank']<$b['rank']) {
+			return -1;
+		}
+		
+		return 0;	
+	}
 	static function menu(&$conf, &$user) {
 		
 		$tbs=new TTemplateTBS;

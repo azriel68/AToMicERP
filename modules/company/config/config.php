@@ -23,11 +23,12 @@ $conf->menu->top[] = array(
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TCompany=array(
+TTemplate::addTabs($conf,'TCompany',array(
 	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/company/company.php?action=view&id=@id@')
 	,'contact'=>array('label'=>'__tr(Contact)__','url'=>HTTP.'modules/contact/contact.php?id_company=@id@')
 	,'address'=>array('label'=>'__tr(Address)__','url'=>HTTP.'modules/address/address.php?id_company=@id@')
-);
+));
+
 
 /******************************************************************************************
  * Définition des templates à utiliser

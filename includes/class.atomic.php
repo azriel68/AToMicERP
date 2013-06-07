@@ -52,7 +52,6 @@ class TAtomic {
 		return $user;
 	}
 	
-	
 	static function getConf(&$user) {
 		if(empty($user->conf)) {
 			$db=new TPDOdb;

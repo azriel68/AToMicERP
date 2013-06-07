@@ -13,9 +13,14 @@ $conf->modules['photo']=array(
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TProduct['photo']=array(
-	'label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@'
-);
+TTemplate::addTabs($conf, 'TProduct', array(
+	'photo'=>array(
+		'label'=>'__tr(Photo)__'
+		,'url'=>HTTP.'modules/photo/photo.php?action=view&id_product=@id@'
+		,'rank'=>3
+	)
+));
+
 
 /******************************************************************************************
  * Définition des templates à utiliser

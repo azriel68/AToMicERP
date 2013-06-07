@@ -229,7 +229,21 @@ table.liste tr.pair td {
     font-family: arial,tahoma,verdana,helvetica;
     margin-bottom: 1px;
 }
-
+div#boxes  .boxe-highlight {
+	background-color: none;
+	
+	border: 3px solid #ffff00;
+    
+    border-radius: 10px;
+    
+    float:left;
+    width:400px;
+    height : 400px;
+    overflow: hidden;
+    margin:0 10px 20px 10px;
+    
+    position:relative;
+}
 div#boxes  div.boxe  {
 	background-color: rgb(255, 255, 255);
 	background-color: rgba(255, 255, 255, 0.8);

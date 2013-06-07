@@ -17,11 +17,11 @@ $conf->modules['contact']=array(
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TContact=array(
+
+TTemplate::addTabs($conf,'TContact',array(
 	'fiche'=>array('label'=>'__tr(Card)__','url'=>'contact.php?action=view&id=@id@')
 	,'company'=>array('label'=>'__tr(Company)__','url'=>'../company/company.php?id_contact=@id@')
-);
-
+));
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
