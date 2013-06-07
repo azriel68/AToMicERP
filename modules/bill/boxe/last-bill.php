@@ -5,7 +5,7 @@
 	
 	$l = new TListviewTBS('list_lastBill');
 		
-	$sql = strtr($conf->list->TBill->companyList['sql'],array(
+	$sql = strtr($conf->list->TBill->billList['sql'],array(
 		'@getEntity@'=>$user->getEntity()
 	));
 	

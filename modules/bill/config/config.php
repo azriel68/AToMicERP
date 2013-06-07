@@ -44,7 +44,7 @@ $conf->defaultConf['company'] = array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TBill->billList=array(
-	'sql'=>"SELECT id, ref, dt_bill FROM ".DB_PREFIX."bill WHERE id_entity IN (@getEntity@)"
+	'sql'=>"SELECT id, ref, dt_bill FROM ".DB_PREFIX."document WHERE id_entity IN (@getEntity@)"
 	,'param'=>array(
 		'title'=>array(
 			'ref'=>'__tr(Ref)__'
@@ -52,7 +52,7 @@ $conf->defaultConf['company'] = array(
 		)
 		,'hide'=>array('id')
 		,'link'=>array(
-			'ref'=>'<a href="'.HTTP.'modules/bill/bill.php?action=view&id=@id@">@name@</a>'
+			'ref'=>'<a href="'.HTTP.'modules/bill/bill.php?action=view&id=@id@">@ref@</a>'
 		)
 	)
 );
