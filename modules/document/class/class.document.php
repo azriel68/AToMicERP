@@ -2,8 +2,8 @@
 class TDocument extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'document');
-		parent::add_champs('number','type=chaine;');
-		parent::add_champs('id_company','type=entier;index;');
+		parent::add_champs('ref','type=chaine;');
+		parent::add_champs('id_company,id_entity','type=entier;index;');
 		
 		TAtomic::initExtraFields($this);
 		

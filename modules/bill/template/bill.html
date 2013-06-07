@@ -1,0 +1,31 @@
+[tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+
+	<form name="formTBill" action="[tpl.self]" method="post">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="success" value="__tr(The bill has been saved)__" />
+		<input type="hidden" name="id" value="[bill.id]" />
+		
+		<table class="grille">
+			<tr>
+				<td>__tr(Entity)__</td><td>[bill.id_entity;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(DateBill)__</td><td>[bill.dt_bill;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Status)__</td><td>[bill.status;htmlconv=no]</td>
+			</tr>
+		</table>
+				
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		
+	</form>
+
+</div>
+
+[tpl.footer;htmlconv=no]

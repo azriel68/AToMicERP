@@ -29,6 +29,7 @@
 		,'company'=>true
 		,'contact'=>true
 		,'document'=>true
+		,'bill'=>true
 		,'product'=>true
 		,'user'=>true
 		,'dictionary'=>true
