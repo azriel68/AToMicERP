@@ -64,7 +64,7 @@ class TTemplate {
 		}
 		
 	}
-	static function getTemplate(&$conf, $object, $mode='fiche') {
+	static function getTemplate(&$conf, $object, $mode='card') {
 		if(is_object($object)) {
 			$objectName = get_class($object);
 		}
@@ -290,7 +290,7 @@ class TTemplate {
 		);
 		
 	}
-	static function buttons(&$user, &$object, $mode='fiche', $more='') {
+	static function buttons(&$user, &$object, $mode='card', $more='') {
 		$TButton=array();
 		
 		if($mode=='list') {

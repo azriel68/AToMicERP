@@ -23,5 +23,5 @@
 	  
 	 define('HTTP_TEMPLATE', HTTP.'templates/'.$user->theme.'/');	 
 
-	 @$conf->template->home->fiche = THEME_TEMPLATE_DIR.'home.html';	 
-	 @$conf->template->login->fiche = THEME_TEMPLATE_DIR.'login.html';
+	 @$conf->template->home->card = THEME_TEMPLATE_DIR.'home.html';	 
+	 @$conf->template->login->card = THEME_TEMPLATE_DIR.'login.html';

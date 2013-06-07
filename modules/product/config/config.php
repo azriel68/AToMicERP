@@ -24,7 +24,7 @@ $conf->menu->top[] = array(
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
 TTemplate::addTabs($conf, 'TProduct', array(
-	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@')
+	'card'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@')
 	,'price'=>array('label'=>'__tr(Price)__','url'=>HTTP.'modules/product/price.php?id_product=@id@')
 ));
  
@@ -33,9 +33,9 @@ TTemplate::addTabs($conf, 'TProduct', array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TProduct->fiche = ROOT.'modules/product/template/product.html';
+@$conf->template->TProduct->card = ROOT.'modules/product/template/product.html';
 @$conf->template->TProduct->short = ROOT.'modules/product/template/product-short.html';
-@$conf->template->TPrice->priceList = ROOT.'modules/contact/template/contact-list.html';
+@$conf->template->TPrice->priceList = ROOT.'modules/product/template/price-list.html';
 @$conf->template->TPrice->TProductPriceList = @$conf->template->TPrice->priceList;
 
 /******************************************************************************************

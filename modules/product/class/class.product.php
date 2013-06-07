@@ -15,5 +15,12 @@ class TProduct extends TObjetStd {
 		
 		$this->setChild('TPrice','id_product');
 	}
+	static function getProductForCombo(&$db, $idEntities='') {
+		$sql="SELECT id,label FROM ".DB_PREFIX."product WHERE 1";
+		if(!empty($idEntities)) $sql.=' AND id_entity IN ('.$idEntities.') ';
+		
+		
+		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'label');
+	}
 }
 

@@ -7,7 +7,7 @@ $conf->modules['photo']=array(
 	'name'=>'Photo'
 	,'id'=>'photo'
 	,'class'=>array('TPhoto')
-	,'folder'=>'photo'
+	
 );
 
 /******************************************************************************************
@@ -16,7 +16,7 @@ $conf->modules['photo']=array(
 TTemplate::addTabs($conf, 'TProduct', array(
 	'photo'=>array(
 		'label'=>'__tr(Photo)__'
-		,'url'=>HTTP.'modules/photo/photo.php?action=view&id_product=@id@'
+		,'url'=>HTTP.'modules/photo/photo.php?id_product=@id@'
 		,'rank'=>3
 	)
 ));
@@ -25,7 +25,8 @@ TTemplate::addTabs($conf, 'TProduct', array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TProduct->photo = ROOT.'modules/photo/template/photo.html';
+@$conf->template->TPhoto->fiche = ROOT.'modules/photo/template/photo.html';
+@$conf->template->TPhoto->list = ROOT.'modules/photo/template/list.html';
 
 /******************************************************************************************
  * Définition des listes

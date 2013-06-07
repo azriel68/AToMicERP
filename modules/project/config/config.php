@@ -13,7 +13,7 @@
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
 	);
 	
-	@$conf->template->TProject->fiche = './template/project.html';
+	@$conf->template->TProject->card = './template/project.html';
 	@$conf->template->TProject->scrum = './template/scrum.html';
 	
 	$conf->list->TProject=new stdClass;
@@ -28,7 +28,7 @@
 	);
 	
 	TTemplate::addTabs($conf, 	'TProject',array(
-		'fiche'=>array('label'=>'Fiche','url'=>'project.php?id=@id@&action=view')
+		'card'=>array('label'=>'Fiche','url'=>'project.php?id=@id@&action=view')
 		,'task'=>array('label'=>'Task','url'=>'task.php?id_project=@id@')
 		,'contact'=>array('label'=>'Contact','url'=>'contact.php?id_project=@id@')
 	));

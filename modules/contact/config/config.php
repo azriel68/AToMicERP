@@ -19,13 +19,13 @@ $conf->modules['contact']=array(
  ******************************************************************************************/
 
 TTemplate::addTabs($conf,'TContact',array(
-	'fiche'=>array('label'=>'__tr(Card)__','url'=>'contact.php?action=view&id=@id@')
+	'card'=>array('label'=>'__tr(Card)__','url'=>'contact.php?action=view&id=@id@')
 	,'company'=>array('label'=>'__tr(Company)__','url'=>'../company/company.php?id_contact=@id@')
 ));
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TContact->fiche = ROOT.'modules/contact/template/contact.html';
+@$conf->template->TContact->card = ROOT.'modules/contact/template/contact.html';
 @$conf->template->TContact->short = ROOT.'modules/contact/template/contact-short.html';
 @$conf->template->TContact->ContactList = ROOT.'modules/contact/template/contact-list.html';
 @$conf->template->TContact->TCompanyContactList = @$conf->template->TContact->ContactList;
