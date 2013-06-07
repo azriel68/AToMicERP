@@ -21,6 +21,7 @@ if($action!==false ) {
 	
 	$TForm=array(
 		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $bill->id_entity)
+		,'ref'=>$bill->ref
 		,'dt_bill'=>$form->calendrier('', 'dt_bill', $bill->dt_bill, 80)
 		,'status'=>$form->texte('', 'status', $bill->status, 80)
 		

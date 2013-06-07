@@ -24,13 +24,13 @@ $conf->menu->top[] = array(
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
 $conf->tabs->TBill=array(
-	'fiche'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/bill/bill.php?action=view&id=@id@')
+	'card'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/bill/bill.php?action=view&id=@id@')
 );
 
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TBill->fiche = ROOT.'modules/bill/template/bill.html';
+@$conf->template->TBill->card = ROOT.'modules/bill/template/bill.html';
 
 /******************************************************************************************
  * Définition de la conf par défaut du module
