@@ -7,3 +7,10 @@ ERP en PHP sur une base modulaire. (Pour le moment le projet est à un stade tro
 
 * Chaque fonction est un modules de /modules
 * Chaque modules peut définir un js, template, function à inclure au soft
+
+
+
+Licences
+==========================
+Font : http://openfontlibrary.org/en/font/averia
+Icons : http://www.glyphish.com/

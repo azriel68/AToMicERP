@@ -5,12 +5,14 @@
 		,'id'=>'TProject'
 		,'position'=>4
 		,'url'=>HTTP.'modules/project/project.php'
+		,'module'=>'project'
 	);
 	
 
 	$conf->modules['project']=array(
 		'name'=>'Projects'
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
+		,'icon'=>'41-picture-frame.png'
 	);
 	
 	@$conf->template->TProject->card = './template/project.html';

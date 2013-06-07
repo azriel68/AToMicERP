@@ -399,6 +399,14 @@ class TTemplate {
 		
 		return 0;	
 	}
+	static function getIcon(&$conf, $id_module) {
+		if(isset($conf->modules[$id_module]['icon'])) {
+			return HTTP.'modules/'.$id_module.'/image/' . $conf->modules[$id_module]['icon'];
+		}
+		else  {
+			return HTTP_TEMPLATE.'images/default-menu-icon.png';	
+		}
+	}
 	static function menu(&$conf, &$user) {
 		
 		$tbs=new TTemplateTBS;
@@ -406,6 +414,14 @@ class TTemplate {
 		$menuTop = array();
 		
 		foreach($conf->menu->top as $menu) {
+			
+			if(empty($menu['icon'])) {
+				
+					$menu['icon']= TTemplate::getIcon($conf, !empty($menu['module']) ? $menu['module'] : null);
+				
+			}
+			
+			
 			if(empty($menu['rights'])){
 				$menuTop[] = $menu;
 			}

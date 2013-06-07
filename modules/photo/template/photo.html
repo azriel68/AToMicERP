@@ -1,0 +1,41 @@
+[tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+	[tpl.parentShort;strconv=no]
+
+	<form name="formTphoto" action="[tpl.self]" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="success" value="__tr(The photo has been saved)__" />
+		<input type="hidden" name="id" value="[photo.id]" />
+		
+		<table class="grille">
+			<tr>
+				<td>__tr(Product)__</td><td>[photo.id_product;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Title)__</td><td>[photo.title;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(File)__</td><td>[photo.filename;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Description)__</td><td>[photo.description;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Source)__</td><td>[photo.source;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Legend)__</td><td>[photo.legend;htmlconv=no]</td>
+			</tr>
+		</table>
+				
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		
+	</form>
+
+</div>
+
+[tpl.footer;htmlconv=no]

@@ -8,6 +8,7 @@ $conf->modules['company']=array(
 	,'id'=>'TCompany'
 	,'class'=>array('TCompany')
 	,'folder'=>'company'
+	,'icon'=>'112-group.png'
 );
 
 /******************************************************************************************
@@ -16,6 +17,7 @@ $conf->modules['company']=array(
 $conf->menu->top[] = array(
 	'name'=>'Companies'
 	,'id'=>'TCompany'
+	,'module'=>'company'
 	,'position'=>1
 	,'url'=>HTTP.'modules/company/company.php'
 );

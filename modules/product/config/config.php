@@ -8,6 +8,7 @@ $conf->modules['product']=array(
 	,'id'=>'product'
 	,'class'=>array('TProduct', 'TPrice')
 	,'folder'=>'product'
+	,'icon'=>'icon.png'
 );
 
 /******************************************************************************************
@@ -16,6 +17,7 @@ $conf->modules['product']=array(
 $conf->menu->top[] = array(
 	'name'=>'Products'
 	,'id'=>'TProduct'
+	,'module'=>'product'
 	,'position'=>2
 	,'url'=>HTTP.'modules/product/product.php'
 );

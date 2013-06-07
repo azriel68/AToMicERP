@@ -42,7 +42,21 @@ div.menu ul {
 div.menu li {
 	list-style: none;
 	display: inline;
-	padding: 5px;
+	padding: 0 5px;
+}
+div.menu li img {
+	vertical-align: middle;
+	
+	margin-right: 5px;
+}
+@font-face {
+    font-family: "averia";
+    src: url('Averia-Regular.ttf');
+}
+div.menu li a {
+	text-decoration: none;
+	font-family: "averia";
+	font-size: 18px;
 }
 div.tabs {
 	float: left;
@@ -303,7 +317,7 @@ div.profile {
 	overflow: visible;
 	float: right;
 	padding: 20px 10px 20px 20px;
-	
+	font-family: "averia";
 }
 
 div.profile ul {
@@ -326,7 +340,10 @@ div.profile ul li {
 	list-style: none;
 	text-decoration: none;
 }
-
+div.profile ul li a {
+	text-decoration: none;
+	font-size: 18px;	
+}
 div.profile ul li:hover {
 	background:#2AA8B9;
 }

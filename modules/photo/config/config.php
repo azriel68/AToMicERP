@@ -25,7 +25,7 @@ TTemplate::addTabs($conf, 'TProduct', array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TPhoto->fiche = ROOT.'modules/photo/template/photo.html';
+@$conf->template->TPhoto->card = ROOT.'modules/photo/template/photo.html';
 @$conf->template->TPhoto->list = ROOT.'modules/photo/template/list.html';
 
 /******************************************************************************************
