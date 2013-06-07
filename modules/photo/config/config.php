@@ -7,20 +7,26 @@ $conf->modules['photo']=array(
 	'name'=>'Photo'
 	,'id'=>'photo'
 	,'class'=>array('TPhoto')
-	,'folder'=>'photo'
+	
 );
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TProduct['photo']=array(
-	'label'=>'__tr(Card)__','url'=>HTTP.'modules/product/product.php?action=view&id=@id@'
-);
+TTemplate::addTabs($conf, 'TProduct', array(
+	'photo'=>array(
+		'label'=>'__tr(Photo)__'
+		,'url'=>HTTP.'modules/photo/photo.php?id_product=@id@'
+		,'rank'=>3
+	)
+));
+
 
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TProduct->photo = ROOT.'modules/photo/template/photo.html';
+@$conf->template->TPhoto->card = ROOT.'modules/photo/template/photo.html';
+@$conf->template->TPhoto->list = ROOT.'modules/photo/template/list.html';
 
 /******************************************************************************************
  * Définition des listes

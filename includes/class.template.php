@@ -64,7 +64,7 @@ class TTemplate {
 		}
 		
 	}
-	static function getTemplate(&$conf, $object, $mode='fiche') {
+	static function getTemplate(&$conf, $object, $mode='card') {
 		if(is_object($object)) {
 			$objectName = get_class($object);
 		}
@@ -290,7 +290,7 @@ class TTemplate {
 		);
 		
 	}
-	static function buttons(&$user, &$object, $mode='fiche', $more='') {
+	static function buttons(&$user, &$object, $mode='card', $more='') {
 		$TButton=array();
 		
 		if($mode=='list') {
@@ -340,7 +340,20 @@ class TTemplate {
 		
 		return $TButton;
 	}
-	
+	static function addTabs(&$conf, $className, $Tab) {
+		
+		if(!isset($conf->tabs->{$className}))$conf->tabs->{$className}=array();
+		
+		foreach($Tab as $name=>$content) {
+			
+			if(empty($content['rank'])){
+				$content['rank'] = count($conf->tabs->{$className});
+			} 
+			
+			$conf->tabs->{$className}[$name] = $content;	
+		}
+		
+	}
 	static function tabs(&$conf, &$user, &$object, $idActive=null) {
 		
 		if($object->getId()==0) return '';
@@ -363,6 +376,8 @@ class TTemplate {
 			}
 		}
 		
+		usort($Tab, array('TTemplate', 'tabsRankOrder'));
+		
 		return $tbs->render(TPL_TABS,
 			array(
 				'tab'=>$Tab
@@ -374,7 +389,24 @@ class TTemplate {
 			)
 		);
 	}
-	
+	static function tabsRankOrder($a, $b) {
+		if($a['rank']>$b['rank']) {
+			return 1;
+		}
+		else if($a['rank']<$b['rank']) {
+			return -1;
+		}
+		
+		return 0;	
+	}
+	static function getIcon(&$conf, $id_module) {
+		if(isset($conf->modules[$id_module]['icon'])) {
+			return HTTP.'modules/'.$id_module.'/image/' . $conf->modules[$id_module]['icon'];
+		}
+		else  {
+			return HTTP_TEMPLATE.'images/default-menu-icon.png';	
+		}
+	}
 	static function menu(&$conf, &$user) {
 		
 		$tbs=new TTemplateTBS;
@@ -382,6 +414,14 @@ class TTemplate {
 		$menuTop = array();
 		
 		foreach($conf->menu->top as $menu) {
+			
+			if(empty($menu['icon'])) {
+				
+					$menu['icon']= TTemplate::getIcon($conf, !empty($menu['module']) ? $menu['module'] : null);
+				
+			}
+			
+			
 			if(empty($menu['rights'])){
 				$menuTop[] = $menu;
 			}

@@ -74,7 +74,7 @@ if($action!==false ) {
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>!empty($parent) ? TTemplate::tabs($conf, $user, $parent, 'contact') : TTemplate::tabs($conf, $user, $contact, 'fiche')
+				,'tabs'=>!empty($parent) ? TTemplate::tabs($conf, $user, $parent, 'contact') : TTemplate::tabs($conf, $user, $contact, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))

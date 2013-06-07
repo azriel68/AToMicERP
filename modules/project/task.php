@@ -36,7 +36,7 @@ if($action!==false)  {
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
 				
-				,'tabs'=>TTemplate::tabs($conf, $user, $task, 'fiche')
+				,'tabs'=>TTemplate::tabs($conf, $user, $task, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 			)
 		)

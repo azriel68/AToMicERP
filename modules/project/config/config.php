@@ -5,15 +5,17 @@
 		,'id'=>'TProject'
 		,'position'=>4
 		,'url'=>HTTP.'modules/project/project.php'
+		,'module'=>'project'
 	);
 	
 
 	$conf->modules['project']=array(
 		'name'=>'Projects'
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
+		,'icon'=>'41-picture-frame.png'
 	);
 	
-	@$conf->template->TProject->fiche = './template/project.html';
+	@$conf->template->TProject->card = './template/project.html';
 	@$conf->template->TProject->scrum = './template/scrum.html';
 	
 	$conf->list->TProject=new stdClass;
@@ -27,10 +29,10 @@
 		)
 	);
 	
-	$conf->tabs->TProject=array(
-		'fiche'=>array('label'=>'Fiche','url'=>'project.php?id=@id@&action=view')
+	TTemplate::addTabs($conf, 	'TProject',array(
+		'card'=>array('label'=>'Fiche','url'=>'project.php?id=@id@&action=view')
 		,'task'=>array('label'=>'Task','url'=>'task.php?id_project=@id@')
 		,'contact'=>array('label'=>'Contact','url'=>'contact.php?id_project=@id@')
-	);
+	));
 	
 	

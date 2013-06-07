@@ -43,7 +43,7 @@ if($action!==false ) {
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $group, 'fiche')
+				,'tabs'=>TTemplate::tabs($conf, $user, $group, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 			)

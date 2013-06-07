@@ -12,7 +12,7 @@ $conf->modules['address']=array(
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TAddress->fiche = ROOT.'modules/address/template/address.html';
+@$conf->template->TAddress->card = ROOT.'modules/address/template/address.html';
 @$conf->template->TAddress->TCompanyAddressList = ROOT.'modules/address/template/address-list.html';
 @$conf->template->TAddress->TContactAddressList = $conf->template->TAddress->TCompanyAddressList;
 

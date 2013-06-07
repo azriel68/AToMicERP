@@ -37,14 +37,18 @@
 	$conf->rights[]=array('user','me','view');
 	$conf->rights[]=array('user','me','edit');
 	
-	$conf->tabs->TUser['fiche']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
-	$conf->tabs->TUser['group']=array('label'=>'__tr(Group)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view');
+	TTemplate::addTabs($conf, 'TUser', array(
+		'card'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view')
+		,'group'=>array('label'=>'__tr(Group)__','url'=>HTTP.'modules/user/user.php?id=@id@&action=view')
+	));
+	TTemplate::addTabs($conf, 'TGroup', array(
+			'group'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php?id=@id@&action=view')
+			,'usergroup'=>array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/usergroup.php?id_group=@id@')
+			,'right'=>array('label'=>'__tr(Rights)__','url'=>HTTP.'modules/user/right.php?id_group=@id@')
+	));
 	
-	$conf->tabs->TGroup['group']=array('label'=>'__tr(Card)__','url'=>HTTP.'modules/user/group.php?id=@id@&action=view');
-	$conf->tabs->TGroup['usergroup']=array('label'=>'__tr(Users)__','url'=>HTTP.'modules/user/usergroup.php?id_group=@id@');
-	$conf->tabs->TGroup['right']=array('label'=>'__tr(Rights)__','url'=>HTTP.'modules/user/right.php?id_group=@id@');
 	
-	@$conf->template->TUser->fiche = './template/user.html';
+	@$conf->template->TUser->card = './template/user.html';
 	
 	@$conf->list->TUser->userList=array(
 		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
@@ -64,7 +68,7 @@
 		)
 	);
 	
-	@$conf->template->TGroup->fiche = './template/group.html';
+	@$conf->template->TGroup->card = './template/group.html';
 	@$conf->template->TGroup->usergroup = './template/usergroup.html';
 	@$conf->template->TGroup->right = './template/right.html';
 	

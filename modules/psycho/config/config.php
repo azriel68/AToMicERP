@@ -2,13 +2,13 @@
 
 
 	$conf->modules['user']=array(
-		'name'=>'Psycho'
+		'name'=>'psycho'
 		,'id'=>'TPsycho'
 		,'class'=>array('TPsycho')
 	);
 
 	/*
-	@$conf->template->TUser->fiche = './template/user.html';
+	@$conf->template->TUser->card = './template/user.html';
 	
 	@$conf->list->TUser->userList=array(
 		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
@@ -28,7 +28,7 @@
 		)
 	);
 	
-	@$conf->template->TGroup->fiche = './template/group.html';
+	@$conf->template->TGroup->card = './template/group.html';
 	@$conf->template->TGroup->usergroup = './template/usergroup.html';
 	@$conf->template->TGroup->right = './template/right.html';
 	

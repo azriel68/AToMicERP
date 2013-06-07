@@ -44,7 +44,7 @@ if($action!==false ) {
 				'header'=>TTemplate::header($conf, __tr('Product : ').$product->label  )
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $product, 'fiche')
+				,'tabs'=>TTemplate::tabs($conf, $user, $product, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 			)
