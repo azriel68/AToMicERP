@@ -8,25 +8,7 @@ class TPsycho extends TContact {
 		parent::add_champs('id_contact,id_event','type=entier; index;');
 		
 		parent::add_champs('trust,openness,responsiveness,communication,thinking,organization,personality,efficiency,investment','type=entier;');
-		
-		
-		
-		TAtomic::initExtraFields($this);
-
-		parent::start();
-		parent::_init_vars();
-	}
-	
-	static function hookLoad($className, $pageName, &$TParameters) {
-		
-		ob_start();
-		
-		if($className=='TContact' && $pageName=='contact/contact') {
-			/*
-			 * Ajout de champs dans le template contact
-			 */
-			 
-			 /*
+		 /*
 			* Anxious ... confident
 			* Shy ... outgoing
 			* Reluctant ... enthusiastic
@@ -37,6 +19,37 @@ class TPsycho extends TContact {
 			* Normal .. top
 			* Normal .. top
 			 */
+			
+		
+		
+		TAtomic::initExtraFields($this);
+
+		parent::start();
+		parent::_init_vars();
+	}
+	
+	function loadByContact(&$db, $id_contact) {
+		
+		return $this->loadBy($db, $id_contact, 'id_contact');
+		
+	}
+	
+	static function hook($className, $pageName, &$TParameters) {
+		
+		ob_start();
+		
+		if($className=='TContact' && $pageName=='contact/contact') {
+			/*
+			 * Ajout de champs dans le template contact
+			 */
+			 $contact = & $TParameters['object'];
+			 
+			 $db=new TPDOdb;
+			 
+			 $psycho=new TPsycho;
+			 $psycho->loadByContact($db, $contact->id);
+			 $psycho->id_contact =  $contact->id;
+			 
 			 $TMood=array(
 			 	'trust'=>array('Anxious', 'confident')
 			 	,'openness'=>array('Shy', 'outgoing')
@@ -49,6 +62,16 @@ class TPsycho extends TContact {
 			 	,'investment'=>array('Normal', 'top')
 			 );
 			 
+			 if($TParameters['action']=='save') {
+			 	
+				foreach ($TMood as $name => $limits) {
+						
+					if(!empty($_REQUEST[$name])) $psycho->{$name} = $_REQUEST[$name];
+					 
+				}
+				
+				$psycho->save($db);
+			 }
 			
 			 
 			 ?><table id="psycho-hook-add" style="display:none;"><?
@@ -57,9 +80,11 @@ class TPsycho extends TContact {
 				 ?><tr>
 				 	<td><?=__tr($name) ?></td>
 				 	<td colspan="2" class="psycho-slider">
-				 		<span style="width:150px; display:inline-block; text-align:right;"><?=$limits[0]?></span>
-				 		<div class="slider" style="display:inline-block; width:200px; margin:0 20px;"></div>
-				 		<?=$limits[1] ?></td>
+				 		<span id="<?=$name ?>-min-bound" style="width:150px; display:inline-block; text-align:right;"><?=$limits[0]?></span>
+				 		<div rel="<?=$name ?>" init-value="<?=$psycho->{$name}?>" class="slider" style="background-color: #333;display:inline-block; width:200px; margin:0 20px;"></div>
+				 		<span id="<?=$name ?>-max-bound"><?=$limits[1] ?></span>
+				 		<input type="hidden" name="<?=$name ?>" id="<?=$name ?>" value="<?=$psycho->{$name}?>" />
+				 		</td>
 				 </tr><?
 			 	
 			 }
@@ -72,23 +97,45 @@ class TPsycho extends TContact {
 				 	 value:3
 					 ,min: 1
 					 ,max: 5
+					 ,animate: "fast"
+					 ,handle: '#myhandle'
 					 ,slide: function( event, ui ) {
-						$( "#amount" ).val( "$" + ui.value );
+					 	var val = ui.value;
+					 	$('#'+$(this).attr('rel')).val( val  );
+					 	sliderBoundFont( $(this).attr('rel'), val );
+					 }
+					 ,create: function( event, ui ) {
+					 	var val = $(this).attr('init-value');
+					 	$(this).slider('value', val);
+					 	sliderBoundFont( $(this).attr('rel'), val );					 	
 					 }
 				 });
 				
-			</script><?
+				<?
+				
+				if($TParameters['action']!='edit') {
+					?>$(".psycho-slider > div.slider").slider({ disabled: true });<?
+				}
+				
+				?>
+				
+				function sliderBoundFont(name, val) {
+					
+					$('#'+name+'-max-bound').css('font-size', (100-((3-val)*5))+'%' );
+					$('#'+name+'-min-bound').css('font-size', (100+((3-val)*5))+'%' );
+					
+				}
+			</script>
+			
+			<?
 		}
 		
+		
+		$db->close();
 		
 		return ob_get_clean();
 		
 	}
 
-	static function hookSave($className, $fileName, &$TParameters) {
-		
-		
-		
-	}
-
+	
 }
