@@ -72,22 +72,57 @@ class TPsycho extends TContact {
 				
 				$psycho->save($db);
 			 }
-			
+			 
+			 $JScategories = ''; $JSvalues='';
+			 foreach($TMood as $name=>$limits) {
+			 	if(!empty($JScategories))$JScategories.=',';
+			 	 $JScategories.="'".__tr($name)."'";
+				
+				 if(!empty($JSvalues))$JSvalues.=',';
+				 $JSvalues .= $psycho->{$name};
+			 }
 			 
 			 ?><table id="psycho-hook-add" style="display:none;"><?
 			 
+			 $first=true;$TPsychoValue=array();
 			 foreach($TMood as $name=>$limits) {
-				 ?><tr>
-				 	<td><?=__tr($name) ?></td>
-				 	<td colspan="2" class="psycho-slider">
+			 	
+				 
+				
+				 ?><tr><?
+				 
+				 	
+				 	?><td><?=__tr($name) ?></td>
+				 	<td class="psycho-slider">
 				 		<span id="<?=$name ?>-min-bound" style="width:150px; display:inline-block; text-align:right;"><?=$limits[0]?></span>
 				 		<div rel="<?=$name ?>" init-value="<?=$psycho->{$name}?>" class="slider" style="background-color: #333;display:inline-block; width:200px; margin:0 20px;"></div>
 				 		<span id="<?=$name ?>-max-bound"><?=$limits[1] ?></span>
 				 		<input type="hidden" name="<?=$name ?>" id="<?=$name ?>" value="<?=$psycho->{$name}?>" />
-				 		</td>
-				 </tr><?
-			 	
+				 		</td><?
+				 		
+				 	if($first) {
+				 		
+						?><td rowspan="<?=count($TMood) ?>" align="center">
+			 			<div id="psycho-profile">
+			 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories) ?>"></script>
+			 			</div>
+			 			</td><?
+					 	$first=false;	
+				 	}	
+				 	
+				 ?></tr><?
 			 }
+
+/*
+		 		?><td colspan="3">
+		 			<div id="psycho-profile">
+		 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories) ?>"></script>
+		 			</div>
+		 		</td><?
+	*/			 		
+				 		
+
+
 			 ?></table><?
 			 
 			?><script language="javascript">
@@ -125,6 +160,9 @@ class TPsycho extends TContact {
 					$('#'+name+'-min-bound').css('font-size', (100+((3-val)*5))+'%' );
 					
 				}
+				
+				
+				
 			</script>
 			
 			<?
