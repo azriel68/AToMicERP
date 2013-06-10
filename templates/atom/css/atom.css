@@ -1,6 +1,12 @@
 /*
  *	CSS du modèle par défaut ATOM 
  */
+
+@font-face {
+    font-family: "averia";
+    src: url('Pecita.otf');
+}
+
 body {
 	padding:0 0 0 0;
 	margin:0 0 0 0;
@@ -49,10 +55,7 @@ div.menu li img {
 	
 	margin-right: 5px;
 }
-@font-face {
-    font-family: "averia";
-    src: url('Averia-Regular.ttf');
-}
+
 div.menu li a {
 	text-decoration: none;
 	font-family: "averia";
