@@ -1,11 +1,18 @@
 <?php
 
 
-	$conf->modules['user']=array(
+	$conf->modules['psycho']=array(
 		'name'=>'psycho'
 		,'id'=>'TPsycho'
 		,'class'=>array('TPsycho')
 	);
+
+	TAtomic::addHook($conf, 'TContact',array(
+		'function'=>'hookLoad'
+		,'object'=>'TPsycho'
+		,'parameters'=>array()
+	));
+
 
 	/*
 	@$conf->template->TUser->card = './template/user.html';

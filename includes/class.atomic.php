@@ -157,6 +157,26 @@ class TAtomic {
 		$conf->menu->top = $menu;
 	}
 	
+	static function addHook(&$conf, $className, $hook) {
+		
+		if(!isset($conf->hooks->{$className})) @$conf->hooks->{$className} = array();
+		
+		$conf->hooks->{$className}[] = $hook;	
+		
+	}
+	static function hook(&$conf, $className, $fileName, $TParameters=array()) {
+		if(!isset($conf->hooks->{$className})) return false;
+		
+		$pageName = substr($fileName, strlen(ROOT.'modules/'),-4);
+		$resultat='';
+		
+		foreach($conf->hooks->{$className} as $hook) {
+			$resultat.= call_user_func(array($hook['object'],$hook['function']), $className, $pageName, array_merge($hook['parameters'],  $TParameters) );
+		}
+		
+		return $resultat;
+	}
+	
 	/*
 	 * Fonction d'initialisation des ExtraFields du thème en cours pour l'objet
 	 * E : objet standart , 'type extrafields'

@@ -78,6 +78,7 @@ if($action!==false ) {
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
+				,'hook'=>TAtomic::hook($conf, get_class($contact), __FILE__)
 			)
 		)
 	)); 

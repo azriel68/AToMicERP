@@ -1,6 +1,7 @@
 [tpl.header;htmlconv=no]
 [tpl.menu;strconv=no]
 
+
 <div class="content">
 	
 	[tpl.tabs;strconv=no]
@@ -14,7 +15,7 @@
 			<input type="hidden" name="success" value="__tr(The contact has been saved)__" />
 			<input type="hidden" name="[id_parent_name]" value="[parent.id]" />
 			
-			<table class="grille">
+			<table class="grille" id="contact">
 				<tr>
 					<td>__tr(Entity)__</td><td>[contact.id_entity;htmlconv=no]</td>
 					<td rowspan="7" align="center">[contact.gravatar;strconv=no]</td>
@@ -46,5 +47,5 @@
 
 
 </div>
-
+[tpl.hook;strconv=no]
 [tpl.footer;htmlconv=no]
