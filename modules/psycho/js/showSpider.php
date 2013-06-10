@@ -26,7 +26,9 @@ $(document).ready(function() {
 		        spacingBottom:0,
 		        spacingLeft:0,
    		        spacingRight:0
-
+				,width:300
+				,marginLeft:0
+				,marginRight:0
 		    },
 		    
 		    title: {
