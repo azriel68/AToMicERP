@@ -181,9 +181,8 @@ class TPsycho extends TContact {
 		
 	}
 
-	static function getAverageValue($id_company) {
+	static function getAverageValue(&$db, $id_company) {
 				
-			 $db=new TPDOdb;
 			 
 			 $company = new TCompany;
 			 $company->load($db, $id_company);
@@ -208,7 +207,7 @@ class TPsycho extends TContact {
 			 }
 			
 			 foreach($Tab as $name=> &$value) {
-			 	$value = (int)($value/count($company->TContactToObject_company));
+			 	$value = round($value/count($company->TContactToObject_company),2);
 			 }
 			
 			

@@ -1,4 +1,4 @@
-function search_city(request, response) {
+function search_city(request, response, zipMode) {
 	$.ajax({
 		url: "http://ws.geonames.org/searchJSON",
 		dataType: "jsonp",
@@ -10,9 +10,16 @@ function search_city(request, response) {
 		},
 		success: function( data ) {
 			response( $.map( data.geonames, function( item ) {
+				
+				item.postalCode = 0;
+				$.each(item.alternateNames, function(i, altN) {
+					if(altN.lang=='post') item.postalCode = altN.name;
+					
+				});
+				
 				return {
-					label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-					value: item.name,
+					label: item.postalCode+', '+item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+					value: (zipMode)? item.postalCode : item.name,
 					data: item
 				}
 			}));

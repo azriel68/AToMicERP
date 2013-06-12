@@ -16,6 +16,9 @@ if(!empty($_REQUEST['id_company'])) {
 	$id_parent_name = 'id_company';
 	$parent = new TCompany;
 	$parent->load($db, $id_parent);
+	
+	$TManager = $parent->getContactForCombo($db, __get('id',0));
+	
 }
 
 if($action!==false ) {
@@ -43,6 +46,7 @@ if($action!==false ) {
 		,'email'=>$form->texte('', 'email', $contact->email, 80)
 		,'lang'=>$form->texte('', 'lang', $contact->lang, 80)
 		,'lang'=>$form->combo('', 'lang', TDictionary::get($db, $user, $contact->id_entity, 'lang'), $contact->lang)
+		,'id_manager'=>$form->combo('', 'id_manager', $TManager, $contact->id_manager)
 		
 		,'id'=>$contact->getId()
 		,'dt_cre'=>$contact->get_date('dt_cre')

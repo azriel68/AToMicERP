@@ -49,7 +49,26 @@ class TCompany extends TObjetStd {
 		}
 		
 	}
-	
+	function getContactForCombo(&$db, $id_contactExclude) {
+		
+		$TContact=array();
+		
+		foreach($this->TContactToObject_company as &$link) {
+			if($link->id_contact != $id_contactExclude) {
+				
+				if(empty($link->contact)) {
+					$link->contact=new TContact;
+					$link->contact->load($db, $link->id_contact);
+				}
+				
+				$TContact[$link->contact->id] = $link->contact->name();
+				
+			}	
+		}
+		
+		return $TContact;
+		
+	}
 }
 
 class TEntity extends TCompany {
