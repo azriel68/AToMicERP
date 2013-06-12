@@ -15,3 +15,4 @@ Licences
 Font : http://openfontlibrary.org/en/font/averia, http://openfontlibrary.org/en/font/pecita
 Icons : http://www.glyphish.com/
 Chart : http://www.highcharts.com/ - www.highcharts.com/license
+Avatar : gravatar.com
