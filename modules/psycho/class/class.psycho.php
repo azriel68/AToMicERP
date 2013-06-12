@@ -2,6 +2,7 @@
 
 class TPsycho extends TContact {
 	
+	
 	function __construct() {
 		parent::set_table(DB_PREFIX.'psycho');
 
@@ -19,13 +20,28 @@ class TPsycho extends TContact {
 			* Normal .. top
 			* Normal .. top
 			 */
-			
-		
 		
 		TAtomic::initExtraFields($this);
 
 		parent::start();
 		parent::_init_vars();
+	
+		$this->TMood=array(
+			 	'trust'=>array('Anxious', 'confident')
+			 	,'openness'=>array('Shy', 'outgoing')
+			 	,'responsiveness'=>array('Reluctant', 'enthusiastic')
+			 	,'communication'=>array('Edge', 'pleasant')
+			 	,'thinking'=>array('Imaginative', 'down to earth')
+			 	,'organization'=>array('Messy', 'methodical')
+			 	,'personality'=>array('Sensitive', 'debonair')
+			 	,'efficiency'=>array('Normal', 'top')
+			 	,'investment'=>array('Normal', 'top')
+			 );
+		
+		foreach($this->TMood as $name=>$limits) {
+			$this->{$name} = 3;	
+		}
+		
 	}
 	
 	function loadByContact(&$db, $id_contact) {
@@ -50,17 +66,7 @@ class TPsycho extends TContact {
 			 $psycho->loadByContact($db, $contact->id);
 			 $psycho->id_contact =  $contact->id;
 			 
-			 $TMood=array(
-			 	'trust'=>array('Anxious', 'confident')
-			 	,'openness'=>array('Shy', 'outgoing')
-			 	,'responsiveness'=>array('Reluctant', 'enthusiastic')
-			 	,'communication'=>array('Edge', 'pleasant')
-			 	,'thinking'=>array('Imaginative', 'down to earth')
-			 	,'organization'=>array('Messy', 'methodical')
-			 	,'personality'=>array('Sensitive', 'debonair')
-			 	,'efficiency'=>array('Normal', 'top')
-			 	,'investment'=>array('Normal', 'top')
-			 );
+			 $TMood = & $psycho->TMood;
 			 
 			 if($TParameters['action']=='save') {
 			 	
@@ -104,7 +110,7 @@ class TPsycho extends TContact {
 				 		
 						?><td rowspan="<?=count($TMood) ?>" align="center">
 			 			<div id="psycho-profile">
-			 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories) ?>"></script>
+			 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories).'&id_contact='.$contact->id.'&name_contact='.$contact->name().(isset($_REQUEST['id_company'])?'&id_company='.$_REQUEST['id_company']:'' ) ?>"></script>
 			 			</div>
 			 			</td><?
 					 	$first=false;	
@@ -175,5 +181,39 @@ class TPsycho extends TContact {
 		
 	}
 
-	
+	static function getAverageValue($id_company) {
+				
+			 $db=new TPDOdb;
+			 
+			 $company = new TCompany;
+			 $company->load($db, $id_company);
+			
+			 $psycho=new TPsycho;
+			 $TMood = $psycho->TMood;
+			 
+			 $Tab=array();
+			 foreach($company->TContactToObject_company as $link) {
+			 	
+				$id_contact = $link->id_contact;
+			
+				$psycho=new TPsycho;
+				$psycho->loadByContact($db, $id_contact);
+				
+				foreach($TMood as $name=>$dummy) {
+					
+					@$Tab[$name]+=$psycho->{$name};		
+					
+				}
+				
+			 }
+			
+			 foreach($Tab as $name=> &$value) {
+			 	$value = (int)($value/count($company->TContactToObject_company));
+			 }
+			
+			
+			 return $Tab;
+			
+	}
+		
 }

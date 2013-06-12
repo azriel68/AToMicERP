@@ -4,7 +4,11 @@
 	
 	$id_div=__get('container', 'psycho-profile');
 	
-	
+	if(!empty($_REQUEST['id_company'])) {
+			
+		$average = implode(',', TPsycho::getAverageValue($_REQUEST['id_company']) );
+		
+	}
 /*	$db=new TPDOdb;
 	//Ancienne valeurs et/ou valeurs toute entreprise
 	$psycho=new TPsycho;
@@ -69,8 +73,19 @@ $(document).ready(function() {
 		        layout: 'vertical'
 		    },
 		    
-		    series: [{
-		        name: '<?=$user->name() ?>',
+		    series: [<?
+		    	if(!empty($average)) {
+		    		?>
+		    		{
+				        name: '<?=__tr('AllCompany') ?>',
+				        data: [<?=$average ?>],
+				        pointPlacement: 'on',
+				        color:'#aaa'
+				    },
+		    		<?
+		    	}
+		    ?>{
+		        name: '<?=addslashes($_REQUEST['name_contact']) ?>',
 		        data: [<?=$_REQUEST['values'] ?>],
 		        pointPlacement: 'on'
 		    }]
