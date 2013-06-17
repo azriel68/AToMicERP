@@ -34,4 +34,5 @@
 		,'user'=>true
 		,'dictionary'=>true
 		,'project'=>true
+		,'planning'=>true
 	);
