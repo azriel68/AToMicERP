@@ -21,9 +21,9 @@ if($action!==false ) {
 	
 	$TForm=array(
 		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $bill->id_entity)
-		,'ref'=>$bill->ref
-		,'dt_bill'=>$form->calendrier('', 'dt_bill', $bill->dt_bill, 80)
-		,'status'=>$form->texte('', 'status', $bill->status, 80)
+		,'ref'=>$form->texteRO('', 'ref', $bill->ref, 12)
+		,'dt_bill'=>$form->calendrier('', 'dt_bill', $bill->dt_bill, 12)
+		,'status'=>$form->texte('', 'status', $bill->status, 40)
 		
 		,'id'=>$bill->getId()
 		,'dt_cre'=>$bill->get_date('dt_cre')
@@ -38,10 +38,10 @@ if($action!==false ) {
 		,array(
 			'bill'=>$TForm
 			,'tpl'=>array(
-				'header'=>TTemplate::header($conf, __tr('Bill : ').$bill->ref)
+				'header'=>TTemplate::header($conf, __tr('Bill').' '.$bill->ref)
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $bill, 'fiche')
+				,'tabs'=>TTemplate::tabs($conf, $user, $bill, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 			)

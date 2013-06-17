@@ -71,20 +71,21 @@ class TAtomic {
 		$dir = ROOT.'modules/';
 		
 		// Load conf of all existing modules
-		$handle = opendir($dir); 
+		/*$handle = opendir($dir); 
 		while (false !== ($file = readdir($handle))) {
 			if($file!='.' && $file!='..'){
 				if(is_dir($dir.$file)){
-					if(is_file($dir.$file.'/config/config.php')) require($dir.$file.'/config/config.php');
+					
 				}
 			}
 		}
-		closedir($handle);
+		closedir($handle);*/
 
 		// Load files from modules only if core or enabled module
 		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
 		foreach($moduleToLoad as $moduleName=>$options) {
 			if(!empty($conf->modules[$moduleName])) {
+				if(is_file($dir.$moduleName.'/config/config.php')) require($dir.$moduleName.'/config/config.php');
 				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
 				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js';
 				if(is_dir($dir.$moduleName.'/class/')) {
