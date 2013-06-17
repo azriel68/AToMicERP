@@ -1,6 +1,7 @@
 [tpl.header;htmlconv=no]
 [tpl.menu;strconv=no]
 
+
 <div class="content">
 	
 	[tpl.tabs;strconv=no]
@@ -14,10 +15,10 @@
 			<input type="hidden" name="success" value="__tr(The contact has been saved)__" />
 			<input type="hidden" name="[id_parent_name]" value="[parent.id]" />
 			
-			<table class="grille">
+			<table class="grille" id="contact">
 				<tr>
 					<td>__tr(Entity)__</td><td>[contact.id_entity;htmlconv=no]</td>
-					<td rowspan="7" align="center">[contact.gravatar;strconv=no]</td>
+					<td rowspan="5" align="center">[contact.gravatar;strconv=no]</td>
 				</tr>
 				<tr>
 					<td>__tr(Firstname)__</td><td>[contact.firstname;strconv=no]</td>
@@ -33,10 +34,13 @@
 					<td>__tr(Fax)__</td><td>[contact.fax;htmlconv=no]</td>
 				</tr>
 				<tr>
-					<td>__tr(Email)__</td><td>[contact.email;htmlconv=no]</td>
+					<td>__tr(Email)__</td><td colspan="2">[contact.email;htmlconv=no]</td>
 				</tr>
 				<tr>
-					<td>__tr(Lang)__</td><td>[contact.lang;htmlconv=no]</td>
+					<td>__tr(Manager)__</td><td colspan="2">[contact.id_manager;strconv=no]</td>
+				</tr>
+				<tr>
+					<td>__tr(Lang)__</td><td colspan="2">[contact.lang;htmlconv=no]</td>
 				</tr>
 			</table>
 					
@@ -46,5 +50,5 @@
 
 
 </div>
-
+[tpl.hook;strconv=no]
 [tpl.footer;htmlconv=no]

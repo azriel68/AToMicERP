@@ -23,7 +23,7 @@
 	/*
 	 * Suite au prob de sens parsing répertoire, et temporairement jusqu'à prise de décision
 	 */
-	$conf->moduleEnabled=array(
+	@$conf->moduleEnabled=array(
 		'address'=>true
 		,'bank'=>true
 		,'company'=>true

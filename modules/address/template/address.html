@@ -44,14 +44,29 @@
 $(document).ready(function() {
 	$('#city').autocomplete({
 		source: function(request, response) {
-			search_city(request, response);
+			search_city(request, response,false);
 		},
 		minLength: 3,
 		select: function( event, ui ) {
 			$('#country').val(ui.item.data.countryCode);
 			$('#city').val(ui.item.data.name);
+			$('#zip').val(ui.item.data.postalCode);
 		}
 	});
+	
+	
+	$('#zip').autocomplete({
+		source: function(request, response) {
+			search_city(request, response, true);
+		},
+		minLength: 3,
+		select: function( event, ui ) {
+			$('#country').val(ui.item.data.countryCode);
+			$('#city').val(ui.item.data.name);
+			$('#zip').val(ui.item.data.postalCode);
+		}
+	});
+
 });
 </script>
 [onshow;block=end]

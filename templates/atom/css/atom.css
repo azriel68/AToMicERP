@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "averia";
-    src: url('Pecita.otf');
+    src: url('ArchitectsDaughter.ttf');
 }
 
 body {
@@ -22,17 +22,31 @@ a {
 a.logo {
 	color: #000000;
 	text-decoration: none;
+	background: url("../images/logo.png") left top no-repeat;
+	height:70px;
+	width:150px;
+	display:block;
+	
+	padding-top:150px;
 }
 div.header {
 	background-color: rgba(255, 255, 255, 0.8);
 	text-align:left;
 	margin: 0px 0px 10px 0;
 	border-bottom: 1px solid #464646;
+	height:65px;
+	overflow: visible;
 }
 div.header h1 {
 	float:left;
 	margin: 0px;
 	padding: 10px;
+	overflow:hidden;
+	height:70px;
+	width:150px;
+	display:block;
+	top:-10px;
+	position:relative;
 }
 
 div.menu {
@@ -246,6 +260,9 @@ table.liste tr.pair td {
     font-family: arial,tahoma,verdana,helvetica;
     margin-bottom: 1px;
 }
+div#boxes {
+	clear:both;
+}
 div#boxes  .boxe-highlight {
 	background-color: none;
 	
@@ -271,7 +288,8 @@ div#boxes  div.boxe  {
     
     border-radius: 10px;
     
-    float:left;
+    display:inline-block;
+    
     width:400px;
     height : 400px;
     overflow: hidden;
@@ -279,6 +297,7 @@ div#boxes  div.boxe  {
     
     position:relative;
 }
+
 div#boxes div.boxe div.buttons {
 	position:absolute;
 	bottom:10px;
@@ -459,3 +478,8 @@ td.projectDrag {
 	left:0;
 	max-height: 90px;
 }
+div.slider a.ui-slider-handle {
+		background:url("../images/57-download.png") center center no-repeat; 
+		background-color: #fff;
+}
+

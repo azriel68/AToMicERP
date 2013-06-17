@@ -12,4 +12,8 @@
 	$conf->js[] = HTTP.'modules/core/js/jNotify.jquery.min.js';
 	$conf->js[] = HTTP.'modules/core/js/tag-it.min.js';
 	$conf->js[] = HTTP.'modules/core/js/jquery.cookie.js';
+
+
+	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts.js';
+	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts-more.js';
 	
