@@ -21,8 +21,20 @@ $conf->menu->top[] = array(
 	,'url'=>HTTP.'modules/planning/planning.php'
 );
 
-
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
-@$conf->template->TPlanning = ROOT.'modules/planning/template/planning.html';
+@$conf->template->TPlanning->card = ROOT.'modules/planning/template/planning.html';
+
+/******************************************************************************************
+ * Définition des js 
+ *******************************************************************************************/
+$conf->js[] = HTTP.'modules/planning/js/Common.js';
+$conf->js[] = HTTP.'modules/planning/js/jquery.calendar.js';
+$conf->js[] = HTTP.'modules/planning/js/wdCalendar_lang_FR.js';
+
+/******************************************************************************************
+ * Définition des css 
+ *******************************************************************************************/
+$conf->css[] = HTTP.'modules/planning/css/calendar.css';
+
