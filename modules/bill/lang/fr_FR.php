@@ -26,6 +26,7 @@ $language=array(
 	/**********************************************
 	 * Other
 	 **********************************************/
+	,'Bill'=>'Facture'
 	,'Bills'=>'Factures'
 	,'TBill'=>'Facture'
 	,'Card'=>'Fiche'
