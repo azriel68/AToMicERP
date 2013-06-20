@@ -29,8 +29,14 @@ $conf->menu->top[] = array(
 /******************************************************************************************
  * Définition des js 
  ******************************************************************************************/
-
+$conf->js[] = HTTP.'modules/planning/js/colorpicker/colorpicker.js';
+$conf->js[] = HTTP.'modules/planning/js/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js';
+$conf->js[] = HTTP.'modules/planning/js/lib/jshashtable-2.1.js';
+$conf->js[] = HTTP.'modules/planning/js/frontierCalendar/jquery-frontier-cal-1.3.2.js';
+ 
 /******************************************************************************************
  * Définition des css 
  ******************************************************************************************/
-
+$conf->css[] = HTTP.'modules/planning/css/frontierCalendar/jquery-frontier-cal-1.3.2.css';
+$conf->css[] = HTTP.'modules/planning/css/colorpicker/colorpicker.css';
+$conf->css[] = HTTP.'modules/planning/css/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css';

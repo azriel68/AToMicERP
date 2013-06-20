@@ -16,9 +16,3 @@
 
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts.js';
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts-more.js';
-	
-	$conf->js[] = HTTP.'modules/core/js/jquery.datepicker.js';
-	$conf->js[] = HTTP.'modules/core/js/datepicker_lang_FR.js';
-	
-	//CSS
-	$conf->css[] = HTTP.'modules/core/css/dp.css';

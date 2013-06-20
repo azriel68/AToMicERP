@@ -2,261 +2,159 @@
 [tpl.menu;strconv=no]
 
 <div class="content">
-	
-		<script type="text/javascript">
-	        $(document).ready(function() {     
-	           var view="week";          
-	           
-	            var DATA_FEED_URL = "./lib/wdCalendar/php/datafeed.php";
-	            var op = {
-	                view: view,
-	                theme:3,
-	                showday: new Date(),
-	                EditCmdhandler:Edit,
-	                DeleteCmdhandler:Delete,
-	                ViewCmdhandler:View,    
-	                onWeekOrMonthToDay:wtd,
-	                onBeforeRequestData: cal_beforerequest,
-	                onAfterRequestData: cal_afterrequest,
-	                onRequestDataError: cal_onerror, 
-	                autoload:true,
-	                url: DATA_FEED_URL + "?method=list",  
-	                quickAddUrl: DATA_FEED_URL + "?method=add", 
-	                quickUpdateUrl: DATA_FEED_URL + "?method=update",
-	                quickDeleteUrl: DATA_FEED_URL + "?method=remove"        
-	            };
-	            var $dv = $("#calhead");
-	            var _MH = document.documentElement.clientHeight;
-	            var dvH = $dv.height() + 2;
-	            op.height = _MH - dvH;
-	            op.eventItems =[];
-	
-	            var p = $("#gridcontainer").bcalendar(op).BcalGetOp();
-	            if (p && p.datestrshow) {
-	                $("#txtdatetimeshow").text(p.datestrshow);
-	            }
-	            $("#caltoolbar").noSelect();
-	            
-	            $("#hdtxtshow").datepicker({ picker: "#txtdatetimeshow", showtarget: $("#txtdatetimeshow"),
-	            onReturn:function(r){                          
-	                            var p = $("#gridcontainer").gotoDate(r).BcalGetOp();
-	                            if (p && p.datestrshow) {
-	                                $("#txtdatetimeshow").text(p.datestrshow);
-	                            }
-	                     } 
-	            });
-	            function cal_beforerequest(type)
-	            {
-	                var t="Loading data...";
-	                switch(type)
-	                {
-	                    case 1:
-	                        t="Loading data...";
-	                        break;
-	                    case 2:                      
-	                    case 3:  
-	                    case 4:    
-	                        t="The request is being processed ...";                                   
-	                        break;
-	                }
-	                $("#errorpannel").hide();
-	                $("#loadingpannel").html(t).show();    
-	            }
-	            function cal_afterrequest(type)
-	            {
-	                switch(type)
-	                {
-	                    case 1:
-	                        $("#loadingpannel").hide();
-	                        break;
-	                    case 2:
-	                    case 3:
-	                    case 4:
-	                        $("#loadingpannel").html("Success!");
-	                        window.setTimeout(function(){ $("#loadingpannel").hide();},2000);
-	                    break;
-	                }              
-	               
-	            }
-	            function cal_onerror(type,data)
-	            {
-	                $("#errorpannel").show();
-	            }
-	            function Edit(data)
-	            {
-	               var eurl="edit.php?id={0}&start={2}&end={3}&isallday={4}&title={1}";   
-	                if(data)
-	                {
-	                    var url = StrFormat(eurl,data);
-	                    OpenModelWindow(url,{ width: 600, height: 400, caption:"Manage  The Calendar",onclose:function(){
-	                       $("#gridcontainer").reload();
-	                    }});
-	                }
-	            }    
-	            function View(data)
-	            {
-	                var str = "";
-	                $.each(data, function(i, item){
-	                    str += "[" + i + "]: " + item + "\n";
-	                });
-	                alert(str);               
-	            }    
-	            function Delete(data,callback)
-	            {           
-	                
-	                $.alerts.okButton="Ok";  
-	                $.alerts.cancelButton="Cancel";  
-	                hiConfirm("Are You Sure to Delete this Event", 'Confirm',function(r){ r && callback(0);});           
-	            }
-	            function wtd(p)
-	            {
-	               if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	                $("#caltoolbar div.fcurrent").each(function() {
-	                    $(this).removeClass("fcurrent");
-	                })
-	                $("#showdaybtn").addClass("fcurrent");
-	            }
-	            //to show day view
-	            $("#showdaybtn").click(function(e) {
-	                //document.location.href="#day";
-	                $("#caltoolbar div.fcurrent").each(function() {
-	                    $(this).removeClass("fcurrent");
-	                })
-	                $(this).addClass("fcurrent");
-	                var p = $("#gridcontainer").swtichView("day").BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	            });
-	            //to show week view
-	            $("#showweekbtn").click(function(e) {
-	                //document.location.href="#week";
-	                $("#caltoolbar div.fcurrent").each(function() {
-	                    $(this).removeClass("fcurrent");
-	                })
-	                $(this).addClass("fcurrent");
-	                var p = $("#gridcontainer").swtichView("week").BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	
-	            });
-	            //to show month view
-	            $("#showmonthbtn").click(function(e) {
-	                //document.location.href="#month";
-	                $("#caltoolbar div.fcurrent").each(function() {
-	                    $(this).removeClass("fcurrent");
-	                })
-	                $(this).addClass("fcurrent");
-	                var p = $("#gridcontainer").swtichView("month").BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	            });
-	            
-	            $("#showreflashbtn").click(function(e){
-	                $("#gridcontainer").reload();
-	            });
-	            
-	            //Add a new event
-	            $("#faddbtn").click(function(e) {
-	                var url ="edit.php";
-	                OpenModelWindow(url,{ width: 500, height: 400, caption: "Create New Calendar"});
-	            });
-	            //go to today
-	            $("#showtodaybtn").click(function(e) {
-	                var p = $("#gridcontainer").gotoDate().BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	
-	
-	            });
-	            //previous date range
-	            $("#sfprevbtn").click(function(e) {
-	                var p = $("#gridcontainer").previousRange().BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	
-	            });
-	            //next date range
-	            $("#sfnextbtn").click(function(e) {
-	                var p = $("#gridcontainer").nextRange().BcalGetOp();
-	                if (p && p.datestrshow) {
-	                    $("#txtdatetimeshow").text(p.datestrshow);
-	                }
-	            });
-	            
-	        });
-	    </script>
-	
-		<div id="calhead" style="padding-left:1px;padding-right:1px;">          
-            <div class="cHead"><div class="ftitle">Mon Calendrier</div>
-            	<div id="loadingpannel" class="ptogtitle loadicon" style="display: none;">Chargement...</div>
-            	<div id="errorpannel" class="ptogtitle loaderror" style="display: none;">Désolé, nous ne pouvons charger vos données, réessayez plus tard</div>
-            </div>          
-            
-            <div id="caltoolbar" class="ctoolbar">
-	            <div id="faddbtn" class="fbutton">
-	                <div><span title='Click to Create New Event' class="addcal">
-	                 Nouvel Evènement              
-	                </span></div>
-	            </div>
-	            <div class="btnseparator"> </div>
-	            <div id="showtodaybtn" class="fbutton">
-	                <div><span title='Click to back to today ' class="showtoday">
-	                Aujourd'hui</span></div>
-	            </div>
-            	<div class="btnseparator"> </div>
 
-	            <div id="showdaybtn" class="fbutton">
-	                <div><span title='Day' class="showdayview">Jour</span></div>
-	            </div>
-	            <div  id="showweekbtn" class="fbutton fcurrent">
-	                <div><span title='Week' class="showweekview">Semaine</span></div>
-	            </div>
-		        <div  id="showmonthbtn" class="fbutton">
-	                <div><span title='Month' class="showmonthview">Mois</span></div>
-	            </div>
-            	<div class="btnseparator"> </div>
-              	<div  id="showreflashbtn" class="fbutton">
-                	<div><span title='Refresh view' class="showdayflash">Rafraichir</span></div>
-                </div>
-             	<div class="btnseparator"> </div>
-            	<div id="sfprevbtn" title="Prev"  class="fbutton">
-              		<span class="fprev"> </span>
-            	</div>
-	            <div id="sfnextbtn" title="Next" class="fbutton">
-	                <span class="fnext"> </span>
-	            </div>
-           		<div class="fshowdatep fbutton">
-                    <div>
-                        <input type="hidden" name="txtshow" id="hdtxtshow" />
-                        <span id="txtdatetimeshow">Chargement</span>
-                    </div>
-            	</div>
-            	<div class="clear"> </div>
-        	</div>
-      </div>
-      <div style="padding:1px;">
-        <div class="t1 chromeColor">
-            &nbsp;</div>
-        <div class="t2 chromeColor">
-            &nbsp;</div>
-        <div id="dvCalMain" class="calmain printborder">
-            <div id="gridcontainer" style="overflow-y: visible;">
-            </div>
-        </div>
-        <div class="t2 chromeColor">
+	<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+		<button id="BtnPreviousMonth">Previous Month</button>
+		<button id="BtnNextMonth">Next Month</button>
+		&nbsp;&nbsp;&nbsp;
+		Date: <input type="text" id="dateSelect" size="20"/>
+		&nbsp;&nbsp;&nbsp;
+		<button id="BtnDeleteAll">Delete All</button>
+		<button id="BtnICalTest">iCal Test</button>
+		<input type="text" id="iCalSource" size="30" value="extra/fifa-world-cup-2010.ics"/>
+	</div>
 
-            &nbsp;</div>
-        <div class="t1 chromeColor">
-            &nbsp;
-        </div>   
-    </div>
+	<br>
+
+	<!--
+	You can use pixel widths or percentages. Calendar will auto resize all sub elements.
+	Height will be calculated by aspect ratio. Basically all day cells will be as tall
+	as they are wide.
+	-->
+	<div id="mycal"> </div>
+
+	</div>
+
+	<!-- debugging-->
+	<div id="calDebug"> </div>
+
+	<!-- Add event modal form -->
+	<style type="text/css">
+		//label, input.text, select { display:block; }
+		fieldset { padding:0; border:0; margin-top:25px; }
+		.ui-dialog .ui-state-error { padding: .3em; }
+		.validateTips { border: 1px solid transparent; padding: 0.3em; }
+	</style>
+	<div id="add-event-form" title="Add New Event">
+		<p class="validateTips">All form fields are required.</p>
+		<form>
+		<fieldset>
+			<label for="name">What?</label>
+			<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>
+			<table style="width:100%; padding:5px;">
+				<tr>
+					<td>
+						<label>Start Date</label>
+						<input type="text" name="startDate" id="startDate" value="" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>				
+					</td>
+					<td>&nbsp;</td>
+					<td>
+						<label>Start Hour</label>
+						<select id="startHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="12" selected="selected">12</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+						</select>				
+					<td>
+					<td>
+						<label>Start Minute</label>
+						<select id="startMin" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="00" selected="selected">00</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>				
+					<td>
+					<td>
+						<label>Start AM/PM</label>
+						<select id="startMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="AM" selected="selected">AM</option>
+							<option value="PM">PM</option>
+						</select>				
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>End Date</label>
+						<input type="text" name="endDate" id="endDate" value="" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>				
+					</td>
+					<td>&nbsp;</td>
+					<td>
+						<label>End Hour</label>
+						<select id="endHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="12" selected="selected">12</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+						</select>				
+					<td>
+					<td>
+						<label>End Minute</label>
+						<select id="endMin" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="00" selected="selected">00</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>				
+					<td>
+					<td>
+						<label>End AM/PM</label>
+						<select id="endMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="AM" selected="selected">AM</option>
+							<option value="PM">PM</option>
+						</select>				
+					</td>				
+				</tr>			
+			</table>
+			<table>
+				<tr>
+					<td>
+						<label>Background Color</label>
+					</td>
+					<td>
+						<div id="colorSelectorBackground"><div style="background-color: #333333; width:30px; height:30px; border: 2px solid #000000;"> </div></div>
+						<input type="hidden" id="colorBackground" value="#333333">
+					</td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td>
+						<label>Text Color</label>
+					</td>
+					<td>
+						<div id="colorSelectorForeground"><div style="background-color: #ffffff; width:30px; height:30px; border: 2px solid #000000;"> </div></div>
+						<input type="hidden" id="colorForeground" value="#ffffff">
+					</td>						
+				</tr>				
+			</table>
+		</fieldset>
+		</form>
+	</div>
+	
+	<div id="display-event-form" title="View Agenda Item">
+		
+	</div>		
+
+	<p>&nbsp;</p>
 
 </div>
 

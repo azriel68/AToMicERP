@@ -16,3 +16,4 @@ Font : http://openfontlibrary.org/en/font/averia, http://openfontlibrary.org/en/
 Icons : http://www.glyphish.com/
 Chart : http://www.highcharts.com/ - www.highcharts.com/license
 Avatar : gravatar.com
+Calendar : http://code.google.com/p/jquery-frontier-calendar/
