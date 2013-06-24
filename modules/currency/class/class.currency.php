@@ -42,7 +42,28 @@ class TCurrency extends TObjetStd {
 		
 		if(empty($date))$date = date('Y-m-d');
 		
+		$db->Execute("SELECT rate 
+		FROM ".DB_PREFIX."currency_rate cr INNER JOIN ".DB_PREFIX."currency c ON (cr.id_currency=c.id)
+		WHERE c.code = '".$code."' AND cr.dt_sync>='".$date."'
+		ORDER BY cr.dt_sync DESC
+		LIMIT 1
+		");
+		
+		$db->Get_line();
+		
+		return (double)$db->Get_field('rate');
+		
 	} 
+	
+	static function getPrice(&$db, $code, $price, $date='') {
+		
+		if(empty($date))$date = date('Y-m-d');
+		
+		$rate = TCurrency::getPrice($db, $code, $date);
+		
+		return $price * $rate;
+		
+	}
 	
 }
 
