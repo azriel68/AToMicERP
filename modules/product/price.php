@@ -23,15 +23,12 @@ if($action!==false ) {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
 	
-	/*$form=new TFormCore;
+	$form=new TFormCore;
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $parent->id_entity)
-		,'ref'=>$form->texte('', 'ref', $parent->ref, 80)
-		,'label'=>$form->texte('', 'label', $parent->label, 80)
-		,'description'=>$form->texte('', 'description', $parent->description, 80)
-		,'price'=>$form->texte('', 'price', $parent->price, 80)
+		'id_product'=>$form->combo('', 'id_entity', TProduct::getProductForCombo($db, $user->getEntity()), $parent->id_entity)
+		,'price_ht'=>$form->texte('', 'ref', $parent->ref, 80)
 		
 		,'id'=>$parent->getId()
 		,'dt_cre'=>$parent->get_date('dt_cre')
@@ -53,9 +50,13 @@ if($action!==false ) {
 				,'tabs'=>TTemplate::tabs($conf, $user, $parent, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
+				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
+			
 			)
 		)
-	));*/
+	));
+	
+	
 }
 else { // Liste de tous les prix associé au produit
 	$listName = empty($parent) ? 'priceList' : get_class($parent).'PriceList';

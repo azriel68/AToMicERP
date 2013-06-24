@@ -24,7 +24,7 @@ class TDictionary extends TObjetStd {
 
 			// Traduction et tri
 			foreach($TDictionnary as $key=>$value) {
-				$TDictionnary[$key] = __tr($value);
+				$TDictionnary["$key"] = __tr($value);
 			}
 			natsort($TDictionnary);
 			

@@ -59,9 +59,20 @@ class TCurrency extends TObjetStd {
 		
 		if(empty($date))$date = date('Y-m-d');
 		
-		$rate = TCurrency::getPrice($db, $code, $date);
+		$rate = TCurrency::getRate($db, $code, $date);
 		
 		return $price * $rate;
+		
+	}
+	
+	static function getChangeLost(&$db, $code, $price, $dateFrom, $date='') {
+		
+		if(empty($date))$date = date('Y-m-d');
+		
+		$rateFrom = TCurrency::getRate($db, $code, $dateFrom);
+		$rate = TCurrency::getRate($db, $code, $date);
+		
+		return $price * ( $rateFrom - $rate );
 		
 	}
 	

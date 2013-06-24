@@ -25,7 +25,8 @@ if($action!==false ) {
 		,'ref'=>$form->texte('', 'ref', $product->ref, 80)
 		,'label'=>$form->texte('', 'label', $product->label, 80)
 		,'description'=>$form->zonetexte('', 'description', $product->description, 80)
-		,'price'=>$form->texte('', 'price', $product->price, 10)
+		,'price_ht'=>$form->texte('', 'price_ht', $product->price_ht, 10)
+		,'vat_rate'=>$form->combo('', 'vat_rate', TDictionary::get($db, $user, $product->id_entity, 'vat_rate') , $product->vat_rate )
 		
 		,'id'=>$product->getId()
 		,'dt_cre'=>$product->get_date('dt_cre')

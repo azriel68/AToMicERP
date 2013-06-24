@@ -4,8 +4,8 @@ class TProduct extends TObjetStd {
 		parent::set_table(DB_PREFIX.'product');
 		parent::add_champs('id_entity','type=entier;');
 		parent::add_champs('ref, label, description','type=chaine;');
-		parent::add_champs('price','type=float;');
-		parent::add_champs('dt_cre,dt_fin','type=date;');
+		parent::add_champs('price_ht,vat_rate,discount,percentage_discount','type=float;');
+		parent::add_champs('dt_start,dt_end','type=date;');
 		
 		TAtomic::initExtraFields($this);
 		
