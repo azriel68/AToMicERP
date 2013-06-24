@@ -94,6 +94,16 @@
 			};
 		}
 
+		// Canvas not supported - Use VML (IE)
+		else if($.browser.msie) {
+			borders = {
+				topLeft: [-90, 90, 0],
+				topRight: [-90, 90, -radius],
+				bottomLeft: [90, 270, 0],
+				bottomRight: [90, 270, -radius]
+			};
+		}
+
 		return borders;
 	}
 
@@ -175,7 +185,7 @@
 		finalStyle = $.extend.apply($, styleExtend);
 
 		// Adjust tip size if needed (IE 1px adjustment bug fix)
-		ieAdjust = 0;
+		ieAdjust = ($.browser.msie) ? 1 : 0;
 		finalStyle.tip.size.width += ieAdjust;
 		finalStyle.tip.size.height += ieAdjust;
 
@@ -232,7 +242,7 @@
 			if($('<canvas />').get(0).getContext) { containers[i] += '<canvas height="' + radius + '" width="' + radius + '" style="vertical-align: top"></canvas>'; }
 
 			// No canvas, but if it's IE use VML
-			else {
+			else if($.browser.msie) {
 				size = radius * 2 + 3;
 				containers[i] += '<v:arc stroked="false" fillcolor="' + color + '" startangle="' + coordinates[i][0] + '" endangle="' + coordinates[i][1] + '" ' + 'style="width:' + size + 'px; height:' + size + 'px; margin-top:' + ((/bottom/).test(i) ? -2 : -1) + 'px; ' + 'margin-left:' + ((/Right/).test(i) ? coordinates[i][2] - 3.5 : -1) + 'px; ' + 'vertical-align:top; display:inline-block; behavior:url(#default#VML)"></v:arc>';
 
@@ -262,7 +272,7 @@
 		}
 
 		// Create a phantom VML element (IE won't show the last created VML element otherwise)
-		else{ self.elements.tooltip.append('<v:image style="behavior:url(#default#VML);"></v:image>'); }
+		else if($.browser.msie) { self.elements.tooltip.append('<v:image style="behavior:url(#default#VML);"></v:image>'); }
 
 		// Setup contentWrapper border
 		sideWidth = Math.max(radius, (radius + (width - radius)));
@@ -296,13 +306,18 @@
 		if(!corner) { corner = new Corner(self.elements.tip.attr('rel')); }
 
 		// Setup adjustment variables
-		ieAdjust = positionAdjust = 0;
+		ieAdjust = positionAdjust = ($.browser.msie) ? 1 : 0;
 
 		// Set initial position
 		self.elements.tip.css(corner[corner.precedance], 0);
 
 		// Set position of tip to correct side
 		if(corner.precedance === 'y') {
+			// Adjustments for IE6 - 0.5px border gap bug
+			if($.browser.msie) {
+				if(parseInt($.browser.version.charAt(0), 10) === 6) { positionAdjust = corner.y === 'top' ? -3 : 1; }
+				else { positionAdjust = corner.y === 'top' ? 1 : 2; }
+			}
 
 			if(corner.x === 'center') {
 				self.elements.tip.css({
@@ -334,6 +349,10 @@
 
 		}
 		else {
+			// Adjustments for IE6 - 0.5px border gap bug
+			if($.browser.msie) {
+				positionAdjust = (parseInt($.browser.version.charAt(0), 10) === 6) ? 1 : (corner.x === 'left' ? 1 : 2);
+			}
 
 			if(corner.y === 'center') {
 				self.elements.tip.css({
@@ -369,6 +388,13 @@
 		paddingSize = self.options.style.tip.size[corner.precedance === 'x' ? 'width' : 'height'];
 		self.elements.tooltip.css('padding', 0).css(paddingCorner, paddingSize);
 
+		// Match content margin to prevent gap bug in IE6 ONLY
+		if($.browser.msie && parseInt($.browser.version.charAt(0), 6) === 6) {
+			newMargin = parseInt(self.elements.tip.css('margin-top'), 10) || 0;
+			newMargin += parseInt(self.elements.content.css('margin-top'), 10) || 0;
+
+			self.elements.tip.css({ marginTop: newMargin });
+		}
 	}
 
 	// Create tip using canvas and VML
@@ -396,12 +422,38 @@
 		// Use canvas element if supported
 		if($('<canvas />').get(0).getContext) { tip = '<canvas height="' + self.options.style.tip.size.height + '" width="' + self.options.style.tip.size.width + '"></canvas>'; }
 
+		// Canvas not supported - Use VML (IE)
+		else if($.browser.msie) {
+			// Create coordize and tip path using tip coordinates
+			coordsize = self.options.style.tip.size.width + ',' + self.options.style.tip.size.height;
+			path = 'm' + coordinates[0][0] + ',' + coordinates[0][1];
+			path += ' l' + coordinates[1][0] + ',' + coordinates[1][1];
+			path += ' ' + coordinates[2][0] + ',' + coordinates[2][1];
+			path += ' xe';
+
+			// Create VML element
+			tip = '<v:shape fillcolor="' + color + '" stroked="false" filled="true" path="' + path + '" coordsize="' + coordsize + '" ' + 'style="width:' + self.options.style.tip.size.width + 'px; height:' + self.options.style.tip.size.height + 'px; ' + 'line-height:0.1px; display:inline-block; behavior:url(#default#VML); ' + 'vertical-align:' + (corner.y === 'top' ? 'bottom' : 'top') + '"></v:shape>';
+
+			// Create a phantom VML element (IE won't show the last created VML element otherwise)
+			tip += '<v:image style="behavior:url(#default#VML);"></v:image>';
+
+			// Prevent tooltip appearing above the content (IE z-index bug)
+			self.elements.contentWrapper.css('position', 'relative');
+		}
+
 		// Create element reference and append vml/canvas
 		self.elements.tip = self.elements.tooltip.find('.' + self.options.style.classes.tip).eq(0);
 		self.elements.tip.html(tip);
 
 		// Draw the canvas tip (Delayed til after DOM creation)
 		if($('<canvas  />').get(0).getContext) { drawTip.call(self, self.elements.tip.find('canvas:first'), coordinates, color); }
+
+		// Fix IE small tip bug
+		if(corner.y === 'top' && $.browser.msie && parseInt($.browser.version.charAt(0), 10) === 6) {
+			self.elements.tip.css({
+				marginTop: -4
+			});
+		}
 
 		// Set the tip position
 		positionTip.call(self, corner);
@@ -419,7 +471,7 @@
 
 		// Create title element
 		self.elements.title = $('<div id="qtip-' + self.id + '-title" class="' + self.options.style.classes.title + '"></div>').css(jQueryStyle(self.options.style.title, true)).css({
-			zoom: 0
+			zoom: ($.browser.msie) ? 1 : 0
 		}).prependTo(self.elements.contentWrapper);
 
 		// Update title with contents if enabled
@@ -618,11 +670,28 @@
 		self.elements.contentWrapper = self.elements.wrapper.children('div:first');
 		self.elements.content = self.elements.contentWrapper.children('div:first').css(jQueryStyle(self.options.style));
 
+		// Apply IE hasLayout fix to wrapper and content elements
+		if($.browser.msie) { self.elements.wrapper.add(self.elements.content).css({ zoom: 1 }); }
+
 		// Setup tooltip attributes
 		if(self.options.hide.when.event === 'unfocus') { self.elements.tooltip.attr('unfocus', true); }
 
 		// If an explicit width is set, updateWidth prior to setting content to prevent dirty rendering
 		if(typeof self.options.style.width.value === 'number') { self.updateWidth(); }
+
+		// Create borders and tips if supported by the browser
+		if($('<canvas />').get(0).getContext || $.browser.msie) {
+			// Create border
+			if(self.options.style.border.radius > 0) { createBorder.call(self); }
+			else {
+				self.elements.contentWrapper.css({
+					border: self.options.style.border.width + 'px solid ' + self.options.style.border.color
+				});
+			}
+
+			// Create tip if enabled
+			if(self.options.style.tip.corner !== false) { createTip.call(self); }
+		}
 
 		// Neither canvas or VML is supported, tips and borders cannot be drawn!
 		else {
@@ -725,7 +794,15 @@
 					if(self.options.position.type !== 'static') { self.focus(); }
 					self.onShow.call(self, event);
 
-					self.elements.tooltip.css({ opacity: '' });
+					// Prevent antialias from disappearing in IE7 by removing filter and opacity attribute
+					if($.browser.msie) { 
+						var ieStyle = self.elements.tooltip.get(0).style;
+						ieStyle.removeAttribute('filter');
+						ieStyle.removeAttribute('opacity');
+					}
+					else {
+						self.elements.tooltip.css({ opacity: '' });
+					}
 				}
 
 				// Maintain toggle functionality if enabled
@@ -809,7 +886,13 @@
 					// Set ARIA hidden status attribute
 					self.elements.tooltip.attr('aria-hidden', true);
 
-					self.elements.tooltip.css({ opacity: '' });
+					// Remove opacity attribute
+					if($.browser.msie) { 
+						self.elements.tooltip.get(0).style.removeAttribute('opacity');
+					}
+					else {
+						self.elements.tooltip.css({ opacity: '' });
+					}
 
 					// Call API callback
 					self.onHide.call(self, event);
@@ -1087,6 +1170,11 @@
 					}());
 				}
 
+				// Initiate bgiframe plugin in IE6 if tooltip overlaps a select box or object element
+				if(!self.elements.bgiframe && $.browser.msie && parseInt($.browser.version.charAt(0), 10) === 6) {
+					bgiframe.call(self);
+				}
+
 				// Call API method and if return value is false, halt
 				returned = self.beforePositionUpdate.call(self, event);
 				if(returned === false) { return self; }
@@ -1138,6 +1226,11 @@
 						// Set the new calculated width and if width has not numerical, grab new pixel width
 						tooltip.width(newWidth);
 
+						// Set position and zoom to defaults to prevent IE hasLayout bug
+						if($.browser.msie) {
+							zoom.css({ zoom: '' });
+						}
+
 						// Set the new width
 						newWidth = self.getDimensions().width;
 
@@ -1160,6 +1253,18 @@
 					self.elements.tooltip.find('.qtip-betweenCorners').each(function (i) {
 						$(this).width(newWidth - (self.options.style.border.radius * 2));
 					});
+				}
+
+				// IE only adjustments
+				if($.browser.msie) {
+					// Reset position and zoom to give the wrapper layout (IE hasLayout bug)
+					zoom.css({ zoom: 1 });
+
+					// Set the new width
+					self.elements.wrapper.width(newWidth);
+
+					// Adjust BGIframe height and width if enabled
+					if(self.elements.bgiframe) { self.elements.bgiframe.width(newWidth).height(self.getDimensions.height); }
 				}
 
 				// Log event and return
@@ -1197,6 +1302,11 @@
 						coordinates = calculateTip(corner, self.options.style.tip.size.width, self.options.style.tip.size.height);
 						drawTip.call(self, tip, coordinates, self.options.style.tip.color || self.options.style.border.color);
 					}
+					else if($.browser.msie) {
+						// Set new fillcolor attribute
+						tip = self.elements.tooltip.find('.qtip-tip [nodeName="shape"]');
+						tip.attr('fillcolor', self.options.style.tip.color || self.options.style.border.color);
+					}
 				}
 
 				// Update border colors if enabled
@@ -1215,6 +1325,12 @@
 							// Draw new border
 							corner = $(this).parent('div[rel]:first').attr('rel');
 							drawBorder.call(self, $(this), borders[corner], self.options.style.border.radius, self.options.style.border.color);
+						});
+					}
+					else if($.browser.msie) {
+						// Set new fillcolor attribute on each border corner
+						self.elements.tooltip.find('.qtip-wrapper [nodeName="arc"]').each(function () {
+							$(this).attr('fillcolor', self.options.style.border.color);
 						});
 					}
 				}
@@ -1250,6 +1366,12 @@
 
 				// Continue normally if rendered, but if not set options.content.text instead
 				if(self.status.rendered) {
+					// Set position and zoom to defaults to prevent IE hasLayout bug
+					if($.browser.msie) {
+						self.elements.contentWrapper.children().css({
+							zoom: 'normal'
+						});
+					}
 
 					// Append new content if its a DOM array and show it if hidden
 					if(content.jquery && content.length > 0) { content.clone(true).appendTo(self.elements.content).show(); }

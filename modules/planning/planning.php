@@ -6,6 +6,10 @@ if(!$user->isLogged()) {
 	TTemplate::login($user);
 }
 
+/*echo '<pre>';
+print_r($user);
+echo '</pre>';*/
+
 $db=new TPDOdb;
 $db->debug = true;
 $planning=new TPlanning;

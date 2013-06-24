@@ -56,7 +56,6 @@ Style for day cells on the current month.
 	color: #444444;	
 	background-image:url('images/dayCellCurrentMonth.png');
 	background-repeat:repeat-y;
-	opacity: 0.8;
 }
 /*
 Style for previous month and next month day cells.
@@ -68,7 +67,6 @@ Style for previous month and next month day cells.
 	color: #999999;
 	background-image:url('images/dayCellOtherMonth.png');
 	background-repeat:repeat-y;
-	opacity: 0.8;
 }
 /*
 Style for Saturday cells.

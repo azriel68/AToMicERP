@@ -5,7 +5,7 @@
 $conf->modules['planning']=array(
 	'name'=>'Planning'
 	,'id'=>'planning'
-	,'class'=>array('TPlanning')
+	,'class'=>array('TPlanning','TEvent','TStatus')
 	,'folder'=>'planning'
 	,'icon'=>'83-calendar.png'
 );
@@ -39,4 +39,3 @@ $conf->js[] = HTTP.'modules/planning/js/frontierCalendar/jquery-frontier-cal-1.3
  ******************************************************************************************/
 $conf->css[] = HTTP.'modules/planning/css/frontierCalendar/jquery-frontier-cal-1.3.2.css';
 $conf->css[] = HTTP.'modules/planning/css/colorpicker/colorpicker.css';
-$conf->css[] = HTTP.'modules/planning/css/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css';

@@ -4,23 +4,14 @@
 <div class="content">
 
 	<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-		<button id="BtnPreviousMonth">Previous Month</button>
-		<button id="BtnNextMonth">Next Month</button>
+		<button id="BtnPreviousMonth">__tr(PrevMonth)__</button>
+		<button id="BtnNextMonth">__tr(NextMonth)__</button>
 		&nbsp;&nbsp;&nbsp;
 		Date: <input type="text" id="dateSelect" size="20"/>
-		&nbsp;&nbsp;&nbsp;
-		<button id="BtnDeleteAll">Delete All</button>
-		<button id="BtnICalTest">iCal Test</button>
-		<input type="text" id="iCalSource" size="30" value="extra/fifa-world-cup-2010.ics"/>
 	</div>
 
 	<br>
-
-	<!--
-	You can use pixel widths or percentages. Calendar will auto resize all sub elements.
-	Height will be calculated by aspect ratio. Basically all day cells will be as tall
-	as they are wide.
-	-->
+	
 	<div id="mycal"> </div>
 
 	</div>
@@ -30,26 +21,34 @@
 
 	<!-- Add event modal form -->
 	<style type="text/css">
-		//label, input.text, select { display:block; }
+		label, input.text, select { display:block; }
 		fieldset { padding:0; border:0; margin-top:25px; }
 		.ui-dialog .ui-state-error { padding: .3em; }
 		.validateTips { border: 1px solid transparent; padding: 0.3em; }
 	</style>
 	<div id="add-event-form" title="Add New Event">
-		<p class="validateTips">All form fields are required.</p>
+		<p class="validateTips">__tr(AllFields)__</p>
 		<form>
 		<fieldset>
-			<label for="name">What?</label>
+			<label for="name">__tr(What)__</label>
 			<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>
+			<label for="name">__tr(Note)__</label>
+			<textarea name="note" id="note" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"> </textarea>
+			<label for="name">__tr(Status)__</label>
+			<select name="status" id="status">
+				<option>à faire</option>
+				<option>fait</option>
+				<option>abandonné</option>
+			</select>
 			<table style="width:100%; padding:5px;">
 				<tr>
 					<td>
-						<label>Start Date</label>
+						<label>__tr(DateStart)__</label>
 						<input type="text" name="startDate" id="startDate" value="" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>				
 					</td>
 					<td>&nbsp;</td>
 					<td>
-						<label>Start Hour</label>
+						<label>__tr(Hour)__</label>
 						<select id="startHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="12" selected="selected">12</option>
 							<option value="1">1</option>
@@ -66,7 +65,7 @@
 						</select>				
 					<td>
 					<td>
-						<label>Start Minute</label>
+						<label>__tr(Min)__</label>
 						<select id="startMin" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="00" selected="selected">00</option>
 							<option value="10">10</option>
@@ -77,7 +76,7 @@
 						</select>				
 					<td>
 					<td>
-						<label>Start AM/PM</label>
+						<label>AM/PM</label>
 						<select id="startMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="AM" selected="selected">AM</option>
 							<option value="PM">PM</option>
@@ -86,12 +85,12 @@
 				</tr>
 				<tr>
 					<td>
-						<label>End Date</label>
+						<label>__tr(DateEnd)__</label>
 						<input type="text" name="endDate" id="endDate" value="" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>				
 					</td>
 					<td>&nbsp;</td>
 					<td>
-						<label>End Hour</label>
+						<label>__tr(Hour)__</label>
 						<select id="endHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="12" selected="selected">12</option>
 							<option value="1">1</option>
@@ -108,7 +107,7 @@
 						</select>				
 					<td>
 					<td>
-						<label>End Minute</label>
+						<label>__tr(Min)__</label>
 						<select id="endMin" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="00" selected="selected">00</option>
 							<option value="10">10</option>
@@ -119,7 +118,7 @@
 						</select>				
 					<td>
 					<td>
-						<label>End AM/PM</label>
+						<label>AM/PM</label>
 						<select id="endMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 							<option value="AM" selected="selected">AM</option>
 							<option value="PM">PM</option>
@@ -130,7 +129,7 @@
 			<table>
 				<tr>
 					<td>
-						<label>Background Color</label>
+						<label>__tr(BgColor)__</label>
 					</td>
 					<td>
 						<div id="colorSelectorBackground"><div style="background-color: #333333; width:30px; height:30px; border: 2px solid #000000;"> </div></div>
@@ -138,7 +137,7 @@
 					</td>
 					<td>&nbsp;&nbsp;&nbsp;</td>
 					<td>
-						<label>Text Color</label>
+						<label>__tr(TextColor)__</label>
 					</td>
 					<td>
 						<div id="colorSelectorForeground"><div style="background-color: #ffffff; width:30px; height:30px; border: 2px solid #000000;"> </div></div>

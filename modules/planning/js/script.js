@@ -1,8 +1,7 @@
 $(document).ready(function(){	
-
+	var une_date = new Date();
 	var clickDate = "";
 	var clickAgendaItem = "";
-	
 	/**
 	 * Initializes calendar with current year & month
 	 * specifies the callbacks for day click & agenda item click events
@@ -45,7 +44,6 @@ $(document).ready(function(){
 	 * @param agendaItem - javascript object containing agenda data.
 	 */
 	function myApplyTooltip(divElm,agendaItem){
-
 		// Destroy currrent tooltip if present
 		if(divElm.data("qtip")){
 			divElm.qtip("destroy");
@@ -114,7 +112,7 @@ $(document).ready(function(){
 	/**
 	 * Make the day cells roughly 3/4th as tall as they are wide. this makes our calendar wider than it is tall. 
 	 */
-	jfcalplugin.setAspectRatio("#mycal",0.75);
+	jfcalplugin.setAspectRatio("#mycal",0.43);
 
 	/**
 	 * Called when user clicks day cell
@@ -152,8 +150,21 @@ $(document).ready(function(){
 		var date = eventObj.data.calDayDate;
 		// Pull agenda item from calendar
 		var agendaItem = jfcalplugin.getAgendaItemById("#mycal",agendaId);		
-		alert("You dropped agenda item " + agendaItem.title + 
-			" onto " + date.toString() + ". Here is where you can make an AJAX call to update your database.");
+		
+		//Update data in database
+		$.ajax({
+            url: 'ajax.interface.php',
+            dataType: "json",
+            crossDomain: true,
+            data: {
+            	put : update_event,
+            	json:1,
+                id_event: search,
+                TEvent_data: {
+                	
+                }
+            }
+       });
 	};
 	
 	/**
@@ -207,6 +218,8 @@ $(document).ready(function(){
 		// Date month 0-based (0=January)
 		var cmonth = calDate.getMonth();
 		var cday = calDate.getDate();
+		une_date.setMonth(une_date.getMonth()-1);
+		_init_data(une_date);
 		// jquery datepicker month starts at 1 (1=January) so we add 1
 		$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);
 		return false;
@@ -223,30 +236,12 @@ $(document).ready(function(){
 		// Date month 0-based (0=January)
 		var cmonth = calDate.getMonth();
 		var cday = calDate.getDate();
+		une_date.setMonth(une_date.getMonth()+1);
+		_init_data(une_date);
 		// jquery datepicker month starts at 1 (1=January) so we add 1
 		$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);		
 		return false;
 	});
-	
-	/**
-	 * Initialize delete all agenda items button
-	 */
-	$("#BtnDeleteAll").button();
-	$("#BtnDeleteAll").click(function() {	
-		jfcalplugin.deleteAllAgendaItems("#mycal");	
-		return false;
-	});		
-	
-	/**
-	 * Initialize iCal test button
-	 */
-	$("#BtnICalTest").button();
-	$("#BtnICalTest").click(function() {
-		// Please note that in Google Chrome this will not work with a local file. Chrome prevents AJAX calls
-		// from reading local files on disk.		
-		jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");	
-		return false;
-	});	
 
 	/**
 	 * Initialize add event modal form
@@ -258,7 +253,7 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			'Add Event': function() {
-
+				
 				var what = jQuery.trim($("#what").val());
 			
 				if(what == ""){
@@ -339,7 +334,28 @@ $(document).ready(function(){
 							foregroundColor: $("#colorForeground").val()
 						}
 					);
-
+							
+					//add event in database
+					$.ajax({
+			            url: 'ajax.planning.php',
+			            dataType: "json",
+			            crossDomain: true,
+			            data: {
+			            	put : "add_event",
+			            	json:1,
+			                TEvent_data : {
+			                	status: $('#status').val(),
+			                	label: $('#what').val(),
+			                	note: $('#note').val(),
+			                	dt_deb: startDateObj.getTime()/1000,
+			                	dt_fin: endDateObj.getTime()/1000,
+			                	id_planning: 1,
+			                	bgcolor: $('#colorBackground').val(),
+			                	txtcolor: $('#colorForeground').val()
+			                }
+			            }
+			        })
+					
 					$(this).dialog('close');
 
 				}
@@ -357,7 +373,7 @@ $(document).ready(function(){
 				changeMonth: true,
 				changeYear: true,
 				showButtonPanel: true,
-				dateFormat: 'yy-mm-dd'
+				dateFormat: 'dd/mm/yyyy'
 			});
 			// initialize end date picker
 			$("#endDate").datepicker({
@@ -366,7 +382,7 @@ $(document).ready(function(){
 				changeMonth: true,
 				changeYear: true,
 				showButtonPanel: true,
-				dateFormat: 'yy-mm-dd'
+				dateFormat: 'dd/mm/yyyy'
 			});
 			// initialize with the date that was clicked
 			$("#startDate").val(clickDate);
@@ -422,6 +438,7 @@ $(document).ready(function(){
 			$("#endMin option:eq(0)").attr("selected", "selected");
 			$("#endMeridiem option:eq(0)").attr("selected", "selected");			
 			$("#what").val("");
+			$("#note").val("");
 			//$("#colorBackground").val("#1040b0");
 			//$("#colorForeground").val("#ffffff");
 		}
@@ -498,4 +515,85 @@ $(document).ready(function(){
 		}	
 	});
 	
+	/*
+	 * 
+	 * Formatage de date façon PHP
+	 */
+	function dateFormat(format, date) {
+		if (date == undefined) {
+			date = new Date();
+		}
+		if (typeof date == 'number') {
+			time = new Date();
+			time.setTime(date);
+			date = time;
+		} else if (typeof date == 'string') {
+			date = new Date(date);
+		}
+		var fullYear = date.getYear();
+		if (fullYear < 1000) {
+			fullYear = fullYear + 1900;
+		}
+		var hour = date.getHours();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var minute = date.getMinutes();
+		var seconde = date.getSeconds();
+		var milliSeconde = date.getMilliseconds();
+		var reg = new RegExp('(d|m|Y|H|i|s)', 'g');
+		var replacement = new Array();
+		replacement['d'] = day < 10 ? '0' + day : day;
+		replacement['m'] = month < 10 ? '0' + month : month;
+		replacement['Y'] = fullYear;
+		replacement['Y'] = fullYear;
+		replacement['H'] = hour < 10 ? '0' + hour : hour;
+		replacement['i'] = minute < 10 ? '0' + minute : minute;
+		replacement['s'] = seconde < 10 ? '0' + seconde : seconde;
+		return format.replace(reg, function($0) {
+			return ($0 in replacement) ? replacement[$0] : $0.slice(1,
+					$0.length - 1);
+		});
+	}
+	
+	
+	/*
+	 * Initialize data from database
+	 */
+	function _init_data(une_date){
+		$('.JFrontierCal-Day-Cell').empty();
+		$.ajax({
+            url: 'ajax.planning.php',
+            dataType: "json",
+            crossDomain: true,
+            data: {
+            	get : "all_events",
+            	json:1,
+                dt_deb: dateFormat("Y-m-d H:i:s",new Date(une_date.getFullYear(), une_date.getMonth(), 1)),
+                dt_fin: dateFormat("Y-m-d H:i:s",new Date(une_date.getFullYear(), une_date.getMonth()+1, 0)),
+            }
+       })
+       .then(function(TEvents_data){
+       		$.each( TEvents_data, function ( i, un_event ) {
+       			jfcalplugin.addAgendaItem(
+					"#mycal",
+					un_event.label,
+					new Date(un_event.dt_deb*1000),
+					new Date(un_event.dt_fin*1000),
+					false,
+					{
+						fname: "Santa",
+						lname: "Claus",
+						leadReindeer: "Rudolph",
+						myExampleDate: new Date()
+					},
+					{
+						backgroundColor: un_event.bgcolor,
+						foregroundColor: un_event.txtcolor
+					}	
+				);
+       		});
+       });
+	}
+	
+	_init_data(une_date);
 });
