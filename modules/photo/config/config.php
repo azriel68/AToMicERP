@@ -32,7 +32,7 @@ TTemplate::addTabs($conf, 'TProduct', array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TPhoto->list=array(
-	'sql'=>"SELECT id, title,source,legend, description, filename FROM ".DB_PREFIX."photo WHERE 1"
+	'sql'=>"SELECT id, title, 'image',source,legend, description FROM ".DB_PREFIX."photo WHERE 1"
 	,'param'=>array(
 		'title'=>array(
 			'title'=>'__tr(Title)__'
@@ -42,7 +42,9 @@ TTemplate::addTabs($conf, 'TProduct', array(
 		)
 		,'hide'=>array('id')
 		,'link'=>array(
-			'ref'=>'<a href="?action=view&id=@id@">@ref@</a>'
+			'title'=>'<a href="?action=view&id=@id@">@val@</a>'
+			,'image'=>'<img src="'.HTTP.'modules/photo/get.php?id=@id@&w=100&h=100">'
+			
 		)
 	)
 );

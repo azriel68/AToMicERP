@@ -89,7 +89,9 @@ else { // Liste de tous les produits
 			$sql.=" AND id_product=".$id_parent;	
 		}
 		
-		$param =$conf->list->TPhoto->list['param'] ;
+		$param =array_merge($conf->list->TPhoto->list['param'],array(
+			
+		)) ;
 		
 		$tbs=new TTemplateTBS;
 		
