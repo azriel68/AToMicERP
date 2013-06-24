@@ -14,7 +14,7 @@ class TConf extends TObjetStd {
 	}
 	
 	static function loadConf(&$db, $id_entity) {
-		$sql = "SELECT confKey, confVal FROM ".DB_PREFIX."conf WHERE id_entity = ".$id_entity;
+		$sql = "SELECT confKey, confVal FROM ".DB_PREFIX."conf WHERE id_entity IN( ".$id_entity .")";
 		return TRequeteCore::get_keyval_by_sql($db, $sql, 'confKey', 'confVal');
 	}
 	

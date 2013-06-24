@@ -35,4 +35,5 @@
 		,'dictionary'=>true
 		,'project'=>true
 		,'planning'=>true
+		,'currency'=>true
 	);
