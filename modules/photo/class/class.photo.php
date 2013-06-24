@@ -35,10 +35,21 @@ class TPhoto extends TObjetStd {
 			$image=imagerotate($image, $rotate, 0);
 		}
 		
+		$width = imagesx($image);
+		$height = imagesy($image);
+		$newwidth = $width;
+		$newheight = $height;
+	
+		TPhoto::get_newdimension($w, $h, $width, $height, $newwidth, $newheight);
+	
+		$image_p = imagecreatetruecolor($newwidth, $newheight);
+		
+		imagecopyresampled($image_p, $image, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+		
 		
 		header ('Content-Type: '.$mime);
-		imagepng($image,null,9);
-		imagedestroy($img);
+		imagepng($image_p,null,9);
+		imagedestroy($image_p);
 		
 	}
 	function addFile($file, $typeObject, $idObject, $idEntity) {
@@ -60,6 +71,33 @@ class TPhoto extends TObjetStd {
 		$this -> filename = $dir.$image_name;
 		return true;
 
+	}
+	
+	static function get_newdimension($xrata, $yrata, $width, $height, &$newwidth, &$newheight){
+		
+		if($width>$xrata && $width>$height){
+			$p = $height / $width;
+			$newwidth = $xrata;
+			$newheight = $p * $xrata;
+		}
+		else if ($width>$xrata) {
+			$p = $height / $width;
+			$newwidth = $xrata;
+			$newheight = $p * $xrata;
+		}
+		else if ($height>$yrata) {
+			$p = $width / $height;
+			$newwidth = $p * $yrata;
+			$newheight = $yrata;
+		}
+		else{
+			$newwidth = $width;
+			$newheight = $height;
+		}
+
+		if($newwidth>$xrata || $newheight>$yrata){
+			TPhoto::_get_newdimension($xrata, $yrata, $newwidth, $newheight, $newwidth, $newheight);
+		}
 	}
 
 }

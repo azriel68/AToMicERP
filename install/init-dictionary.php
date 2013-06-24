@@ -17,6 +17,9 @@ while (false !== ($file = readdir($handle))) {
 	if($file!='.' && $file!='..'){
 		$fileName = pathinfo($dir.$file, PATHINFO_FILENAME);
 		$fileHandler = fopen($dir.$file, 'r');
+		
+		$db->Execute("DELETE FROM ".DB_PREFIX."dictionary WHERE id_entity=".$id_entity." AND type='".$fileName."'");
+		
 		while($dataline = fgetcsv($fileHandler, 1024)) {
 			$dic = new TDictionary;
 			$dic->id_entity = $id_entity;

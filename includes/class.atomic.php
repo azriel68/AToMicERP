@@ -55,7 +55,13 @@ class TAtomic {
 	static function getConf(&$user) {
 		if(empty($user->conf)) {
 			$db=new TPDOdb;
-			$user->conf = TConf::loadConf($db, $user->id_entity_c);
+			
+			$TEntity = $user->getEntity('array');
+			foreach($TEntity as $id_entity) {
+				
+				$user->conf[$id_entity] = TConf::loadConf($db, $id_entity);	
+			}
+			
 			$db->close();
 		}
 	}
