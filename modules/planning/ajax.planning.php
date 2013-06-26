@@ -13,7 +13,7 @@
 			case 'all_events':
 				__out(_get_all_events($_REQUEST['dt_deb'],$_REQUEST['dt_fin']));			
 				break;
-			case 'event':
+			case 'get_event':
 				__out(_get_event($_REQUEST['id_event']));			
 				break;
 		}
@@ -30,7 +30,10 @@
 				__out(_del_event($_REQUEST['id_event']));
 				break;
 			case 'update_event':
-				__out(_update_event($_REQUEST['id_event']), $_REQUEST['TEvent_data']);
+				__out(_update_event($_REQUEST['id_event'], $_REQUEST['TEvent_data']));
+				break;
+			case 'update_date_event':
+				__out(_update_event($_REQUEST['id_event'], $_REQUEST['TEvent_data'], $_REQUEST['only_date']));
 				break;
 		}
 	}
@@ -90,9 +93,10 @@
 		if($event->load($db,$id_event)){
 			$TChamps = $event->get_champs();
 			
-			foreach($TChamps as $champ){
-				$TEvent_data[$champ] = $event->$champ;
+			foreach($TChamps as $cle=>$champ){
+				$TEvent_data[$cle] = $event->$cle;
 			}
+			$TEvent_data['id'] = $event->id;
 			$db->close();
 			
 			return $TEvent_data;
@@ -112,7 +116,6 @@
 		global $user;
 		$db = new TPDOdb;
 		$event = new TEvent;
-		echo $TEvent_data['bgcolor']." ".$TEvent_data['txtcolor'];
 		
 		$event->id_entity = $user->id_entity;
 		$event->id_status = $TEvent_data['status'];
@@ -127,7 +130,7 @@
 		$id_event = $event->save($db);
 		$db->close();
 		
-		return ($id_event > 0) ? 1 : 0;
+		return ($id_event > 0) ? $id_event : 0;
 	}
 	
 	/*
@@ -157,19 +160,26 @@
 	 * return 0 = erreur
 	 * 		  1 = ok
 	 */
-	function _update_event($id_event,$TEvent_data){
+	function _update_event($id_event,$TEvent_data,$only_date=false){
 		global $user;
 		$db = new TPDOdb;
 		$event = new TEvent;
-		
+		//echo $TEvent_data['date']; exit;
 		if($event->load($db,$id_event)){
-			$event->id_entity = $user->id_entity;
-			$event->id_status = $TEvent_data['status'];
-			$event->label = $TEvent_data['label'];
-			$event->note = $TEvent_data['note'];
-			$event->dt_deb = $TEvent_data['dt_deb'];
-			$event->dt_fin = $TEvent_data['dt_fin'];
-			$event->id_planning = $TEvent_data['id_planning'];
+			if($only_date){
+				$diff_dates = __diff_date($event->dt_deb, $event->dt_fin*1000);
+				$event->dt_deb = date_format(date_modify(new DateTime(date("Y-m-d H:i:s",$event->dt_deb)),__diff_date($event->dt_deb,$TEvent_data['date'])),"U");
+				$event->dt_fin = date_format(date_modify(new DateTime(date("Y-m-d H:i:s",$event->dt_deb)),$diff_dates),"U");
+			}
+			else{
+				$event->dt_deb = $TEvent_data['dt_deb'];
+				$event->dt_fin = $TEvent_data['dt_fin'];
+				$event->id_entity = $user->id_entity;
+				$event->id_status = $TEvent_data['status'];
+				$event->label = $TEvent_data['label'];
+				$event->note = $TEvent_data['note'];
+				$event->id_planning = $TEvent_data['id_planning'];
+			}
 			
 			$id_event = $event->save($db);
 			$db->close();
@@ -179,4 +189,11 @@
 		else{
 			return 0;
 		}
+	}
+	
+	function __diff_date($date1,$date2){
+		$date1 = new DateTime(date("Y-m-d",$date1));
+		$date2 = new DateTime(date("Y-m-d",$date2/1000));
+		$interval = $date1->diff($date2);
+		return $interval->format('%R%a days');
 	}

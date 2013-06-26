@@ -93,6 +93,7 @@
 		// if we set these variables.
 		this.backgroundColor = null;
 		this.foregroundColor = null;
+		this.id_event = null;
 		
 		// using jshashset.js library
 		// an agenda item can store arbitrary data. we have no idea what the user will want to
@@ -114,7 +115,15 @@
 		this.setForegroundColor = function(c){
 			this.foregroundColor = c;
 		};
-
+		
+		this.setIdEvent = function(c){
+			this.id_event = c;
+		};
+		
+		this.getIdEvent = function(){
+			return this.id_event;
+		};
+		
 		this.getBackgroundColor = function(){
 			return this.backgroundColor;
 		};
@@ -2914,7 +2923,8 @@
 		}
 		var displayPropObj = new Object();
 		displayPropObj["backgroundColor"] = agendaObject.getBackgroundColor();
-		displayPropObj["foregroundColor"] = agendaObject.getForegroundColor();		
+		displayPropObj["foregroundColor"] = agendaObject.getForegroundColor();
+		displayPropObj["id_event"] = agendaObject.getIdEvent();		
 		var agendaData = {
 			agendaId: agendaObject.getAgendaId(),
 			title: agendaObject.getTitle(),
@@ -3750,6 +3760,9 @@
 					}
 					if(displayProp.foregroundColor != null){
 						agi.setForegroundColor(displayProp.foregroundColor);
+					}
+					if(displayProp.id_event != null){
+						agi.setIdEvent(displayProp.id_event);
 					}
 				}
 				var calObj = myCalendars.get(calId);
