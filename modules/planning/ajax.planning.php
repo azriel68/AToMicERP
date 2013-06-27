@@ -179,12 +179,14 @@
 				$event->label = $TEvent_data['label'];
 				$event->note = $TEvent_data['note'];
 				$event->id_planning = $TEvent_data['id_planning'];
+				$event->bgcolor = $TEvent_data['bgcolor'];
+				$event->txtcolor = $TEvent_data['txtcolor'];
 			}
 			
 			$id_event = $event->save($db);
 			$db->close();
 			
-			return ($id_event > 0) ? 1 : 0;
+			return $id_event;
 		}
 		else{
 			return 0;

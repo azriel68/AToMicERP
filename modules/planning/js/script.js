@@ -590,6 +590,7 @@ $(document).ready(function(){
 					var startDateObj = new Date(parseInt(startYear),parseInt(startMonth)-1,parseInt(startDay),startHour,startMin,0,0);
 					var endDateObj = new Date(parseInt(endYear),parseInt(endMonth)-1,parseInt(endDay),endHour,endMin,0,0);
 					
+					jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
 					//add event in database
 					$.ajax({
 			            url: 'ajax.planning.php',
@@ -612,9 +613,7 @@ $(document).ready(function(){
 			            }
 			        })
 			        .then(function(res){
-			        	alert(clickAgendaItem.agendaId);
 			        	// add new event to the calendar
-			        	jfcalplugin.deleteAgendaItemById(clickAgendaItem.agendaId);
 			        	jfcalplugin.addAgendaItem(
 							"#mycal",
 							what,
@@ -778,7 +777,7 @@ $(document).ready(function(){
 		},
 		close: function() {
 			// clear agenda data
-			$("#update-event-form").html("");
+			$(this).dialog('close');
 		}
 	});
 	
