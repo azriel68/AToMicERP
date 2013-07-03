@@ -11,10 +11,13 @@
 	function _get($case) {
 		switch ($case) {
 			case 'all_events':
-				__out(_get_all_events($_REQUEST['dt_deb'],$_REQUEST['dt_fin']));			
+				__out(_get_all_events($_REQUEST['planning'],$_REQUEST['dt_deb'],$_REQUEST['dt_fin']));			
 				break;
 			case 'get_event':
 				__out(_get_event($_REQUEST['id_event']));			
+				break;
+			case 'all_users':
+				__out(_get_all_users());
 				break;
 		}
 		
@@ -35,6 +38,9 @@
 			case 'update_date_event':
 				__out(_update_event($_REQUEST['id_event'], $_REQUEST['TEvent_data'], $_REQUEST['only_date']));
 				break;
+			case 'add_user_right':
+				__out(_add_user_rights($_REQUEST['tag'],$_REQUEST['type'],$_REQUEST['planning']));
+				break;
 		}
 	}
 	
@@ -51,7 +57,7 @@
 	 * 				...
 	 * 			}
 	 */
-	function _get_all_events($dt_deb, $dt_fin){
+	function _get_all_events($id_planning,$dt_deb, $dt_fin){
 		
 		global $user;
 		$db = new TPDOdb;
@@ -67,6 +73,7 @@
 		$sql .= " FROM ".DB_PREFIX."event
 				 WHERE dt_deb >= '".$dt_deb."' AND dt_fin <= '".$dt_fin."'
 				  AND id_entity = ".$user->id_entity."
+				  AND id_planning = ".$id_planning."
 				 ORDER BY dt_deb ASC";
 				  
 		$db->Execute($sql);
@@ -198,4 +205,68 @@
 		$date2 = new DateTime(date("Y-m-d",$date2/1000));
 		$interval = $date1->diff($date2);
 		return $interval->format('%R%a days');
+	}
+	
+	
+	/*
+	 * Retourne la liste utilisateurs
+	 * return tab[]
+	 */
+	function _get_all_users(){
+		global $user;
+		$sql = "SELECT u.id, u.firstname,u.lastname FROM ".DB_PREFIX."contact u 
+				LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
+				LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
+				LEFT JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)
+				LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group = gu.id_group)
+						WHERE ge.id_entity IN (".$user->getEntity().")";
+		
+		$db = new TPDOdb;
+		$db->Execute($sql);
+		$TUsers = array();
+		while($db->Get_line())
+			$TUsers[] = $db->Get_field('lastname')." ".$db->Get_field('firstname');
+		
+		return $TUsers;
+	}
+	
+	/*
+	 * Ajoute un droit utilisateur sur un planning
+	 */
+	function _add_user_rights($username,$type,$id_planning){
+		global $user;
+		
+		$db = new TPDOdb;
+		$usertemp = new TContact;
+		$right = new TPlanningRights;
+		
+		$usertemp->loadBy($db, substr($username,strpos($username," ")), 'lastname');
+		$right->id_entity= $user->getEntity();
+		$right->id_planning= $id_planning;
+		
+		switch ($type) {
+			case 'admin':
+				$right->read = 1;
+				$right->create = 1;
+				$right->admin = 1;
+				break;
+			case 'modifieur':
+				$right->read = 1;
+				$right->create = 1;
+				$right->admin = 0;
+				break;
+			case 'lecteur':
+				$right->read = 1;
+				$right->create = 0;
+				$right->admin = 0;
+				break;
+		}
+		
+		$right->id_user = $usertemp->id;
+				
+		if($right->save($db))
+			return $right->id;
+		else
+			return "error";
+		
 	}

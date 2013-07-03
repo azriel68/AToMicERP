@@ -207,6 +207,40 @@ div.content  a.butAction:hover,div.content  span.butAction:hover {
 	background-color:#31b5c5;
 }
 
+div.content  a.butActionSmall,div.content  span.butActionSmall,div.content  span.butActionSmallDelete, div.content  a.butActionSmallDelete, div.content  a.butActionSmallRefused {
+    background-color: #37BFCD;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
+    color: #FFFFFF;
+    font-weight: 700;
+    height: 15px;
+    letter-spacing: 1px;
+    line-height: 52px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);
+    width: 155px;
+
+    background-clip: padding-box;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    height: 15px;
+    line-height: 15px;
+    position: relative;
+    text-align: center;
+    width: 190px;
+    /*float:left;*/
+    
+    margin: 5px 5px 5px 5px;
+    text-decoration: none;
+    padding:10px 0;
+}
+
+
+div.content  a.butActionSmall:hover,div.content  span.butActionSmall:hover {
+	background-color:#31b5c5;
+}
+
+
 div.content  span.butActionDelete , div.content  a.butActionDelete{
 	background-color: #cc7777;
 }

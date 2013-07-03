@@ -52,9 +52,11 @@
 	
 	@$conf->list->TUser->userList=array(
 		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
-			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact) 
+			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
 			LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
-					WHERE c.id IN (@getEntity@) AND u.isUser = 1"
+			LEFT JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)
+			LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group = gu.id_group)
+					WHERE ge.id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'title'=>array(
 				'firstname'=>'__tr(Firstname)__'
@@ -73,7 +75,9 @@
 	@$conf->template->TGroup->right = './template/right.html';
 	
 	@$conf->list->TGroup->groupList=array(
-		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g LEFT JOIN ".DB_PREFIX."group_entity ge ON (g.id=ge.id_group) WHERE ge.id_entity IN (@getEntity@)"
+		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g 
+				LEFT JOIN ".DB_PREFIX."group_entity ge ON (g.id=ge.id_group) 
+				WHERE ge.id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'hide'=>array('id')
 			,'link'=>array(

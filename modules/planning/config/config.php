@@ -5,7 +5,7 @@
 $conf->modules['planning']=array(
 	'name'=>'Planning'
 	,'id'=>'planning'
-	,'class'=>array('TPlanning','TEvent','TStatus')
+	,'class'=>array('TPlanning','TEvent','TStatus','TPlanningRights')
 	,'folder'=>'planning'
 	,'icon'=>'83-calendar.png'
 );
@@ -22,9 +22,18 @@ $conf->menu->top[] = array(
 );
 
 /******************************************************************************************
+ * Définition des onglet à afficher sur une fiche de l'objet
+ ******************************************************************************************/
+TTemplate::addTabs($conf, 'TPlanning', array(
+	'card'=>array('label'=>'__tr(Agenda)__','url'=>HTTP.'modules/planning/planning.php?id_planning=@id@')
+	,'admin'=>array('label'=>'__tr(Admin)__','url'=>HTTP.'modules/planning/admin.php?id_planning=@id@')
+));
+
+/******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
 @$conf->template->TPlanning->card = ROOT.'modules/planning/template/planning.html';
+@$conf->template->TPlanningRights->admin = ROOT.'modules/planning/template/admin.html';
 
 /******************************************************************************************
  * Définition des js 

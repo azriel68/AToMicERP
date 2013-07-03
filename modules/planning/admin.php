@@ -6,23 +6,12 @@ if(!$user->isLogged()) {
 	TTemplate::login($user);
 }
 
-/*echo '<pre>';
-print_r($user);
-echo '</pre>';*/
-
 $db=new TPDOdb;
+$planningrights=new TPlanningRights;
 $planning=new TPlanning;
+$planning->load($db,$_REQUEST['id_planning']);
 
-if($planning->loadBy(&$db, $user->id_entity, 'id_entity')){
-	
-}
-else{
-	$planning->id_entity = $user->id_entity;
-	$planning->label = "mycal";
-	$planning->save(&$db);
-}
-
-$action = TTemplate::actions($db, $user, $planning);
+$action = TTemplate::actions($db, $user, $planningrights);
 
 if($action != false){
 	//Actions
@@ -36,7 +25,7 @@ else{
 		,'id'=>$planning->id
 	);
 	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $planning)
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $planningrights, 'admin')
 		,array()
 		,array(
 			'planning'=>$TPlanning,
@@ -45,7 +34,7 @@ else{
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
 				,'self'=>$_SERVER['PHP_SELF']
-				,'tabs'=>TTemplate::tabs($conf, $user, $planning, 'card')
+				,'tabs'=>TTemplate::tabs($conf, $user, $planning, 'admin')
 			)
 		)
 	)); 

@@ -1,7 +1,6 @@
 <?php
 
 $language=array(
-
 	"PrevMonth"=>"Mois précédent",
 	"NextMonth"=>"Mois suivant",
     "Mon"=>"Lundi",

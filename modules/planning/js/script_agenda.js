@@ -219,11 +219,21 @@ $(document).ready(function(){
 		var cmonth = calDate.getMonth();
 		var cday = calDate.getDate();
 		une_date.setMonth(une_date.getMonth()-1);
-		_init_data(une_date);
+		_init_data($('#id_planning').val(),une_date);
 		// jquery datepicker month starts at 1 (1=January) so we add 1
 		$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);
 		return false;
 	});
+	
+	
+	/*
+	 * Initialize action onChange calendar selection
+	 */
+	$('#BtnSelect_calendar').click(function(){
+		$('#id_planning').val($('#select_calendar').val());
+		_init_data($('#select_calendar').val(),new Date());
+	});
+	
 	/**
 	 * Initialize next month button
 	 */
@@ -237,7 +247,7 @@ $(document).ready(function(){
 		var cmonth = calDate.getMonth();
 		var cday = calDate.getDate();
 		une_date.setMonth(une_date.getMonth()+1);
-		_init_data(une_date);
+		_init_data($('#id_planning').val(),une_date);
 		// jquery datepicker month starts at 1 (1=January) so we add 1
 		$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);		
 		return false;
@@ -840,7 +850,7 @@ $(document).ready(function(){
 	/*
 	 * Initialize data from database
 	 */
-	function _init_data(une_date){
+	function _init_data(id_planning,une_date){
 		$('.JFrontierCal-Day-Cell').empty();
 		$.ajax({
             url: 'ajax.planning.php',
@@ -849,6 +859,7 @@ $(document).ready(function(){
             data: {
             	get : "all_events",
             	json:1,
+            	planning: id_planning,
                 dt_deb: dateFormat("Y-m-d H:i:s",new Date(une_date.getFullYear(), une_date.getMonth(), 1)),
                 dt_fin: dateFormat("Y-m-d H:i:s",new Date(une_date.getFullYear(), une_date.getMonth()+1, 0)),
             }
@@ -877,5 +888,5 @@ $(document).ready(function(){
        });
 	}
 	
-	_init_data(une_date);
+	_init_data($('#id_planning').val(),une_date);
 });
