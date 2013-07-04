@@ -13,4 +13,50 @@
 	
 </div>
 
+<div id="dialog-form" title="__tr(Link Contact To Company)__">
+	<form id="form-link-contact">
+	
+		<label for="name">__tr(ContactName)__</label>
+		<input type="text" name="contactname" id="contactname" />
+	
+	</form>
+</div>
+<script type="text/javascript">
+	function linkToExistantContact(id_company) {
+		
+		$('#contactname').autocomplete({
+			source:"./script/interface.php?get=contact&id_user=[user.id]&json=1"
+			,delay:0
+			,minLength:0
+			,select: function( event, ui ) {
+				
+			}
+		});
+		
+		$( "#dialog-form" ).dialog( "open" );
+		
+	}
+
+	 $( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 150,
+		width: 350,
+		modal: true,
+		draggable:false,
+		resizable:false,
+		buttons: {
+		"linkThisContact": function() {
+				
+			
+				$( this ).dialog( "close" );
+			
+		},
+		Cancel: function() {
+			$( this ).dialog( "close" );
+		}
+		
+		}
+	});
+</script>
+
 [tpl.footer;htmlconv=no]

@@ -16,8 +16,6 @@
 						<ul id="group_entities">
 							<li>[entity.val;block=li;strconv=no]</li>
 						</ul>
-						
-						<input type="text" id="group_entities_input" name="group_entities_input" value="" />
 					</td>
 				</tr>
 				<tr>
@@ -56,6 +54,7 @@ $(document).ready(function() {
 	 		,availableTags: data
 	 		,placeholderText:"__tr(Enter entity name to link it)__"
 	 		,showAutocompleteOnFocus:true
+	 		,fieldName: 'entities'
 	 		,beforeTagRemoved:function(event, ui) {
 	 			
 	 			if($("#group_entities").tagit("assignedTags").length<=1) {
@@ -68,12 +67,13 @@ $(document).ready(function() {
 	 		}
 	 		,beforeTagAdded: function(event, ui) {
 	 			
-	 			
-		        /*if(listEntityAvailable.indexOf(ui.tag) == -1 ) {
-		        	alert("__tr(You have no rights to add this entity)__");
+				var company = ui.tagLabel; //$("#group_entities").tagit('tagLabel', ui.tag);
+
+	 			if(listEntityAvailable.indexOf(company) == -1 ) {
+		        	alert("__tr(You have no rights to add this entity)__ : "+company);
 		        	return false;
 		        }
-		        return true;*/
+		        return true;
 		    }
 	 	});
 		

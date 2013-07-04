@@ -113,9 +113,25 @@ else {
 	
 	$tbs=new TTemplateTBS;
 	
+	$TButton = TTemplate::buttons($user, $contact, 'list', $buttonsMore);
+	if(!empty($id_parent)) {
+	
+		$TButton = array_merge(
+				$TButton
+				,array(
+					'link'=>array(
+						'href'=>'javascript:linkToExistantContact('.$id_parent.')'
+						,'class'=>'butAction'
+						,'label'=>__tr('LinkToExistant')
+					)
+				)
+		);
+	}
+	
+	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $contact, $listName)
 		,array(
-			'button'=>TTemplate::buttons($user, $contact, 'list', $buttonsMore)
+			'button'=>$TButton
 		)
 		,array(
 			'tpl'=>array(
@@ -127,6 +143,7 @@ else {
 				,'list'=>$l->render($db, $sql, $param)
 				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
 			)
+			,'user'=>$user
 		)
 	)); 
 }
