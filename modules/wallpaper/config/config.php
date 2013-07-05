@@ -7,4 +7,11 @@
 	);
 
 	
+	$conf->menu->admin[] = array(
+		'name'=>'__tr(ChangeWallpaper)__'
+		,'id'=>'changeWallpaper'
+		,'position'=>80
+		,'url'=>'javascript:getWallpaper()'
+		,'right'=>array('user','me','view')
+	);
 	

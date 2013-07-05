@@ -2,25 +2,11 @@
 	require('../../../inc.php');
 ?>
 $(document).ready(function() {
-	$('body').css('background-image', '');
 	
 	var cookie = $.cookie('atomicWallpaper');
 	if (!cookie) {
 		
-		$.ajax({
-			url : "<?=HTTP ?>modules/wallpaper/script/interface.php"
-			,data: {
-				json:1
-				,get : 'wallpaper'
-				,async:true
-			}
-			,dataType: 'json'
-		})
-		.done(function (wallpaper) {
-			$.cookie('atomicWallpaper', wallpaper.response.image.url, { expires: 1, path: "/" });
-			changeWallpaper(wallpaper.response.image.url);
-					
-		}); 
+		getWallpaper();
 		
 	}
 	else {
@@ -30,6 +16,28 @@ $(document).ready(function() {
 	
 });
 
+function getWallpaper() {
+	oldContent = $('#menu-admin-changeWallpaper').html();
+	$('#menu-admin-changeWallpaper').html("<?=__tr("Loading new wallpaper") ?>");
+	
+	$.ajax({
+			url : "<?=HTTP ?>modules/wallpaper/script/interface.php"
+			,data: {
+				json:1
+				,get : 'wallpaper'
+				,async:true
+			}
+			,dataType: 'json'
+		})
+		.done(function (wallpaper) {
+			$.cookie('atomicWallpaper', wallpaper.response.image.url, { expires: 360, path: "/" });
+			changeWallpaper(wallpaper.response.image.url);
+			
+			$('#menu-admin-changeWallpaper').html(oldContent);
+					
+		}); 
+	
+}
 function changeWallpaper(url) {
 	$('body').css('background-image', 'url('+url+')');
 }
