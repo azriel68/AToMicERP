@@ -32,7 +32,7 @@ function _contactList(&$db, $id_user,$term='') {
 	
 	$user=new TUser;
 	$user->load($db, $id_user);
-	$sql="SELECT c.id, CONCAT(c.firstname, ' ', c.lastname) as `fullname` FROM ".DB_PREFIX."contact c
+	$sql="SELECT c.id, CONCAT(c.id,'. ',c.firstname, ' ', c.lastname) as `fullname` FROM ".DB_PREFIX."contact c
 			WHERE c.id_entity IN (".$user->getEntity().") AND CONCAT(c.firstname, ' ', c.lastname) LIKE '%".$term."%' 
 			ORDER BY c.lastname";
 	

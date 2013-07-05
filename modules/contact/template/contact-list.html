@@ -14,8 +14,12 @@
 </div>
 
 <div id="dialog-form" title="__tr(Link Contact To Company)__">
-	<form id="form-link-contact">
-	
+	<form id="form-link-contact" name="form-link-contact" action="[tpl.self]">
+		<input type="hidden" name="action" value="addlink" />
+		<input type="hidden" name="id_contact" value="0" />
+		<input type="hidden" name="success" value="__tr(The contact has been added)__" />
+		<input type="hidden" name="[id_parent_name]" value="[parent.id]" />
+			
 		<label for="name">__tr(ContactName)__</label>
 		<input type="text" name="contactname" id="contactname" />
 	
@@ -29,7 +33,8 @@
 			,delay:0
 			,minLength:0
 			,select: function( event, ui ) {
-				
+				id_contact = ui.item.value.substr(0, ui.item.value.indexOf('.'));
+				$('#form-link-contact input[name=id_contact]').val(id_contact);
 			}
 		});
 		
@@ -45,17 +50,28 @@
 		draggable:false,
 		resizable:false,
 		buttons: {
-		"linkThisContact": function() {
+			"linkThisContact": function() {
+					if($('#form-link-contact input[name=id_contact]').val()>0) {
+						$('#form-link-contact').submit();
+						$( this ).dialog( "close" );
+						
+					}
+					else {
+						
+						errorMsg("__tr(Not able to recognize the Contact)__");
+						
+					}
+						
 				
-			
+				
+			}
+			,Cancel: function() {
 				$( this ).dialog( "close" );
-			
-		},
-		Cancel: function() {
-			$( this ).dialog( "close" );
+			}
 		}
+
 		
-		}
+
 	});
 </script>
 

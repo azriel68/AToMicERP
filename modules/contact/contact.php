@@ -21,6 +21,17 @@ if(!empty($_REQUEST['id_company'])) {
 	
 }
 
+
+
+if(!empty($_REQUEST['action']) && $_REQUEST['action']=="addlink" ) {
+	$contact->load($db, $_REQUEST['id_contact']);
+	
+	$parent->addContact($contact);		
+	$parent->save($db);	
+	TTemplate::success(__tr("The contact has been linked"));
+}
+
+
 if($action!==false ) {
 
 	if($action=='save' && !empty($parent) ) {
@@ -134,6 +145,7 @@ else {
 			'button'=>$TButton
 		)
 		,array(
+			
 			'tpl'=>array(
 				'header'=>TTemplate::header($conf)
 				,'footer'=>TTemplate::footer($conf)
@@ -144,6 +156,8 @@ else {
 				,'parentShort'=>empty($parent) ? '' : $tbs->render(TTemplate::getTemplate($conf, $parent, 'short'), array(), array('objectShort' => $parent))
 			)
 			,'user'=>$user
+			,'parent'=>empty($parent) ? array() : $parent
+			,'id_parent_name'=>empty($parent) ? '' : $id_parent_name
 		)
 	)); 
 }
