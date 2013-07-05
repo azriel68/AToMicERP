@@ -93,7 +93,10 @@ class TAtomic {
 			if(is_file($dir.$moduleName.'/config/config.php')) require($dir.$moduleName.'/config/config.php');
 			if(!empty($conf->modules[$moduleName])) {
 				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
+				
 				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js';
+				if(is_file($dir.$moduleName.'/js/script.js.php')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js.php';
+				
 				if(is_dir($dir.$moduleName.'/class/')) {
 					TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
 				}

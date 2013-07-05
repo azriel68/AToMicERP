@@ -410,6 +410,7 @@ div.profile ul li {
 div.profile ul li a {
 	text-decoration: none;
 	font-size: 18px;	
+	color:#525252;
 }
 div.profile ul li:hover {
 	background:#2AA8B9;
