@@ -51,7 +51,7 @@
 	@$conf->template->TUser->card = './template/user.html';
 	
 	@$conf->list->TUser->userList=array(
-		'sql'=>"SELECT u.id, u.firstname,u.lastname,u.login FROM ".DB_PREFIX."contact u 
+		'sql'=>"SELECT DISTINCT u.id,u.login, u.firstname,u.lastname FROM ".DB_PREFIX."contact u 
 			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
 			LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
 			LEFT JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	$.ajax({
-        url: 'ajax.planning.php',
+        url: './script/interface.php',
         dataType: "json",
         crossDomain: true,
         async: false,
@@ -25,7 +25,7 @@ $(document).ready(function() {
     });
 	
 	$.ajax({
-        url: 'ajax.planning.php',
+        url: './script/interface.php',
         dataType: "json",
         crossDomain: true,
         //async: false,
@@ -94,7 +94,7 @@ $(document).ready(function() {
    
    	function _add_user_right(event,ui,id_tag,type){
    		$.ajax({
-	        url: 'ajax.planning.php',
+	        url: './script/interface.php',
 	        dataType: "json",
 	        crossDomain: true,
 	        data: {
@@ -111,7 +111,7 @@ $(document).ready(function() {
    	
    	function _del_user_right(id_right){
    		$.ajax({
-	        url: 'ajax.planning.php',
+	        url: './script/interface.php',
 	        dataType: "json",
 	        crossDomain: true,
 	        data: {

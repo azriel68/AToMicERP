@@ -152,7 +152,7 @@ $(document).ready(function(){
 		
 		//Update data in database
 		$.ajax({
-            url: 'ajax.planning.php',
+            url: './script/interface.php',
             dataType: "json",
             crossDomain: true,
             data: {
@@ -326,7 +326,7 @@ $(document).ready(function(){
 					
 					//add event in database
 					$.ajax({
-			            url: 'ajax.planning.php',
+			            url: './script/interface.php',
 			            dataType: "json",
 			            crossDomain: true,
 			            data: {
@@ -476,7 +476,7 @@ $(document).ready(function(){
 					if(clickAgendaItem != null){
 						//add event in database
 						$.ajax({
-				            url: 'ajax.planning.php',
+				            url: './script/interface.php',
 				            dataType: "json",
 				            crossDomain: true,
 				            data: {
@@ -603,7 +603,7 @@ $(document).ready(function(){
 					jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
 					//add event in database
 					$.ajax({
-			            url: 'ajax.planning.php',
+			            url: './script/interface.php',
 			            dataType: "json",
 			            crossDomain: true,
 			            data: {
@@ -654,7 +654,7 @@ $(document).ready(function(){
 		open: function(event, ui){
 			if(clickAgendaItem != null){
 				$.ajax({
-		            url: 'ajax.planning.php',
+		            url: './script/interface.php',
 		            dataType: "json",
 		            crossDomain: true,
 		            data: {
@@ -853,7 +853,7 @@ $(document).ready(function(){
 	function _init_data(id_planning,une_date){
 		$('.JFrontierCal-Day-Cell').empty();
 		$.ajax({
-            url: 'ajax.planning.php',
+            url: './script/interface.php',
             dataType: "json",
             crossDomain: true,
             data: {

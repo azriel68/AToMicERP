@@ -58,7 +58,7 @@ $(document).ready(function() {
 	 		,beforeTagRemoved:function(event, ui) {
 	 			
 	 			if($("#group_entities").tagit("assignedTags").length<=1) {
-	 				alert("__tr(The group have to be to at least one entity)__");
+	 				errorMsg("__tr(The group have to be to at least one entity)__");
 	 				return false;
 	 			}
 	 			
@@ -70,7 +70,7 @@ $(document).ready(function() {
 				var company = ui.tagLabel; //$("#group_entities").tagit('tagLabel', ui.tag);
 
 	 			if(listEntityAvailable.indexOf(company) == -1 ) {
-		        	alert("__tr(You have no rights to add this entity)__ : "+company);
+		        	errorMsg("__tr(You have no rights to add this entity)__ : "+company);
 		        	return false;
 		        }
 		        return true;
