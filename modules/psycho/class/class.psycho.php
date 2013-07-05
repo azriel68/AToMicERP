@@ -101,7 +101,7 @@ class TPsycho extends TContact {
 				 	?><td><?=__tr($name) ?></td>
 				 	<td class="psycho-slider" id="<?=$name?>-bg" style="background: #ffffff;" align="center">
 				 		<span id="<?=$name ?>-min-bound" style="width:150px; display:inline-block; text-align:right;"><?=$limits[0]?></span>
-				 		<div rel="<?=$name ?>" init-value="<?=$psycho->{$name}?>" class="slider" style="background-color: #333;display:inline-block; width:200px; margin:0 20px;"></div>
+				 		<div rel="<?=$name ?>" init-value="<?=$psycho->{$name}?>" class="slider" style="background-color: #999;display:inline-block; width:200px; margin:0 20px;"></div>
 				 		<span id="<?=$name ?>-max-bound" style="width:150px; display:inline-block; text-align:left;"><?=$limits[1] ?></span>
 				 		<input type="hidden" name="<?=$name ?>" id="<?=$name ?>" value="<?=$psycho->{$name}?>" />
 				 		</td><?

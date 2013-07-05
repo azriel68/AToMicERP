@@ -512,8 +512,4 @@ td.projectDrag {
 	left:0;
 	max-height: 90px;
 }
-div.slider a.ui-slider-handle {
-		background:url("../images/57-download.png") center center no-repeat; 
-		background-color: #fff;
-}
 

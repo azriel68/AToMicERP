@@ -13,13 +13,13 @@ echo '</pre>';*/
 $db=new TPDOdb;
 $planning=new TPlanning;
 
-if($planning->loadBy(&$db, $user->id_entity, 'id_entity')){
+if($planning->loadBy($db, $user->id_entity, 'id_entity')){
 	
 }
 else{
 	$planning->id_entity = $user->id_entity;
 	$planning->label = "mycal";
-	$planning->save(&$db);
+	$planning->save($db);
 }
 
 $action = TTemplate::actions($db, $user, $planning);

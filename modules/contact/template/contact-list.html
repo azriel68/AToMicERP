@@ -44,7 +44,7 @@
 
 	 $( "#dialog-form" ).dialog({
 		autoOpen: false,
-		height: 150,
+		height: 200,
 		width: 350,
 		modal: true,
 		draggable:false,
@@ -54,7 +54,6 @@
 					if($('#form-link-contact input[name=id_contact]').val()>0) {
 						$('#form-link-contact').submit();
 						$( this ).dialog( "close" );
-						
 					}
 					else {
 						
