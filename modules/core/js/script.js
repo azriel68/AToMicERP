@@ -1,3 +1,43 @@
+$(document).ready(function() {
+	
+	initButtonAction();
+	
+	
+	
+});
+
+function initButtonAction() {
+	$('a#button-action-edit').each(function() {
+		
+		var url = $(this).attr('href');
+		$(this).attr('href','#');
+		
+		$(this).click(function() {
+			$('div.content').html("Loading...");
+			$('div.content').load(url+' div.content', function() {
+				initButtonAction();
+			});
+			
+		});
+		
+	});
+	
+	$('a#button-action-cancel').each(function() {
+		
+		var url = $(this).attr('href');
+		$(this).attr('href','#');
+		
+		$(this).click(function() {
+			$('div.content').html("Loading...");
+			$('div.content').load(url+' div.content', function() {
+				initButtonAction();
+			});
+		});
+		
+	});
+}
+
+
 function errorMsg(message) {
 	
 		jError(
