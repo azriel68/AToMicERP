@@ -185,4 +185,38 @@ class TUser extends TContact {
 		
 		return $Tab;
 	}
+	
+	function getMyGroup(&$db){
+		//Check if unit group exist in database
+		$db->Execute("SELECT g.id 
+				FROM ".DB_PREFIX."group g LEFT JOIN ".DB_PREFIX."group_user gu ON (g.id = gu.id_group)
+				LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group = gu.id_group)
+				WHERE gu.id_user = ".$this->getId()." AND code = 'unit'");
+		
+		//If exist return his id
+		if($db->Get_line())
+			return $db->Get_field('id');
+		else{ //Else insert dependencies
+			$TGroup = new TGroup;
+			$TGroup->name = $this->login;
+			$TGroup->code = "unit";
+			$TGroup->id_entity = $this->getEntity("normal");
+			$TGroup->description = "Group for single user ".$this->login;
+			$TGroup->save($db);
+			
+			$TGroup_user = new TGroupUser;
+			$TGroup_user->id_group = $TGroup->id;
+			$TGroup_user->id_user = $this->getId();
+			$TGroup_user->idAdmin = 0;
+			$TGroup_user->save();
+			
+			$TGroup_entity = new TGroupEntity;
+			$TGroup_entity->id_entity = $this->getEntity("normal");
+			$TGroup_entity->id_group = $TGroup->id;
+			$TGroup_entity->save($db);
+			
+			return $TGroup->id;
+		}
+		
+	}
 }

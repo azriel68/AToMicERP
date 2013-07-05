@@ -19,6 +19,10 @@
 			case 'all_users':
 				__out(_get_all_users());
 				break;
+			case 'gel_all_user_rights':
+				__out(_gel_all_user_rights($_REQUEST['planning']));
+				break;
+				
 		}
 		
 	}
@@ -40,6 +44,9 @@
 				break;
 			case 'add_user_right':
 				__out(_add_user_rights($_REQUEST['tag'],$_REQUEST['type'],$_REQUEST['planning']));
+				break;
+			case 'del_user_right':
+				__out(_del_user_rights($_REQUEST['right']));
 				break;
 		}
 	}
@@ -214,7 +221,7 @@
 	 */
 	function _get_all_users(){
 		global $user;
-		$sql = "SELECT u.id, u.firstname,u.lastname FROM ".DB_PREFIX."contact u 
+		$sql = "SELECT u.id, u.login FROM ".DB_PREFIX."contact u 
 				LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
 				LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
 				LEFT JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)
@@ -225,7 +232,7 @@
 		$db->Execute($sql);
 		$TUsers = array();
 		while($db->Get_line())
-			$TUsers[] = $db->Get_field('lastname')." ".$db->Get_field('firstname');
+			$TUsers[] = $db->Get_field('id').".".$db->Get_field('login');
 		
 		return $TUsers;
 	}
@@ -233,40 +240,102 @@
 	/*
 	 * Ajoute un droit utilisateur sur un planning
 	 */
-	function _add_user_rights($username,$type,$id_planning){
+	function _add_user_rights($id_tag,$type,$id_planning){
 		global $user;
-		
+				
 		$db = new TPDOdb;
-		$usertemp = new TContact;
 		$right = new TPlanningRights;
 		
-		$usertemp->loadBy($db, substr($username,strpos($username," ")), 'lastname');
 		$right->id_entity= $user->getEntity();
 		$right->id_planning= $id_planning;
 		
 		switch ($type) {
 			case 'admin':
-				$right->read = 1;
-				$right->create = 1;
+				$right->reader = 1;
+				$right->writer = 1;
 				$right->admin = 1;
+				$type = 'admintags';
 				break;
 			case 'modifieur':
-				$right->read = 1;
-				$right->create = 1;
+				$right->reader = 1;
+				$right->writer = 1;
 				$right->admin = 0;
+				$type = 'modtags';
 				break;
 			case 'lecteur':
-				$right->read = 1;
-				$right->create = 0;
+				$right->reader = 1;
+				$right->writer = 0;
 				$right->admin = 0;
+				$type = 'lectags';
 				break;
 		}
 		
-		$right->id_user = $usertemp->id;
-				
-		if($right->save($db))
-			return $right->id;
+		$right->id_user = $id_tag;
+		
+		$id_right = __right_exist($id_tag,$id_planning);
+		if($id_right!= "error")
+			return array('type' => $type, 'id_right' => $id_right);
+		
+		$right->save($db);
+		if($right->id>0)
+			return $tab = array('type' => $type, 'id_right' => $right->id);
 		else
 			return "error";
 		
 	}
+	
+	/*
+	 * Vérifie si un droit utilisateur a déjà été renseigner pour le planning passé en paramètre
+	 */
+	 
+	 function __right_exist($id_tag,$id_planning){
+	 	$db = new TPDOdb;
+		$db->Execute("SELECT id FROM ".DB_PREFIX."planning_rights WHERE id_user = ".$id_tag." AND id_planning = ".$id_planning);
+		if($db->Get_line())
+			return $db->Get_field('id');
+		else
+			return TRUE;
+	 }
+	
+	/*
+	 * Supprime un droit utilisateur
+	 */
+	
+	function _del_user_rights($id_right){
+		global $user;
+		
+		$db = new TPDOdb;
+		$right = new TPlanningRights;
+		
+		if($right->load($db,$id_right))
+			$right->delete($db);
+		else
+			return "error";
+	}
+	
+	
+	/*
+	 * Supprime un droit utilisateur
+	 */
+	
+	function _gel_all_user_rights($id_planning){
+		global $user;
+		
+		$db = new TPDOdb;
+		
+		$sql = "SELECT u.login, pr.reader, pr.writer, pr.admin
+				FROM ".DB_PREFIX."planning_rights pr LEFT JOIN ".DB_PREFIX."contact u ON (u.id = pr.id_user)
+				WHERE id_planning = ".$id_planning;
+		
+		$db->Execute($sql);
+		
+		while($db->Get_line()){
+			$TPlanning_rights[$db->Get_field('login')] = array('reader' => $db->Get_field('reader'), 'writer' => $db->Get_field('writer'), 'admin' => $db->Get_field('admin'));
+		}
+		
+		return $TPlanning_rights;
+	}
+	
+	
+	
+	

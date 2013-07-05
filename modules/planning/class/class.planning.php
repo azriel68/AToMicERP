@@ -47,7 +47,7 @@ class TStatus extends TObjetStd {
 class TPlanningRights extends TObjetStd{
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'planning_rights');
-		parent::add_champs('id_entity, id_user, id_planning, read, create, admin','type=entier;');
+		parent::add_champs('id_entity, id_user, id_planning, reader, writer, admin','type=entier;');
 		
 		TAtomic::initExtraFields($this);
 		
