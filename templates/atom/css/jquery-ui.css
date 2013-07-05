@@ -661,8 +661,8 @@ html, body{ }
 
 /* Button states */
 .ui-state-default, .ui-widget-content .ui-state-default{background-color:#d4d4d4;border-color:#d4d4d4;color:#525252;}
-.ui-state-focus, .ui-widget-content .ui-state-focus{background-color:#66B3FF;border-color:#66B3FF;color:#ffffff;}
-.ui-state-hover, .ui-widget-content .ui-state-hover{background-color:#66B3FF;border-color:#66B3FF;color:#ffffff;}
+.ui-state-focus, .ui-widget-content .ui-state-focus{background-color:#31b5c5;border-color:#31b5c5;color:#ffffff;}
+.ui-state-hover, .ui-widget-content .ui-state-hover{background-color:#31b5c5;border-color:#31b5c5;color:#ffffff;}
 .ui-state-active, .ui-widget-content .ui-state-active{background-color:#37BFCD;border-color:#37BFCD;color:#ffffff;}
 
 

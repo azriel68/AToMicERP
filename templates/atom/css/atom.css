@@ -30,10 +30,10 @@ a.logo {
 	padding-top:150px;
 }
 div.header {
-	background-color: rgba(255, 255, 255, 0.8);
+	/*background-color: rgba(255, 255, 255, 0.8);*/
 	text-align:left;
 	margin: 0px 0px 10px 0;
-	border-bottom: 1px solid #464646;
+	/*border-bottom: 1px solid #464646;*/
 	height:65px;
 	overflow: visible;
 }
@@ -72,8 +72,17 @@ div.menu li img {
 
 div.menu li a {
 	text-decoration: none;
-	font-family: "averia";
+	/*font-family: "averia";*/
 	font-size: 18px;
+	font-weight: bold;
+	padding: 25px 10px;
+	background-color: #D4D4D4;
+	color:#525252;
+}
+
+div.menu li a:hover {
+	background-color:#31b5c5;
+	color:#fff;
 }
 div.tabs {
 	float: left;
@@ -117,7 +126,7 @@ input, input.flat, textarea, textarea.flat, form.flat select, select.flat {
    	font-family: "ProximaNova","Lucida Sans","Lucida Grande",sans-serif;
    	
 	background: #FDFDFD;
-    border: 1px solid #3CC3D2;
+    border: 2px solid #525252;
     padding: 1px 1px 1px 1px;
     margin: 0px 0px 0px 0px;
 }
@@ -167,7 +176,7 @@ div.content table.grille img {
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
 }
 div.content table.grille td {
-	border: 1px solid #464646;
+	border: 1px solid #CCCCCC;
 	padding:5px;
 }
 div.content table.grille td:first-child {
@@ -175,18 +184,20 @@ div.content table.grille td:first-child {
 	font-weight: bold;
 }
 div.content  a.butAction,div.content  span.butAction,div.content  span.butActionDelete, div.content  a.butActionDelete, div.content  a.butActionRefused {
-    background-color: #37BFCD;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
-    color: #FFFFFF;
-    font-weight: 700;
+    background-color: #D4D4D4;
+    /*box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;*/
+    /*color: #FFFFFF;*/
+    color:#525252;
+    font-size: 1em;
+    font-weight: bold;
     height: 52px;
     letter-spacing: 1px;
     line-height: 52px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);
+    /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);*/
     width: 155px;
 
-    background-clip: padding-box;
-    border-radius: 4px 4px 4px 4px;
+   /* background-clip: padding-box;
+    border-radius: 4px 4px 4px 4px;*/
     cursor: pointer;
     display: inline-block;
     font-size: 18px;
@@ -203,8 +214,9 @@ div.content  a.butAction,div.content  span.butAction,div.content  span.butAction
 }
 
 
-div.content  a.butAction:hover,div.content  span.butAction:hover {
+div.content  a.butAction:hover,div.content  span.butAction:hover, div#boxes a.butAction:hover {
 	background-color:#31b5c5;
+	color:#fff;
 }
 
 div.content  a.butActionSmall,div.content  span.butActionSmall,div.content  span.butActionSmallDelete, div.content  a.butActionSmallDelete, div.content  a.butActionSmallRefused {
@@ -302,14 +314,14 @@ div#boxes  .boxe-highlight {
 	
 	border: 3px solid #ffff00;
     
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     
-    float:left;
+    /*float:left;*/
     width:400px;
     height : 400px;
     overflow: hidden;
     margin:0 10px 20px 10px;
-    
+     display:inline-block;
     position:relative;
 }
 div#boxes  div.boxe  {
@@ -318,9 +330,9 @@ div#boxes  div.boxe  {
 	padding: 10px 10px 10px 10px;
 	
 	border: 1px solid #E8E8E8;
-    box-shadow: 2px 2px 2px #999999;
+    /*box-shadow: 2px 2px 2px #999999;*/
     
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     
     display:inline-block;
     
@@ -337,20 +349,20 @@ div#boxes div.boxe div.buttons {
 	bottom:10px;
 	right:-10px;
 }
-div#boxes  a.butAction {
-    background-color: #37BFCD;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;
-    color: #FFFFFF;
+div#boxes a.butAction {
+	background-color: #D4D4D4;
+    color:#525252;
+    font-size: 1em;
     font-weight: bold;
+    height: 52px;
     letter-spacing: 1px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);
+    line-height: 52px;
+
     width: 100px;
 
     background-clip: padding-box;
-    border-radius: 4px 4px 4px 4px;
     cursor: pointer;
     display: inline-block;
-    font-size: 14px;
     height: 15px;
     line-height: 15px;
     position: relative;
@@ -360,7 +372,6 @@ div#boxes  a.butAction {
     margin: 20px 20px 0px 0px;
     text-decoration: none;
     padding:10px 0;
-
 }
 
 div#boxes  div.boxe h2 {
@@ -373,13 +384,13 @@ div.profile {
 	overflow: visible;
 	float: right;
 	padding: 20px 10px 20px 20px;
-	font-family: "averia";
+	/*font-family: "averia";*/
 }
 
 div.profile ul {
 	display:none;
 	position:absolute;
-	top:45px;
+	top:65px;
 	right:0;
 	margin:0 0 0 0;
 	padding:0 0 0 0;
@@ -415,7 +426,7 @@ div.profile:hover ul {
 	display:block;	
 }
 div.profile img {
-	height:20px;
+	height:40px;
 	vertical-align: middle;
 }
 #userGroupDrag, #scrum {

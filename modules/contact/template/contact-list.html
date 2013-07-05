@@ -31,6 +31,7 @@
 		$('#contactname').autocomplete({
 			source:"./script/interface.php?get=contact&id_user=[user.id]&json=1"
 			,delay:0
+			,autoFocus:true
 			,minLength:0
 			,select: function( event, ui ) {
 				id_contact = ui.item.value.substr(0, ui.item.value.indexOf('.'));
