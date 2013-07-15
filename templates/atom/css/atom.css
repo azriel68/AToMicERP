@@ -183,14 +183,14 @@ div.content table.grille td:first-child {
 	width:20%;
 	font-weight: bold;
 }
-div.content  a.butAction,div.content  span.butAction,div.content  span.butActionDelete, div.content  a.butActionDelete, div.content  a.butActionRefused {
+div.content  a.butAction,div.content  input.butAction,div.content  span.butAction,div.content  span.butActionDelete, div.content  a.butActionDelete, div.content  a.butActionRefused {
     background-color: #D4D4D4;
     /*box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.28) inset;*/
     /*color: #FFFFFF;*/
     color:#525252;
     font-size: 1em;
     font-weight: bold;
-    height: 52px;
+   /* height: 52px;*/
     letter-spacing: 1px;
     line-height: 52px;
     /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.48);*/
@@ -201,7 +201,6 @@ div.content  a.butAction,div.content  span.butAction,div.content  span.butAction
     cursor: pointer;
     display: inline-block;
     font-size: 18px;
-    height: 30px;
     line-height: 30px;
     position: relative;
     text-align: center;
@@ -211,10 +210,12 @@ div.content  a.butAction,div.content  span.butAction,div.content  span.butAction
     margin: 20px 20px 20px 20px;
     text-decoration: none;
     padding:10px 0;
+    
+    border:0 none;
 }
 
 
-div.content  a.butAction:hover,div.content  span.butAction:hover, div#boxes a.butAction:hover {
+div.content  a.butAction:hover,div.content  span.butAction:hover, div#boxes a.butAction:hover ,div.content  input.butAction:hover {
 	background-color:#31b5c5;
 	color:#fff;
 }
@@ -241,7 +242,7 @@ div.content  a.butActionSmall,div.content  span.butActionSmall,div.content  span
     text-align: center;
     width: 190px;
     /*float:left;*/
-    
+    font-family: "ProximaNova","Lucida Sans","Lucida Grande",sans-serif;
     margin: 5px 5px 5px 5px;
     text-decoration: none;
     padding:10px 0;
