@@ -288,6 +288,11 @@ table.liste {
 table.liste a {
 	text-decoration: none;
 }
+table.liste tr td {
+	height: 30px;
+	vertical-align: top;
+	padding:5px;
+}
 table.liste tr.liste_titre {
     background: none repeat scroll 0 0 #FFFFFF;
     color: #2AA8B9;
@@ -310,6 +315,13 @@ table.liste tr.pair td {
     font-family: arial,tahoma,verdana,helvetica;
     margin-bottom: 1px;
 }
+table.liste tr.impair td:first-child,table.liste tr.pair td:first-child {
+	padding-left:10px;	
+}
+table.liste tr.impair:hover td, table.liste tr.pair:hover td {
+ 	background-color: #c5e3e7;	
+}
+
 div#boxes {
 	clear:both;
 }

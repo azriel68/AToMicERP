@@ -1,21 +1,48 @@
 $(document).ready(function() {
 	
-	initButtonAction();
+	/*initInterface();
+	 FAusse bonne idée
+	 * */
 	
 	
 	
 });
 
-function initButtonAction() {
+function initInterface() {
+	$('div.tabs a').each(function() {
+		
+		var url = $(this).attr('href');
+		if(url=='#') {
+			return false;
+		}
+		
+		$(this).attr('href','#'+url);
+		
+		$(this).click(function() {
+			//$('div.content').html("Loading...");
+			$('div.content').load(url+' div.content', function() {
+				
+				initInterface();
+			});
+			
+		});
+		
+	});
+	
 	$('a#button-action-edit').each(function() {
 		
 		var url = $(this).attr('href');
+		if(url=='#') {
+			return false;
+		}
+
 		$(this).attr('href','#');
 		
 		$(this).click(function() {
-			$('div.content').html("Loading...");
+			//$('div.content').html("Loading...");
 			$('div.content').load(url+' div.content', function() {
-				initButtonAction();
+				
+				initInterface();
 			});
 			
 		});
@@ -25,12 +52,16 @@ function initButtonAction() {
 	$('a#button-action-cancel').each(function() {
 		
 		var url = $(this).attr('href');
+		if(url=='#') {
+			return false;
+		}
+
 		$(this).attr('href','#');
 		
 		$(this).click(function() {
-			$('div.content').html("Loading...");
+			//$('div.content').html("Loading...");
 			$('div.content').load(url+' div.content', function() {
-				initButtonAction();
+				initInterface();
 			});
 		});
 		
