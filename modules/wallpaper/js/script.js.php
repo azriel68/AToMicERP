@@ -56,14 +56,15 @@ function getWallpaper(changeWallpaperEveryDay) {
 				json:1
 				,get : 'wallpaper'
 				,async:true
+				,UId : '<?=$user->UId ?>'
 			}
 			,dataType: 'json'
 		})
 		.done(function (wallpaper) {
 			var expirationDay = (changeWallpaperEveryDay==1) ? 1 : 360;
 			
-			$.cookie('atomicWallpaper', wallpaper.response.image.url, { expires: expirationDay, path: "/" });
-			changeWallpaper(wallpaper.response.image.url);
+			$.cookie('atomicWallpaper', wallpaper.url, { expires: expirationDay, path: "/" });
+			changeWallpaper(wallpaper.url);
 			
 			$('#menu-admin-changeWallpaper').html(oldContent);
 					
