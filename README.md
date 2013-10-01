@@ -12,8 +12,8 @@ ERP en PHP sur une base modulaire. (Pour le moment le projet est à un stade tro
 
 Licences
 ==========================
-Font : http://openfontlibrary.org/en/font/averia, http://openfontlibrary.org/en/font/pecita
-Icons : http://www.glyphish.com/
-Chart : http://www.highcharts.com/ - www.highcharts.com/license
-Avatar : gravatar.com
-Calendar : http://code.google.com/p/jquery-frontier-calendar/
+* Font : http://openfontlibrary.org/en/font/averia, http://openfontlibrary.org/en/font/pecita
+* Icons : http://www.glyphish.com/
+* Chart : http://www.highcharts.com/ - www.highcharts.com/license
+* Avatar : gravatar.com
+* Calendar : http://code.google.com/p/jquery-frontier-calendar/
