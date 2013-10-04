@@ -3,9 +3,11 @@
 	define('ROOT', '/var/www/ATM/AToMicERP/');
 	define('HTTP', 'http://127.0.0.1/ATM/AToMicERP/');
 	define('DOCROOT', ROOT.'documents/');
-	define('COREROOT', '/var/www/ATM/atm-core/');
-	define('COREHTTP', 'http://127.0.0.1/ATM/atm-core/');
-
+	
+	define('COREROOT',ROOT.'core/');
+	define('COREHTTP',HTTP.'core/');
+	
+	
 	define('DB_HOST','localhost');
 	define('DB_NAME','atomicERP');
 	define('DB_USER','root');
