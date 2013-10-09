@@ -134,7 +134,7 @@ class TTemplate {
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'self'=>$_SERVER['PHP_SELF']
-					,'list'=>$l->render($db, $sql, $param)
+					,'list'=>$l->renderDataTableSQL($db, $sql, $param)
 				)
 			)
 		)); 

@@ -300,7 +300,12 @@ table.liste tr.liste_titre {
 table.liste tr.liste_titre th {
 	border-bottom: 1px solid #2AA8B9;	
 }
-
+table.liste tr.barre-recherche {
+	background-color: #2AA8B9;
+}
+table.liste tr.barre-recherche a {
+	color:#fff;	
+}
 table.liste tr.impair td {
     background: #F2F2F2;
     border: 0 none;

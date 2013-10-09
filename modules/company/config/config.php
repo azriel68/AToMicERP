@@ -64,6 +64,11 @@ $conf->defaultConf['company'] = array(
 		,'link'=>array(
 			'name'=>'<a href="'.HTTP.'modules/company/company.php?action=view&id=@id@">@name@</a>'
 		)
+		,'search'=>array(
+			'name'=>true
+			,'phone'=>true
+			,'email'=>true
+		)
 	)
 );
 
