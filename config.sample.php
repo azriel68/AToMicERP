@@ -1,19 +1,18 @@
 <?
 
-	define('ROOT', '/var/www/ATM/AToMicERP/');
-	define('HTTP', 'http://127.0.0.1/ATM/AToMicERP/');
+	define('ROOT', __DIR__.'/');
+	define('HTTP', '@HTTP@');
 	define('DOCROOT', ROOT.'documents/');
 	
 	define('COREROOT',ROOT.'core/');
 	define('COREHTTP',HTTP.'core/');
 	
-	
-	define('DB_HOST','localhost');
-	define('DB_NAME','atomicERP');
-	define('DB_USER','root');
-	define('DB_PASS','**********'); /* Your user password Here */
+	define('DB_HOST','@DB_HOSTNAME@');
+	define('DB_NAME','@DB_BASENAME@');
+	define('DB_USER','@DB_USER@');
+	define('DB_PASS','@DB_USER_PASSWORD@'); /* Your user password Here */
 	define('DB_DRIVER','mysqli');
-	define('DB_PREFIX','atom_');
+	define('DB_PREFIX','@DB_PREFIX@');
 
 	define('DEFAULT_THEME','atom');
 	define('DEFAULT_LANG','fr_FR');

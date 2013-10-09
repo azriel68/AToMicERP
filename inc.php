@@ -26,7 +26,13 @@
 		,'user'=>true
 	);
 
-	require('config.php');
+	if(is_file('config.php') && is_readable('config.php')) {
+		require('config.php');
+	}
+	else {
+		header('location:./install/');
+		exit();
+	}
 	
 	define('USE_TBS', true);
 	require(COREROOT.'inc.core.php');
