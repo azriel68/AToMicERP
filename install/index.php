@@ -1,39 +1,42 @@
 <?php
 
-	require('../config.sample.php');
-	define('USE_TBS', true);
-	require(COREROOT.'inc.core.php');
-	require('../includes/class.atomic.php');
-	require('../includes/class.template.php');
-	require('../includes/fonction.php');
-
+	$_FOR_INSTALLER=true;
+	require('../inc.php'); 
+	 
 	if(is_file('../install.lock')) exit(__tr('Installation already done'));
 	
-	$user=new stdClass;
-	$user->theme = DEFAULT_THEME;
+	$action=__get('action', 'installer');
 	
-	$conf=new stdClass;
-	$conf->js=array();
-	$conf->css=array();
+	switch ($action) {
+		case 'database-test':
+			$db=new TPDOdb(DB_DRIVER, DB_DRIVER.':dbname='.__get('db_name').';host='.__get('db_host'), __get('db_user'), _get('db_user'));
+			print_r($db);			
+			break;
+		case 'installer':
+			installer($conf);
+			
+			break;
+		
+	}
 	
-	require('../config.templates.php');
 	
-	$etape = __get('etape', 'etape1');
 	
-	call_user_func('_'.$etape, $conf);
-	
-function _etape1($conf) {
+function installer($conf) {
 	
 	$tbs=new TTemplateTBS;
 		
 	$form=new TFormCore;
 	
-	print $tbs->render('etape1.html'
+	print __tr_view($tbs->render('installer.html'
 		,array()
 		,array(
 			'form'=>array(
-				'database'=>$form->texte('', 'database', '', 50 )
-				,'btsubmit'=>$form->btsubmit(__tr('Create database'), 'btcreate','','butAction') 
+				'db_name'=>$form->texte('', 'db_name', 'atomic', 50 )
+				,'db_user'=>$form->texte('', 'db_name', 'root', 50 )
+				,'db_host'=>$form->texte('', 'db_host', $_SERVER['SERVER_NAME'], 50 )
+				,'db_pass'=>$form->texte('', 'db_pass', '', 50 )
+				,'db_prefix'=>$form->texte('', 'db_prefix', 'atom_', 50 )
+				,'db_test'=>$form->bt(__tr('test database'), 'db_test','','butAction') 
 			)
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf)
@@ -42,6 +45,6 @@ function _etape1($conf) {
 				,'self'=>$_SERVER['PHP_SELF']
 			)
 		)
-	);
+	));
 	
 } 

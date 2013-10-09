@@ -29,6 +29,9 @@
 	if(is_file('config.php') && is_readable('config.php')) {
 		require('config.php');
 	}
+	else if(!empty($_FOR_INSTALLER)) {
+		require('config.sample.php');
+	}
 	else {
 		header('location:./install/');
 		exit();
@@ -43,7 +46,7 @@
 
 	$user = TAtomic::getUser();
 	TAtomic::loadLang($conf, $user->lang);
-	TAtomic::getConf($user);
+	if(empty($_FOR_INSTALLER)) TAtomic::getConf($user);
 	
 	require('config.templates.php');
 	TAtomic::loadStyle($conf, $user->theme);
