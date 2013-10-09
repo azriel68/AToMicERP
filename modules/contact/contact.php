@@ -52,8 +52,12 @@ if($action!==false ) {
 		
 		,'firstname'=>$form->texte('', 'firstname', $contact->firstname, 80)
 		,'lastname'=>$form->texte('', 'lastname', $contact->lastname, 80)
+		,'birthday'=>$form->calendrier('', 'birthday', $contact->birthday, 80)
+		,'job'=>$form->texte('', 'job', $contact->job, 80)
 		,'phone'=>$form->texte('', 'phone', $contact->phone, 80)
+		,'mobile'=>$form->texte('', 'mobile', $contact->mobile, 80)
 		,'fax'=>$form->texte('', 'fax', $contact->fax, 80)
+		,'civility'=>$form->combo('', 'civility', TDictionary::get($db, $user, $parent->id_entity, 'civility'), $contact->civility)
 		,'email'=>$form->texte('', 'email', $contact->email, 80)
 		,'lang'=>$form->texte('', 'lang', $contact->lang, 80)
 		,'lang'=>$form->combo('', 'lang', TDictionary::get($db, $user, $contact->id_entity, 'lang'), $contact->lang)

@@ -6,7 +6,8 @@ class TCompany extends TObjetStd {
 		
 		parent::add_champs('isEntity,id_entity','type=entier;index;');
 		parent::add_champs('isCustomer,isSupplier','type=entier;index;');
-		parent::add_champs('customerRef,supplierRef,name,phone,fax,email,web','type=chaine;');
+		parent::add_champs('capital','type=float;');
+		parent::add_champs('customerRef,supplierRef,name,legalForm,vat_intra,vat_subject,phone,fax,email,web','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
 

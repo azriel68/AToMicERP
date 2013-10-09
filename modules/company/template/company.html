@@ -4,6 +4,25 @@
 <div class="content">
 	
 	[tpl.tabs;strconv=no]
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#vat_subject").change(function() {
+					setViewVAT();			
+			});
+			setViewVAT();
+		});
+	
+		function setViewVAT() {
+			
+			if($("#vat_subject").val() == 1) {
+				$("#VATLine").show();
+			} else {
+				$("#VATLine").hide();
+			}
+			
+		}
+	</script>
 
 	<form name="formTCompany" action="[tpl.self]" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="action" value="save" />
@@ -16,6 +35,18 @@
 			</tr>
 			<tr>
 				<td>__tr(Name)__</td><td>[company.name;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Capital)__</td><td>[company.capital;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Forme juridique)__</td><td>[company.legalForm;htmlconv=no]</td>
+			</tr>
+			<tr>
+				<td>__tr(Assujetti)__</td><td>[company.vat_subject;htmlconv=no]</td>
+			</tr>
+			<tr id="VATLine">
+				<td>__tr(Numéro)__</td><td>[company.vat_intra;htmlconv=no]</td>
 			</tr>
 			<tr>
 				<td>__tr(Phone)__</td><td>[company.phone;htmlconv=no]</td>
