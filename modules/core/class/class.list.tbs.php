@@ -3,7 +3,7 @@
 class TListviewTBS {
 	
 	function __construct( $id, $template='') {
-		if(empty($template)) $template = COREROOT.'includes/class/html.list.tbs.php';	
+		if(empty($template)) $template = __DIR__.'/html.list.tbs.php';	
 			
 		$this->id = $id;
 		$this->template = $template;
@@ -243,13 +243,14 @@ class TListviewTBS {
 	}
 
 	private function getJS(&$TParam) {
-		$javaScript = '<script language="javascript">
+		/*$javaScript = '<script language="javascript">
 		if(typeof(TListTBS_include)=="undefined") {
 			document.write("<script type=\"text/javascript\" src=\"'.COREHTTP.'includes/js/list.tbs.js\"></scr");
 	  		document.write("ipt>");
 		}
 		</script>';
-
+		*/
+		$javaScript='';
 
 		if($this->typeRender=='dataTable') {
 			
