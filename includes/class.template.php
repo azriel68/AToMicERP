@@ -185,6 +185,16 @@ class TTemplate {
 			$success = '';
 		}
 		
+		if(isset($_REQUEST['error'])) {
+			$error = TTemplate::error($_REQUEST['error']);
+		}
+		else if(!empty($errorMessage)) {
+			$error = TTemplate::error($errorMessage);
+		}
+		else {
+			$error = '';
+		}
+		
 		//print_r($conf);
 		return $tbs->render(TPL_HEADER,
 			array(
@@ -197,7 +207,7 @@ class TTemplate {
 					, 'id'=>$id
 					, 'title'=>$title
 					, 'http'=>HTTP
-					, 'error'=> isset($_REQUEST['error']) ? TTemplate::error($_REQUEST['error']) :''
+					, 'error'=> $error
 					, 'success'=> $success
 					)
 			)

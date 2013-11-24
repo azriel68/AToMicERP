@@ -2,30 +2,35 @@
 <h1>__tr(Installer)__</h1>
 
 <h2>__tr(Step)__ 1</h2>
+<form action="#" name="formStep1">
+	<input type="hidden" name="action" value="database-test" />
+	[step1.errorMessage];
 <table border="1">
 	<tr>
 		<th colspan="2">__tr(Database connexion)__</th>
 	</tr>
 	<tr>
-		<td>__tr(Host)__</td><td>[form.db_host; strconv=no]</td>
+		<td>__tr(Host)__</td><td>[step1.db_host; strconv=no]</td>
 	</tr>
 	<tr>
-		<td>__tr(Database name)__</td><td>[form.db_name; strconv=no]</td>
+		<td>__tr(Database name)__</td><td>[step1.db_name; strconv=no]</td>
 	</tr>
 	<tr>
-		<td>__tr(Database user)__</td><td>[form.db_user; strconv=no]</td>
+		<td>__tr(Database user)__</td><td>[step1.db_user; strconv=no]</td>
 	</tr>
 	<tr>
-		<td>__tr(Database user password)__</td><td>[form.db_pass; strconv=no]</td>
+		<td>__tr(Database user password)__</td><td>[step1.db_pass; strconv=no]</td>
 	</tr>
 	<tr>
-		<td>__tr(Database table prefix)__</td><td>[form.db_prefix; strconv=no]</td>
+		<td>__tr(Database table prefix)__</td><td>[step1.db_prefix; strconv=no]</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="2">[form.db_test; strconv=no]</td>
+		<td align="center" colspan="2">[step1.db_test; strconv=no]</td>
 	</tr>
 	
 </table>
+</form>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		

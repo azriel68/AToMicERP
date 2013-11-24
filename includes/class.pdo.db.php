@@ -15,6 +15,8 @@ function __construct($db_type = '', $connexionString='', $DB_USER='', $DB_PASS='
 	$this -> query = '';			//requete actuelle
 	$this -> type = $db_type;
 	$this -> debug = false;
+	$this -> debugError = false;
+	$this -> error = '';
 	
 	if(empty($connexionString)) {
 		if (($db_type == '') && (defined('DB_DRIVER')))
@@ -101,6 +103,9 @@ function Get_Recordcount() {
 	return $this -> rs -> rowCount();
 }
 private function Error($message, $showTrace=true) {
+	
+	$this->error = $message;
+	
 	if($this->debug ||  $this->debugError) {
 		//print $this->connexionString.'<br/>';
 		print "<strong>".$message."</strong>";
