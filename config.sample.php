@@ -4,9 +4,6 @@
 	define('HTTP', '@HTTP@');
 	define('DOCROOT', ROOT.'documents/');
 	
-	define('COREROOT',ROOT.'core/');
-	define('COREHTTP',HTTP.'core/');
-	
 	define('DB_HOST','@DB_HOSTNAME@');
 	define('DB_NAME','@DB_BASENAME@');
 	define('DB_USER','@DB_USER@');

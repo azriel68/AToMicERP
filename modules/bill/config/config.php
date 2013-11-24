@@ -8,6 +8,7 @@ $conf->modules['bill']=array(
 	,'id'=>'TBill'
 	,'class'=>array('TBill')
 	,'folder'=>'bill'
+	,'moduleRequire'=>array('user')
 );
 
 /******************************************************************************************

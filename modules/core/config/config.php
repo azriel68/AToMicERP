@@ -3,7 +3,7 @@
 	$conf->modules['core']=array(
 		'name'=>'Core'
 		,'id'=>'Core'
-		,'class'=>array('TNumbering', 'TConf')
+		,'class'=>array('TNumbering', 'TConf','TListTBS','TReponseMail')
 	);
 	
 	//JAVASCRIPTS
@@ -16,3 +16,6 @@
 
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts.js';
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts-more.js';
+	
+	$conf->js[] = HTTP.'modules/core/js/list.tbs.js';
+	

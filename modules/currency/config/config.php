@@ -7,6 +7,7 @@ $conf->modules['currency']=array(
 	'name'=>'Currency'
 	,'id'=>'currency'
 	,'class'=>array('TCurrency','TCurrencyRate')
+	,'moduleRequire'=>array('user')
 	
 );
 

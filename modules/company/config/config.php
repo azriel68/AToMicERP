@@ -9,6 +9,7 @@ $conf->modules['company']=array(
 	,'class'=>array('TCompany')
 	,'folder'=>'company'
 	,'icon'=>'112-group.png'
+	,'moduleRequire'=>array('core','dictionnary')
 );
 
 /******************************************************************************************

@@ -4,6 +4,7 @@
 		'name'=>'Wallpaper'
 		,'id'=>'TWallpaper'
 		,'class'=>array()
+		,'moduleRequire'=>array('user')
 	);
 
 	

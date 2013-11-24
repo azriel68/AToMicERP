@@ -7,6 +7,7 @@
 		,'position'=>1
 		,'url'=>HTTP.'modules/user/user.php?id=@id@&action=view'
 		,'right'=>array('user','me','view')
+		,'moduleRequire'=>array('core','dictionnary','company','contact')
 	);
 
 

@@ -41,3 +41,35 @@ function GetLanguageCodeISO6391()
 	}
 	return $hi_code;
 }
+function _debug() {
+	if(isset($_REQUEST['DEBUG'])) {
+		return true;
+	}
+	
+	return false;
+}
+function __get($varName, $default=null) {
+	return isset($_REQUEST[$varName]) ? $_REQUEST[$varName] : $default;
+} 
+function __out($data) {
+	
+	if(isset($_REQUEST['gz'])) {
+		$s = serialize($data);
+		print gzdeflate($s,9);
+	}
+	elseif(isset($_REQUEST['gz2'])) {
+		$s = serialize($data);
+		print gzencode($s,9);
+	}
+	elseif(isset($_REQUEST['json'])) {
+		print json_encode($data);
+	}
+	elseif(isset($_REQUEST['jsonp'])) {
+			print $_GET['callback'].'('.json_encode($data).');' ;
+	}
+	else{
+		$s = serialize($data);
+		print $s;
+	}
+
+}

@@ -7,6 +7,7 @@ $conf->modules['address']=array(
 	'name'=>'Address'
 	,'id'=>'TAddress'
 	,'class'=>array('TAddress')
+	,'moduleRequire'=>array('core','company')
 );
 
 /******************************************************************************************

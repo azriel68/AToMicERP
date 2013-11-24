@@ -37,17 +37,17 @@
 		exit();
 	}
 	
-	define('USE_TBS', true);
-	require(COREROOT.'inc.core.php');
 	require(ROOT.'includes/inc.php');
-	
 	session_name('atomic');
 	session_start();
 
 	$user = TAtomic::getUser();
+	
 	TAtomic::loadLang($conf, $user->lang);
 	if(empty($_FOR_INSTALLER)) TAtomic::getConf($user);
 	
 	require('config.templates.php');
 	TAtomic::loadStyle($conf, $user->theme);
+	
+	
 	

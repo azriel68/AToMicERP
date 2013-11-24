@@ -7,6 +7,7 @@ $conf->modules['photo']=array(
 	'name'=>'Photo'
 	,'id'=>'photo'
 	,'class'=>array('TPhoto')
+	,'moduleRequire'=>array('core')
 	
 );
 

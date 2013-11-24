@@ -5,10 +5,11 @@
 		'name'=>'psycho'
 		,'id'=>'TPsycho'
 		,'class'=>array('TPsycho')
+		,'moduleRequire'=>array('project')
 	);
 
 	TAtomic::addHook($conf, 'TContact',array(
-		'function'=>'hook'
+		'function'=>'psychoHook'
 		,'object'=>'TPsycho'
 		,'parameters'=>array()
 	));

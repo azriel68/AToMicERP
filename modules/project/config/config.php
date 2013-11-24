@@ -6,6 +6,7 @@
 		,'position'=>4
 		,'url'=>HTTP.'modules/project/project.php'
 		,'module'=>'project'
+		
 	);
 	
 
@@ -13,6 +14,7 @@
 		'name'=>'Projects'
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
 		,'icon'=>'41-picture-frame.png'
+		,'moduleRequire'=>array('user')
 	);
 	
 	@$conf->template->TProject->card = './template/project.html';

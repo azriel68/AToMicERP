@@ -8,6 +8,8 @@ $conf->modules['contact']=array(
 	,'id'=>'contact'
 	,'class'=>array('TContact', 'TContactToObject')
 	,'folder'=>'contact'
+	,'moduleRequire'=>array('core','dictionnary','company')
+	
 );
 
 /******************************************************************************************

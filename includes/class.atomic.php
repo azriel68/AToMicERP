@@ -72,34 +72,71 @@ class TAtomic {
 		
 		return $translated_sentence;
 	}
+
+	static function activateModule(&$conf, $moduleName) {
+		if(!isset($conf->moduleEnabled[$moduleName])) {
+			
+			// TODO activation du module en base
+			
+			
+			$conf->moduleEnabled[$moduleName]=true;
+		}
+		
+	}
+
+	static function loadModuleDependencie(&$conf, $moduleName) {
+		
+		if(isset($conf->moduleEnabled[$moduleName]['moduleRequire'])) {
+			
+			foreach($conf->moduleEnabled[$moduleName]['moduleRequire'] as $subModuleName) {
+				
+				TAtomic::activateModule($conf, $subModuleName);
+				
+			}
+			
+		}
+		
+		
+	}
+	
+	static function orderModules(&$conf) {
+		// TODO réordonne le chargement des modules 
+		
+		foreach($conf->modules as $moduleName=>$options) {
+			
+			
+		}
+		
+	}
 	
 	static function loadModule(&$conf) {
 		$dir = ROOT.'modules/';
 		
-		// Load conf of all existing modules
-		/*$handle = opendir($dir); 
-		while (false !== ($file = readdir($handle))) {
-			if($file!='.' && $file!='..'){
-				if(is_dir($dir.$file)){
-					
-				}
-			}
-		}
-		closedir($handle);*/
-
-		// Load files from modules only if core or enabled module
 		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
+		// Load conf of all existing modules
 		foreach($moduleToLoad as $moduleName=>$options) {
 			if(is_file($dir.$moduleName.'/config/config.php')) require($dir.$moduleName.'/config/config.php');
+			
+			$conf->modules[$moduleName]['enabled']=true;
+			
+			TAtomic::loadModuleDependencie($conf, $moduleName);
+			
+			if(is_dir($dir.$moduleName.'/class/')) {
+				TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
+			}
+					
+		}
+
+		TAtomic::orderModules($conf);
+
+		// Load files from modules only if core or enabled module
+		foreach($moduleToLoad as $moduleName=>$options) {
 			if(!empty($conf->modules[$moduleName])) {
 				if(is_file($dir.$moduleName.'/lib/function.php')) require($dir.$moduleName.'/lib/function.php');
 				
 				if(is_file($dir.$moduleName.'/js/script.js')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js';
 				if(is_file($dir.$moduleName.'/js/script.js.php')) $conf->js[] = HTTP.'modules/'.$moduleName.'/js/script.js.php';
 				
-				if(is_dir($dir.$moduleName.'/class/')) {
-					TAtomic::loadClass($conf, $dir.$moduleName.'/class/');
-				}
 				if(is_dir($dir.$moduleName.'/boxe/')) {
 					TAtomic::loadBoxe($conf, $moduleName);
 				}

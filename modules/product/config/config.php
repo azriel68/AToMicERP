@@ -9,6 +9,7 @@ $conf->modules['product']=array(
 	,'class'=>array('TProduct', 'TPrice')
 	,'folder'=>'product'
 	,'icon'=>'icon.png'
+	,'moduleRequire'=>array('user')
 );
 
 /******************************************************************************************

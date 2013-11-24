@@ -8,6 +8,7 @@ $conf->modules['planning']=array(
 	,'class'=>array('TPlanning','TEvent','TStatus','TPlanningRights')
 	,'folder'=>'planning'
 	,'icon'=>'83-calendar.png'
+	,'moduleRequire'=>array('user')
 );
 
 /******************************************************************************************
