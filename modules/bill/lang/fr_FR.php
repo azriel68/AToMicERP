@@ -4,7 +4,7 @@ $language=array(
 	/*************************************************
 	 * Fields
 	 *************************************************/
-	'Ref'=>'Numéro de facture'
+	'Ref'=>'Référence'
 	,'RefExt'=>'Référence externe'
 	,'DateBill'=>'Date facture'
 	,'Status'=>'Statut'
