@@ -461,7 +461,7 @@ class TListviewTBS {
 				} 
 				
 				if(isset($TParam['subQuery'][$field])) {
-					$dbSub = new Tdb;
+					$dbSub = new TPDOdb;
 					$dbSub->Execute( strtr($TParam['subQuery'][$field], array_merge( $trans, array('@val@'=>$value)  )) );
 					$subResult = '';
 					while($dbSub->Get_line()) {

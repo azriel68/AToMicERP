@@ -1,7 +1,7 @@
 <?
 	require('../../../inc.php');
 	
-	$db=new Tdb;
+	$db=new TPDOdb;
 	
 	$l = new TListviewTBS('list_lastBill');
 		
