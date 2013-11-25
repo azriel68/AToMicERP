@@ -11,6 +11,7 @@
 	require('fonction.php');
 	 
 	require('class.form.core.php');
+	require('class.tools.php');
 	require('class.trigger.php');
 	require('class.objet_std.php');
 	require('class.pdo.db.php');

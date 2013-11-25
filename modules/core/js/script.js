@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	
-	/*initInterface();
-	 FAusse bonne idée
+	/*
+	 FAusse bonne idée ?
 	 * */
-	
+	initInterface();
 	
 	
 });

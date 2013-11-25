@@ -9,7 +9,7 @@
 	);
 
 	TAtomic::addHook($conf, 'TContact',array(
-		'function'=>'psychoHook'
+		'function'=>'hook'
 		,'object'=>'TPsycho'
 		,'parameters'=>array()
 	));

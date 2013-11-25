@@ -51,7 +51,8 @@ class TPsycho extends TContact {
 	}
 	
 	static function hook($className, $pageName, &$TParameters) {
-		
+		$pageName=strtr($pageName,array("\\"=>"/")); //windows	
+			
 		ob_start();
 		
 		if($className=='TContact' && $pageName=='contact/contact') {
@@ -131,7 +132,7 @@ class TPsycho extends TContact {
 
 			 ?></table><?
 			 
-			?><script language="javascript">
+			?><script type="text/javascript">
 				$('#contact').append( $('#psycho-hook-add').children() );
 				
 				 $(".psycho-slider > div.slider").slider({
@@ -172,10 +173,12 @@ class TPsycho extends TContact {
 			</script>
 			
 			<?
+			
+			$db->close();
 		}
 		
 		
-		$db->close();
+		
 		
 		return ob_get_clean();
 		

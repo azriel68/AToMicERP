@@ -276,14 +276,19 @@ class TListviewTBS {
 			$TPagination=array();
 		}
 		elseif($this->typeRender=='dataTableAjax') {
-			$javaScript.='<script language="javascript">
-			
+
+/*
 					if(typeof(TListTBS_dataTable_include)=="undefined") {
 						var TListTBS_dataTable_include=true;
 						document.write("<script type=\"text/javascript\" src=\"'.COREHTTP.'includes/js/dataTable/js/jquery.dataTables.min.js\"></scr");
 			  			document.write("ipt>");
 						document.write("<link rel=\"stylesheet\" href=\"'.COREHTTP.'includes/js/dataTable/css/jquery.dataTables.css\" />");
 					}
+ * 
+ */
+
+			$javaScript.='<script language="javascript">
+			
 			
 					$(document).ready(function () {
 						$("#'.$this->id.'").wrap("<div id=\"'.$this->id.'_datatable_container\">");	
