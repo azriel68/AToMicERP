@@ -18,6 +18,7 @@ function __construct($db_type = '', $connexionString='', $DB_USER='', $DB_PASS='
 	$this -> debugError = false;
 	$this -> error = '';
 	
+	
 	if(empty($connexionString)) {
 		if (($db_type == '') && (defined('DB_DRIVER')))
 			$db_type = DB_DRIVER;
@@ -103,8 +104,7 @@ function Get_Recordcount() {
 	return $this -> rs -> rowCount();
 }
 private function Error($message, $showTrace=true) {
-	
-	$this->error = $message;
+	$this -> error = $message;
 	
 	if($this->debug ||  $this->debugError) {
 		//print $this->connexionString.'<br/>';
@@ -152,20 +152,29 @@ private function Error($message, $showTrace=true) {
 	}
 		
 }
-function Execute ($sql){
+function Execute ($sql, $TBind=array()){
         $mt_start = microtime(true)*1000;
 		 
         $this->query = $sql;
 		
 		if($this->debug) {
 				$this->Error('Debug requête : '.$this->query);
-				
+						
 		}
 		
+		if(!empty($TBind)) {
+			$this->rs = $this->db->prepare( $this->query);
+			foreach($TBind as $k=>$v) {
+				$this->rs->bindParam($k, $v);
+			}
+			
+			$this->rs->execute();
+		}
+		else {
+			$this->rs = $this->db->query( $this->query);	
+		}
 		
-        $this->rs = $this->db->query( $this->query);
-		
-		$mt_end = microtime(true)*1000;
+        $mt_end = microtime(true)*1000;
 		
 		if (mysql_errno()) {
 			if($this->debug) $this->Error("PDO DB ErrorExecute : " . print_r($this ->db-> errorInfo(),true).' '.$this -> query);

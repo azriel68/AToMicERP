@@ -21,7 +21,8 @@ class TUser extends TContact {
 	}
 	static function checkLoginExist(&$db, $login, $TIdExclude=array()) {
 		
-		$db->Execute("SELECT id FROM ".DB_PREFIX."contact WHERE login='".$login."' AND id NOT IN (-1,".implode(',',$TIdExclude).")");
+		$db->Execute("SELECT id FROM ".DB_PREFIX."contact 
+			WHERE login='".$login."' AND id NOT IN (-1,".implode(',',$TIdExclude).")");
 		if($db->Get_line()) {
 			return true;
 		}
@@ -40,7 +41,7 @@ class TUser extends TContact {
 	function save(&$db) {
 		
 		if(TUser::checkLoginExist($db, $this->login, array($this->getId()) )) {
-			TAtomic::errorlog("ErrorLoginAlreadyExist ($login)");
+			TAtomic::errorlog('ErrorLoginAlreadyExist ('.$this->login.')');
 			
 			return false;
 		}
@@ -139,7 +140,10 @@ class TUser extends TContact {
 			return true;
 			
 		}
-		
+		elseif(!$this->right($this->id_entity_c, 'login')) {
+			TAtomic::errorlog("Error no rights to login for (".$this->getId()." / ".$this->id_entity_c.")");	
+		}
+			
 		return false;
 	}
 	function getEntity($mode='sql') {
