@@ -1,5 +1,5 @@
 [tpl.header;strconv=no]
-<form action="home.php" name="formLogin" method="post" onsubmit="return checkLogin();">
+<form action="home.php" name="formLogin" id="formLogin" method="post">
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="back" value="[form.back; strconv=no]" />
 	<div id="page-login" class="content">
@@ -9,7 +9,7 @@
 		<div>
 			[form.password; strconv=no]
 		</div>
-		<div id="select_etity" style="display:none;">
+		<div id="select_entity">
 			[form.id_entity; strconv=no]
 		</div>
 		<div>
@@ -18,7 +18,7 @@
 	</div>
 </form>
 <script type="text/javascript">
-	function checkLogin() {
+	/*function checkLogin() {
 		
 		if($('#login').val()!='' && $('#password').val()!='' && $('#id_entity').selectedIndex>-1) {
 			return true;
@@ -26,11 +26,9 @@
 		
 		return false;
 				
-	}
+	}*/
 	function show_entity() {
 		if($('#login').val()!='') $('#select_etity').show();
-			
-		
 	}
 	
 	$(document).ready(function() {
@@ -38,9 +36,20 @@
 		show_entity();
 		
 		$('#login').change(function() {
-			
 			show_entity();
 		});
+
+		$("#formLogin").validate({
+			rules: {
+			// simple rule, converted to {required:true}
+				name: "required"
+				// compound rule
+				,login: {
+					required: true
+				}
+			}
+		});
+
 		
 	});
 	

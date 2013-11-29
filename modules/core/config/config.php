@@ -18,4 +18,6 @@
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts-more.js';
 	
 	$conf->js[] = HTTP.'modules/core/js/list.tbs.js';
+
+	$conf->js[] = HTTP.'modules/core/js/jquery.validate.min.js';
 	

@@ -20,8 +20,8 @@
 	require('class.requete.php');
 	require('class.atomic.php');
 
-	require('tbs_class.php');
 	require('tbs_plugin_opentbs.php');
+	require('tbs_class.php');
 	
 	require('class.template.tbs.php');
 	require('class.template.php');

@@ -7,11 +7,6 @@
 Class TFormCore {
 var $type_aff='FORM'; //Type d'affichage du formulaire (FORM / VIEW )
 
-
-//
-var $js_validation=''; 
-
-
 var $trans=array("\""=>'&quot;');
  /**
   * constructeur de la classe form
@@ -44,6 +39,20 @@ function __construct($pAction=null,$pName=null,$pMethod="POST",$pTransfert=FALSE
 }
 
 
+function Set_typeaff($pType='edit'){
+	
+  $pType = strtolower($pType);  	
+	
+  if (($pType=='edit') || ($pType=='new'))
+    $this->type_aff='edit';
+  else
+    $this->type_aff='view';  
+}
+
+function hidden($pName,$pVal,$plus=""){
+  $field = '<input id="'.$pName.'" TYPE="HIDDEN" NAME="'.$pName.'" VALUE="'.$pVal.'" '.$plus.'> ';
+  return $field;
+} 
 
 
 
