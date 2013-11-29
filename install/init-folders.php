@@ -10,7 +10,7 @@ if(empty($company) && empty($_REQUEST['id_company'])) {
 
 @mkdir(DOCROOT,0777);
 
-$id_entity = empty($company) ? $_REQUEST['id_company'] : $company->getId();
+$id_entity = __get('id_company',  $company->getId());
 
 $moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
 foreach($moduleToLoad as $moduleName=>$options) {

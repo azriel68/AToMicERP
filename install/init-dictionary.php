@@ -7,7 +7,7 @@ if(empty($company) && empty($_REQUEST['id_company'])) {
 	echo 'Dictionary not created, company missing';
 	return false;
 }
-$id_entity = empty($company) ? $_REQUEST['id_company'] : $company->getId();
+$id_entity = __get('id_company',  $company->getId());
 
 $db = new TPDOdb;
 $dir = ROOT.'modules/dictionary/init/';

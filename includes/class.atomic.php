@@ -31,21 +31,28 @@ class TAtomic {
 		}
 		$user = & $_SESSION['user'];
 		
-		if(!empty($_REQUEST['login']) && !empty($_REQUEST['password']) && !empty($_REQUEST['action']) && $_REQUEST['action'] == 'login') {
+		$login = __get('login','','string',30);
+		$password = __get('password','','string',30);
+		$id_entity = __get('id_entity', 0, 'integer');
+		$action = __get('action','');
+		$back = __get('back',false);
+		$UId = __get('UId', '', 'string', 50);
+		
+		if(!empty($login) && !empty($password) && $action == 'login') {
 			$db=new TPDOdb;
-			if($user->login($db, $_REQUEST['login'], $_REQUEST['password']/*, $_REQUEST['id_entity']*/)) {
+			if($user->login($db, $login, $password, $id_entity)) {
 				
-				if(isset($_REQUEST['back'])) {
-					header('location:'.$_REQUEST['back']);
+				if($back) {
+					header('location:'.$back);
 				}
 				
 			}
 			$db->close();
 			
 		}
-		else if(isset($_REQUEST['UId'])) {
+		else if(!empty($UId)) {
 			$db=new TPDOdb;
-			$user->loginUId($db, $_REQUEST['UId']);
+			$user->loginUId($db, $UId);
 			$db->close();
 		}
 		

@@ -67,7 +67,7 @@ function __construct($db_type = '', $connexionString='', $DB_USER='', $DB_PASS='
 
 	$this->debugError = defined('SHOW_LOG_DB_ERROR') || (ini_get('display_errors')=='On');
 	
-	if (isset($_REQUEST['DEBUG']) || defined('DB_SHOW_ALL_QUERY') ) {
+	if (_debug() || defined('DB_SHOW_ALL_QUERY') ) {
 		print "SQL DEBUG : 	<br>";
 		$this -> debug = true;
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
@@ -294,11 +294,7 @@ function Get_All($mode = PDO::FETCH_OBJ, $functionOrClassOrColumn=null) {
 }
 function Get_line($mode = PDO::FETCH_OBJ){
 	if(!is_object($this->rs)){
-		//die('query : '.$this->query);
-		//if (isset($_REQUEST['DEBUG'])) {
 			$this->Error("PDO DB ErrorGetLine : " . print_r($this ->db-> errorInfo(),true).' '.$this->query);
-			
-		//}
 		return FALSE;
 	}
 	

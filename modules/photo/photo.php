@@ -10,8 +10,10 @@ $photo=new TPhoto;
 $db=new TPDOdb;
 
 $moreButton='';
-if(!empty($_REQUEST['id_product'])) {
-	$id_parent = $_REQUEST['id_product'];
+$id_product = __get('id_product',0,'int');
+
+if($id_product) {
+	$id_parent = $id_product;
 	$id_parent_name = 'id_product';
 	$parent = new TProduct;
 	$parent->load($db, $id_parent);
@@ -52,7 +54,7 @@ if($action!==false ) {
 		,'dt_maj'=>$photo->get_date('dt_maj')
 	);
 	
-	if(isset($_REQUEST['id_product'])) {
+	if($id_product) {
 		$TForm['id_product']=$form->combo('', 'id_product', TProduct::getProductForCombo($db, $user->getEntity()), $photo->id_product);
 	}
 	

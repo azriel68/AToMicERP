@@ -48,8 +48,28 @@ function _debug() {
 	
 	return false;
 }
-function __get($varName, $default=null) {
-	return isset($_REQUEST[$varName]) ? $_REQUEST[$varName] : $default;
+function __get($varName, $default=null, $type='', $maxlength=0) {
+     $var = isset($_REQUEST[$varName]) ? $_REQUEST[$varName] : $default;
+	 
+	 if($maxlength>0) {
+	 	$var = substr($var, 0, $maxlength);
+	 }
+	 
+	 if(!empty($type)) {
+	 /*
+	  Les valeurs possibles pour le paramètre type sont :
+        "boolean" (ou, depuis PHP 4.2.0, "bool")
+        "integer" (ou, depuis PHP 4.2.0, "int")
+        "float" (uniquement depuis PHP 4.2.0. Pour les anciennes versions, utilisez l'alternative "double")
+        "string"
+        "array"
+        "object"
+        "NULL" (depuis PHP 4.2.0)
+	  */
+		settype($var, $type);
+	 }
+	 
+	 return $var;
 } 
 function __out($data) {
 	

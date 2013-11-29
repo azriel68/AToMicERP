@@ -2,8 +2,8 @@
 	
 	require('../../inc.php');
 	
-	$get = isset($_REQUEST['get'])?$_REQUEST['get']:'';
-	$put = isset($_REQUEST['put'])?$_REQUEST['put']:'';
+	$get = __get('get','');
+	$put = __get('put','');
 	
 	_get($get);
 	_put($put);
@@ -11,16 +11,16 @@
 	function _get($case) {
 		switch ($case) {
 			case 'all_events':
-				__out(_get_all_events($_REQUEST['planning'],$_REQUEST['dt_deb'],$_REQUEST['dt_fin']));			
+				__out(_get_all_events(__get('planning',0,'int'),__get('dt_deb','', 'string',10 ),__get('dt_fin','', 'string',10)));			
 				break;
 			case 'get_event':
-				__out(_get_event($_REQUEST['id_event']));			
+				__out(_get_event(__get('id_event',0,'int' )));			
 				break;
 			case 'all_users':
 				__out(_get_all_users());
 				break;
 			case 'gel_all_user_rights':
-				__out(_gel_all_user_rights($_REQUEST['planning']));
+				__out(_gel_all_user_rights( __get('planning',0,'int') ));
 				break;
 				
 		}
@@ -29,24 +29,32 @@
 	
 	function _put($case) {
 		
+		$TEvent_data = __get('TEvent_data');
+		$id_event = __get('id_event',0,'int' );
+		$only_date = __get('only_date',0,'int');
+		$id_right = __get('right',0, 'int');
+		$id_tag = __get('tag',0, 'int');
+		$type = __get('type','', 'string',30);
+		$id_planning = __get('planning',0, 'int');
+		
 		switch ($case) {
 			case 'add_event':
-				__out(_add_event($_REQUEST['TEvent_data']));
+				__out(_add_event( $TEvent_data  ));
 				break;
 			case 'del_event':
-				__out(_del_event($_REQUEST['id_event']));
+				__out(_del_event( $id_event ));
 				break;
 			case 'update_event':
-				__out(_update_event($_REQUEST['id_event'], $_REQUEST['TEvent_data']));
+				__out(_update_event($id_event, $TEvent_data ));
 				break;
 			case 'update_date_event':
-				__out(_update_event($_REQUEST['id_event'], $_REQUEST['TEvent_data'], $_REQUEST['only_date']));
+				__out(_update_event($id_event, $TEvent_data, $only_date ));
 				break;
 			case 'add_user_right':
-				__out(_add_user_rights($_REQUEST['tag'],$_REQUEST['type'],$_REQUEST['planning']));
+				__out(_add_user_rights($id_tag,$type,$id_planning));
 				break;
 			case 'del_user_right':
-				__out(_del_user_rights($_REQUEST['right']));
+				__out(_del_user_rights($id_right));
 				break;
 		}
 	}

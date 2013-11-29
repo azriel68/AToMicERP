@@ -11,8 +11,9 @@ $db=new TPDOdb;
 $action = TTemplate::actions($db, $user, $contact);
 
 // Display from the company module, company is the parent
-if(!empty($_REQUEST['id_company'])) {
-	$id_parent = $_REQUEST['id_company']; // où est défini adresse ? :: !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
+$id_company = __get('id_company',0, 'int');
+if($id_company) {
+	$id_parent = $id_company; // où est défini adresse ? :: !empty($address->id_company) ? $address->id_company : $_REQUEST['id_company'];
 	$id_parent_name = 'id_company';
 	$parent = new TCompany;
 	$parent->load($db, $id_parent);
@@ -21,10 +22,10 @@ if(!empty($_REQUEST['id_company'])) {
 	
 }
 
+$actionRequest =__get('action');
 
-
-if(!empty($_REQUEST['action']) && $_REQUEST['action']=="addlink" ) {
-	$contact->load($db, $_REQUEST['id_contact']);
+if($actionRequest=="addlink" ) {
+	$contact->load($db, __get('id_contact',0,'int'));
 	
 	$parent->addContact($contact);		
 	$parent->save($db);	
@@ -110,7 +111,7 @@ else {
 	
 	$sql = strtr($conf->list->{$className}->{$listName}['sql'],array(
 		'@getEntity@'=>$user->getEntity()
-		,'@id_company@'=>!empty($_REQUEST['id_company']) ? $_REQUEST['id_company'] : ''
+		,'@id_company@'=>__get('id_company', '')
 	));
 	
 	$param = $conf->list->{$className}->{$listName}['param'];

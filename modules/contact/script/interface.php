@@ -2,8 +2,8 @@
 
 require ('../../../inc.php');
 
-$get = isset($_REQUEST['get']) ? $_REQUEST['get'] : '';
-$put = isset($_REQUEST['put']) ? $_REQUEST['put'] : '';
+$get =  __get('get', '');
+$put = __get('put', '');
 
 $db=new TPDOdb;
 _put($db, $put);
@@ -14,7 +14,7 @@ function _get(&$db, $case) {
 	switch ($case) {
 		case 'contact' :
 			
-			__out(_contactList($db, $_REQUEST['id_user'], $_REQUEST['term']));
+			__out(_contactList($db, __get('id_user',0,'int'), __get('term','','string',30) ));
 
 			break;
 	}
@@ -33,7 +33,7 @@ function _contactList(&$db, $id_user,$term='') {
 	$user=new TUser;
 	$user->load($db, $id_user);
 	$sql="SELECT c.id, CONCAT(c.id,'. ',c.firstname, ' ', c.lastname) as `fullname` FROM ".DB_PREFIX."contact c
-			WHERE c.id_entity IN (".$user->getEntity().") AND CONCAT(c.firstname, ' ', c.lastname) LIKE '%".$term."%' 
+			WHERE c.id_entity IN (".$user->getEntity().") AND CONCAT(c.firstname, ' ', c.lastname) LIKE ".$db->quote('%'.$term.'%')."   
 			ORDER BY c.lastname";
 	
 	$db->Execute($sql);

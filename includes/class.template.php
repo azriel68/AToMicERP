@@ -20,25 +20,27 @@ class TTemplate {
 	 * S : actions effectuée 
 	 */
 	static function actions(&$db, &$user, &$object) {
-	 	
-		if(isset($_REQUEST['action'])) {
-			switch ($_REQUEST['action']) {
+	 	$action =__get('action', false);
+		$id = __get('id',0,'int');
+		
+		if($action) {
+			switch ($action) {
 				case 'new':
 					return 'edit';
 					break;
 					
 				case 'edit':
-					$object->load($db, $_REQUEST['id']);
+					$object->load($db, $id);
 					return 'edit';
 					break;
 					
 				case 'view':
-					$object->load($db, $_REQUEST['id']);
+					$object->load($db, $id);
 					return 'view';
 					break;
 					
 				case 'save':
-					$object->load($db, $_REQUEST['id']);
+					$object->load($db, $id);
 					$object->set_values($_POST);
 					if(empty($object->id_entity)) {
 						$object->id_entity = $user->id_entity;
@@ -49,7 +51,7 @@ class TTemplate {
 					break;
 					
 				case 'delete':
-					$object->load($db, $_REQUEST['id']);
+					$object->load($db, $id);
 					$object->delete($db);
 					return 'delete';
 					break;
@@ -175,20 +177,17 @@ class TTemplate {
 	static function header(&$conf, $title='AtomicERP', $successMessage='', $errorMessage='', $id="page") {
 		$tbs=new TTemplateTBS;
 		
-		if(isset($_REQUEST['success'])) {
-			$success = TTemplate::success($_REQUEST['success']);
-		}
-		else if(!empty($successMessage)) {
+		$successMessage=__get('sucess', $successMessage);
+		$errorMessage=__get('error', $errorMessage);
+		
+		if(!empty($successMessage)) {
 			$success = TTemplate::success($successMessage);
 		}
 		else {
 			$success = '';
 		}
 		
-		if(isset($_REQUEST['error'])) {
-			$error = TTemplate::error($_REQUEST['error']);
-		}
-		else if(!empty($errorMessage)) {
+		if(!empty($errorMessage)) {
 			$error = TTemplate::error($errorMessage);
 		}
 		else {

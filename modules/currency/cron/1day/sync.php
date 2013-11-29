@@ -2,7 +2,7 @@
 
 	require('../../../../inc.php');
 	
-	$id_entity = $_REQUEST['id_entity'] or die('id_entity ?');
+	$id_entity = (int)$_REQUEST['id_entity'] or die('id_entity ?');
 	
 	$local_conf = &$user->conf[$id_entity];
 	

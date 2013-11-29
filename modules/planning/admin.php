@@ -9,7 +9,7 @@ if(!$user->isLogged()) {
 $db=new TPDOdb;
 $planningrights=new TPlanningRights;
 $planning=new TPlanning;
-$planning->load($db,$_REQUEST['id_planning']);
+$planning->load($db,(int)$_REQUEST['id_planning']);
 
 $action = TTemplate::actions($db, $user, $planningrights);
 
