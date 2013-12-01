@@ -21,6 +21,9 @@ function initInterface() {
 		$(this).click(function() {
 			//$('div.content').html("Loading...");
 			$('div.content').load(url+' div.content', function() {
+				if(typeof InPageHook == 'function') {
+					InPageHook();
+				}
 				
 				initInterface();
 			});
@@ -40,8 +43,11 @@ function initInterface() {
 		
 		$(this).click(function() {
 			//$('div.content').html("Loading...");
-			$('div.content').load(url+' div.content', function() {
-				
+			
+			$('div.content').load(url+' div.content', function( response, status, xhr ) {
+				if(typeof InPageHook == 'function') {
+					InPageHook();
+				}
 				initInterface();
 			});
 			
@@ -61,6 +67,10 @@ function initInterface() {
 		$(this).click(function() {
 			//$('div.content').html("Loading...");
 			$('div.content').load(url+' div.content', function() {
+				if(typeof InPageHook == 'function') {
+					InPageHook();
+				}
+
 				initInterface();
 			});
 		});

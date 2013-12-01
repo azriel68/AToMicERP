@@ -133,34 +133,37 @@ class TPsycho extends TContact {
 			 ?></table><?
 			 
 			?><script type="text/javascript">
-				$('#contact').append( $('#psycho-hook-add').children() );
-				
-				 $(".psycho-slider > div.slider").slider({
-				 	 value:3
-					 ,min: 1
-					 ,max: 5
-					 ,animate: "fast"
-					 ,handle: '#myhandle'
-					 ,slide: function( event, ui ) {
-					 	var val = ui.value;
-					 	$('#'+$(this).attr('rel')).val( val  );
-					 	sliderBoundFont( $(this).attr('rel'), val );
-					 }
-					 ,create: function( event, ui ) {
-					 	var val = $(this).attr('init-value');
-					 	$(this).slider('value', val);
-					 	sliderBoundFont( $(this).attr('rel'), val );					 	
-					 }
-				 });
-				
-				<?
-				
-				if($TParameters['action']!='edit') {
-					?>$(".psycho-slider > div.slider").slider({ disabled: true });<?
+				function InPageHook() {
+					$('#contact').append( $('#psycho-hook-add').children() );
+					
+					 $(".psycho-slider > div.slider").slider({
+					 	 value:3
+						 ,min: 1
+						 ,max: 5
+						 ,animate: "fast"
+						 ,handle: '#myhandle'
+						 ,slide: function( event, ui ) {
+						 	var val = ui.value;
+						 	$('#'+$(this).attr('rel')).val( val  );
+						 	sliderBoundFont( $(this).attr('rel'), val );
+						 }
+						 ,create: function( event, ui ) {
+						 	var val = $(this).attr('init-value');
+						 	$(this).slider('value', val);
+						 	sliderBoundFont( $(this).attr('rel'), val );					 	
+						 }
+					 });
+					
+					<?
+					
+					if($TParameters['action']!='edit') {
+						?>$(".psycho-slider > div.slider").slider({ disabled: true });<?
+					}
+					
+					?>
+					
 				}
-				
-				?>
-				
+			
 				function sliderBoundFont(name, val) {
 					
 					$('#'+name+'-max-bound').css('font-size', (100-((3-val)*5))+'%' );
@@ -168,7 +171,7 @@ class TPsycho extends TContact {
 					
 				}
 				
-				
+				InPageHook();			
 				
 			</script>
 			

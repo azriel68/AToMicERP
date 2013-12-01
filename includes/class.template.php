@@ -265,7 +265,7 @@ class TTemplate {
 		if($mode=='list') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$TButton['new']=array(
-					'href'=>'?action=new'.$more
+					'href'=>$_SERVER['PHP_SELF'].'?action=new'.$more
 					,'class'=>'butAction'
 					,'label'=>__tr('new'.get_class($object))
 				);
@@ -274,14 +274,14 @@ class TTemplate {
 		else if($mode=='save' || $mode=='view') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$TButton['edit']=array(
-					'href'=>'?action=edit&id='.$object->getId().$more
+					'href'=>$_SERVER['PHP_SELF'].'?action=edit&id='.$object->getId().$more
 					,'class'=>'butAction'
 					,'label'=>__tr('edit'.get_class($object))
 				);
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton['delete']=array(
-					'href'=>'?action=delete&id='.$object->getId().$more
+					'href'=>$_SERVER['PHP_SELF'].'?action=delete&id='.$object->getId().$more
 					,'class'=>'butAction'
 					,'label'=>__tr('delete'.get_class($object))
 				);
@@ -298,7 +298,7 @@ class TTemplate {
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton['cancel']=array(
-					'href'=> ($object->getId() > 0) ? '?action=view&id='.$object->getId().$more : '?action=list'.$more
+					'href'=> ($object->getId() > 0) ? $_SERVER['PHP_SELF'].'?action=view&id='.$object->getId().$more : $_SERVER['PHP_SELF'].'?action=list'.$more
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))
 				);
@@ -332,6 +332,7 @@ class TTemplate {
 		$Tab = array();
 		
 		$className = get_class($object);
+		
 		foreach($conf->tabs->{$className} as $id=>$tab) {
 			
 			$mode = !empty($tab['mode']) ? $tab['mode'] : 'main';
@@ -344,7 +345,7 @@ class TTemplate {
 				$Tab[] = $tab;
 			}
 		}
-		
+		//print_r($Tab);
 		usort($Tab, array('TTemplate', 'tabsRankOrder'));
 		
 		return $tbs->render(TPL_TABS,
