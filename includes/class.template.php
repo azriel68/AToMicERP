@@ -273,6 +273,14 @@ class TTemplate {
 		}
 		else if($mode=='save' || $mode=='view') {
 			//if($user->right(get_class($object), 'main', 'create')) {
+				$TButton['delete']=array(
+					'href'=>$_SERVER['PHP_SELF'].'?action=delete&id='.$object->getId().$more
+					,'class'=>'butAction'
+					,'label'=>__tr('delete'.get_class($object))
+				);
+				
+					
+				
 				$TButton['edit']=array(
 					'href'=>$_SERVER['PHP_SELF'].'?action=edit&id='.$object->getId().$more
 					,'class'=>'butAction'
@@ -280,27 +288,23 @@ class TTemplate {
 				);
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
-				$TButton['delete']=array(
-					'href'=>$_SERVER['PHP_SELF'].'?action=delete&id='.$object->getId().$more
-					,'class'=>'butAction'
-					,'label'=>__tr('delete'.get_class($object))
-				);
 			//}
 		}
 		else if($mode=='edit') {
 			//if($user->right(get_class($object), 'main', 'create')) {
 				$formName = 'form'.get_class($object);
-				$TButton['save']=array(
-					'href'=>'javascript:document.forms[\''.$formName.'\'].submit()'
-					,'class'=>'butAction'
-					,'label'=>__tr('save'.get_class($object))
-				);
+				
 			//}
 			//if($user->right(get_class($object), 'main', 'delete')) {
 				$TButton['cancel']=array(
 					'href'=> ($object->getId() > 0) ? $_SERVER['PHP_SELF'].'?action=view&id='.$object->getId().$more : $_SERVER['PHP_SELF'].'?action=list'.$more
 					,'class'=>'butAction'
 					,'label'=>__tr('cancel'.get_class($object))
+				);
+				$TButton['save']=array(
+					'href'=>'javascript:document.forms[\''.$formName.'\'].submit()'
+					,'class'=>'butAction'
+					,'label'=>__tr('save'.get_class($object))
 				);
 			//}
 		}

@@ -101,9 +101,14 @@ class TUser extends TContact {
 		$sql = "SELECT id FROM ".$this->get_table()." 
 			WHERE login=".$db->quote($login)." AND password=".$db->quote($pwd)."
 			AND status = 1";
+			
 		$db->Execute($sql);
+		
+		TAtomic::accesslog('SQL '.$sql);	
 			
 		if($db->Get_line()) {
+			TAtomic::accesslog('login exist : '.$login);		
+				
 			$this->id_entity_c = $id_entity;
 			$this->t_connexion = time();
 			return $this->load($db, $db->Get_field('id'));
@@ -111,7 +116,7 @@ class TUser extends TContact {
 		else  {
 			TAtomic::errorlog("ErrorBadLogin ($login $pwd)");
 			$this->errorLogin = true;
-			
+			$this->error = __tr('ErrorBadLogin').' '.$login;
 		}
 			
 		return false;
@@ -135,19 +140,29 @@ class TUser extends TContact {
 		return false;
 	}
 	function isLogged() {
-		
-		if(!empty($_SESSION['user']) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {
+//		Tools::pre($this);exit;
+		if(empty($_SESSION['user'])) {
+			return false;
+		}
+		else if(empty($_SESSION['user']->login)) {
+			return false;
+		}
+			
+		else if(!empty($_SESSION['user']) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {
 			return true;
 			
 		}
 		elseif(!$this->right($this->id_entity_c, 'login')) {
-			TAtomic::errorlog("Error no rights to login for (".$this->getId()." / ".$this->id_entity_c.")");	
+			TAtomic::errorlog("Error no rights to login for (".$this->login.' / '. $this->getId()." / ".$this->id_entity_c.")");
+			
+			$this->error = __tr('Error no rights to login for')."(".$this->login.' / '.$this->getId()." / ".$this->id_entity_c.")";
+			return false;	
 		}
 			
 		return false;
 	}
 	function getEntity($mode='sql') {
-		/* retour l'entité possible en fonction de ses droits */
+		/* Return entities allowed by rights */
 		$TEntity = array();
 		foreach($this->rights as $id_entity=>$right) {
 			$TEntity[] = $id_entity;
@@ -160,7 +175,9 @@ class TUser extends TContact {
 		
 	}
 	
-	
+	/*
+	 * Do current user had rights to module
+	 */
 	function right($id_entity, $module='main', $submodule='main', $action='view') {
 		
 		if(empty($submodule)) $submodule = 'main';

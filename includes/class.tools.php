@@ -178,13 +178,14 @@ class Tools{
 	    return '';
 	}
 	
-	static function pre($val){
-		
-		echo '<pre>';
-		print_r($val);
-		echo '</pre>';
-		
-		
+	static function pre($t, $all=false){
+	  if($all) {
+	  	print '<pre>'. print_r($t, true) .'</pre>';
+	  }	
+	  else {
+	  	var_dump($t);
+	  }
+	  
 	}
 	
 	static function string2num($s) {

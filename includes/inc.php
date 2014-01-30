@@ -21,6 +21,8 @@
 	require('class.atomic.php');
 
 	require('tbs_plugin_opentbs.php');
+	require('plugins/tbs_plugin_bypage.php');
+	require('plugins/tbs_plugin_navbar.php');
 	require('tbs_class.php');
 	
 	require('class.template.tbs.php');

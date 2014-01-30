@@ -28,7 +28,7 @@ $conf->menu->top[] = array(
  ******************************************************************************************/
 TTemplate::addTabs($conf,'TCompany',array(
 	'card'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/company/company.php?action=view&id=@id@')
-	,'contact'=>array('label'=>'__tr(Contact)__','url'=>HTTP.'modules/contact/contact.php?id_company=@id@')
+	,'contact'=>array('label'=>'__tr(Contact)__','url'=>HTTP.'modules/contact/contact.php?id_company=@id@') // TODO move in good module
 	,'address'=>array('label'=>'__tr(Address)__','url'=>HTTP.'modules/address/address.php?id_company=@id@')
 ));
 

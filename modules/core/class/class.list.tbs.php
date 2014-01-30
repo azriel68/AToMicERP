@@ -22,18 +22,18 @@ class TListviewTBS {
 		
 		if(!isset($TParam['liste']))$TParam['liste']=array();
 		$TParam['liste'] = array_merge(array(
-			'messageNothing'=>"Il n'y a aucun élément à afficher."
+			'messageNothing'=>"Nothing to show."
 			,'picto_precedent'=>'&lt;'
 			,'picto_suivant'=>'&gt;'
 			,'order_down'=>'&#9660;'
 			,'order_up'=>'&#9650;'
-			,'noheader'=>0
+			,'showheader'=>0
 			,'image'=>''
-			,'titre'=>'Liste'
+			,'titre'=>__tr('List')
 			,'orderDown'=>''
 			,'orderUp'=>''
 			,'id'=>$this->id
-			,'picto_search'=>'[Rechercher]'
+			,'picto_search'=>__tr('[search]')
 		),$TParam['liste']);
 		
 		if(!isset($TParam['limit']))$TParam['limit']=array();

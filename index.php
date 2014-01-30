@@ -28,7 +28,7 @@
 					,'btsubmit'=>$form->btsubmit(__tr('sign in'), 'btlogin','','butAction') //.'<a href="javascript:document.forms[\'formLogin\'].submit()" class="butAction">'.__tr('sign in').'</a>'  /*$form->btsubmit(__tr('sign in'), 'btsignin','','butAction')*/
 				)
 				,'tpl'=>array(
-					'header'=>TTemplate::header($conf)
+					'header'=>TTemplate::header($conf,__tr('Sign in'), '', __val( $user->error ) )
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'self'=>$_SERVER['PHP_SELF']

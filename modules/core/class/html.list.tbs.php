@@ -1,12 +1,12 @@
 <table width="100%" border="0" class="notopnoleftnoright" style="margin-bottom: 2px;">
 		<tr>
-			[onshow;block=begin; when [liste.noheader]==0]
-			<td class="nobordernopadding" width="40" align="left" valign="middle">
+			[onshow;block=begin; when [liste.showheader]==1]
+			<td width="40" align="left" valign="middle">
 				[liste.image;magnet=img; strconv=no]
 			</td>
-			<td class="nobordernopadding"><div class="titre">[liste.titre; strconv=no]</div></td>
+			<td><div class="titre">[liste.titre; strconv=no]</div></td>
 			[onshow;block=end]
-			<td class="nobordernopadding" align="right" valign="middle">
+			<td align="right" valign="middle">
 				<div> 
 					[onshow;block=div; when [liste.havePage]+-0 ]
 				<!-- [onshow;block=div;when [pagination.last]+-1 ] -->

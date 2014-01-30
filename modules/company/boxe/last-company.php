@@ -12,8 +12,8 @@
 	$param = array_merge($conf->list->TCompany->companyList['param'] , array(
 		'limit'=>array('nbLine'=>10)
 		,'orderBy'=>array('dt_cre'=>'DESC')
-		,'hide'=>array('web','id')
-		
+		,'hide'=>array('web','id','phone')
+		,'search'=>array()
 	));
 		
 	?>

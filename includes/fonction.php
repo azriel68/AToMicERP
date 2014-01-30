@@ -71,6 +71,29 @@ function __get($varName, $default=null, $type='', $maxlength=0) {
 	 
 	 return $var;
 } 
+function __val(&$valueObject, $default='', $type='string') {
+     
+	 if(!isset($valueObject))$value=$default;
+	 else $value = $valueObject;
+	 
+	 if(!empty($type)) {
+	 /*
+	  Les valeurs possibles pour le paramètre type sont :
+        "boolean" (ou, depuis PHP 4.2.0, "bool")
+        "integer" (ou, depuis PHP 4.2.0, "int")
+        "float" (uniquement depuis PHP 4.2.0. Pour les anciennes versions, utilisez l'alternative "double")
+        "string"
+        "array"
+        "object"
+        "NULL" (depuis PHP 4.2.0)
+	  */
+		settype($value, $type);
+	 }
+	 
+	 return $value;
+} 
+
+
 function __out($data) {
 	
 	if(isset($_REQUEST['gz'])) {

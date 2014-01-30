@@ -167,6 +167,10 @@ select.flat, form.flat select {
 .button:disabled {
 	background: #ddd;
 }
+div.content div.buttons {
+	text-align:right;
+	clear:both;
+}
 div.content table.grille {
 	border-collapse: collapse;
 	border: 1px solid #464646;
