@@ -20,7 +20,8 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()), $bill->id_entity)
+		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()) , $bill->id_entity)
+		,'id_company'=>$form->combo('', 'id_company', TCompany::getCustomerForCombo($db, $bill->id_entity) , $bill->id_company)
 		,'ref'=>$form->texteRO('', 'ref', $bill->ref, 12)
 		,'dt_bill'=>$form->calendrier('', 'dt_bill', $bill->dt_bill, 12)
 		,'status'=>$form->texte('', 'status', $bill->status, 40)

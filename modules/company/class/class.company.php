@@ -50,6 +50,25 @@ class TCompany extends TObjetStd {
 		}
 		
 	}
+	
+	static function getCustomerForCombo(&$db, $id_entity) {
+		return TCompany::getCompanyForCombo($db, 1, $id_entity);
+	}
+	
+	static function getCompanyForCombo(&$db, $customers=null,  $idEntities='') {
+		
+		$sql="SELECT id,name FROM ".DB_PREFIX."company WHERE 1";
+		
+		if(!is_null($customers)) $sql.=' AND isCustomer='.$customers;
+		
+		if(!empty($idIn)) $sql.=' AND id_entity IN ('.$idIn.') ';
+		
+		
+		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'name');
+		
+	}
+	
+
 	function getContactForCombo(&$db, $id_contactExclude) {
 		
 		$TContact=array();

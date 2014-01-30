@@ -139,6 +139,10 @@ input, textarea, select {
 	margin-bottom:1px;
 	margin-top:1px;
 }
+input.text_readonly {
+	background: #525252;
+	color:#fff;
+}
 select.flat, form.flat select {
 	font-weight: normal;
 }

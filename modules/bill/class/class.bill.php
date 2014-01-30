@@ -4,8 +4,13 @@ class TBill extends TDocument {
 		parent::add_champs('status','type=chaine;index;');
 		parent::add_champs('ref_ext','type=chaine;');
 		parent::add_champs('dt_bill','type=date;');
+
+		parent::add_champs('total,total_VAT,total_ATI','type=float;'); //ATI All taxe included
+
 		
 		parent::__construct();
+		
+		$this->type='bill';
 	}
 	
 	function save(&$db) {
