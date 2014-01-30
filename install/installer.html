@@ -39,7 +39,49 @@
 </script>
 
 <h2>__tr(Step)__ 2</h2>
+<form action="#" name="formStep2">
+	<input type="hidden" name="action" value="create-config" />
+	[step2.errorMessage];
+	
+	[step2.db_name; strconv=no]
+	[step2.db_user; strconv=no]
+	[step2.db_pass; strconv=no]
+	[step2.db_prefix; strconv=no]
+	
+	
+<table border="1">
+	<tr>
+		<th colspan="2">__tr(Config creation)__</th>
+	</tr>
+	<tr>
+		<td align="center" colspan="2">[step2.db_create; strconv=no]</td>
+	</tr>
+	
+</table>
+</form>
 
+
+<h2>__tr(Step)__ 3</h2>
+<form action="#" name="formStep3">
+	<input type="hidden" name="action" value="database-create" />
+	[step3.errorMessage];
+	
+	[step3.db_name; strconv=no]
+	[step3.db_user; strconv=no]
+	[step3.db_pass; strconv=no]
+	[step3.db_prefix; strconv=no]
+	
+	
+<table border="1">
+	<tr>
+		<th colspan="2">__tr(Database creation)__</th>
+	</tr>
+	<tr>
+		<td align="center" colspan="2">[step3.db_create; strconv=no]</td>
+	</tr>
+	
+</table>
+</form>
 
 
 [tpl.footer;strconv=no]

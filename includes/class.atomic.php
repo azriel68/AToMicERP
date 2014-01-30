@@ -35,13 +35,15 @@ class TAtomic {
 		$password = __get('password','','string',30);
 		$id_entity = __get('id_entity', 0, 'integer');
 		$action = __get('action','');
-		$back = __get('back',false);
+		$back = __get('back',false, 'boolean');
 		$UId = __get('UId', '', 'string', 50);
 		
 		if(!empty($login) && !empty($password) && $action == 'login') {
 			$db=new TPDOdb;
+			
+			
 			if($user->login($db, $login, $password, $id_entity)) {
-				
+					
 				if($back) {
 					header('location:'.$back);
 				}
@@ -54,6 +56,10 @@ class TAtomic {
 			$db=new TPDOdb;
 			$user->loginUId($db, $UId);
 			$db->close();
+		}
+		else {
+				
+			null; // user already logged	
 		}
 		
 		return $user;
@@ -256,6 +262,34 @@ class TAtomic {
 			
 		}
 		
+	}
+	
+	/*
+	 * Créée ou mise à jour de la base de données
+	 * 
+	 */
+	
+	static function createMajBase(&$db, &$conf) {
+		
+		foreach (array_merge($conf->moduleCore, $conf->moduleEnabled) as $moduleName=>$options) {
+			
+			$module = $conf->modules[$moduleName];
+			
+			if (isset($module['class'])) {
+		
+				foreach ($module['class'] as $className) {
+		
+					$o = new $className;
+					if (method_exists($o, 'init_db_by_vars')) {
+						$o -> init_db_by_vars($db);
+					}
+		
+				}
+		
+			}
+		
+		}
+			
 	}
 	
 }
