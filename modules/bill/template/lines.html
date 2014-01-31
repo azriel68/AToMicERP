@@ -15,16 +15,27 @@
 			$(this).click(function() {
 				//$('div.content').html("Loading...");
 				
-				$('div.content div#lines-contener').load(url+' div#lines-contener table#lines', function( response, status, xhr ) {
-					
-					initInterfaceLine();
-				});
-				
+				loadLines();
 			});
 			
 		});
 		
 		
+	}
+
+	function loadLines() {
+		
+				$('div.content div#lines-contener').load('[tpl.self] div#lines-contener table#lines', function( response, status, xhr ) {
+					
+					initInterfaceLine();
+				});
+
+	}
+	
+	function addLine() {
+		
+		$.post("[tpl.self]", $('#formTLines').serialize());
+				
 	}
 	
 	$(document).ready(function() {
@@ -54,7 +65,9 @@
 
 
 
-	<form name="formTLines" action="[tpl.self]" method="post">
+	<form name="formTLines" id="formTLines" action="[tpl.self]" method="post">
+		<input type="hidden" ty name="action" value="add-line" />
+		<input type="hidden" name="id_bill" value="[bill.id]" />
 		
 		<div id="lines-contener">
 		
@@ -76,7 +89,9 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td>[line_add.id_product;strconv=no;magnet=tfoot][line_add.title;strconv=no]</td><td>[line_add.quantity;strconv=no]</td>
+					<td>[line_add.id_product;strconv=no;magnet=tfoot][line_add.title;strconv=no]</td>
+					<td>[line_add.quantity;strconv=no]</td>
+					<td><a href="#" onclick="addLine()">Add</a></td>
 				</tr>
 			</tfoot>
 		</table>

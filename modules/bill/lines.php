@@ -18,11 +18,24 @@ if($id_bill) {
 	$bill=new TBill;
 	$bill->load($db, $id_bill);	
 	
+	if($action=='add-line') {
+		
+		$iLine = $bill->addChild($db, 'TBillLine');
+	
+		$newLine = &$bill->TBillLine[$iLine];
+		$newLine->set_values(__get('TLineAdd'));
+	
+		$bill->save($db);
+	}
+	
 	$TLine = array();
 	
 	foreach($bill->TBillLine as $k=>&$line) {
 		
 		 $viewLineMode = ($action=='edit-line' && $id_line == $line->id) ? 'edit' : 'view' ;
+		
+		 
+		
 		 $form->Set_typeaff( $viewLineMode );
 				
 			$row = array_merge( $line->get_values(), array(
@@ -45,7 +58,7 @@ if($id_bill) {
 	}	
 	else {
 		$TLineAdd =array(
-					'id_product'=>$form->combo('', 'TLineAdd[id_product]', array_merge( array(0=>'') , TProduct::getProductForCombo($db))  , $line->id_product)
+					'id_product'=>$form->combo('', 'TLineAdd[id_product]', array_merge( array(0=>'') , TProduct::getProductForCombo($db))  , 0)
 					,'title'=>$form->texte('', 'TLineAdd[title]', '', 80)		
 					,'quantity'=>$form->texte('', 'TLineAdd[quantity]', 1, 5)
 		);	

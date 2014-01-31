@@ -345,6 +345,8 @@ div#boxes {
 	-moz-column-count:3; /* Firefox */
 	-webkit-column-count:3; /* Safari and Chrome */
 	column-count:3;
+	
+	
 }
 div#boxes  .boxe-highlight {
 	background-color: #ffffaa;
@@ -371,8 +373,10 @@ div#boxes  div.boxe  {
     
     /*border-radius: 10px;*/
     
-    display:block;
+    display:inline-block;
     
+   /* page-break-inside: avoid;*/
+	width:90%;
     
 /*    width:400px;
     height : 400px;*/
