@@ -123,7 +123,7 @@ class TTemplate {
 
 	static function liste(&$conf, &$user, &$db, &$object, $listname='index', $param=array()) {
 		/*
-		 * Fonction à changer, non conforme à une démarche module
+		 * TODO Fonction à changer, non conforme à une démarche module
 		 */
 		$className = get_class($object);
 		$l = new TListviewTBS('list_'.$className);
@@ -149,7 +149,8 @@ class TTemplate {
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'self'=>$_SERVER['PHP_SELF']
-					,'list'=>$l->renderDataTableSQL($db, $sql, $param)
+				/*	,'list'=>$l->renderDataTableSQL($db, $sql, $param)*/
+					,'list'=>$l->render($db, $sql, $param)
 				)
 			)
 		)); 
