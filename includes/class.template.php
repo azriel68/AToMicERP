@@ -95,7 +95,20 @@ class TTemplate {
 			foreach($TBoxe as $boxe) {
 				$url = $boxe.'?UId='.$user->UId;
 				
-				array_push( $Tab, file_get_contents($url) );	
+				
+				
+				@$TContent = unserialize( file_get_contents($url.'&get=parameters') );
+				if($TContent===false)$TContent=array('width'=>400, 'height'=>400);
+				else {
+					$TContent=array(
+						'width'=>$TContent['columns'] * 200
+						, 'height'=>$TContent['rows'] * 100
+					);
+				}
+				
+				$TContent['content'] = file_get_contents($url);
+				
+				array_push( $Tab, $TContent);	
 			}
 			
 		}

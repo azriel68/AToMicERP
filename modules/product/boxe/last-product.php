@@ -12,21 +12,21 @@
 	
 	$db=new TPDOdb;
 	
-	$l = new TListviewTBS('list_lastProject');
+	$l = new TListviewTBS('list_lastProduct');
 		
-	$sql = strtr($conf->list->TProject->index['sql'],array(
+	$sql = strtr($conf->list->TProduct->productList['sql'],array(
 		'@getEntity@'=>$user->getEntity()
 	));
 	
-	$param = array_merge($conf->list->TProject->index['param'] , array(
+	$param = array_merge($conf->list->TProduct->productList['param'] , array(
 		'limit'=>array('nbLine'=>10)
 		,'orderBy'=>array('dt_cre'=>'DESC')
-		,'hide'=>array('dt_maj','id','status')
+		,'hide'=>array('dt_maj','id','description')
 		
 	));
 		
 	?>
-	<h2><?=__tr('lastProjects') ?></h2>
+	<h2><?=__tr('lastProducts') ?></h2>
 	<?	
 	print $l->render($db, $sql, $param);
 	
@@ -34,6 +34,6 @@
 	?>
 	
 	<div class="buttons">
-	<a href="./modules/project/project.php?action=new" class="butAction">__tr(newTProject)__</a>
+	<a href="./modules/product/product.php?action=new" class="butAction">__tr(newTProduct)__</a>
 	</div>
 	

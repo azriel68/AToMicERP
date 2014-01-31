@@ -36,5 +36,5 @@
 		,'project'=>true
 		,'planning'=>true
 		,'currency'=>true
-		,'wallpaper'=>true
+		/*,'wallpaper'=>true*/
 	);

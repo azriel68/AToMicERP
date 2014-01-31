@@ -32,6 +32,11 @@ a.logo {
 	
 	padding-top:150px;
 }
+
+div.boxe a {
+	font-weight:normal;
+}
+
 div.header {
 	/*background-color: rgba(255, 255, 255, 0.8);*/
 	text-align:left;
@@ -337,20 +342,23 @@ table.liste tr.impair:hover td, table.liste tr.pair:hover td {
 
 div#boxes {
 	clear:both;
+	-moz-column-count:3; /* Firefox */
+	-webkit-column-count:3; /* Safari and Chrome */
+	column-count:3;
 }
 div#boxes  .boxe-highlight {
-	background-color: none;
+	background-color: #ffffaa;
 	
 	border: 3px solid #ffff00;
     
     /*border-radius: 10px;*/
     
     /*float:left;*/
-    width:400px;
-    height : 400px;
+   /* width:400px;*/
+    height : 100px;
     overflow: hidden;
     margin:0 10px 20px 10px;
-     display:inline-block;
+    display:block;
     position:relative;
 }
 div#boxes  div.boxe  {
@@ -363,10 +371,11 @@ div#boxes  div.boxe  {
     
     /*border-radius: 10px;*/
     
-    display:inline-block;
+    display:block;
     
-    width:400px;
-    height : 400px;
+    
+/*    width:400px;
+    height : 400px;*/
     overflow: hidden;
     margin:0 10px 20px 10px;
     
@@ -378,6 +387,21 @@ div#boxes div.boxe div.buttons {
 	bottom:10px;
 	right:-10px;
 }
+
+
+div#boxes div.boxe a {
+	font-weight:normal;
+}
+div#boxes div.boxe table.liste tr.impair td:first-child,div#boxes div.boxe table.liste tr.pair td:first-child {
+	padding-left:5px !important;
+}
+div#boxes div.boxe table.liste th.liste_titre {
+	font-weight:normal;
+}
+div#boxes div.boxe table.liste tr td {
+	height:auto;
+}
+
 div#boxes a.butAction {
 	background-color: #D4D4D4;
     color:#525252;

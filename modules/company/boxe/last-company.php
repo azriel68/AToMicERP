@@ -1,6 +1,16 @@
 <?
 	require('../../../inc.php');
 	
+	$get = __get('get','');
+	if($get=='parameters') {
+		print __out(array(
+			'rows'=>2
+			,'columns'=>2
+		));
+		exit;
+	}
+	
+	
 	$db=new TPDOdb;
 	
 	$l = new TListviewTBS('list_lastCompany');

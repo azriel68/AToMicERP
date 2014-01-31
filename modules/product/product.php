@@ -53,7 +53,21 @@ if($action!==false ) {
 	));
 }
 else { // Liste de tous les produits
-	print TTemplate::liste($conf, $user, $db, $product, 'productList');
+	print TTemplate::liste($conf, $user, $db, $product, 'productList',
+	
+		array(
+			'eval'=>array(
+				'price'=>'_get_product_price(@id@)'
+			)
+		)
+	
+	);
 }
 
 $db->close();
+
+function _get_product_price($id_product) {
+	global $db;
+	
+	TProduct::getPrice($db, $id_product);
+}

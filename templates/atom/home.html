@@ -1,8 +1,8 @@
 [tpl.header;htmlconv=no]
 [tpl.menu;strconv=no]
 <div id="boxes">
-	<div class="boxe" id="boxe_[boxe.#]">
-		[boxe.val;block=div; strconv=no]
+	<div class="boxe" id="boxe_[boxe.#]" style="height:[boxe.height]px;"><!-- width:[boxe.width]px; -->
+		[boxe.content;block=div; strconv=no]
 	</div>
 </div>
 <script type="text/javascript">
@@ -47,7 +47,7 @@
 			rebuild[items[v]] = items[v];
 		}
 	 	
-	 	n = IDs.length
+	 	n = IDs.length;
 		for (var i = 0; i< n; i++) {
 	 
 			// item id from saved order

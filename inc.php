@@ -30,7 +30,7 @@
 		require(__DIR__.'/config.php');
 	}
 	else if(!empty($_FOR_INSTALLER)) {
-		print __tr('Using sample config, only for install');
+		print 'Using sample config, only for install';
 		require('config.sample.php');
 		
 	}
