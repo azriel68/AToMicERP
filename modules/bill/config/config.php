@@ -6,7 +6,7 @@
 $conf->modules['bill']=array(
 	'name'=>'Bill'
 	,'id'=>'TBill'
-	,'class'=>array('TBill')
+	,'class'=>array('TBill','TBillLine')
 	,'folder'=>'bill'
 	,'moduleRequire'=>array('user')
 );
@@ -24,14 +24,16 @@ $conf->menu->top[] = array(
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-$conf->tabs->TBill=array(
+TTemplate::addTabs($conf, 'TBill' ,array(
 	'card'=>array('label'=>'__tr(Card)__','url'=>HTTP.'modules/bill/bill.php?action=view&id=@id@')
-);
+	,'details'=>array('label'=>'__tr(Details)__','url'=>HTTP.'modules/bill/lines.php?action=view&id_bill=@id@')
+));
 
 /******************************************************************************************
  * Définition des templates à utiliser
  ******************************************************************************************/
 @$conf->template->TBill->card = ROOT.'modules/bill/template/bill.html';
+@$conf->template->TBill->lines = ROOT.'modules/bill/template/lines.html';
 
 /******************************************************************************************
  * Définition de la conf par défaut du module
@@ -45,7 +47,7 @@ $conf->defaultConf['company'] = array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TBill->billList=array(
-	'sql'=>"SELECT id, ref, dt_bill, status FROM ".DB_PREFIX."document WHERE id_entity IN (@getEntity@)"
+	'sql'=>"SELECT id, ref, dt_bill, status FROM ".DB_PREFIX."document WHERE id_entity IN (@getEntity@) AND type='bill' "
 	,'param'=>array(
 		'title'=>array(
 			'ref'=>'__tr(Ref)__'

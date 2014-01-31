@@ -158,7 +158,7 @@ class TTemplate {
 		
 	}
 	
-	static function listeDataTable(&$conf, &$user, &$db, &$object, $listName, $TParam=array()) {
+	static function listeDataTable(&$conf, &$user, &$db, &$object, $listName, $TParam=array()) { // TODO Delete
 		$tbs=new TTemplateTBS;
 		
 		$className = get_class($object);

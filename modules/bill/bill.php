@@ -50,6 +50,7 @@ if($action!==false ) {
 	)); 
 	
 }
+
 else {
 	print TTemplate::liste($conf, $user, $db, $bill, 'billList');
 }

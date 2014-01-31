@@ -1,0 +1,93 @@
+[tpl.header;htmlconv=no]
+[tpl.menu;strconv=no]
+
+<script type="text/javascript">
+	function initInterfaceLine(){
+		$('#lines-contener table#lines a').each(function() {
+			
+			var url = $(this).attr('href');
+			if(url=='#') {
+				return false;
+			}
+	
+			$(this).attr('href','#');
+			
+			$(this).click(function() {
+				//$('div.content').html("Loading...");
+				
+				$('div.content div#lines-contener').load(url+' div#lines-contener table#lines', function( response, status, xhr ) {
+					
+					initInterfaceLine();
+				});
+				
+			});
+			
+		});
+		
+		
+	}
+	
+	$(document).ready(function() {
+		initInterfaceLine();
+	});
+	
+</script>
+
+<div class="content">
+	
+	[tpl.tabs;strconv=no]
+
+	<table class="grille" id="bill">
+		<tr>
+			<td>__tr(Ref)__</td><td>[bill.ref;strconv=no]</td>
+		</tr>
+		<tr>
+			<td>__tr(Company)__</td><td>[bill.id_company;strconv=no]</td>
+		</tr>
+		<tr>
+			<td>__tr(DateBill)__</td><td>[bill.dt_bill;strconv=no]</td>
+		</tr>
+		<tr>
+			<td>__tr(Status)__</td><td>[bill.status;strconv=no]</td>
+		</tr>
+	</table>
+
+
+
+	<form name="formTLines" action="[tpl.self]" method="post">
+		
+		<div id="lines-contener">
+		
+		<table class="grille" id="lines">
+			<thead>
+				<tr>
+					<th>__tr(Label)__</th><th>__tr(quantity)__</th><th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="line-[line.id]">
+					<td>[line.id_product;strconv=no;block=tr][line.title;strconv=no]</td>
+					<td>[line.quantity;strconv=no]</td>
+					<td>
+						<a href="[tpl.self]?action=edit-line&id_line=[line.id]&id_bill=[bill.id]">Modify</a> 
+						Delete	
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>[line_add.id_product;strconv=no;magnet=tfoot][line_add.title;strconv=no]</td><td>[line_add.quantity;strconv=no]</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		</div>
+
+		<div class="buttons">	
+		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
+		</div>
+	</form>
+
+</div>
+
+[tpl.footer;htmlconv=no]

@@ -11,6 +11,9 @@ class TBill extends TDocument {
 		parent::__construct();
 		
 		$this->type='bill';
+		
+		$this->setChild('TBillLine', 'id_document');
+		
 	}
 	
 	function save(&$db) {
@@ -21,3 +24,14 @@ class TBill extends TDocument {
 		return parent::save($db);
 	}
 }
+
+class TBillLine extends TDocumentLine {
+	function __construct() { 
+		
+		parent::add_champs('id_product','type=entier;index;');
+		
+		parent::__construct();
+		
+	}
+}
+

@@ -48,6 +48,7 @@ function _debug() {
 	
 	return false;
 }
+
 function __get($varName, $default=null, $type='', $maxlength=0) {
      $var = isset($_REQUEST[$varName]) ? $_REQUEST[$varName] : $default;
 	 

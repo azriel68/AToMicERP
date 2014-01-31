@@ -264,27 +264,43 @@ class TAtomic {
 		return $resultat;
 	}
 	
+	static function addExtraField($typeObject, $field, $info=array()) {
+		global $conf;
+		
+		$TExtraFields = &$conf->TExtraFields;
+		
+		if(!isset($TExtraFields[$typeObject])) $TExtraFields[$typeObject] = array();  
+		
+		$TExtraFields[$typeObject][$field] = $info;
+		
+	}
+	
 	/*
 	 * Fonction d'initialisation des ExtraFields du thème en cours pour l'objet
 	 * E : objet standart , 'type extrafields'
 	 * S : null
 	 */
-	static function initExtraFields(&$objet, $typeObjet='') {
-	global $TExtraFields;
+	static function initExtraFields(&$object, $typeObject='') {
+	global $conf;
 		
-		if($typeObjet=='') $typeObjet = get_class($objet);
+		$TExtraFields = &$conf->TExtraFields;
 		
-		$Tab = isset($TExtraFields[$typeObjet]) ? $TExtraFields[$typeObjet] : array();  
+		if($typeObject=='') $typeObject = get_class($object);
+		
+		$Tab = isset($TExtraFields[$typeObject]) ? $TExtraFields[$typeObject] : array();  
 		foreach($Tab as $field=>$info) {
 			
-			if(is_array($info)) {
+			if(empty($info)) {
+				$type_champs='chaine';
+			}
+			else if(is_array($info)) {
 				$type_champs= isset( $info['type'] ) ? $info['type'] : $info[0];	
 			}
 			else {
 				$type_champs=$info;
 			}
 			
-			$objet->add_champs($field, 'type='+$type_champs+';');
+			$object->add_champs($field, 'type='+$type_champs+';');
 			
 			
 		}
