@@ -14,7 +14,6 @@
 			
 			$(this).click(function() {
 				//$('div.content').html("Loading...");
-				
 				loadLines();
 			});
 			
@@ -83,7 +82,8 @@
 					<td>[line.quantity;strconv=no]</td>
 					<td>
 						<a href="[tpl.self]?action=edit-line&id_line=[line.id]&id_bill=[bill.id]">Modify</a> 
-						Delete	
+						<a href="[tpl.self]?action=delete-line&id_line=[line.id]&id_bill=[bill.id]">Delete</a> 
+							
 					</td>
 				</tr>
 			</tbody>

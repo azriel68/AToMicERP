@@ -254,14 +254,43 @@ class TAtomic {
 	static function hook(&$conf, $className, $fileName, $TParameters=array()) {
 		if(!isset($conf->hooks->{$className})) return false;
 		
-		$pageName = substr($fileName, strlen(ROOT.'modules/'),-4);
+		$len_for_file = strlen(ROOT.'modules/');
+		if(strlen($fileName) < $len_for_file) $pageName = $fileName;
+		else {
+			$pageName = substr($fileName, strlen(ROOT.'modules/'),-4);
+			$pageName=strtr($pageName,array("\\"=>"/")); //windows	
+		}
+		
 		$resultat='';
 		
 		foreach($conf->hooks->{$className} as $hook) {
 			$resultat.= call_user_func(array($hook['object'],$hook['function']), $className, $pageName, array_merge($hook['parameters'],  $TParameters) );
 		}
 		
+		$resultat.=TAtomic::hookJsStarter($conf, $className);
+		
 		return $resultat;
+	}
+	function hookJsStarter(&$conf, $className) {
+		if(!isset($conf->hooks->{$className})) return '';
+		
+		$r='<script type="text/javascript">
+		$(document).ready(function() { InPageHook(); });
+		
+		function InPageHook() {
+		 ';
+		 
+			foreach($conf->hooks->{$className} as $hook) {
+				$fct = $hook['object'].'_'.$hook['function'];
+				$r.='if(typeof '.$fct.' == "function") { '.$fct.'(); }';
+			}
+		
+		 
+		 $r.='
+		}
+		</script>';
+		
+		
 	}
 	
 	static function addExtraField($typeObject, $field, $info=array()) {

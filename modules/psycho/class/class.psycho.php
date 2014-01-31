@@ -51,7 +51,7 @@ class TPsycho extends TContact {
 	}
 	
 	static function hook($className, $pageName, &$TParameters) {
-		$pageName=strtr($pageName,array("\\"=>"/")); //windows	
+		
 			
 		ob_start();
 		
@@ -133,7 +133,7 @@ class TPsycho extends TContact {
 			 ?></table><?
 			 
 			?><script type="text/javascript">
-				function InPageHook() {
+				function TPsycho_hook() {
 					$('#contact').append( $('#psycho-hook-add').children() );
 					
 					 $(".psycho-slider > div.slider").slider({
@@ -169,9 +169,7 @@ class TPsycho extends TContact {
 					$('#'+name+'-max-bound').css('font-size', (100-((3-val)*5))+'%' );
 					$('#'+name+'-min-bound').css('font-size', (100+((3-val)*5))+'%' );
 					
-				}
-				
-				InPageHook();			
+				}		
 				
 			</script>
 			

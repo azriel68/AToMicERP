@@ -12,9 +12,14 @@ $action = TTemplate::actions($db, $user, $company);
 
 if($action!==false ) {
 
+	$successMsg='';
 	if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
+	else if($action=='save') {
+		$successMsg = __tr('Company saved');
+	}
+
 
 	$form=new TFormCore;
 	$form->Set_typeaff($action);
@@ -49,7 +54,7 @@ if($action!==false ) {
 		,array(
 			'company'=>$TForm
 			,'tpl'=>array(
-				'header'=>TTemplate::header($conf, __tr('Company : ').$company->name  )
+				'header'=>TTemplate::header($conf, __tr('Company : ').$company->name, $successMsg  )
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
 				,'tabs'=>TTemplate::tabs($conf, $user, $company, 'card')

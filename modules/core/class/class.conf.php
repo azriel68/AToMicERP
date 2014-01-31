@@ -23,7 +23,7 @@ class TConf extends TObjetStd {
 		$entities = ($onlyThisEntity) ? $id_entity : '0,'.$id_entity;
 		
 		$sql = "SELECT id FROM ".$this->get_table()."
-		WHERE confKey=".$db->quote($name)." AND id_entity IN (".$entities.")";
+		WHERE confKey=".$db->quote($key)." AND id_entity IN (".$entities.")";
 		
 		$sql.=" ORDER BY id_entity DESC LIMIT 1";
 		$db->Execute($sql);

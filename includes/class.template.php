@@ -228,7 +228,12 @@ class TTemplate {
 		
 	}
 	static function success($message) {
+		global $conf;
+		
 		ob_start();
+
+		print TAtomic::hook($conf, 'Notify', 'success', array('message'=>$message));
+
 		
 		?><script type="text/javascript">
 		$(document).ready(function() {
@@ -247,7 +252,11 @@ class TTemplate {
 	}
 	
 	static function error($message) {
+		global $conf;
+			
 		ob_start();
+		
+		print TAtomic::hook($conf, 'Notify', 'error', array('message'=>$message));
 		
 		?><script type="text/javascript">
 		$(document).ready(function() {
