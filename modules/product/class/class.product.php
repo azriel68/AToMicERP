@@ -29,7 +29,7 @@ class TProduct extends TObjetStd {
 	 */
 	function price($date='') {
 		
-		$time = empty($date) ? time : strtotime($date);
+		$time = empty($date) ? time() : strtotime($date);
 		
 		foreach($this->TPrice as &$price) {
 			
@@ -39,7 +39,7 @@ class TProduct extends TObjetStd {
 			
 		}
 		
-		return $price->ht;
+		return $this->price_ht;
 		
 	}
 	static function getPrice(&$db, $id_product, $date='') {

@@ -45,13 +45,16 @@ TTemplate::addTabs($conf, 'TProduct', array(
  * Définition des listes
  ******************************************************************************************/
 @$conf->list->TProduct->productList=array(
-	'sql'=>"SELECT id, ref, label, description FROM ".DB_PREFIX."product WHERE id_entity IN (@getEntity@)"
+	'sql'=>"SELECT id, ref, label, description,price_ht FROM ".DB_PREFIX."product WHERE id_entity IN (@getEntity@)"
 	,'param'=>array(
 		'title'=>array(
 			'ref'=>'__tr(Ref)__'
 			,'label'=>'__tr(Label)__'
 			,'description'=>'__tr(Description)__'
 			,'price'=>'__tr(Price)__'
+		)
+		,'type'=>array(
+			'price_ht'=>'money'
 		)
 		,'hide'=>array('id')
 		,'link'=>array(

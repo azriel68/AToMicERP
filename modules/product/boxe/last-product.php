@@ -21,7 +21,7 @@
 	$param = array_merge($conf->list->TProduct->productList['param'] , array(
 		'limit'=>array('nbLine'=>10)
 		,'orderBy'=>array('dt_cre'=>'DESC')
-		,'hide'=>array('dt_maj','id','description')
+		,'hide'=>array('dt_maj','id','description','price_ht')
 		
 	));
 		

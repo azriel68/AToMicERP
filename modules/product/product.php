@@ -8,6 +8,7 @@ if(!$user->isLogged()) {
 
 $product=new TProduct;
 $db=new TPDOdb;
+$dbPrice=new TPDOdb;
 
 $action = TTemplate::actions($db, $user, $product);
 
@@ -57,7 +58,7 @@ else { // Liste de tous les produits
 	
 		array(
 			'eval'=>array(
-				'price'=>'_get_product_price(@id@)'
+				'price_ht'=>'_get_product_price(@id@)'
 			)
 		)
 	
@@ -67,7 +68,7 @@ else { // Liste de tous les produits
 $db->close();
 
 function _get_product_price($id_product) {
-	global $db;
+	global $dbPrice;
 	
-	TProduct::getPrice($db, $id_product);
+	return TProduct::getPrice($dbPrice, $id_product).' €';
 }
