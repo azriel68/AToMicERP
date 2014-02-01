@@ -246,9 +246,20 @@ class TAtomic {
 	
 	static function addHook(&$conf, $className, $hook) {
 		
-		if(!isset($conf->hooks->{$className})) @$conf->hooks->{$className} = array();
+		if(is_array($className)) {
+			foreach($className as $cN) {
+				if(!isset($conf->hooks->{$cN})) @$conf->hooks->{$cN} = array();
 		
-		$conf->hooks->{$className}[] = $hook;	
+				$conf->hooks->{$cN}[] = $hook;	
+			}
+		}
+		else {
+			if(!isset($conf->hooks->{$className})) @$conf->hooks->{$className} = array();
+			
+			$conf->hooks->{$className}[] = $hook;	
+				
+		}
+		
 		
 	}
 	static function hook(&$conf, $className, $fileName, $TParameters=array()) {

@@ -8,11 +8,14 @@
 		,'moduleRequire'=>array('core')
 	);
 
-	TAtomic::addHook($conf, 'Notify',array(
-		'function'=>'hook'
-		,'object'=>'TCompanion'
-		,'parameters'=>array()
-	));
+	TAtomic::addHook($conf
+		, array('Notify','TProduct') 
+		,array(
+			'function'=>'hook'
+			,'object'=>'TCompanion'
+			,'parameters'=>array()
+		)
+	);
 
 
 	

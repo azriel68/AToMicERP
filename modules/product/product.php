@@ -49,6 +49,8 @@ if($action!==false ) {
 				,'tabs'=>TTemplate::tabs($conf, $user, $product, 'card')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
+				,'hook'=>TAtomic::hook($conf, get_class($product), __FILE__, array( 'object'=>&$product,'user'=>&$user, 'action'=>$action ) )
+		
 			)
 		)
 	));

@@ -22,6 +22,18 @@ class TCompanion {
 			
 			<?
 		}
+		elseif($className=='TProduct' && $pageName=='product/product') {
+			
+			$message=__tr('YouCanAddCustomPriceWithPriceTab');
+			
+			?>
+			<script type="text/javascript">
+				$(document).ready(function () { showCompanion('tip', "<?=addslashes($message)  ?>"); });
+			</script>
+			<?
+			
+		}
+		
 	
 		return ob_get_clean();	
 	}
