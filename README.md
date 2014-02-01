@@ -9,16 +9,13 @@ ERP en PHP sur une base modulaire. (Pour le moment le projet est à un stade tro
 Version actuelle : Alpha 2
 
 Installation
-============
 * Allez dans /install et cliquez tour à tour sur les différents boutons d'étape (attention, dans cette alpha, aucun message n'indique la progression)
 * Puis lancez manuellement le script /install/create-admin.php (les messages vous indiquerons les paramètres à ajouter)
 
 Activation des modules
-======================
 * A faire dans le fichier config.php de la racine
 
 Modules disponibles (aucun n'est à ce stade terminé ou stable)
-===================
 * core (obligatoire) contient les fonctions indispensables
 * user (obligatoire) étend le module contact pour la gestion des utilisateurs
 * company (obligatoire) permet de gérer les tiers et/ou entités des utilisateurs
