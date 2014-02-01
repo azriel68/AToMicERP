@@ -10,6 +10,9 @@ function showCompanion(mood, message) {
 		else if(mood=='happy') {
 			$('#companion').css('background-position','-480px 0px');
 		}
+		else if(mood=='welldone') {
+			$('#companion').css('background-position','-590px -340px');
+		}
 
 		$('#companion div.bubble').html(message);
 

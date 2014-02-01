@@ -107,8 +107,8 @@ class TUser extends TContact {
 		TAtomic::accesslog('SQL '.$sql);	
 			
 		if($db->Get_line()) {
-			TAtomic::accesslog('login exist : '.$login);		
-				
+			TAtomic::accesslog('sign in successfull : '.$login);		
+			//TODO add trigger USER_LOGIN
 			$this->id_entity_c = $id_entity;
 			$this->t_connexion = time();
 			return $this->load($db, $db->Get_field('id'));

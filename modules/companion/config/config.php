@@ -9,7 +9,7 @@
 	);
 
 	TAtomic::addHook($conf
-		, array('Notify','TProduct') 
+		, array('Notify','TProduct','Home') 
 		,array(
 			'function'=>'hook'
 			,'object'=>'TCompanion'

@@ -15,6 +15,7 @@
 				,'footer'=>TTemplate::footer($conf)
 				,'self'=>$_SERVER['PHP_SELF']
 				,'menu'=>TTemplate::menu($conf, $user)
+				,'hook'=>TAtomic::hook($conf, 'Home', 'home', array('action'=>'view'))
 			)
 		)
 	)); 

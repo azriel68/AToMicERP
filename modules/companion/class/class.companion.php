@@ -4,38 +4,80 @@ class TCompanion {
 	
 	static function hook($className, $pageName, &$TParameters) {
 		
+		$action = __val($TParameters['action'], 'none');
+		
 		ob_start();
 		
 		if($className=='Notify' && $pageName=='error') {
-			?>
-			<script type="text/javascript">
-				$(document).ready(function () { showCompanion('sad', "<?=addslashes($TParameters['message'])  ?>"); });
-			</script>
-			
-			<?
+			$message = $TParameters['message'];
+			$mood='sad';
 		}
 		elseif($className=='Notify' && $pageName=='success') {
-			?>
-			<script type="text/javascript">
-				$(document).ready(function () { showCompanion('happy', "<?=addslashes($TParameters['message'])  ?>"); });
-			</script>
-			
-			<?
+			$message = $TParameters['message'];
+			$mood='happy';
 		}
-		elseif($className=='TProduct' && $pageName=='product/product') {
+		else {
 			
-			$message=__tr('YouCanAddCustomPriceWithPriceTab');
-			
-			?>
-			<script type="text/javascript">
-				$(document).ready(function () { showCompanion('tip', "<?=addslashes($message)  ?>"); });
-			</script>
-			<?
-			
+			if($action=='save') {
+				$message=__tr('YourItemIsRegister');
+				$mood='welldone';	
+			}
+			elseif($action=='view') {
+				
+				$message=TCompanion::tip($className, $pageName);
+				if(!empty($message)) $mood='tip';				
+			}
+		
 		}
 		
+		if(!empty($mood)) {
+			?>
+			<script type="text/javascript">
+				$(document).ready(function () { showCompanion('<?=$mood ?>', "<?=addslashes($message)  ?>"); });
+			</script>
+			
+			<?
+			
+		}
+	 
 	
 		return ob_get_clean();	
 	}
-	
+	static function tip($className, $pageName) {
+		$TTip=array(
+				'Home'=>array(
+					'home'=>array(
+						'ThisCentralDashBoard'
+					)
+				)
+				,'TProduct'=>array(
+					'product/product'=>array(
+						'YouCanAddCustomPriceWithPriceTab'
+						,'YouCanAddAnotherPictureWithPictureTab'
+						,'TheBasePrice'
+					)
+				)
+		);
+		
+		
+		if(!empty($TTip[$className][$pageName])) {
+
+			foreach($TTip[$className][$pageName] as $tip) {
+				
+				$cookiename = 'TCompanion_'.$className.'_'.md5($pageName.$tip);
+				
+				if(!isset($_COOKIE[$cookiename])) {
+					
+					setcookie($cookiename, $tip,time() + 86400*30);
+					
+					return __tr($tip);
+				}
+				
+			}		
+
+			
+		}
+		 
+	}
+
 }
