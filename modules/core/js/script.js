@@ -3,8 +3,13 @@ $(document).ready(function() {
 	/*
 	 FAusse bonne idée ?
 	 * */
-	initInterface();
+	//initInterface(); // lot of problem with that
 	
+	
+	if(typeof InPageHook == 'function') {
+		InPageHook();
+	}
+				
 	
 });
 

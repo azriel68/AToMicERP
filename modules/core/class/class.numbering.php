@@ -57,7 +57,13 @@ class TNumbering extends TObjetStd {
 		$num->save($db);
 		
 		preg_match('|{0.*?}|', $maskToSearch, $matches);
-		$ref = preg_replace('|{0.*?}|', str_pad($num->numberValue, strlen($matches[0])-2, '0', STR_PAD_LEFT), $maskToSearch);
+		if(!empty($matches)) {
+			$ref = preg_replace('|{0.*?}|', str_pad($num->numberValue, strlen($matches[0])-2, '0', STR_PAD_LEFT), $maskToSearch);
+			
+		}
+		else {
+			$ref=''; // TODO to debug
+		}
 		
 		return $ref;
 	}

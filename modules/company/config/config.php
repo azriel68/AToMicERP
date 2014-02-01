@@ -6,11 +6,21 @@
 $conf->modules['company']=array(
 	'name'=>'Company'
 	,'id'=>'TCompany'
-	,'class'=>array('TCompany')
+	,'class'=>array('TCompany','TEntity')
 	,'folder'=>'company'
 	,'icon'=>'112-group.png'
 	,'moduleRequire'=>array('core','dictionnary')
 );
+
+$conf->menu->admin[] = array(
+	'name'=>'__tr(MyEntity)__'
+	,'id'=>'entity'
+	,'position'=>2
+	,'url'=>HTTP.'modules/company/company.php?id=@id@&action=view'
+	,'right'=>array('user','me','view')
+	,'moduleRequire'=>array('core','dictionnary','company','contact')
+);
+
 
 /******************************************************************************************
  * Définition des menus (top / left)

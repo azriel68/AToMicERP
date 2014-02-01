@@ -233,7 +233,6 @@ class TTemplate {
 		ob_start();
 
 		print TAtomic::hook($conf, 'Notify', 'success', array('message'=>$message));
-
 		
 		?><script type="text/javascript">
 		$(document).ready(function() {

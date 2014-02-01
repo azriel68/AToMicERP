@@ -52,7 +52,7 @@ $conf->defaultConf['company'] = array(
 		'title'=>array(
 			'ref'=>'__tr(Ref)__'
 			,'dt_bill'=>'__tr(DateBill)__'
-			,'status'=>'__tr(DateBill)__'
+			,'status'=>'__tr(Status)__'
 		)
 		,'hide'=>array('id')
 		,'type'=>array(

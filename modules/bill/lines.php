@@ -53,7 +53,7 @@ if($id_bill) {
 	
 	$form->Set_typeaff('edit');
 	if($action=='edit-line') {
-		$TLineAdd =array();
+		$TLineAdd =array('id_product'=>'', 'title'=>'', 'quantity'=>0);
 		
 	}	
 	else {
