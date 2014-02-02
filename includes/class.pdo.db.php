@@ -120,9 +120,9 @@ private function Error($message, $showTrace=true) {
 	                        || (!empty($row['function']) && $row['function']==__FUNCTION__)
 	                        || (!empty($row['function']) && $row['function']=='call_user_func')) continue;
 	                        
-	                $log='<strong>L. '.$row['line'].'</strong>';
-	                if(!empty($row['class']))$log.=' '.$row['class'];
-	                $log.=' <span style="color:green">'.$row['function'].'()</span> dans <span style="color:blue">'.$row['file'].'</span>';
+	                if(!empty($row['line'])) $log='<strong>L. '.$row['line'].'</strong>';
+	                if(!empty($row['class'])) $log.=' '.$row['class'];
+	             	if(!empty($row['file']))   $log.=' <span style="color:green">'.$row['function'].'()</span> dans <span style="color:blue">'.$row['file'].'</span>';
 					
 					print $log.'<br>';
 	        }

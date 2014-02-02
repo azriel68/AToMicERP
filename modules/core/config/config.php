@@ -22,5 +22,5 @@
 	$conf->js[] = HTTP.'modules/core/js/jquery.validate.min.js';
 
 
-	TTrigger::register('TNumbering');
+	TTrigger::register('TNumbering',50);
 	

@@ -337,6 +337,7 @@ function _no_save_vars($lst_chp) {
   	if(class_exists('TTrigger')) {
   		
   		TTrigger::run($ATMdb,$this, get_class($this), $state);
+		
   	}	
 	
   }
@@ -491,6 +492,8 @@ function _no_save_vars($lst_chp) {
 			$this->delete($db);
 		}
 		else {
+			$this->run_trigger($db, ($this->{OBJETSTD_MASTERKEY}==0) ? 'before_create' : 'before_update');
+				
 			$query = array();
 			$query[OBJETSTD_DATECREATE] = date("Y-m-d H:i:s",$this->{OBJETSTD_DATECREATE});
 			if(!isset($this->no_dt_maj))$query[OBJETSTD_DATEUPDATE] = date('Y-m-d H:i:s');
@@ -503,16 +506,12 @@ function _no_save_vars($lst_chp) {
 				$this->get_newid($db);
 				$query[OBJETSTD_MASTERKEY]=$this->{OBJETSTD_MASTERKEY};
 
-				$this->run_trigger($db, 'before_create');
-
 				$db->dbinsert($this->get_table(),$query);
 
 				$this->run_trigger($db, 'create');
 			}
 			else {
 				$query[OBJETSTD_MASTERKEY]=$this->{OBJETSTD_MASTERKEY};
-			
-				$this->run_trigger($db, 'before_update');
 			
 				$db->dbupdate($this->get_table(),$query,$key);
 				
@@ -529,8 +528,10 @@ function _no_save_vars($lst_chp) {
 
 	function delete(&$db){
 		if($this->{OBJETSTD_MASTERKEY}!=0){
-			$this->run_trigger($db, 'delete');
+			$this->run_trigger($db, 'before_delete');
 			$db->dbdelete($this->get_table(),array(OBJETSTD_MASTERKEY=>$this->{OBJETSTD_MASTERKEY}),array(0=>OBJETSTD_MASTERKEY));
+			$this->run_trigger($db, 'delete');
+	
 		}
 		
 		if($this->withChild) {

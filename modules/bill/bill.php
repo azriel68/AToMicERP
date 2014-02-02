@@ -8,6 +8,8 @@ if(!$user->isLogged()) {
 
 $bill=new TBill;
 $db=new TPDOdb;
+//$db->debug=true;
+
 $action = TTemplate::actions($db, $user, $bill);
 
 if($action!==false ) {

@@ -15,7 +15,7 @@ class TTrigger {
 				if(class_exists($trigger['objectName'])) {
 					
 					if(method_exists($trigger['objectName'],'trigger')) {
-						$result = call_user_func(array($trigger['objectName'],'trigger'), $ATMdb, $object, $className, $state );
+						$result = call_user_func_array(array($trigger['objectName'],'trigger'), array(&$ATMdb, &$object, $className, $state) );
 					}
 
 				}			

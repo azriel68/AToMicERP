@@ -199,7 +199,7 @@ function fichier($pLib,$pName,$pVal,$pTaille,$pTailleMax=0,$plus='',$class='text
     return $field;
 }
 
-function texteRO($pLib,$pName,$pVal,$pTaille,$pTailleMax=0, $plus=""){
+function texteRO($pLib,$pName,$pVal,$pTaille,$pTailleMax=0, $plus="", $default=''){
   $lib="";
   $field="";
   if ($pLib!="")

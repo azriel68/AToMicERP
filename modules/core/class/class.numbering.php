@@ -73,6 +73,7 @@ class TNumbering extends TObjetStd {
 			
 			if(empty($object->ref)) {
 				$object->ref = TNumbering::getNextRefValue($db, $object, 'ref');
+				
 			}			
 		}
 		

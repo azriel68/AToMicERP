@@ -14,8 +14,7 @@ class TBill extends TDocument {
 		
 		$this->setChild('TBillLine', 'id_document');
 		
-	}
-	
+	}	
 }
 
 class TBillLine extends TDocumentLine {
