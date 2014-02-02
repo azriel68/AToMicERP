@@ -18,19 +18,7 @@ class TCompany extends TObjetStd {
 		$this -> setChild('TContactToObject', array('id_object', 'company') );
 	}
 	
-	function save(&$db) {
-		// Set customer Ref
-		if(empty($this->customerRef) && $this->isCustomer == 1) {
-			$this->customerRef = TNumbering::getNextRefValue($db, $this, 'customerRef');
-		}
-		
-		// Set supplier Ref
-		if(empty($this->supplierRef) && $this->isSupplier == 1) {
-			$this->supplierRef = TNumbering::getNextRefValue($db, $this, 'supplierRef');
-		}
-		
-		return parent::save($db);
-	}
+	
 	function contactExist(&$contact) {
 		//pre($this->TContactToObject_company);	
 		foreach($this->TContactToObject_company as &$link) {

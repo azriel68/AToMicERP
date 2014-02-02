@@ -73,9 +73,19 @@ class TNumbering extends TObjetStd {
 			
 			if(empty($object->ref)) {
 				$object->ref = TNumbering::getNextRefValue($db, $object, 'ref');
-				
 			}			
 		}
-		
+		else if($className=='TCompany' && ($state == 'before_create' || $state=='before_update' )) {
+			
+			if(empty($object->customerRef) && $object->isCustomer == 1) {
+				$object->customerRef = TNumbering::getNextRefValue($db, $object, 'customerRef');
+			}
+			
+			// Set supplier Ref
+			if(empty($object->supplierRef) && $object->isSupplier == 1) {
+				$object->supplierRef = TNumbering::getNextRefValue($db, $object, 'supplierRef');
+			}
+			
+		}
 	}
 }
