@@ -27,10 +27,24 @@ if($id_bill) {
 	
 		$bill->save($db);
 	}
+	else if($action=='delete-line') {
+		$bill->removeChild('TBillLine', $id_line );
+		$bill->save($db);
+	}
+	else if($action=='save-line') {
+		foreach($_POST['TLine'] as $k=>$values) {
+			$bill->TBillLine[$k]->set_values($values);
+		}	
+		
+		$bill->save($db);
+	}
+	
 	
 	$TLine = array();
 	
 	foreach($bill->TBillLine as $k=>&$line) {
+		
+		 if($line->to_delete) continue;
 		
 		 $viewLineMode = ($action=='edit-line' && $id_line == $line->id) ? 'edit' : 'view' ;
 		
@@ -39,9 +53,9 @@ if($id_bill) {
 		 $form->Set_typeaff( $viewLineMode );
 				
 			$row = array_merge( $line->get_values(), array(
-				'id_product'=>$form->combo('', 'TLine['+$k+'][id_product]', array_merge( array(0=>'') , TProduct::getProductForCombo($db))  , $line->id_product)
-				,'title'=>$form->texte('', 'TLine['+$k+'][title]', $line->title, 80)		
-				,'quantity'=>$form->texte('', 'TLine['+$k+'][quantity]', $line->quantity, 5)
+				'id_product'=>$form->combo('', 'TLine['.$k.'][id_product]', array_merge( array(0=>'') , TProduct::getProductForCombo($db))  , $line->id_product)
+				,'title'=>$form->texte('', 'TLine['.$k.'][title]', $line->title, 80)		
+				,'quantity'=>$form->texte('', 'TLine['.$k.'][quantity]', $line->quantity, 5)
 				,'viewMode'=>$viewLineMode
 				
 			));
@@ -61,6 +75,7 @@ if($id_bill) {
 					'id_product'=>$form->combo('', 'TLineAdd[id_product]', array_merge( array(0=>'') , TProduct::getProductForCombo($db))  , 0)
 					,'title'=>$form->texte('', 'TLineAdd[title]', '', 80)		
 					,'quantity'=>$form->texte('', 'TLineAdd[quantity]', 1, 5)
+					
 		);	
 		
 	}

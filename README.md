@@ -45,3 +45,4 @@ Licences
 * Chart : http://www.highcharts.com/ - www.highcharts.com/license
 * Avatar : gravatar.com
 * Calendar : http://code.google.com/p/jquery-frontier-calendar/
+* Template : http://www.tinybutstrong.com/

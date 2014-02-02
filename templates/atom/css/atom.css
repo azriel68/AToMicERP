@@ -195,6 +195,13 @@ div.content table.grille td {
 	border: 1px solid #CCCCCC;
 	padding:5px;
 }
+div.content table.grille tr.edit td {
+	background-color:#31b5c5;
+	color:#fff;
+}
+div.content table.grille tr.edit td a {
+	color:#fff;
+}
 div.content table.grille td:first-child {
 	width:20%;
 	font-weight: bold;

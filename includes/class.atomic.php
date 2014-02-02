@@ -245,7 +245,7 @@ class TAtomic {
 	}
 	
 	static function addHook(&$conf, $className, $hook) {
-		
+		//TODO delete the className argument ?
 		if(is_array($className)) {
 			foreach($className as $cN) {
 				if(!isset($conf->hooks->{$cN})) @$conf->hooks->{$cN} = array();
