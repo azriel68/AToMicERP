@@ -335,10 +335,8 @@ function _no_save_vars($lst_chp) {
   function run_trigger(&$ATMdb, $state) {
   	/* Execute les trigger */
   	if(class_exists('TTrigger')) {
-  //	print  get_class($this).", $state<br>";
-  		$trigger=new TTrigger;
-  		$trigger->run($ATMdb,$this, get_class($this), $state);
-		
+  		
+  		TTrigger::run($ATMdb,$this, get_class($this), $state);
   	}	
   }
   function loadBy(&$db, $value, $field, $annexe=false) {
