@@ -67,4 +67,14 @@ class TNumbering extends TObjetStd {
 		
 		return $ref;
 	}
+
+	static function trigger(&$db, &$object, $className, $state) {
+		if($className=='TBill' && ($state == 'before_create' || $state=='before_update' )) {
+			
+			if(empty($object->ref)) {
+				$object->ref = TNumbering::getNextRefValue($db, $object, 'ref');
+			}			
+		}
+		
+	}
 }

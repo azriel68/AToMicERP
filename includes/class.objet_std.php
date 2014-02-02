@@ -338,6 +338,7 @@ function _no_save_vars($lst_chp) {
   		
   		TTrigger::run($ATMdb,$this, get_class($this), $state);
   	}	
+	
   }
   function loadBy(&$db, $value, $field, $annexe=false) {
   	$db->Execute("SELECT ".OBJETSTD_MASTERKEY." FROM ".$this->get_table()." WHERE ".$field."='".$value."' LIMIT 1");
@@ -501,12 +502,18 @@ function _no_save_vars($lst_chp) {
 			if($this->{OBJETSTD_MASTERKEY}==0){
 				$this->get_newid($db);
 				$query[OBJETSTD_MASTERKEY]=$this->{OBJETSTD_MASTERKEY};
+
+				$this->run_trigger($db, 'before_create');
+
 				$db->dbinsert($this->get_table(),$query);
 
 				$this->run_trigger($db, 'create');
 			}
 			else {
 				$query[OBJETSTD_MASTERKEY]=$this->{OBJETSTD_MASTERKEY};
+			
+				$this->run_trigger($db, 'before_update');
+			
 				$db->dbupdate($this->get_table(),$query,$key);
 				
 				$this->run_trigger($db, 'update');

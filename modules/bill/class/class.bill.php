@@ -16,13 +16,6 @@ class TBill extends TDocument {
 		
 	}
 	
-	function save(&$db) {
-		if(empty($this->ref)) {
-			$this->ref = TNumbering::getNextRefValue($db, $this, 'ref');
-		}
-		
-		return parent::save($db);
-	}
 }
 
 class TBillLine extends TDocumentLine {

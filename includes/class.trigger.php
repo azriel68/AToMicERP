@@ -15,7 +15,7 @@ class TTrigger {
 				if(class_exists($trigger['objectName'])) {
 					
 					if(method_exists($trigger['objectName'],'trigger')) {
-						$result = call_user_func(array($hook['object'],$hook['function']), $ATMdb, $object, $className, $state );
+						$result = call_user_func(array($trigger['objectName'],'trigger'), $ATMdb, $object, $className, $state );
 					}
 
 				}			
@@ -23,15 +23,23 @@ class TTrigger {
 		
 	}
 	
-	function register(&$ATMdb, $objectName) {
+	static function register($objectName, $priority = 99) {
 		global $conf;
-		/* Enregistre un nouveau trigger avec le chemin à charger et la method à appeler */
+		/*  */
 		
 		//TODO add db
 		
-		$conf->TTrigger[]=array('objectName'=>$objectName);
+		$conf->TTrigger[]=array('objectName'=>$objectName, 'priority'=>$priority);
+		
+		TTrigger::orderTrigger($conf->TTrigger);
 		
 	}
+	static function orderTrigger(&$TTrigger) {
+		
+		
+		
+	}
+	
 	function loadTrigger(&$ATMdb) {
 		/* Charge la liste des triggers à exécuter */
 		$this->TTrigger=array();
