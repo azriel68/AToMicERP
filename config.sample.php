@@ -25,7 +25,8 @@
 	 */
 	@$conf->moduleEnabled=array(
 		'address'=>true
-		,'bank'=>true
+		,'numbering'=>true
+		/*,'bank'=>true*/
 		,'company'=>true
 		,'contact'=>true
 		,'document'=>true
@@ -35,6 +36,7 @@
 		,'dictionary'=>true
 		,'project'=>true
 		,'planning'=>true
-		,'currency'=>true
-		/*,'wallpaper'=>true*/
+		,'companion'=>true
+		/*,'currency'=>true
+		,'wallpaper'=>true*/
 	);

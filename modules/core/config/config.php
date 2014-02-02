@@ -3,7 +3,7 @@
 	$conf->modules['core']=array(
 		'name'=>'Core'
 		,'id'=>'Core'
-		,'class'=>array('TNumbering', 'TConf'/*,'TListviewTBS'*/,'TReponseMail')
+		,'class'=>array('TConf'/*,'TListviewTBS'*/,'TReponseMail')
 	);
 	
 	//JAVASCRIPTS
@@ -21,6 +21,4 @@
 
 	$conf->js[] = HTTP.'modules/core/js/jquery.validate.min.js';
 
-
-	TTrigger::register('TNumbering',50);
 	
