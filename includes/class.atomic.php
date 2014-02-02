@@ -301,7 +301,7 @@ class TAtomic {
 		}
 		</script>';
 		
-		
+		return $r;
 	}
 	
 	static function addExtraField($typeObject, $field, $info=array()) {

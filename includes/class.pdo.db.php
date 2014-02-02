@@ -141,9 +141,9 @@ private function Error($message, $showTrace=true) {
                         || (!empty($row['function']) && $row['function']==__FUNCTION__)
                         || (!empty($row['function']) && $row['function']=='call_user_func')) continue;
                         
-                $log.=' < L. '.$row['line'];
+                if(!empty($row['line']))$log.=' < L. '.$row['line'];
                 if(!empty($row['class']))$log.=' '.$row['class'];
-                $log.=$row['function'].'() dans '.$row['file'];
+                if(!empty($row['file']))$log.=$row['function'].'() dans '.$row['file'];
 				//print $log;
         }
 		
