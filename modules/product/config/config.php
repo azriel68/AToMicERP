@@ -58,7 +58,7 @@ TTemplate::addTabs($conf, 'TProduct', array(
 		)
 		,'hide'=>array('id')
 		,'link'=>array(
-			'ref'=>'<a href="?action=view&id=@id@">@ref@</a>'
+			'ref'=>'<a href="'.HTTP.'modules/product/product.php?action=view&id=@id@">@ref@</a>'
 		)
 	)
 );

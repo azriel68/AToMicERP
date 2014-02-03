@@ -10,6 +10,8 @@ class TTrigger {
 	
 		/* Execute the triggers */
 	
+		if(empty($conf->TTrigger)) return false;
+	
 		foreach($conf->TTrigger as &$trigger) {
 			
 				if(class_exists($trigger['objectName'])) {
