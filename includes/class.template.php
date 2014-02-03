@@ -335,6 +335,40 @@ class TTemplate {
 		
 		return $TButton;
 	}
+
+
+	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $position=1) {
+	
+		if(!isset($conf->menu->left))$conf->menu->left=array();
+		if(!isset($conf->menu->top))$conf->menu->top=array();
+	
+		if(empty($topMenu)) {
+			$conf->menu->top[] = array(
+				'name'=>$name
+				,'id'=>$id
+				,'module'=>$module
+				,'position'=>$position
+				,'url'=>$url
+			);
+			
+			
+		}
+		else {
+			if(!isset($conf->menu->left[$topMenu]))$conf->menu->left[$topMenu]=array();
+		
+			$conf->menu->left[$topMenu][] = array(
+				'name'=>$name
+				,'id'=>$id
+				,'module'=>$module
+				,'position'=>$position
+				,'url'=>$url
+			);
+			
+		}
+		
+	}
+
+
 	static function addTabs(&$conf, $className, $Tab) {
 		
 		if(!isset($conf->tabs->{$className}))$conf->tabs->{$className}=array();
@@ -426,6 +460,30 @@ class TTemplate {
 			}
 						
 		}
+
+		$menuLeft = array();
+		
+		foreach($conf->menu->left as $id_top_menu=>$TMenu) { // TODO filtre on active menu
+			
+			foreach($TMenu as $menu) {
+				
+				if(empty($menu['icon'])) {
+					
+						$menu['icon']= TTemplate::getIcon($conf, !empty($menu['module']) ? $menu['module'] : null);
+					
+				}
+				
+				if(empty($menu['rights'])){
+					$menuLeft[] = $menu;
+				}
+				else if( $user->right($menu['rights'][0],$menu['rights'][1],$menu['rights'][2]) ) {
+					$menuLeft[] = $menu;
+				}
+				
+			}
+			
+						
+		}
 		
 		$menuAdmin = array();
 		foreach($conf->menu->admin as $menu) {
@@ -439,11 +497,12 @@ class TTemplate {
 				$menuAdmin[] = $menu;
 			}
 		}
-		
+		//var_dump($menuLeft);
 		//print_r($conf);
 		return $tbs->render(TPL_MENU,
 			array(
 				'menuTop'=>$menuTop
+				,'menuLeft'=>$menuLeft
 				,'menuAdmin'=>$menuAdmin
 			)
 			,array(

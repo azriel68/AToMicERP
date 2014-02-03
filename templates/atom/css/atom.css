@@ -25,12 +25,14 @@ a {
 a.logo {
 	color: #000000;
 	text-decoration: none;
-	background: url("../images/logo.png") left top no-repeat;
-	height:70px;
-	width:150px;
 	display:block;
 	
-	padding-top:150px;
+}
+a.logo {
+	color: #000000;
+	text-decoration: none;
+	display:block;
+	
 }
 
 div.boxe a {
@@ -443,6 +445,9 @@ div#boxes  div.boxe h2 {
 	margin:0 0 0 0;
 	cursor: pointer;
 }
+/*
+ * Admin menu
+ */
 div.profile {
 	position:relative;
 	overflow: visible;
@@ -499,6 +504,62 @@ div.profile img {
 	height:40px;
 	vertical-align: middle;
 }
+/*
+ * Menu left
+ * 
+ */
+div.menu-left {
+	position:relative;
+	overflow: visible;
+	float: left;	
+	overflow:visible;
+}
+
+div.menu-left ul {
+	display:none;
+	position:absolute;
+	top:0px;
+	left:0;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	width:400px;
+	z-index:999;
+	background: #0b0909;
+	height:auto;
+	
+}
+div.menu-left ul li {
+	background: #0b0909;
+	border-bottom:3px solid #151515;
+	padding:20px 10px;
+	display:block;	
+	list-style: none;
+	text-decoration: none;
+}
+div.menu-left  ul li a {
+	text-decoration: none;
+	font-size: 14px;	
+	color:#fff;
+}
+div.menu-left  ul li:hover {
+	background:#2AA8B9;
+}
+div.menu-left  ul li:hover a {
+	color:#fff;
+}
+
+div.menu-left:hover {
+	background: #2AA8B9;
+	color:#fff;
+}
+div.menu-left:hover ul {
+	display:block;	
+}
+div.menu-left ul img {
+	height:40px;
+	vertical-align: middle;
+}
+
 #userGroupDrag, #scrum {
 	width:100%;
 	border-spacing: 10px;

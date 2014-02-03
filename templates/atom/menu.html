@@ -1,5 +1,20 @@
 <div class="header" data-role="header">
-	<h1><a href="[tpl.http]" class="logo">[tpl.logo]</a></h1>
+	<div class="menu-left">
+	<h1>
+		<a href="[tpl.http]" class="logo">[tpl.logo;strconv=no;]</a>
+	</h1>
+	<ul>
+		<li id="menu-left-home">
+			<a href="[tpl.http]" leftMenuModule="home">__tr(Home)__</a>
+		</li>	
+	
+	
+		<li id="menu-left-[menuLeft.id]">
+			<a href="[menuLeft.url; block=li]" leftMenuModule="[menuLeft.module]">[menuLeft.name]</a>
+		</li>	
+	</ul>
+	
+	</div>
 	<div class="menu">
 		<ul>
 			<li>
@@ -24,9 +39,9 @@
 	$(document).ready(function() {
 		var h=$(window).height();
 		$('div.profile ul').css('height', h); 
+		$('div.menu-left ul').css('height', h); 
 		
 		
 		
 	})
-	
 </script>

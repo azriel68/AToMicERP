@@ -14,8 +14,7 @@
 	define('DEFAULT_THEME','atom');
 	define('DEFAULT_LANG','fr_FR');
 	define('DEFAULT_COUNTRY', 'FR');
-	define('ATOMIC_LOGO','AToMic ERP');
-
+	
 	define('ADMIN','admin');
 	
 	date_default_timezone_set('Europe/Paris'); 

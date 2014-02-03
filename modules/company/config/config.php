@@ -25,13 +25,12 @@ $conf->menu->admin[] = array(
 /******************************************************************************************
  * Définition des menus (top / left)
  ******************************************************************************************/
-$conf->menu->top[] = array(
-	'name'=>'Companies'
-	,'id'=>'TCompany'
-	,'module'=>'company'
-	,'position'=>1
-	,'url'=>HTTP.'modules/company/company.php'
-);
+
+TTemplate::addMenu($conf, 'TCompany', 'Companies', HTTP.'modules/company/company.php', 'company');
+TTemplate::addMenu($conf, 'customer', 'Customers', HTTP.'modules/company/company.php', 'company', 'TCompany');
+TTemplate::addMenu($conf, 'addcustomer', 'Add customer', HTTP.'modules/company/company.php', 'company', 'customer');
+TTemplate::addMenu($conf, 'supplier', 'Suppliers', HTTP.'modules/company/company.php', 'company', 'TCompany');
+TTemplate::addMenu($conf, 'everyone', 'EveryCompanies', HTTP.'modules/company/company.php', 'company', 'TCompany');
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
