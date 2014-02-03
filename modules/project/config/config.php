@@ -1,21 +1,15 @@
 <?php
 
-	$conf->menu->top[] = array(
-		'name'=>"Project"
-		,'id'=>'TProject'
-		,'position'=>4
-		,'url'=>HTTP.'modules/project/project.php'
-		,'module'=>'project'
-		
-	);
 	
-
 	$conf->modules['project']=array(
 		'name'=>'Projects'
 		,'class'=>array('TProject','TTask','TTaskTime','TTaskTag')
 		,'icon'=>'41-picture-frame.png'
 		,'moduleRequire'=>array('user')
 	);
+
+	TTemplate::addMenu($conf, 'TProject', 'Projects', HTTP.'modules/project/project.php', 'project', '','',4);
+
 	
 	@$conf->template->TProject->card = './template/project.html';
 	@$conf->template->TProject->scrum = './template/scrum.html';

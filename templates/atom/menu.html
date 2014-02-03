@@ -5,12 +5,12 @@
 	</h1>
 	<ul>
 		<li id="menu-left-home">
-			<a href="[tpl.http]" leftMenuModule="home">__tr(Home)__</a>
+			<a href="[tpl.http]home.php" ctm="home">__tr(Home)__</a>
 		</li>	
 	
 	
 		<li id="menu-left-[menuLeft.id]">
-			<a href="[menuLeft.url; block=li]" leftMenuModule="[menuLeft.module]">[menuLeft.name]</a>
+			<a href="[menuLeft.url; block=li]" ctm="[menuLeft.topMenu]">[menuLeft.name]</a>
 		</li>	
 	</ul>
 	
@@ -18,7 +18,7 @@
 	<div class="menu">
 		<ul>
 			<li>
-				<a href="[menuTop.url;block=li]"><img src="[menuTop.icon]">__tr([menuTop.name])__</a>
+				<a href="[menuTop.url;block=li]" ctm="[menuTop.topMenu]"><img src="[menuTop.icon]">__tr([menuTop.name])__</a>
 			</li>
 		</ul>
 	</div>
@@ -26,10 +26,10 @@
 		[user.gravatar; strconv=no] [user.firstname] [user.lastname]
 		<ul>
 			<li id="menu-admin-[menuAdmin.id]">
-				<a href="[menuAdmin.url; block=li]">[menuAdmin.name]</a>
+				<a href="[menuAdmin.url; block=li]" class="menu">[menuAdmin.name]</a>
 			</li>	
 			<li>
-				<a href="[tpl.logout_url]">__tr(Logout)__</a>
+				<a href="[tpl.logout_url]" class="menu">__tr(Logout)__</a>
 			</li>	
 		</ul>
 	</div>

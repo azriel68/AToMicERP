@@ -9,9 +9,31 @@ $(document).ready(function() {
 	if(typeof InPageHook == 'function') {
 		InPageHook();
 	}
-				
+		
+	initMenu();		
 	
 });
+
+function initMenu() {
+	
+	$('a[ctm]').each(function() {
+		
+		var module = $(this).attr('ctm');
+		var url = $(this).attr('href');
+		
+		if(url.indexOf('?')==-1) {
+			url=url+'?ctm='+module;
+		}
+		else {
+			url=url+'&ctm='+module;
+		}
+		
+		$(this).attr('href', url);
+	
+		
+	});
+	
+}
 
 function initInterface() {
 	$('div.tabs a').each(function() {

@@ -10,11 +10,5 @@
 		,'moduleRequire'=>array('user')
 	);
 
-	$conf->menu->top[] = array(
-		'name'=>"Bank"
-		,'id'=>'TBank'
-		,'position'=>3
-		,'url'=>HTTP.'modules/bank/'
-		,'module'=>'bank'
-	);
+	//TTemplate::addMenu($conf, 'TBank', 'Bank', HTTP.'modules/bank/', 'bank', '','',3);
 	

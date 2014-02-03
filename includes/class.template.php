@@ -139,6 +139,13 @@ class TTemplate {
 		
 		$template = TTemplate::getTemplate($conf, $object,'list');
 		
+		print TAtomic::hook($conf, $className, 'list', array(
+			'sql'=>&$sql
+			,'object'=>&$object
+			,'listname'=>&$listname
+			,'param'=>&$param
+		));
+		
 		return __tr_view($tbs->render($template
 			,array(
 				'button'=>TTemplate::buttons($user, $object, 'list')
@@ -337,7 +344,7 @@ class TTemplate {
 	}
 
 
-	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $position=1) {
+	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $leftMenu='main', $position=1) {
 	
 		if(!isset($conf->menu->left))$conf->menu->left=array();
 		if(!isset($conf->menu->top))$conf->menu->top=array();
@@ -349,12 +356,13 @@ class TTemplate {
 				,'module'=>$module
 				,'position'=>$position
 				,'url'=>$url
+				,'topMenu'=>$id
 			);
 			
 			
 		}
 		else {
-			if(!isset($conf->menu->left[$topMenu]))$conf->menu->left[$topMenu]=array();
+			if(!isset($conf->menu->left[$topMenu]))  @$conf->menu->left[$topMenu]=array();
 		
 			$conf->menu->left[$topMenu][] = array(
 				'name'=>$name
@@ -362,6 +370,8 @@ class TTemplate {
 				,'module'=>$module
 				,'position'=>$position
 				,'url'=>$url
+				,'topMenu'=>$topMenu
+				,'leftMenu'=>$leftMenu
 			);
 			
 		}
@@ -439,6 +449,9 @@ class TTemplate {
 	}
 	static function menu(&$conf, &$user) {
 		
+		if(__get('ctm')!='') $_SESSION['current_top_menu']=__get('ctm');
+		$current_top_menu = __val($_SESSION['current_top_menu'], 'home');
+		
 		$tbs=new TTemplateTBS;
 		
 		$menuTop = array();
@@ -446,9 +459,7 @@ class TTemplate {
 		foreach($conf->menu->top as $menu) {
 			
 			if(empty($menu['icon'])) {
-				
 					$menu['icon']= TTemplate::getIcon($conf, !empty($menu['module']) ? $menu['module'] : null);
-				
 			}
 			
 			
@@ -460,12 +471,13 @@ class TTemplate {
 			}
 						
 		}
-
+	
+		$conf->menu->left['home']=$menuTop;
 		$menuLeft = array();
 		
-		foreach($conf->menu->left as $id_top_menu=>$TMenu) { // TODO filtre on active menu
+		if(!empty($conf->menu->left[$current_top_menu])) {
 			
-			foreach($TMenu as $menu) {
+			foreach($conf->menu->left[$current_top_menu] as $menu) {
 				
 				if(empty($menu['icon'])) {
 					
@@ -482,9 +494,9 @@ class TTemplate {
 				
 			}
 			
-						
 		}
-		
+			
+						
 		$menuAdmin = array();
 		foreach($conf->menu->admin as $menu) {
 			

@@ -14,12 +14,8 @@ $conf->modules['bill']=array(
 /******************************************************************************************
  * Définition des menus (top / left)
  ******************************************************************************************/
-$conf->menu->top[] = array(
-	'name'=>'Bills'
-	,'id'=>'TBill'
-	,'position'=>20
-	,'url'=>HTTP.'modules/bill/bill.php'
-);
+
+TTemplate::addMenu($conf, 'TBill', 'Bills', HTTP.'modules/bill/bill.php', 'TBill', '', '', 20);
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet

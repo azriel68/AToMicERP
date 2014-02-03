@@ -27,9 +27,9 @@ $conf->menu->admin[] = array(
  ******************************************************************************************/
 
 TTemplate::addMenu($conf, 'TCompany', 'Companies', HTTP.'modules/company/company.php', 'company');
-TTemplate::addMenu($conf, 'customer', 'Customers', HTTP.'modules/company/company.php', 'company', 'TCompany');
-TTemplate::addMenu($conf, 'addcustomer', 'Add customer', HTTP.'modules/company/company.php', 'company', 'customer');
-TTemplate::addMenu($conf, 'supplier', 'Suppliers', HTTP.'modules/company/company.php', 'company', 'TCompany');
+TTemplate::addMenu($conf, 'customer', 'Customers', HTTP.'modules/company/company.php?isCustomer=1', 'company', 'TCompany');
+TTemplate::addMenu($conf, 'addcustomer', 'Add customer', HTTP.'modules/company/company.php?action=new', 'company', 'TCompany', 'customer');
+TTemplate::addMenu($conf, 'supplier', 'Suppliers', HTTP.'modules/company/company.php?isSupplier=1', 'company', 'TCompany');
 TTemplate::addMenu($conf, 'everyone', 'EveryCompanies', HTTP.'modules/company/company.php', 'company', 'TCompany');
 
 /******************************************************************************************
