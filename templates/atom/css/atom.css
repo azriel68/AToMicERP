@@ -531,11 +531,18 @@ div.menu-left ul {
 div.menu-left ul li {
 	background: #0b0909;
 	border-bottom:3px solid #151515;
-	padding:20px 10px;
+	padding:20px 10px 20px 30px;
 	display:block;	
 	list-style: none;
 	text-decoration: none;
 }
+
+div.menu-left ul li.starred {
+	background: #4a7178;
+	padding:20px 10px 20px 10px;
+}
+
+
 div.menu-left  ul li a {
 	text-decoration: none;
 	font-size: 14px;	

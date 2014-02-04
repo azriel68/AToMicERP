@@ -344,7 +344,7 @@ class TTemplate {
 	}
 
 
-	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $leftMenu='main', $position=1) {
+	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $starred=false, $position=0) {
 	
 		if(!isset($conf->menu->left))$conf->menu->left=array();
 		if(!isset($conf->menu->top))$conf->menu->top=array();
@@ -364,6 +364,8 @@ class TTemplate {
 		else {
 			if(!isset($conf->menu->left[$topMenu]))  @$conf->menu->left[$topMenu]=array();
 		
+			if($position==0 && !empty($conf->menu->left[$topMenu])) $position = $conf->menu->left[$topMenu][ count($conf->menu->left[$topMenu])-1 ]['position']+10; 
+		
 			$conf->menu->left[$topMenu][] = array(
 				'name'=>$name
 				,'id'=>$id
@@ -371,7 +373,7 @@ class TTemplate {
 				,'position'=>$position
 				,'url'=>$url
 				,'topMenu'=>$topMenu
-				,'leftMenu'=>$leftMenu
+				,'starred'=>(int)$starred
 			);
 			
 		}
@@ -473,7 +475,16 @@ class TTemplate {
 		}
 	
 		$conf->menu->left['home']=$menuTop;
-		$menuLeft = array();
+		$menuLeft = array(0=>array(
+			'name'=>'home'
+			,'id'=>'home'
+			,'module'=>'home'
+			,'position'=>0
+			,'url'=>HTTP.'home.php'
+			,'topMenu'=>$current_top_menu
+			,'starred'=>0
+			,'class'=>''
+		));
 		
 		if(!empty($conf->menu->left[$current_top_menu])) {
 			
@@ -484,6 +495,8 @@ class TTemplate {
 						$menu['icon']= TTemplate::getIcon($conf, !empty($menu['module']) ? $menu['module'] : null);
 					
 				}
+				
+				$menu['class'] = ($menu['starred']) ? 'starred' : '';
 				
 				if(empty($menu['rights'])){
 					$menuLeft[] = $menu;
