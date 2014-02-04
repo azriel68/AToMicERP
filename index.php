@@ -5,7 +5,7 @@
 	$db=new TPDOdb;
 	
 	if(isset($_REQUEST['logout'])) {
-		unset($_SESSION['user']);
+		$user=new TUser;
 	}
 
 	if($user->isLogged()) {
@@ -32,6 +32,8 @@
 					,'footer'=>TTemplate::footer($conf)
 					,'menu'=>TTemplate::menu($conf, $user)
 					,'self'=>$_SERVER['PHP_SELF']
+					,'logo'=>ATOMIC_LOGO
+					,'http'=>HTTP
 				)
 			)
 		); 

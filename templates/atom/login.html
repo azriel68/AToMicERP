@@ -1,4 +1,14 @@
 [tpl.header;strconv=no]
+
+<div class="header" data-role="header">
+	
+	<h1 style="text-align: center;">
+		<a href="[tpl.http]" class="logo">[tpl.logo;strconv=no;]</a>
+	</h1>
+	
+</div>
+
+<div data-role="page" style="clear: both; margin-top:50;">
 <form action="home.php" name="formLogin" id="formLogin" method="post">
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="back" value="[form.back; strconv=no]" />
@@ -17,6 +27,9 @@
 		</div>
 	</div>
 </form>
+
+</div>
+
 <script type="text/javascript">
 	/*function checkLogin() {
 		

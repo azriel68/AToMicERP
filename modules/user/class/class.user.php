@@ -140,15 +140,11 @@ class TUser extends TContact {
 		return false;
 	}
 	function isLogged() {
-//		Tools::pre($this);exit;
-		if(empty($_SESSION['user'])) {
-			return false;
-		}
-		else if(empty($_SESSION['user']->login)) {
+		if(empty($this->login)) {
 			return false;
 		}
 			
-		else if(!empty($_SESSION['user']) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {
+		else if(!empty($this->login) && $this->right($this->id_entity_c, 'login') && $this->t_connexion > 0 ) {
 			return true;
 			
 		}
