@@ -358,8 +358,7 @@ class TTemplate {
 				,'url'=>$url
 				,'topMenu'=>$id
 			);
-			
-			
+
 		}
 		else {
 			if(!isset($conf->menu->left[$topMenu]))  @$conf->menu->left[$topMenu]=array();
@@ -457,7 +456,7 @@ class TTemplate {
 		$tbs=new TTemplateTBS;
 		
 		$menuTop = array();
-		
+	
 		foreach($conf->menu->top as $menu) {
 			
 			if(empty($menu['icon'])) {
@@ -485,7 +484,7 @@ class TTemplate {
 			,'starred'=>0
 			,'class'=>''
 		));
-		
+		     
 		if(!empty($conf->menu->left[$current_top_menu])) {
 			
 			foreach($conf->menu->left[$current_top_menu] as $menu) {
@@ -496,7 +495,7 @@ class TTemplate {
 					
 				}
 				
-				$menu['class'] = ($menu['starred']) ? 'starred' : '';
+				$menu['class'] = (__val($menu['starred'],0)) ? 'starred' : '';
 				
 				if(empty($menu['rights'])){
 					$menuLeft[] = $menu;
@@ -508,7 +507,7 @@ class TTemplate {
 			}
 			
 		}
-			
+		
 						
 		$menuAdmin = array();
 		foreach($conf->menu->admin as $menu) {

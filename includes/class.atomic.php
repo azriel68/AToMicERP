@@ -282,7 +282,7 @@ class TAtomic {
 		
 		return $resultat;
 	}
-	function hookJsStarter(&$conf, $className) {
+	static function hookJsStarter(&$conf, $className) {
 		if(!isset($conf->hooks->{$className})) return '';
 		
 		$r='<script type="text/javascript">

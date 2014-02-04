@@ -15,7 +15,7 @@ $conf->modules['planning']=array(
  * Définition des menus (top / left)
  ******************************************************************************************/
 
-	TTemplate::addMenu($conf, 'TPlanning', 'Planning', HTTP.'modules/planning/planning.php', 'planning', '','',5);
+	TTemplate::addMenu($conf, 'TPlanning', 'Planning', HTTP.'modules/planning/planning.php', 'planning');
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet

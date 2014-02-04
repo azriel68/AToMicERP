@@ -16,7 +16,9 @@ $conf->modules['product']=array(
  * Définition des menus (top / left)
  ******************************************************************************************/
 
-TTemplate::addMenu($conf, 'TProduct', 'Products', HTTP.'modules/product/product.php', 'product', '','',2);
+TTemplate::addMenu($conf, 'TProduct', 'Products', HTTP.'modules/product/product.php', 'product', '');
+TTemplate::addMenu($conf, 'AllProduct', 'Products', HTTP.'modules/product/product.php', 'product', 'TProduct', true);
+TTemplate::addMenu($conf, 'AddProduct', 'New product', HTTP.'modules/product/product.php?action=new', 'product', 'TProduct');
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet

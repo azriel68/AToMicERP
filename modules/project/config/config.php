@@ -8,7 +8,7 @@
 		,'moduleRequire'=>array('user')
 	);
 
-	TTemplate::addMenu($conf, 'TProject', 'Projects', HTTP.'modules/project/project.php', 'project', '','',4);
+	TTemplate::addMenu($conf, 'TProject', 'Projects', HTTP.'modules/project/project.php', 'project');
 
 	
 	@$conf->template->TProject->card = './template/project.html';
