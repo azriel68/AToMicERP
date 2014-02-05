@@ -11,7 +11,7 @@
 		case 'database-test':
 			$db=new TPDOdb(DB_DRIVER, DB_DRIVER.':dbname='.__get('db_name').';host='.__get('db_host'), __get('db_user'), __get('db_pass'));
 			
-			installer($conf, $db->error, 2);	
+			installer($conf, $db->error ? $db->error : __tr('Your configuration is good') , 2);	
 			break;
 		case 'create-config':	
 			
@@ -32,15 +32,16 @@
 			);
 			
 			
-			installer($conf, !$res ? __tr("can't create config file") : ''  , 4);
+			installer($conf, !$res ? __tr("can't create config file") : _tr('Config file created')  , 3);
 			break;
 		case 'database-create':
 			
+			unset($_SESSION['user']); // prevent login issue just after installation 
 			
 			$db=new TPDOdb(DB_DRIVER, DB_DRIVER.':dbname='.__get('db_name').';host='.__get('db_host'), __get('db_user'), __get('db_pass'));
 			TAtomic::createMajBase($db, $conf);
 			
-			installer($conf, $db->error, 3);	
+			installer($conf, $db->error ? $db->error : 'Your database was created', 4);	
 				
 			break;
 		case 'installer':
@@ -87,6 +88,13 @@ function installer($conf, $errorMessage='', $step=1) {
 				,'db_prefix'=>$form->hidden( 'db_prefix',  __get('db_prefix', 'atom_', 'string', 50), 50 )
 				,'db_create'=>$form->btsubmit(__tr('create database'), 'db_create','','butAction') 
 				,'errorMessage'=>(($step==3) ? $errorMessage : '')
+			)
+			,'step4'=>array(
+				'password'=>$form->texte('', 'password',  __get('password', '', 'string', 50), 50 )
+				,'company'=>$form->texte('', 'company',  __get('company', '', 'string', 50), 50 )
+
+				,'db_create'=>$form->btsubmit(__tr('create admin'), 'db_create','','butAction') 
+				,'errorMessage'=>(($step==4) ? $errorMessage : '')
 			)
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf,'Installer')
