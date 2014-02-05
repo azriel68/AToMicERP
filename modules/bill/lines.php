@@ -38,7 +38,21 @@ if($id_bill) {
 		
 		$bill->save($db);
 	}
-	
+	else if($action=='set-lines-order') {
+		
+		foreach($bill->TBillLine as &$line) {
+			
+			foreach($_POST['listOfId'] as $position=>$id) {
+				if($id==$line->id) {
+					$line->position = $position;	
+					break;
+				}
+			}
+			// TODO add order by on loadChild
+			$bill->save($db);			
+		}	
+		
+	}
 	
 	$TLine = array();
 	
