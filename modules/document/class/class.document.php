@@ -26,6 +26,7 @@ class TDocumentLine extends TObjetStd {
 		parent::add_champs('title,description','type=chaine;');
 		parent::add_champs('quantity, price, total,total_VAT,total_ATI,VAT_rate','type=float;');
 		parent::add_champs('id_document','type=entier;index;');
+		parent::add_champs('position','type=entier;');
 		
 		TAtomic::initExtraFields($this);
 		
