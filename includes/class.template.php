@@ -350,6 +350,10 @@ class TTemplate {
 		if(!isset($conf->menu->top))$conf->menu->top=array();
 	
 		if(empty($topMenu)) {
+			
+			if($position==0 && !empty($conf->menu->top)) $position = $conf->menu->top[ count($conf->menu->top)-1 ]['position']+10; 
+		
+			
 			$conf->menu->top[] = array(
 				'name'=>$name
 				,'id'=>$id
@@ -376,6 +380,8 @@ class TTemplate {
 			);
 			
 		}
+		
+		
 		
 	}
 
@@ -480,7 +486,7 @@ class TTemplate {
 			,'module'=>'home'
 			,'position'=>0
 			,'url'=>HTTP.'home.php'
-			,'topMenu'=>$current_top_menu
+			,'topMenu'=>'home'
 			,'starred'=>0
 			,'class'=>''
 		));

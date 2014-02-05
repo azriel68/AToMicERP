@@ -117,6 +117,8 @@ class TUser extends TContact {
 			TAtomic::errorlog("ErrorBadLogin ($login $pwd)");
 			$this->errorLogin = true;
 			$this->error = __tr('ErrorBadLogin').' '.$login;
+			
+			return false;
 		}
 			
 		return false;

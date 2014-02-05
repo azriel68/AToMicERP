@@ -9,7 +9,7 @@
 </div>
 
 <div data-role="page" style="clear: both; margin-top:50;">
-<form action="home.php" name="formLogin" id="formLogin" method="post">
+<form action="#" name="formLogin" id="formLogin" method="post">
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="back" value="[form.back; strconv=no]" />
 	<div id="page-login" class="content">
@@ -61,6 +61,24 @@
 					required: true
 				}
 			}
+		});
+
+		$('#formLogin').submit(function() {
+			
+			$.post(HTTP+'modules/user/script/interface.php?put=login'
+				,$(this).serialize()  
+				,function(verifLogin) {
+				
+					if(verifLogin==1) {
+						
+						document.location.href="home.php?sucess=Login sucessful";
+						
+					}
+				}
+			);
+			
+			return false;
+			
 		});
 
 		

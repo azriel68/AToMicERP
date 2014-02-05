@@ -26,7 +26,7 @@ $conf->menu->admin[] = array(
  * Définition des menus (top / left)
  ******************************************************************************************/
 
-TTemplate::addMenu($conf, 'TCompany', 'Companies', HTTP.'modules/company/company.php', 'company');
+TTemplate::addMenu($conf, 'TCompany', 'Companies', HTTP.'modules/company/company.php', 'company', '', false, 1);
 TTemplate::addMenu($conf, 'customer', 'Customers', HTTP.'modules/company/company.php?isCustomer=1', 'company', 'TCompany', true);
 TTemplate::addMenu($conf, 'addcustomer', 'Add customer', HTTP.'modules/company/company.php?action=new&isCustomer=1', 'company', 'TCompany');
 TTemplate::addMenu($conf, 'supplier', 'Suppliers', HTTP.'modules/company/company.php?isSupplier=1', 'company', 'TCompany', true);

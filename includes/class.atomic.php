@@ -207,7 +207,7 @@ class TAtomic {
 		if(is_dir(THEME_TEMPLATE_DIR.'/css/')) {
 			$handle = opendir(THEME_TEMPLATE_DIR.'/css/'); 
 			while (false !== ($file = readdir($handle))) {
-				if(substr($file,-3)=='css'){
+				if(substr($file,-4)=='.css'){
 					$conf->css[] = HTTP_TEMPLATE.'css/'.$file;
 				}
 			}
@@ -236,14 +236,24 @@ class TAtomic {
 	}
 	
 	static function sortMenu(&$conf) {
-		$menu = array();
+		/*$menu = array();
 		foreach ($conf->menu->top as $menuElement) {
 			$menu[$menuElement['position']] = $menuElement;
 		}
 		ksort($menu, SORT_NUMERIC);
-		$conf->menu->top = $menu;
+		
+		
+		
+		$conf->menu->top = $menu;*/
+		usort($conf->menu->top, array('TAtomic', '_sortMenu_top'));
 	}
-	
+	static function _sortMenu_top($a, $b) {
+		
+		if($a['position']<$b['position']) return -1;
+		else if($a['position']>$b['position']) return 1;
+		else return 0;
+		
+	}
 	static function addHook(&$conf, $className, $hook) {
 		//TODO delete the className argument ?
 		if(is_array($className)) {
