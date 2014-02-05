@@ -83,5 +83,26 @@
 </table>
 </form>
 
+<h2>__tr(Step)__ 4</h2>
+<form action="create-admin" name="formStep3">
+	[step4.errorMessage];
+	
+<table border="1">
+	<tr>
+		<th colspan="2">__tr(Create admin)__</th>
+	</tr>
+	<tr>
+		<td>__tr(AdminPassword)__</td><td>[step4.password; strconv=no]</td>
+	</tr>
+	<tr>
+		<td>__tr(FirstEntity)__</td><td>[step4.company; strconv=no]</td>
+	</tr>
+		<tr>
+		<td align="center" colspan="2">[step4.admin_create; strconv=no]</td>
+	</tr>
+	
+</table>
+</form>
+
 
 [tpl.footer;strconv=no]
