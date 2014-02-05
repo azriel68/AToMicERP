@@ -39,7 +39,7 @@ if($id_bill) {
 		$bill->save($db);
 	}
 	else if($action=='set-lines-order') {
-		
+		//TODO -> in object document
 		foreach($bill->TBillLine as &$line) {
 			
 			foreach($_POST['listOfId'] as $position=>$id) {

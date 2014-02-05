@@ -355,7 +355,7 @@ class TTemplate {
 		
 			
 			$conf->menu->top[] = array(
-				'name'=>$name
+				'name'=>__tr($name)
 				,'id'=>$id
 				,'module'=>$module
 				,'position'=>$position
@@ -370,7 +370,7 @@ class TTemplate {
 			if($position==0 && !empty($conf->menu->left[$topMenu])) $position = $conf->menu->left[$topMenu][ count($conf->menu->left[$topMenu])-1 ]['position']+10; 
 		
 			$conf->menu->left[$topMenu][] = array(
-				'name'=>$name
+				'name'=>__tr($name)
 				,'id'=>$id
 				,'module'=>$module
 				,'position'=>$position
