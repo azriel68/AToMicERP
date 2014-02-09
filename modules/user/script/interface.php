@@ -33,7 +33,13 @@ function _put(&$db,&$conf, $case) {
 		case 'login':	
 			// if login ok return 1, else 0
 			$user=new TUser;
-			print (int)$user->login($db, __get('login'), __get('password'), __get('id_entity',-1, 'integer'));
+			$res = (int)$user->login($db, __get('login'), __get('password'), __get('id_entity',-1, 'integer'));
+			
+			if($res===1) {
+				$_SESSION['user'] = $user;
+			}
+			
+			print $res;
 			
 			break;
 	}

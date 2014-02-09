@@ -142,6 +142,7 @@ class TUser extends TContact {
 		return false;
 	}
 	function isLogged() {
+		
 		if(empty($this->login)) {
 			return false;
 		}
