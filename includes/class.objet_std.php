@@ -376,10 +376,11 @@ function _no_save_vars($lst_chp) {
 		}
 	}
 	
-	function setChild($class, $foreignKey) {
+	function setChild($class, $foreignKey, $orderBy='') {
 		$this->TChildObjetStd[]=array(
 			'class'=>$class
 			,'foreignKey' => $foreignKey
+			,'orderBy'=>$orderBy
 		);
 		
 		$tabName = $class;
@@ -421,6 +422,7 @@ function _no_save_vars($lst_chp) {
 	}
 	function loadChild(&$db) {
 		if($this->withChild) {
+			//TODO add order by on load
 			
 			foreach($this->TChildObjetStd as $child) {
 					$className = $child['class'];		

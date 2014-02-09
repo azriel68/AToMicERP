@@ -11,12 +11,37 @@ class TDocument extends TObjetStd {
 		parent::_init_vars();
 	
 		if(get_class($this)=='TDocument') {
-			$this->setChild('TDocumentLine', 'id_document');
+			$this->setChild('TDocumentLine', 'id_document', 'position ASC');
 			$this->setChild('TPaymentDocument', 'id_document');
 			
 		}
 		
 		
+	}
+	
+	function setOrderLine($TabName, $TPosition) {
+		
+		foreach($this->{$TabName} as &$line) {
+			
+			foreach($TPosition as $position=>$id) {
+				if($id==$line->id) {
+					$line->position = $position;	
+					break;
+				}
+			}			
+		}	
+		
+		$this->orderLineByPosition($TabName);
+	}
+	
+	function orderLineByPosition($TabName) {
+		usort($this->{$TabName}, array('TDocument', '_usort_order_by_position'));
+	}
+	
+	static function _usort_order_by_position($a, $b) {
+		if($a->position<$b->position) return -1;
+		else if($a->position>$b->position) return 1;
+		else return 0;
 	}
 }
 
