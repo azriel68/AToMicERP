@@ -393,7 +393,7 @@ class TTemplate {
 		foreach($Tab as $name=>$content) {
 			
 			if(empty($content['rank'])){
-				$content['rank'] = count($conf->tabs->{$className});
+				$content['rank'] = count($conf->tabs->{$className}) * 10;
 			} 
 			
 			$conf->tabs->{$className}[$name] = $content;	
