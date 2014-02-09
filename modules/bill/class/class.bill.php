@@ -12,7 +12,7 @@ class TBill extends TDocument {
 		
 		$this->type='bill';
 		
-		$this->setChild('TBillLine', 'id_document');
+		$this->setChild('TBillLine', 'id_document', 'position ASC');
 		
 	}	
 }
@@ -21,7 +21,6 @@ class TBillLine extends TDocumentLine {
 	function __construct() { 
 		
 		parent::add_champs('id_product','type=entier;index;');
-		
 		parent::__construct();
 		
 	}
