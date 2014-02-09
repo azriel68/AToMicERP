@@ -14,9 +14,10 @@ $conf->modules['printer']=array(
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
 TTemplate::addTabs($conf, 'TBill' ,array(
-	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&type=bill')
+	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&object=TBill')
 ));
 TTemplate::addTabs($conf, 'TOrder' ,array(
-	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&type=order')
+	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&object=TOrder')
 ));
 
+@$conf->template->TPrinter->card = ROOT.'modules/printer/template/printer.html';

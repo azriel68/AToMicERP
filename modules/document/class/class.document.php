@@ -43,6 +43,10 @@ class TDocument extends TObjetStd {
 		else if($a->position>$b->position) return 1;
 		else return 0;
 	}
+	
+	static function getListOfDoc(&$conf, $className, $id) {
+		
+	}
 }
 
 class TDocumentLine extends TObjetStd {

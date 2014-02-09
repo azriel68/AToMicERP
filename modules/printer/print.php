@@ -6,11 +6,15 @@ if(!$user->isLogged()) {
 	TTemplate::login($user);
 }
 
-$bill=new TBill;
 $db=new TPDOdb;
 //$db->debug=true;
+$printer=new TPrinter;
 
-$action = TTemplate::actions($db, $user, $bill);
+$className = __get('object');
+
+$object = new $className;
+
+$action = TTemplate::actions($db, $user, $printer);
 
 if($action!==false ) {
 
@@ -22,39 +26,28 @@ if($action!==false ) {
 	$form->Set_typeaff($action);
 	
 	$TForm=array(
-		'id_entity'=>$form->combo('', 'id_entity', TEntity::getEntityForCombo($db, $user->getEntity()) , $bill->id_entity)
-		,'id_company'=>$form->combo('', 'id_company', TCompany::getCustomerForCombo($db, $bill->id_entity) , $bill->id_company)
-		,'ref'=>$form->texteRO('', 'ref', $bill->ref, 12)
-		,'dt_bill'=>$form->calendrier('', 'dt_bill', $bill->dt_bill, 12)
-		,'status'=>$form->texte('', 'status', $bill->status, 40)
-		
-		,'id'=>$bill->getId()
-		,'dt_cre'=>$bill->get_date('dt_cre')
-		,'dt_maj'=>$bill->get_date('dt_maj')
+		'model'=>TPrinter::getModel($db, $className)
 	);
 	$tbs=new TTemplateTBS;
 	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $bill)
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $printer)
 		,array(
-			'button'=>TTemplate::buttons($user, $bill, $action)
+			'button'=>TTemplate::buttons($user, $object, $action)
+			,'listOfDoc'=>TDocument::getListOfDoc($conf, $className, __get('id'))
 		)
 		,array(
-			'bill'=>$TForm
+			'printer'=>$TForm
 			,'tpl'=>array(
-				'header'=>TTemplate::header($conf, __tr('Bill').' '.$bill->ref)
+				'header'=>TTemplate::header($conf, __tr('Print'))
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
-				,'tabs'=>TTemplate::tabs($conf, $user, $bill, 'card')
+				,'tabs'=>TTemplate::tabs($conf, $user, $object, 'printer')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
 			)
 		)
 	)); 
 	
-}
-
-else {
-	print TTemplate::liste($conf, $user, $db, $bill, 'billList');
 }
 
 $db->close();
