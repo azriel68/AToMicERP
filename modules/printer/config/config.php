@@ -20,4 +20,4 @@ TTemplate::addTabs($conf, 'TOrder' ,array(
 	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&object=TOrder')
 ));
 
-@$conf->template->TPrinter->card = ROOT.'modules/printer/template/printer.html';
+@$conf->template->TPrinter->card = ROOT.'modules/printer/template/print.html';

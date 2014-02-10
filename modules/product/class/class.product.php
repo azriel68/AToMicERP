@@ -2,7 +2,7 @@
 class TProduct extends TObjetStd {
 	function __construct() { 
 		parent::set_table(DB_PREFIX.'product');
-		parent::add_champs('id_entity','type=entier;');
+		parent::add_champs('id_entity,isService','type=entier;index;');
 		parent::add_champs('ref, label, description','type=chaine;');
 		parent::add_champs('price_ht,vat_rate,packaging','type=float;'); // TODO price_ht -> price ?
 		parent::add_champs('dt_start,dt_end','type=date;');

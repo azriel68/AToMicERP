@@ -1,4 +1,4 @@
-[tpl.header;htmlconv=no]
+[tpl.header;strconv=no]
 [tpl.menu;strconv=no]
 
 <div class="content">
@@ -8,26 +8,24 @@
 	<form name="formTPrinter" action="[tpl.self]" method="post">
 		<input type="hidden" name="action" value="addModel" />
 		<input type="hidden" name="success" value="__tr(The model has been added)__" />
-		<input type="hidden" name="id" value="[tpl.id]" />
-		<input type="hidden" name="object" value="[tpl.className]" />
+		<input type="hidden" name="id" value="[printer.id_object]" />
+		<input type="hidden" name="object" value="[printer.className]" />
 		
 		<table class="grille">
 			<tr>
-				<td>__tr(Models)__</td><td>[printer.model;htmlconv=no]</td>
+				<td>__tr(Models)__</td><td>[printer.model;strconv=no]</td><td>[printer.printButton;strconv=no]</td>
 			</tr>
 			<tr>
-				<td>__tr(loadModel)__</td><td>[printer.loadModel;htmlconv=no]</td>
+				<td>__tr(loadModel)__</td><td>[printer.loadModel;strconv=no]</td><td>[printer.addButton;strconv=no]</td>
 			</tr>
 			
 		</table>
 			
-		<div class="buttons">	
-		<a href="[button.href;block=a]" class="[button.class]">[button.label]</a>
-		</div>
-		
 		<table class="grille">
 			<tr>
-				<td>[listOfDoc.file;htmlconv=no;block=tr]</td>
+				<td>[listOfDoc.file;strconv=no;block=tr]</td>
+				<td>[listOfDoc.size;strconv=no]</td>
+				<td><a href="#">Delete</a></td>
 			</tr>
 		</table>
 		
@@ -35,4 +33,4 @@
 
 </div>
 
-[tpl.footer;htmlconv=no]
+[tpl.footer;strconv=no]

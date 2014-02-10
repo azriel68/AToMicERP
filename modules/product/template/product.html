@@ -1,4 +1,4 @@
-[tpl.header;htmlconv=no]
+[tpl.header;strconv=no]
 [tpl.menu;strconv=no]
 
 <div class="content">
@@ -12,27 +12,31 @@
 		
 		<table class="grille">
 			<tr>
-				<td>__tr(Entity)__</td><td>[product.id_entity;htmlconv=no]</td>
+				<td>__tr(Entity)__</td><td>[product.id_entity;strconv=no]</td>
 			</tr>
 			<tr>
-				<td>__tr(Ref)__</td><td>[product.ref;htmlconv=no]</td>
+				<td>__tr(Ref)__</td><td>[product.ref;strconv=no]</td>
 			</tr>
 			<tr>
-				<td>__tr(Label)__</td><td>[product.label;htmlconv=no]</td>
+				<td>__tr(Label)__</td><td>[product.label;strconv=no]</td>
 			</tr>
 			<tr>
-				<td>__tr(Description)__</td><td>[product.description;htmlconv=no]</td>
+				<td>__tr(Description)__</td><td>[product.description;strconv=no]</td>
 			</tr>
 			<tr>
-				<td>__tr(PriceHT)__</td><td>[product.price_ht;htmlconv=no;frm=0,00€]</td>
+				<td>__tr(PriceHT)__</td><td>[product.price_ht;strconv=no;frm=0,00€]</td>
 			</tr>
 			<tr>
-				<td>__tr(VATRate)__</td><td>[product.vat_rate;htmlconv=no;frm=0,00%]</td>
+				<td>__tr(VATRate)__</td><td>[product.vat_rate;strconv=no;frm=0,00%]</td>
+			</tr>
+			<tr>
+				<td>__tr(isService)__</td><td>[product.isService;strconv=no]</td>
 			</tr>
 		</table>
-				
-		<a href="[button.href;block=a]" id="button-action-[button.$]" class="[button.class]">[button.label]</a>
 		
+		<div class="buttons">	
+			<a href="[button.href;block=a]" id="button-action-[button.$]" class="[button.class]">[button.label]</a>
+		</div>
 	</form>
 
 </div>
