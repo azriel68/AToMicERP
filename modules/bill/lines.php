@@ -38,7 +38,11 @@ if($id_bill) {
 		
 		$bill->save($db);
 	}
-	
+	else if($action=='set-lines-order') {
+		$bill->setOrderLine('TBillLine', $_POST['listOfId']);
+		$bill->save($db);
+			
+	}
 	
 	$TLine = array();
 	

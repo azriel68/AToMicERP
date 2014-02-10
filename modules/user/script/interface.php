@@ -1,16 +1,14 @@
 <?php
 
+$_FOR_SCRIPT=true;
 require ('../../../inc.php');
 
-$get = isset($_REQUEST['get']) ? $_REQUEST['get'] : '';
-$put = isset($_REQUEST['put']) ? $_REQUEST['put'] : '';
-
 $db=new TPDOdb;
-_put($db, $put);
-_get($db, $get);
+_put($db, $conf, __get('put'));
+_get($db, $conf, __get('get'));
 $db->close();
 
-function _get(&$db, $case) {
+function _get(&$db,&$conf, $case) {
 	switch ($case) {
 		case 'entities' :
 			
@@ -20,7 +18,7 @@ function _get(&$db, $case) {
 	}
 
 }
-function _put(&$db, $case) {
+function _put(&$db,&$conf, $case) {
 	switch ($case) {
 		case 'right' :
 			__out(_setRight($db, $_REQUEST['id_group'], $_REQUEST['module'], $_REQUEST['submodule'], $_REQUEST['action']));
@@ -31,6 +29,17 @@ function _put(&$db, $case) {
 			break;
 		case 'removeGroup':
 			__out(_remove_group($db, $_REQUEST['id_group'], $_REQUEST['id_user']));
+			
+		case 'login':	
+			// if login ok return 1, else 0
+			$user=new TUser;
+			$res = (int)$user->login($db, __get('login'), __get('password'), __get('id_entity',-1, 'integer'));
+			
+			if($res===1) {
+				$_SESSION['user'] = $user;
+			}
+			
+			print $res;
 			
 			break;
 	}
@@ -53,7 +62,7 @@ function _remove_group(&$db, $id_group, $id_user) {
 	//$gu->loadByGroupUser($db, $id_group, $id_user );
 	
 	//$gu->delete($db);
-	
+	// TODO set in class
 	$db->Execute("DELETE FROM ".DB_PREFIX."group_user WHERE id_group=$id_group AND id_user=$id_user"); //flemmard !
 	
 	return 1;

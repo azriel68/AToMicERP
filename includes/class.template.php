@@ -350,8 +350,12 @@ class TTemplate {
 		if(!isset($conf->menu->top))$conf->menu->top=array();
 	
 		if(empty($topMenu)) {
+			
+			if($position==0 && !empty($conf->menu->top)) $position = $conf->menu->top[ count($conf->menu->top)-1 ]['position']+10; 
+		
+			
 			$conf->menu->top[] = array(
-				'name'=>$name
+				'name'=>__tr($name)
 				,'id'=>$id
 				,'module'=>$module
 				,'position'=>$position
@@ -366,7 +370,7 @@ class TTemplate {
 			if($position==0 && !empty($conf->menu->left[$topMenu])) $position = $conf->menu->left[$topMenu][ count($conf->menu->left[$topMenu])-1 ]['position']+10; 
 		
 			$conf->menu->left[$topMenu][] = array(
-				'name'=>$name
+				'name'=>__tr($name)
 				,'id'=>$id
 				,'module'=>$module
 				,'position'=>$position
@@ -376,6 +380,8 @@ class TTemplate {
 			);
 			
 		}
+		
+		
 		
 	}
 
@@ -387,7 +393,7 @@ class TTemplate {
 		foreach($Tab as $name=>$content) {
 			
 			if(empty($content['rank'])){
-				$content['rank'] = count($conf->tabs->{$className});
+				$content['rank'] = count($conf->tabs->{$className}) * 10;
 			} 
 			
 			$conf->tabs->{$className}[$name] = $content;	
@@ -480,7 +486,7 @@ class TTemplate {
 			,'module'=>'home'
 			,'position'=>0
 			,'url'=>HTTP.'home.php'
-			,'topMenu'=>$current_top_menu
+			,'topMenu'=>'home'
 			,'starred'=>0
 			,'class'=>''
 		));

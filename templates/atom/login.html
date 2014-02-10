@@ -63,6 +63,24 @@
 			}
 		});
 
+		$('#formLogin').submit(function() {
+			
+			$.post(HTTP+'modules/user/script/interface.php?put=login'
+				,$(this).serialize()  
+				,function(verifLogin) {
+				
+					if(verifLogin==1) {
+						
+						document.location.href="home.php?sucess=Login sucessful";
+						
+					}
+				}
+			);
+			
+			return false;
+			
+		});
+
 		
 	});
 	

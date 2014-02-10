@@ -6,7 +6,7 @@
 	function loadLines(url) {
 		
 				$('div.content div#lines-contener').load(url+' div#lines-contener table#lines', function( response, status, xhr ) {
-					
+					 setBillLineSortable();
 				});
 
 	}
@@ -35,8 +35,27 @@
 		
 	}
 	
-	$(document).ready(function() {
+	function setBillLineSortable() {
+		
+		$('div#lines-contener table#lines tbody').sortable({ 
+			axis: "y" 
+			, items: "tr:not(.unsortable)"
+			,update: function( event, ui ) {
+				
+				
+				$.post("[tpl.self]", {
+					action:'set-lines-order'
+					,id_bill:[bill.id]
+					,listOfId : $('div#lines-contener table#lines tbody').sortable( "toArray", {attribute : 'id-line'})
+				});
+				
+			}
+		});
+		
+	}
 	
+	$(document).ready(function() {
+		setBillLineSortable();
 	});
 	
 </script>
@@ -76,7 +95,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="[line.viewMode]" id="line-[line.id]">
+				<tr class="[line.viewMode]" id="line-[line.id]" id-line="[line.id]">
 					<td>[line.id_product;strconv=no;block=tr][line.title;strconv=no]</td>
 					<td>[line.quantity;strconv=no]</td>
 					<td>

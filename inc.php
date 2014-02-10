@@ -40,16 +40,19 @@
 	}
 	
 	require(ROOT.'includes/inc.php');
+	
 	session_name('atomic');
 	session_start();
 
-	$user = TAtomic::getUser();
-	
-	TAtomic::loadLang($conf, $user->lang);
-	if(empty($_FOR_INSTALLER)) TAtomic::getConf($user);
-	
-	require('config.templates.php');
-	TAtomic::loadStyle($conf, $user->theme);
+	if(empty($_FOR_SCRIPT)) {
+		$user = TAtomic::getUser();	
+		TAtomic::loadLang($conf, $user->lang);
+		
+		if(empty($_FOR_INSTALLER)) TAtomic::getConf($user);
+		
+		require('config.templates.php');
+		TAtomic::loadStyle($conf, $user->theme);
+	}
 	
 	TAtomic::accesslog('page '.$_SERVER['PHP_SELF'].$_SERVER['REQUEST_URI']);
 	
