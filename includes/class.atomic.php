@@ -48,7 +48,7 @@ class TAtomic {
 		
 	}
 	
-	static function getUser() {
+	static function getUser(&$db) {
 		if(!isset($_SESSION['user'])) {
 			$_SESSION['user'] = new TUser;
 		}
@@ -61,12 +61,14 @@ class TAtomic {
 		$back = __get('back',false, 'boolean');
 		$UId = __get('UId', '', 'string', 50);
 		
+		//$conf->id_entity = $user->id_entity_c;
+		
 		if(!empty($login) && !empty($password) && $action == 'login') {
-			$db=new TPDOdb;
-			
 			
 			if($user->login($db, $login, $password, $id_entity)) {
-					
+				
+				//$conf->id_entity = $user->id_entity_c;
+								
 				if($back) {
 					header('location:'.$back);
 				}
@@ -76,13 +78,11 @@ class TAtomic {
 				null;	
 			}
 			
-			$db->close();
 			
 		}
 		else if(!empty($UId)) {
-			$db=new TPDOdb;
 			$user->loginUId($db, $UId);
-			$db->close();
+			// TODO ? $conf->id_entity = $user->id_entity_c;
 		}
 		else {
 				
@@ -92,9 +92,8 @@ class TAtomic {
 		return $user;
 	}
 	
-	static function getConf(&$user) {
+	static function getConf(&$db, &$user) {
 		if(empty($user->conf)) {
-			$db=new TPDOdb;
 			
 			$TEntity = $user->getEntity('array');
 			foreach($TEntity as $id_entity) {
@@ -102,7 +101,6 @@ class TAtomic {
 				$user->conf[$id_entity] = TConf::loadConf($db, $id_entity);	
 			}
 			
-			$db->close();
 		}
 	}
 	
@@ -148,9 +146,26 @@ class TAtomic {
 		}
 		
 	}
+
+	/*
+	 * Load Enabled module From db
+	 * I : &db, &conf 
+	 * Update conf
+	 */	
+	static function getEnabledModule(&$db, &$conf) {
 	
-	static function loadModule(&$conf) {
+		$db->Execute("SELECT module FROM ".DB_PREFIX.'module WHERE id_entity IN (0,'.$conf->id_entity.') AND activate=1');
+	
+		while($db->Get_line()) {
+			$conf->moduleEnabled[$db->Get_field('module')] = true;	
+		}
+		
+	}
+	
+	static function loadModule(&$db, &$conf) {
 		$dir = ROOT.'modules/';
+		
+		//TAtomic::getEnabledModule($db, $conf); TODO
 		
 		$moduleToLoad = array_merge($conf->moduleCore, $conf->moduleEnabled);
 		// Load conf of all existing modules

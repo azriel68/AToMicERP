@@ -1,10 +1,12 @@
 <?php
 
 $language=array(
-	/*************************************************
+	
+	 'companyModuleDescription'=>'Module de gestion des tiers (Prospect, client, fournisseur, ...) et des entités de connexion'
+	 /*************************************************
 	 * Fields
 	 *************************************************/
-	'Name'=>'Raison sociale'
+	,'Name'=>'Raison sociale'
 	,'Phone'=>'Téléphone'
 	,'Email'=>'E-mail'
 	,'Web'=>'Site web'

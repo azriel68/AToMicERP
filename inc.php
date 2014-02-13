@@ -20,7 +20,6 @@
 	$conf->moduleCore = array(
 		'core'=>true
 		,'dictionary'=>true
-		
 		,'company'=>true
 		,'contact'=>true
 		,'user'=>true
@@ -40,15 +39,26 @@
 	}
 	
 	require(ROOT.'includes/inc.php');
+
+
+	$db=new TPDOdb;
+		
+	if(empty($_FOR_INSTALLER)) {
+		TAtomic::loadModule($db, $conf);
+		TAtomic::sortMenu($conf);
+	}
+
+
 	
 	session_name('atomic');
 	session_start();
 
 	if(empty($_FOR_SCRIPT)) {
-		$user = TAtomic::getUser();	
+		
+		$user = TAtomic::getUser($db);
 		TAtomic::loadLang($conf, $user->lang);
 		
-		if(empty($_FOR_INSTALLER)) TAtomic::getConf($user);
+		if(empty($_FOR_INSTALLER)) TAtomic::getConf($db, $user);
 		
 		require('config.templates.php');
 		TAtomic::loadStyle($conf, $user->theme);
