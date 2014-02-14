@@ -45,7 +45,9 @@ class TDocument extends TObjetStd {
 	}
 	
 	static function getListOfDoc(&$conf, $className, $id) {
+		$Tab=array();
 		
+		return $Tab;	
 	}
 }
 

@@ -28,7 +28,6 @@
 	require('class.template.tbs.php');
 	require('class.template.php');
 	
-	TAtomic::loadModule($conf);
-	TAtomic::sortMenu($conf);
+	
 	
 	

@@ -10,6 +10,7 @@ $conf->modules['company']=array(
 	,'folder'=>'company'
 	,'icon'=>'112-group.png'
 	,'moduleRequire'=>array('core','dictionnary')
+	,'description'=>'companyModuleDescription'
 );
 
 $conf->menu->admin[] = array(

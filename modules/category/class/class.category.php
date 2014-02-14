@@ -1,0 +1,4 @@
+<?
+class TCategory extends TObjetStd {
+
+}

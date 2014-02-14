@@ -3,21 +3,18 @@
 /******************************************************************************************
  * Définition du module
  ******************************************************************************************/
-$conf->modules['printer']=array(
-	'name'=>'Printer'
-	,'id'=>'TPrinter'
-	,'class'=>array('TPrinter')
+$conf->modules['category']=array(
+	'name'=>'Category'
+	,'id'=>'TCategory'
+	,'class'=>array('TCategory')
 	,'moduleRequire'=>array('core')
 );
 
 /******************************************************************************************
  * Définition des onglet à afficher sur une fiche de l'objet
  ******************************************************************************************/
-TTemplate::addTabs($conf, 'TBill' ,array(
-	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&object=TBill')
-));
-TTemplate::addTabs($conf, 'TOrder' ,array(
-	'printer'=>array('label'=>'__tr(Print)__','url'=>HTTP.'modules/printer/print.php?action=view&id=@id@&object=TOrder')
+TTemplate::addTabs($conf, 'TCompany' ,array(
+	'category'=>array('label'=>'__tr(Categories)__','url'=>HTTP.'modules/category/category.php?action=view&id=@id@&object=TBill')
 ));
 
-@$conf->template->TPrinter->card = ROOT.'modules/printer/template/print.html';
+@$conf->template->TCategory->card = ROOT.'modules/category/template/category.html';

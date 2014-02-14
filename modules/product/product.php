@@ -29,6 +29,7 @@ if($action!==false ) {
 		,'price_ht'=>$form->texte('', 'price_ht', $product->price_ht, 10)
 		,'vat_rate'=>$form->combo('', 'vat_rate', TDictionary::get($db, $user, $product->id_entity, 'vat_rate') , $product->vat_rate )
 		
+		,'isService'=>$form->combo('', 'isService', TDictionary::get($db, $user, $product->id_entity, 'yesno'), $product->isService )
 		,'id'=>$product->getId()
 		,'dt_cre'=>$product->get_date('dt_cre')
 		,'dt_maj'=>$product->get_date('dt_maj')

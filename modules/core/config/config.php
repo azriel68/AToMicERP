@@ -3,7 +3,7 @@
 	$conf->modules['core']=array(
 		'name'=>'Core'
 		,'id'=>'Core'
-		,'class'=>array('TConf'/*,'TListviewTBS'*/,'TReponseMail')
+		,'class'=>array('TConf','TModule','TReponseMail')
 	);
 	
 	//JAVASCRIPTS
