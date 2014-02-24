@@ -25,24 +25,31 @@ class TTrigger {
 		
 	}
 	
-	static function register($objectName, $priority = 99) {
+	static function register($objectName, $priority = 99, $method='trigger') {
 		global $conf;
 		/*  */
 		
 		//TODO add db
 		
-		$conf->TTrigger[]=array('objectName'=>$objectName, 'priority'=>$priority);
+		$conf->TTrigger[]=array('objectName'=>$objectName, 'priority'=>$priority, 'method'=>$trigger);
 		
-		TTrigger::orderTrigger($conf->TTrigger);
+		TTrigger::sortTrigger($conf->TTrigger);
 		
 	}
-	static function orderTrigger(&$TTrigger) {
+	static function sortTrigger(&$TTrigger) {
 		
+		usort($TTrigger, array('TTriger', '_sortTrigger_fct'));
 		
+	}
+	static function _sortTrigger_fct($a, $b) {
+		
+		if($a['priority']<$b['priority']) return -1;
+		else if($a['priority']>$b['priority']) return 1;
+		return 0;
 		
 	}
 	
-	function loadTrigger(&$ATMdb) {
+	function loadTrigger(&$ATMdb) { // Delete or not ? Trigger store in db or not ?
 		/* Charge la liste des triggers à exécuter */
 		$this->TTrigger=array();
 		
