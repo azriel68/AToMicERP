@@ -17,7 +17,7 @@ class TTrigger {
 				if(class_exists($trigger['objectName'])) {
 					
 					if(method_exists($trigger['objectName'],'trigger')) {
-						$result = call_user_func_array(array($trigger['objectName'],'trigger'), array(&$ATMdb, &$object, $className, $state) );
+						$result = call_user_func_array(array($trigger['objectName'],$trigger['method']), array(&$ATMdb, &$object, $className, $state) );
 					}
 
 				}			
@@ -31,14 +31,14 @@ class TTrigger {
 		
 		//TODO add db
 		
-		$conf->TTrigger[]=array('objectName'=>$objectName, 'priority'=>$priority, 'method'=>$trigger);
+		$conf->TTrigger[]=array('objectName'=>$objectName, 'priority'=>$priority, 'method'=>$method);
 		
 		TTrigger::sortTrigger($conf->TTrigger);
 		
 	}
 	static function sortTrigger(&$TTrigger) {
 		
-		usort($TTrigger, array('TTriger', '_sortTrigger_fct'));
+		usort($TTrigger, array('TTrigger', '_sortTrigger_fct'));
 		
 	}
 	static function _sortTrigger_fct($a, $b) {
