@@ -16,6 +16,7 @@ class TCompany extends TObjetStd {
 
 		$this -> setChild('TAddress', 'id_company');
 		$this -> setChild('TContactToObject', array('id_object', 'company') );
+		$this -> setChild('TCategoryLink', array('id_object', 'company') );
 	}
 	
 	

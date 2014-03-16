@@ -6,15 +6,13 @@ if(!$user->isLogged()) {
 	TTemplate::login($user);
 }
 
-$db=new TPDOdb;
-//$db->debug=true;
-$printer=new TPrinter;
+$category=new TCategory;
 
 $className = __get('object');
 
 $object = new $className;
 $object->load($db, __get('id',0,'integer'));
-
+$object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 
 $action=__get('action', false);
 
@@ -28,20 +26,29 @@ $action=__get('action', false);
 	$form=new TFormCore;
 	$form->Set_typeaff($action);
 	
-	$TForm=array(
-		'model'=>TPrinter::getModel($db, $className)
-		,'addButton'=>$form->btsubmit(__tr('addModel'), 'addModel')
-		,'printButton'=>$form->btsubmit(__tr('generate'), 'printButton')
-		,'id_object'=>$object->getId()
-		,'className'=>$className
-		,'loadModel'=>$form->fichier('', 'newModel', '', '50')
-	);
+	$buttonsMore = '&object='.$className.'&id='.$object->id;
+	
+	$TButton = TTemplate::buttons($user, $category, 'list', $buttonsMore);
+	if(!empty($object->id)) {
+	
+		$TButton = array_merge(
+				$TButton
+				,array(
+					'link'=>array(
+						'href'=>'javascript:linkToCategory('.$object->id.')'
+						,'class'=>'butAction'
+						,'label'=>__tr('LinkToCategory')
+					)
+				)
+		);
+	}
+	
 	
 	$tbs=new TTemplateTBS;
 	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $printer)
 		,array(
-			'listOfDoc'=>TDocument::getListOfDoc($conf, $className, __get('id'))
+			'TCategoryLink'=>$object->TCategoryLink
 		)
 		,array(
 			'printer'=>$TForm
@@ -52,6 +59,8 @@ $action=__get('action', false);
 				,'tabs'=>TTemplate::tabs($conf, $user, $object, 'printer')
 				,'self'=>$_SERVER['PHP_SELF']
 				,'mode'=>$action
+				,'parentShort'=>empty($object) ? '' : $tbs->render(TTemplate::getTemplate($conf, $object, 'short'), array(), array('objectShort' => $object))
+				
 			)
 		)
 	)); 

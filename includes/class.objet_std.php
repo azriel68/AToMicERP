@@ -35,22 +35,22 @@ class TObjetStd {
 	function set_table($nom_table){
     	$this->table=$nom_table;
     }
-	/**
-	  * @param boolean $create_new When true returns a new stdClass.
-	  *
-	  * @return stdClass|null
-	  */
-	function add_champs($nom, $infos=""){
-    
-	    if($nom!=""){
-	        $var = explode(",", $nom);
+	
+	function add_champs($nom, $infos=array()){
+		
+		if(is_string($infos))$infos = strtolower($infos); // deprecated
+		
+        if($nom!=''){
+	        $var = explode(',', $nom);
 	        $nb=count($var);
 	        for ($i=0; $i<$nb ; $i++) {
-	        	$this->TChamps[trim($var[$i])] = strtolower($infos);
+	        	
+	        	$this->TChamps[trim($var[$i])] = $infos;
 	        } // for
     	}
     
   	}
+
   function get_table(){
     return $this->table;
   }
@@ -240,39 +240,106 @@ function _no_save_vars($lst_chp) {
 		return $this->{$nom_champ};
 	}
 	
+	
   function _is_date($info){
-    $pos = strpos($info,'type=date;');
-    if($pos===false)return false;
-    else return true;
+  	
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='date') return true;
+		else return false;
+	}
+	else {
+	    $pos = strpos($info,'type=date;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+		
+	}
   }
   
-  function _is_tableau($info){ 
-    $pos = strpos($info,'type=tableau;');
-    if($pos===false)return false;
-    else return true;
+  function _is_tableau($info){
+  		return $this->_is_array($info); 
   }
+  function _is_array($info) {
+  	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='array') return true;
+		else return false;
+	}
+	else {
+		
+	    $pos = strpos($info,'type=tableau;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+			
+	}
+	
+  }
+
   
   function _is_null($info){
-    $pos = strpos($info,'type=null;');
-    if($pos===false)return false;
-    else return true;
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='null') return true;
+		else return false;
+	}
+	else {
+	    $pos = strpos($info,'type=null;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+	
+	}
+
   }
   
   function _is_int($info){
-    $pos = strpos($info,'type=entier;');
-    if($pos===false)return false;
-    else return true;
+
+	if(is_array($info)) {
+		if(isset($info['type']) && ($info['type']=='int' || $info['type']=='integer' )) return true;
+		else return false;
+	}
+	else {
+
+	    $pos = strpos($info,'type=entier;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+
+	}
+
   }
   function _is_float($info){
-		$pos = strpos($info,'type=float;');
+
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='float') return true;
+		else return false;
+	}
+	else {
+
+		$pos = strpos($info,'type=float;'); // deprecated
 		if($pos===false) return false;
 		else return true;
+	}
+  }
+  function _is_text($info){
+  	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='text') return true;
+		else return false;
+	}
+	else {
+		$pos = strpos($info,'type=text;'); // deprecated
+		if($pos===false) return false;
+		else return true;
+	}
   }
   function _is_index($info){
-		$pos = strpos($info,'index;');
+  	if(is_array($info)) {
+		if(isset($info['index']) && $info['index']==true) return true;
+		else return false;
+	}
+	else {
+	
+		$pos = strpos($info,'index;'); // deprecated
 		if($pos===false) return false;
 		else return true;
+	}
   }
+  
   
   
   function _set_save_query(&$query){
@@ -453,6 +520,21 @@ function _no_save_vars($lst_chp) {
 		}
 		
 	}
+	/*
+	 * Load a subobject in child's array
+	 * I : Array Name, Object Name, Key in line Name
+	 * O : null
+	 */
+	function loadChildSubObject($db, $tabName, $objectName, $innerKeyName) {
+		
+		foreach($this->{$tabName} as &$row) {
+			
+			$row->{$objectName}->load($db, $row->{$innerKeyName});
+			
+		}
+		
+	}
+	
 	function saveChild(&$db) {
 	
 		if($this->withChild) {
