@@ -14,12 +14,24 @@ $object = new $className;
 $object->load($db, __get('id',0,'integer'));
 $object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 
-$action=__get('action', false);
+	$action=__get('action', false);
 
 
-
-
-	if($action=='delete') {
+	if($action=='addlink') {
+		
+		$category->load($db, __get('id_category',0,'int'));
+		if($category->id==0) {
+			//new category
+			
+			$category->label = __get('categoryname');
+			
+			$category->save($db);
+		}
+		
+		$category->addChild($db, $tabName)
+		
+	}
+	else if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
 
@@ -28,7 +40,8 @@ $action=__get('action', false);
 	
 	$buttonsMore = '&object='.$className.'&id='.$object->id;
 	
-	$TButton = TTemplate::buttons($user, $category, 'list', $buttonsMore);
+	$TButton = array();
+	//$TButton = TTemplate::buttons($user, $category, 'list', $buttonsMore);
 	if(!empty($object->id)) {
 	
 		$TButton = array_merge(
@@ -45,14 +58,14 @@ $action=__get('action', false);
 	
 	
 	$tbs=new TTemplateTBS;
-	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $printer)
+	//Tools::pre($object);
+	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $category)
 		,array(
-			'TCategoryLink'=>$object->TCategoryLink
+			'button'=>$TButton
+			,'TCategoryLink'=>$object->TCategoryLink
 		)
 		,array(
-			'printer'=>$TForm
-			,'tpl'=>array(
+			'tpl'=>array(
 				'header'=>TTemplate::header($conf, __tr('Print'))
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
@@ -62,6 +75,9 @@ $action=__get('action', false);
 				,'parentShort'=>empty($object) ? '' : $tbs->render(TTemplate::getTemplate($conf, $object, 'short'), array(), array('objectShort' => $object))
 				
 			)
+			,'user'=>$user
+			,'parent'=>empty($object) ? array() : $object
+			,'id_parent_name'=>empty($className) ? '' : $className
 		)
 	)); 
 	

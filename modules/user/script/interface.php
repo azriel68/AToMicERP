@@ -1,7 +1,9 @@
 <?php
 
 $_FOR_SCRIPT=true;
+ob_start();
 require ('../../../inc.php');
+ob_clean();
 
 $db=new TPDOdb;
 _put($db, $conf, __get('put'));

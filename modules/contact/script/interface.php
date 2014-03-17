@@ -2,13 +2,17 @@
 
 require ('../../../inc.php');
 
+if(__get('id_user',0,'int')!=$user->id) {
+	exit; // user usurpation or logout
+}
+
+
 $get =  __get('get', '');
 $put = __get('put', '');
 
-$db=new TPDOdb;
 _put($db, $put);
 _get($db, $get);
-$db->close();
+
 
 function _get(&$db, $case) {
 	switch ($case) {

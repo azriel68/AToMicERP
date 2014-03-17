@@ -18,8 +18,8 @@ class TObjetStd {
 	 **/
 	function __construct(){
 			
-		$this->table=''; /* table contenant les données */
-		$this->{OBJETSTD_MASTERKEY}=0; /* clef primaire */
+		$this->table=''; /* Name of DB table */
+		$this->{OBJETSTD_MASTERKEY}=0; /* Primary Key */
 		$this->{OBJETSTD_DATECREATE}=time();
 		$this->{OBJETSTD_DATEUPDATE}=time();
 		$this->TChamps=array(); /* tableau contenant la d?claration de variables */
@@ -32,20 +32,23 @@ class TObjetStd {
 	/**
 	 * change la table
 	 */
-	function set_table($nom_table){
-    	$this->table=$nom_table;
+	function set_table($tableName){
+    	$this->table=$tableName;
     }
 	
-	function add_champs($nom, $infos=array()){
+	function add_champs($name, $infos=array()){ //deprecated
+		$this->addFields($name, $infos);
+	}
+	function addFields($name, $infos=array()){
 		
 		if(is_string($infos))$infos = strtolower($infos); // deprecated
 		
-        if($nom!=''){
-	        $var = explode(',', $nom);
+        if(!empty($name)){
+	        $var = explode(',', $name);
 	        $nb=count($var);
 	        for ($i=0; $i<$nb ; $i++) {
 	        	
-	        	$this->TChamps[trim($var[$i])] = $infos;
+	        	$this->TChamps[trim($var[$i])] = $infos; //TODO rename TField
 	        } // for
     	}
     
@@ -443,7 +446,7 @@ function _no_save_vars($lst_chp) {
 		}
 	}
 	
-	function setChild($class, $foreignKey, $orderBy='') {
+	function setChild($class, $foreignKey, $orderBy='', $useSimpleTabName=false) {
 		$this->TChildObjetStd[]=array(
 			'class'=>$class
 			,'foreignKey' => $foreignKey
@@ -451,10 +454,11 @@ function _no_save_vars($lst_chp) {
 		);
 		
 		$tabName = $class;
-		if(is_array($foreignKey)) {
+		if(!$useSimpleTabName && is_array($foreignKey)) {
 			$tabName .= '_'.$foreignKey[1];
 		}
 		$this->{$tabName} = array();
+	
 	}
 	function removeChild($className, $id, $key=OBJETSTD_MASTERKEY) {
 		foreach($this->{$className} as &$object) {
@@ -527,9 +531,13 @@ function _no_save_vars($lst_chp) {
 	 */
 	function loadChildSubObject($db, $tabName, $objectName, $innerKeyName) {
 		
-		foreach($this->{$tabName} as &$row) {
+		if(!empty($this->{$tabName})) {
 			
-			$row->{$objectName}->load($db, $row->{$innerKeyName});
+			foreach($this->{$tabName} as &$row) {
+				
+				$row->{$objectName}->load($db, $row->{$innerKeyName});
+				
+			}
 			
 		}
 		

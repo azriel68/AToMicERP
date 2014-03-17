@@ -19,8 +19,66 @@
 			</tr>
 		</table>
 		
+		<a href="[button.href;block=a]" id="button-action-[button.$]" class="[button.class]">[button.label]</a>
+		
 	</form>
 
 </div>
 
+<div id="dialog-form" title="__tr(Link Category)__">
+	<form id="form-link-category" name="form-link-category" action="[tpl.self]">
+		<input type="hidden" name="action" value="addlink" />
+		<input type="hidden" name="id_category" value="0" />
+		<input type="hidden" name="success" value="__tr(The category has been added)__" />
+		<input type="hidden" name="id" value="[parent.id]" />
+		<input type="hidden" name="object" value="[id_parent_name]" />
+			
+		<label for="name">__tr(CategorieName)__</label>
+		<input type="text" name="categoryname" id="categoryname" />
+	
+	</form>
+</div>
+
+
+<script type="text/javascript">
+	function linkToCategory(id_object, type_object) {
+		
+		$('#categoryname').autocomplete({
+			source:"./script/interface.php?get=category&id_user=[user.id]&json=1"
+			,delay:0
+			,autoFocus:true
+			,minLength:0
+			,select: function( event, ui ) {
+				id_category = ui.item.value.substr(0, ui.item.value.indexOf('.'));
+				$('#form-link-category input[name=id_category]').val(id_category);
+			}
+		});
+		
+		$( "#dialog-form" ).dialog( "open" );
+		
+	}
+
+	 $( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 200,
+		width: 350,
+		modal: true,
+		draggable:false,
+		resizable:false,
+		buttons: {
+			"linkThis": function() {
+					
+					$('#form-link-category').submit();
+					$( this ).dialog( "close" );
+				
+			}
+			,Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+
+		
+
+	});
+</script>
 [tpl.footer;strconv=no]
