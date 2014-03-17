@@ -25,10 +25,13 @@ $object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 			
 			$category->label = __get('categoryname');
 			
-			$category->save($db);
 		}
 		
-		$category->addChild($db, $tabName)
+		$k = $category->addChild($db, 'TCategoryLink');
+		$category->TCategoryLink[$k]->id_object = $object->id;
+		$category->TCategoryLink[$k]->type_object = $className;
+		
+		$category->save($db);
 		
 	}
 	else if($action=='delete') {
@@ -66,7 +69,7 @@ $object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 		)
 		,array(
 			'tpl'=>array(
-				'header'=>TTemplate::header($conf, __tr('Print'))
+				'header'=>TTemplate::header($conf, __tr('Categories'))
 				,'footer'=>TTemplate::footer($conf)
 				,'menu'=>TTemplate::menu($conf, $user)
 				,'tabs'=>TTemplate::tabs($conf, $user, $object, 'printer')

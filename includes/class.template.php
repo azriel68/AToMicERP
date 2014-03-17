@@ -343,6 +343,9 @@ class TTemplate {
 		return $TButton;
 	}
 
+	static function add(&$conf, $object, $type, $url) {
+		@$conf->template->{$object}->{$type} = $url;
+	}
 
 	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $starred=false, $position=0) {
 	

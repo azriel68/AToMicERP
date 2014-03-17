@@ -6,7 +6,7 @@
 $conf->modules['category']=array(
 	'name'=>'Category'
 	,'id'=>'TCategory'
-	,'class'=>array('TCategory')
+	,'class'=>array('TCategory','TCategoryLink')
 	,'moduleRequire'=>array('core')
 );
 
@@ -20,4 +20,20 @@ TTemplate::addTabs($conf, 'TCompany'
 	)
 ));
 
-@$conf->template->TCategory->card = ROOT.'modules/category/template/category.html';
+TTemplate::add($conf, 'TCategory','card', ROOT.'modules/category/template/category.html');
+
+@$conf->list->TCategory->CategoryList=array(
+	'sql'=>"SELECT c.id, c.label FROM ".DB_PREFIX."contact c
+			WHERE c.id_entity IN (@getEntity@)
+			ORDER BY label"
+	,'param'=>array(
+		'title'=>array(
+			'label'=>'__tr(Label)__'
+		)
+		,'hide'=>array('id')
+		,'link'=>array(
+			'name'=>'<a href="?action=view&id=@id@">@name@</a>'
+		)
+	)
+);
+
