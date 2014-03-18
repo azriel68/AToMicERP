@@ -24,15 +24,13 @@ $object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 			//new category
 			
 			$category->label = __get('categoryname');
-			
+			$category->save($db);
 		}
 		
-		$k = $category->addChild($db, 'TCategoryLink');
-		$category->TCategoryLink[$k]->id_object = $object->id;
-		$category->TCategoryLink[$k]->type_object = $className;
-		
-		$category->save($db);
-		
+		$k = $object->addChild($db, 'TCategoryLink');
+		$object->TCategoryLink[$k]->id_category = $category->id;
+		$object->save($db);
+	
 	}
 	else if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');

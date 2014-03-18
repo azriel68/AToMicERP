@@ -5,6 +5,7 @@ class TCategory extends TObjetStd {
 		$this->set_table(DB_PREFIX.'category');
 		
 		$this->addFields('label',array('type'=>'string', 'index'=>true));
+		$this->addFields('id_entity', array('type'=>'int', 'index'=>true));
 
 		TAtomic::initExtraFields($this);
 		
@@ -21,7 +22,7 @@ class TCategoryLink extends TObjetStd {
 		$this->set_table(DB_PREFIX.'category_link');
 		
 		$this->addFields('id_category,id_object',array('type'=>'int', 'index'=>true));
-		$this->addFields('type_object',array('type'=>'string', 'index'=>true));
+		$this->addFields('objectType',array('type'=>'string', 'index'=>true));
 
 		TAtomic::initExtraFields($this);
 		

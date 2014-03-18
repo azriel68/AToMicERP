@@ -11,8 +11,8 @@ class TCompany extends TObjetStd {
 		
 		TAtomic::initExtraFields($this);
 
-		parent::start();
-		parent::_init_vars();
+		$this->start();
+		$this->_init_vars();
 
 		$this -> setChild('TAddress', 'id_company');
 		$this -> setChild('TContactToObject', array('id_object', 'company') );

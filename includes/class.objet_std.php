@@ -13,21 +13,21 @@
  
 class TObjetStd {
 
+	public $table = '';
+	public $TChamps=array(); /* tableau contenant la d?claration de variables */
+	public $TNoSaveVars=array(); /* tableau des variables ? charger mais pas ? sauvegarder */
+	public $TList=array(); /* tableau permettant la construction d'une liste */ 
+		
+	public $TChildForeignKey=array();
+
 	/**
 	 * constructeur
 	 **/
 	function __construct(){
 			
-		$this->table=''; /* Name of DB table */
 		$this->{OBJETSTD_MASTERKEY}=0; /* Primary Key */
 		$this->{OBJETSTD_DATECREATE}=time();
 		$this->{OBJETSTD_DATEUPDATE}=time();
-		$this->TChamps=array(); /* tableau contenant la d?claration de variables */
-		$this->TNoSaveVars=array(); /* tableau des variables ? charger mais pas ? sauvegarder */
-		$this->TList=array(); /* tableau permettant la construction d'une liste */ 
-		
-		
-		
 	}
 	/**
 	 * change la table
@@ -457,6 +457,12 @@ function _no_save_vars($lst_chp) {
 		if(!$useSimpleTabName && is_array($foreignKey)) {
 			$tabName .= '_'.$foreignKey[1];
 		}
+		
+		if(is_array($foreignKey)) {
+			$this->TChildForeignKey[$tabName] = $foreignKey;
+			$this->TChildForeignKey[$tabName][3] = (int)$useSimpleTabName;
+		}
+		
 		$this->{$tabName} = array();
 	
 	}
@@ -483,11 +489,20 @@ function _no_save_vars($lst_chp) {
 		$k = count($this->{$tabName});
 		
 		$className = substr($tabName, 0, strrpos($tabName, '_'));
-
-		if(empty($className))$className = $tabName;
+		
+		if(empty($className)){
+			$className = $tabName;
+		}
+		
+		
+		$objectType = empty($this->TChildForeignKey[$tabName]) ? '' : $this->TChildForeignKey[$tabName][1]; 
 		$this->{$tabName}[$k] = new $className;	
+	
+		if(!empty($objectType)) $this->{$tabName}[$k]->objectType = $objectType;
+		//var_dump($this->{$tabName});
+		//exit;
 		if($id>0) { $this->{$tabName}[$k]->load($db, $id); }
-
+		
 
 		return $k;
 	}
@@ -553,7 +568,7 @@ function _no_save_vars($lst_chp) {
 					$foreignKey	= $child['foreignKey'];
 					
 					$tabName = $className;
-					if(is_array($foreignKey)) {
+					if(is_array($foreignKey) && empty($this->TChildForeignKey[$tabName][3])) {
 						$tabName .= '_'.$foreignKey[1];
 					}	
 					/*	print "$tabName <br>";

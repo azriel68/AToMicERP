@@ -14,7 +14,7 @@
 		
 		<table class="grille">
 			<tr>
-				<td>[TCategoryLink.label;strconv=no;block=tr]</td>
+				<td>[TCategoryLink.category.label;strconv=no;block=tr]</td>
 				<td><a href="#">Delete</a></td>
 			</tr>
 		</table>
@@ -49,6 +49,7 @@
 			,autoFocus:true
 			,minLength:0
 			,select: function( event, ui ) {
+				
 				id_category = ui.item.value.substr(0, ui.item.value.indexOf('.'));
 				$('#form-link-category input[name=id_category]').val(id_category);
 			}
