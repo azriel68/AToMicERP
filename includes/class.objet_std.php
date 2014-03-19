@@ -451,6 +451,7 @@ function _no_save_vars($lst_chp) {
 			'class'=>$class
 			,'foreignKey' => $foreignKey
 			,'orderBy'=>$orderBy
+			,'useSimpleTabName' => (int)$useSimpleTabName
 		);
 		
 		$tabName = $class;
@@ -515,10 +516,8 @@ function _no_save_vars($lst_chp) {
 					$foreignKey	= $child['foreignKey'];
 					//print $className;print_r($foreignKey);print '<br>';
 					if(is_array($foreignKey)) {
-						
 						$keys = array($foreignKey[0]=>$this->getId(), 'objectType'=>$foreignKey[1]);
-						$tabName = $className.'_'.$foreignKey[1];
-						
+						if(empty($child['useSimpleTabName'])) $tabName = $className.'_'.$foreignKey[1];
 					}
 					else{
 						$keys = array($foreignKey=>$this->getId());

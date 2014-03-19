@@ -1,8 +1,11 @@
 <?
 class TCompany extends TObjetStd {
+	
+	public $objectName = 'company';
+	
 	function __construct() {
 		
-		$this->set_table(DB_PREFIX.'company');
+		$this->set_table( DB_PREFIX.$this->objectName );
 		
 		$this->addFields('isEntity,id_entity','type=entier;index;');
 		$this->addFields('isCustomer,isSupplier','type=entier;index;');
@@ -15,8 +18,8 @@ class TCompany extends TObjetStd {
 		$this->_init_vars();
 
 		$this -> setChild('TAddress', 'id_company');
-		$this -> setChild('TContactToObject', array('id_object', 'company') );
-		$this -> setChild('TCategoryLink', array('id_object', 'company'), '', true );
+		$this -> setChild('TContactToObject', array('id_object', $this->objectName) );
+		$this -> setChild('TCategoryLink', array('id_object', $this->objectName) );
 	}
 	
 	

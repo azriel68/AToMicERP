@@ -12,7 +12,10 @@ $className = __get('object');
 
 $object = new $className;
 $object->load($db, __get('id',0,'integer'));
-$object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
+
+$objectName = $object->objectName or die("Can't find objectName in object ".$className);
+
+$object->loadChildSubObject($db, 'TCategoryLink_'.$objectName, 'category', 'id_category');
 
 	$action=__get('action', false);
 
@@ -60,10 +63,12 @@ $object->loadChildSubObject($db, 'TCategoryLink', 'categorie', 'id_categorie');
 	
 	$tbs=new TTemplateTBS;
 	//Tools::pre($object);
+	
+	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $category)
 		,array(
 			'button'=>$TButton
-			,'TCategoryLink'=>$object->TCategoryLink
+			,'TCategoryLink'=>$object->{'TCategoryLink_'.$objectName}
 		)
 		,array(
 			'tpl'=>array(
