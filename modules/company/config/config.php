@@ -19,7 +19,7 @@ $conf->menu->admin[] = array(
 	,'position'=>2
 	,'url'=>HTTP.'modules/company/company.php?id=@id@&action=view'
 	,'right'=>array('user','me','view')
-	,'moduleRequire'=>array('core','dictionnary','company','contact')
+	,'moduleRequire'=>array('core','dictionnary','contact','category')
 );
 
 
