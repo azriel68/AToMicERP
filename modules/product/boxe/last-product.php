@@ -26,7 +26,7 @@
 	));
 		
 	?>
-	<h2><?=__tr('lastProducts') ?></h2>
+	<h2><?php echo __tr('lastProducts') ?></h2>
 	<?	
 	print $l->render($db, $sql, $param);
 	

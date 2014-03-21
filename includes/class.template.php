@@ -116,9 +116,11 @@ class TTemplate {
 		
 		return $Tab;
 	}
-	static function gravatar($email, $title='gravatar', $size=100, $float="none") {
+	static function gravatar($email, $title='gravatar', $size=100, $float="none", $justUrl = false) {
 		$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
-		return '<img src="'.$grav_url.'" alt="'.$title.'" style="float:'.$float.'" />';
+		
+		if($justUrl) return $grav_url;
+		else return '<img src="'.$grav_url.'" alt="'.$title.'" style="float:'.$float.'" />';
 	}
 
 	static function liste(&$conf, &$user, &$db, &$object, $listname='index', $param=array()) {
@@ -244,7 +246,7 @@ class TTemplate {
 		?><script type="text/javascript">
 		$(document).ready(function() {
 			
-			infoMsg('<?=addslashes($message) ?>');
+			infoMsg('<?php echo addslashes($message) ?>');
 		
 		});
 	  		
@@ -266,7 +268,7 @@ class TTemplate {
 		
 		?><script type="text/javascript">
 		$(document).ready(function() {
-				errorMsg('<?=addslashes($message) ?>');
+				errorMsg('<?php echo addslashes($message) ?>');
 			  
 		});
 			
@@ -343,6 +345,9 @@ class TTemplate {
 		return $TButton;
 	}
 
+	static function add(&$conf, $object, $type, $url) {
+		@$conf->template->{$object}->{$type} = $url;
+	}
 
 	static function addMenu(&$conf, $id, $name, $url, $module, $topMenu='', $starred=false, $position=0) {
 	

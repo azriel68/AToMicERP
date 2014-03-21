@@ -18,12 +18,12 @@ $(document).ready(function() {
 	$('#changeWallpaperEveryDay').change(function() {
 		
 		if($(this).is(':checked')) {
-			infoMsg("<?=__tr('Loading new wallpaper every day activated') ?>");
+			infoMsg("<?php echo __tr('Loading new wallpaper every day activated') ?>");
 			$.cookie('atomicChangeWallpaperEveryDay', 1, { expires: 360, path: "/" });
 			$.cookie('atomicWallpaper', myWallpaper, { expires: 1, path: "/" });
 		}
 		else {
-			infoMsg("<?=__tr('Feature desactivated') ?>");
+			infoMsg("<?php echo __tr('Feature desactivated') ?>");
 			$.cookie('atomicChangeWallpaperEveryDay', 0, { expires: 360, path: "/" });
 			$.cookie('atomicWallpaper', myWallpaper, { expires: 360, path: "/" });
 		}
@@ -48,15 +48,15 @@ $(document).ready(function() {
 
 function getWallpaper(changeWallpaperEveryDay) {
 	oldContent = $('#menu-admin-changeWallpaper').html();
-	$('#menu-admin-changeWallpaper').html("<?=__tr("Loading new wallpaper") ?>");
+	$('#menu-admin-changeWallpaper').html("<?php echo __tr("Loading new wallpaper") ?>");
 	
 	$.ajax({
-			url : "<?=HTTP ?>modules/wallpaper/script/interface.php"
+			url : "<?php echo HTTP ?>modules/wallpaper/script/interface.php"
 			,data: {
 				json:1
 				,get : 'wallpaper'
 				,async:true
-				,UId : '<?=$user->UId ?>'
+				,UId : '<?php echo $user->UId ?>'
 			}
 			,dataType: 'json'
 		})

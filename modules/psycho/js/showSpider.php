@@ -29,7 +29,7 @@ $(document).ready(function() {
 		var chart;
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: '<?=$id_div ?>',
+                renderTo: '<?php echo $id_div ?>',
                 polar: true,
 		        type: 'line',
 		        spacingTop:0,
@@ -52,7 +52,7 @@ $(document).ready(function() {
 		    },
 		    
 		    xAxis: {
-		        categories: [<?=$_REQUEST['categories'] ?>],
+		        categories: [<?php echo $_REQUEST['categories'] ?>],
 		        tickmarkPlacement: 'on',
 		        lineWidth: 0
 		    },
@@ -83,16 +83,16 @@ $(document).ready(function() {
 		    	if(!empty($average)) {
 		    		?>
 		    		{
-				        name: '<?=addslashes($company_name) ?>',
-				        data: [<?=$average ?>],
+				        name: '<?php echo addslashes($company_name) ?>',
+				        data: [<?php echo $average ?>],
 				        pointPlacement: 'on',
 				        color:'#aaa'
 				    },
 		    		<?
 		    	}
 		    ?>{
-		        name: '<?=addslashes($_REQUEST['name_contact']) ?>',
-		        data: [<?=$_REQUEST['values'] ?>],
+		        name: '<?php echo addslashes($_REQUEST['name_contact']) ?>',
+		        data: [<?php echo $_REQUEST['values'] ?>],
 		        pointPlacement: 'on'
 		    }]
 		    

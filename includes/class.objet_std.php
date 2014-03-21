@@ -13,44 +13,47 @@
  
 class TObjetStd {
 
+	public $table = '';
+	public $TChamps=array(); /* tableau contenant la d?claration de variables */
+	public $TNoSaveVars=array(); /* tableau des variables ? charger mais pas ? sauvegarder */
+	public $TList=array(); /* tableau permettant la construction d'une liste */ 
+		
+	public $TChildForeignKey=array();
+
 	/**
 	 * constructeur
 	 **/
 	function __construct(){
 			
-		$this->table=''; /* table contenant les données */
-		$this->{OBJETSTD_MASTERKEY}=0; /* clef primaire */
+		$this->{OBJETSTD_MASTERKEY}=0; /* Primary Key */
 		$this->{OBJETSTD_DATECREATE}=time();
 		$this->{OBJETSTD_DATEUPDATE}=time();
-		$this->TChamps=array(); /* tableau contenant la d?claration de variables */
-		$this->TNoSaveVars=array(); /* tableau des variables ? charger mais pas ? sauvegarder */
-		$this->TList=array(); /* tableau permettant la construction d'une liste */ 
-		
-		
-		
 	}
 	/**
 	 * change la table
 	 */
-	function set_table($nom_table){
-    	$this->table=$nom_table;
+	function set_table($tableName){
+    	$this->table=$tableName;
     }
-	/**
-	  * @param boolean $create_new When true returns a new stdClass.
-	  *
-	  * @return stdClass|null
-	  */
-	function add_champs($nom, $infos=""){
-    
-	    if($nom!=""){
-	        $var = explode(",", $nom);
+	
+	function add_champs($name, $infos=array()){ //deprecated
+		$this->addFields($name, $infos);
+	}
+	function addFields($name, $infos=array()){
+		
+		if(is_string($infos))$infos = strtolower($infos); // deprecated
+		
+        if(!empty($name)){
+	        $var = explode(',', $name);
 	        $nb=count($var);
 	        for ($i=0; $i<$nb ; $i++) {
-	        	$this->TChamps[trim($var[$i])] = strtolower($infos);
+	        	
+	        	$this->TChamps[trim($var[$i])] = $infos; //TODO rename TField
 	        } // for
     	}
     
   	}
+
   function get_table(){
     return $this->table;
   }
@@ -240,39 +243,106 @@ function _no_save_vars($lst_chp) {
 		return $this->{$nom_champ};
 	}
 	
+	
   function _is_date($info){
-    $pos = strpos($info,'type=date;');
-    if($pos===false)return false;
-    else return true;
+  	
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='date') return true;
+		else return false;
+	}
+	else {
+	    $pos = strpos($info,'type=date;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+		
+	}
   }
   
-  function _is_tableau($info){ 
-    $pos = strpos($info,'type=tableau;');
-    if($pos===false)return false;
-    else return true;
+  function _is_tableau($info){
+  		return $this->_is_array($info); 
   }
+  function _is_array($info) {
+  	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='array') return true;
+		else return false;
+	}
+	else {
+		
+	    $pos = strpos($info,'type=tableau;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+			
+	}
+	
+  }
+
   
   function _is_null($info){
-    $pos = strpos($info,'type=null;');
-    if($pos===false)return false;
-    else return true;
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='null') return true;
+		else return false;
+	}
+	else {
+	    $pos = strpos($info,'type=null;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+	
+	}
+
   }
   
   function _is_int($info){
-    $pos = strpos($info,'type=entier;');
-    if($pos===false)return false;
-    else return true;
+
+	if(is_array($info)) {
+		if(isset($info['type']) && ($info['type']=='int' || $info['type']=='integer' )) return true;
+		else return false;
+	}
+	else {
+
+	    $pos = strpos($info,'type=entier;'); // deprecated
+	    if($pos===false)return false;
+	    else return true;
+
+	}
+
   }
   function _is_float($info){
-		$pos = strpos($info,'type=float;');
+
+	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='float') return true;
+		else return false;
+	}
+	else {
+
+		$pos = strpos($info,'type=float;'); // deprecated
 		if($pos===false) return false;
 		else return true;
+	}
+  }
+  function _is_text($info){
+  	if(is_array($info)) {
+		if(isset($info['type']) && $info['type']=='text') return true;
+		else return false;
+	}
+	else {
+		$pos = strpos($info,'type=text;'); // deprecated
+		if($pos===false) return false;
+		else return true;
+	}
   }
   function _is_index($info){
-		$pos = strpos($info,'index;');
+  	if(is_array($info)) {
+		if(isset($info['index']) && $info['index']==true) return true;
+		else return false;
+	}
+	else {
+	
+		$pos = strpos($info,'index;'); // deprecated
 		if($pos===false) return false;
 		else return true;
+	}
   }
+  
   
   
   function _set_save_query(&$query){
@@ -376,18 +446,26 @@ function _no_save_vars($lst_chp) {
 		}
 	}
 	
-	function setChild($class, $foreignKey, $orderBy='') {
+	function setChild($class, $foreignKey, $orderBy='', $useSimpleTabName=false) {
 		$this->TChildObjetStd[]=array(
 			'class'=>$class
 			,'foreignKey' => $foreignKey
 			,'orderBy'=>$orderBy
+			,'useSimpleTabName' => (int)$useSimpleTabName
 		);
 		
 		$tabName = $class;
-		if(is_array($foreignKey)) {
+		if(!$useSimpleTabName && is_array($foreignKey)) {
 			$tabName .= '_'.$foreignKey[1];
 		}
+		
+		if(is_array($foreignKey)) {
+			$this->TChildForeignKey[$tabName] = $foreignKey;
+			$this->TChildForeignKey[$tabName][3] = (int)$useSimpleTabName;
+		}
+		
 		$this->{$tabName} = array();
+	
 	}
 	function removeChild($className, $id, $key=OBJETSTD_MASTERKEY) {
 		foreach($this->{$className} as &$object) {
@@ -412,11 +490,20 @@ function _no_save_vars($lst_chp) {
 		$k = count($this->{$tabName});
 		
 		$className = substr($tabName, 0, strrpos($tabName, '_'));
-
-		if(empty($className))$className = $tabName;
+		
+		if(empty($className)){
+			$className = $tabName;
+		}
+		
+		
+		$objectType = empty($this->TChildForeignKey[$tabName]) ? '' : $this->TChildForeignKey[$tabName][1]; 
 		$this->{$tabName}[$k] = new $className;	
+	
+		if(!empty($objectType)) $this->{$tabName}[$k]->objectType = $objectType;
+		//var_dump($this->{$tabName});
+		//exit;
 		if($id>0) { $this->{$tabName}[$k]->load($db, $id); }
-
+		
 
 		return $k;
 	}
@@ -429,10 +516,8 @@ function _no_save_vars($lst_chp) {
 					$foreignKey	= $child['foreignKey'];
 					//print $className;print_r($foreignKey);print '<br>';
 					if(is_array($foreignKey)) {
-						
 						$keys = array($foreignKey[0]=>$this->getId(), 'objectType'=>$foreignKey[1]);
-						$tabName = $className.'_'.$foreignKey[1];
-						
+						if(empty($child['useSimpleTabName'])) $tabName = $className.'_'.$foreignKey[1];
 					}
 					else{
 						$keys = array($foreignKey=>$this->getId());
@@ -453,6 +538,25 @@ function _no_save_vars($lst_chp) {
 		}
 		
 	}
+	/*
+	 * Load a subobject in child's array
+	 * I : Array Name, Object Name, Key in line Name
+	 * O : null
+	 */
+	function loadChildSubObject($db, $tabName, $objectName, $innerKeyName) {
+		
+		if(!empty($this->{$tabName})) {
+			
+			foreach($this->{$tabName} as &$row) {
+				
+				$row->{$objectName}->load($db, $row->{$innerKeyName});
+				
+			}
+			
+		}
+		
+	}
+	
 	function saveChild(&$db) {
 	
 		if($this->withChild) {
@@ -463,7 +567,7 @@ function _no_save_vars($lst_chp) {
 					$foreignKey	= $child['foreignKey'];
 					
 					$tabName = $className;
-					if(is_array($foreignKey)) {
+					if(is_array($foreignKey) && empty($this->TChildForeignKey[$tabName][3])) {
 						$tabName .= '_'.$foreignKey[1];
 					}	
 					/*	print "$tabName <br>";

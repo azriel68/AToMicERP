@@ -27,7 +27,7 @@
 	));
 		
 	?>
-	<h2><?=__tr('lastCompanies') ?></h2>
+	<h2><?php echo __tr('lastCompanies') ?></h2>
 	<?	
 	print $l->render($db, $sql, $param);
 	

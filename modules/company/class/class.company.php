@@ -1,21 +1,25 @@
 <?
 class TCompany extends TObjetStd {
+	
+	public $objectName = 'company';
+	
 	function __construct() {
 		
-		parent::set_table(DB_PREFIX.'company');
+		$this->set_table( DB_PREFIX.$this->objectName );
 		
-		parent::add_champs('isEntity,id_entity','type=entier;index;');
-		parent::add_champs('isCustomer,isSupplier','type=entier;index;');
-		parent::add_champs('capital','type=float;');
-		parent::add_champs('customerRef,supplierRef,name,legalForm,vat_intra,vat_subject,phone,fax,email,web','type=chaine;');
+		$this->addFields('isEntity,id_entity','type=entier;index;');
+		$this->addFields('isCustomer,isSupplier','type=entier;index;');
+		$this->addFields('capital','type=float;');
+		$this->addFields('customerRef,supplierRef,name,legalForm,vat_intra,vat_subject,phone,fax,email,web','type=chaine;');
 		
 		TAtomic::initExtraFields($this);
 
-		parent::start();
-		parent::_init_vars();
+		$this->start();
+		$this->_init_vars();
 
 		$this -> setChild('TAddress', 'id_company');
-		$this -> setChild('TContactToObject', array('id_object', 'company') );
+		$this -> setChild('TContactToObject', array('id_object', $this->objectName) );
+		$this -> setChild('TCategoryLink', array('id_object', $this->objectName) );
 	}
 	
 	

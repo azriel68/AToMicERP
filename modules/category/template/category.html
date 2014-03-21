@@ -4,33 +4,82 @@
 <div class="content">
 	
 	[tpl.tabs;strconv=no]
-Catégories sur 2 colonnes, dans l'objet et non, utiliser sortable avec plusieurs listes de jquery
-	<form name="formTPrinter" action="[tpl.self]" method="post">
-		<input type="hidden" name="action" value="addModel" />
-		<input type="hidden" name="success" value="__tr(The model has been added)__" />
-		<input type="hidden" name="id" value="[printer.id_object]" />
-		<input type="hidden" name="object" value="[printer.className]" />
+	[tpl.parentShort;strconv=no]
+
+	<form name="formTCategory" action="[tpl.self]" method="post">
+		<input type="hidden" name="action" value="addCategory" />
+		<input type="hidden" name="success" value="__tr(The category has been linked)__" />
+		<input type="hidden" name="id" value="[category.id_object]" />
+		<input type="hidden" name="object" value="[category.className]" />
 		
 		<table class="grille">
 			<tr>
-				<td>__tr(Models)__</td><td>[printer.model;strconv=no]</td><td>[printer.printButton;strconv=no]</td>
-			</tr>
-			<tr>
-				<td>__tr(loadModel)__</td><td>[printer.loadModel;strconv=no]</td><td>[printer.addButton;strconv=no]</td>
-			</tr>
-			
-		</table>
-			
-		<table class="grille">
-			<tr>
-				<td>[listOfDoc.file;strconv=no;block=tr]</td>
-				<td>[listOfDoc.size;strconv=no]</td>
+				<td>[TCategoryLink.category.label;strconv=no;block=tr]</td>
 				<td><a href="#">Delete</a></td>
 			</tr>
 		</table>
+		
+		<a href="[button.href;block=a]" id="button-action-[button.$]" class="[button.class]">[button.label]</a>
 		
 	</form>
 
 </div>
 
+<div id="dialog-form" title="__tr(Link Category)__">
+	<form id="form-link-category" name="form-link-category" action="[tpl.self]">
+		<input type="hidden" name="action" value="addlink" />
+		<input type="hidden" name="id_category" value="0" />
+		<input type="hidden" name="success" value="__tr(The category has been added)__" />
+		<input type="hidden" name="id" value="[parent.id]" />
+		<input type="hidden" name="object" value="[id_parent_name]" />
+			
+		<label for="name">__tr(CategorieName)__</label>
+		<input type="text" name="categoryname" id="categoryname" />
+	
+	</form>
+</div>
+
+
+<script type="text/javascript">
+	function linkToCategory(id_object, type_object) {
+		
+		$('#categoryname').autocomplete({
+			source:"./script/interface.php?get=category&id_user=[user.id]&json=1"
+			,delay:0
+			,autoFocus:true
+			,minLength:0
+			,select: function( event, ui ) {
+				
+				id_category = ui.item.value.substr(0, ui.item.value.indexOf('.'));
+				$('#form-link-category input[name=id_category]').val(id_category);
+			}
+		});
+		
+		$( "#dialog-form" ).dialog( "open" );
+		
+	}
+
+	 $( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 200,
+		width: 350,
+		modal: true,
+		draggable:false,
+		resizable:false,
+		buttons: {
+			"linkThis": function() {
+					
+					$('#form-link-category').submit();
+					$( this ).dialog( "close" );
+				
+			}
+			,Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+
+		
+
+	});
+</script>
 [tpl.footer;strconv=no]

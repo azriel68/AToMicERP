@@ -16,7 +16,7 @@
 	));
 		
 	?>
-	<h2><?=__tr('lastBills') ?></h2>
+	<h2><?php echo __tr('lastBills') ?></h2>
 	<?	
 	print $l->render($db, $sql, $param);
 	
