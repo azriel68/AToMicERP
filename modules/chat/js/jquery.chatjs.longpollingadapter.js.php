@@ -1,4 +1,7 @@
-﻿/**
+﻿<?php
+	require ('../../../inc.php');
+?>
+/**
  * ChatJS 1.0 - MIT License
  * www.chatjs.net
  * 
@@ -260,7 +263,7 @@ LongPollingAdapter.prototype = {
         };
 
         // starts to poll the server for events
-        $.startLongPolling('/longpolling/getevents');
+        $.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php?get=events&json=1&id_user='.$user->id) ?>');
 
         // function passed by ChatJS to the adapter to be called when the adapter initialization is completed
         done();

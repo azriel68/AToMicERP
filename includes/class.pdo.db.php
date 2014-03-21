@@ -152,6 +152,15 @@ private function Error($message, $showTrace=true) {
 	}
 		
 }
+function ExecuteAsArray($sql, $TBind=array() ,$mode = PDO::FETCH_OBJ) {
+	
+	$this->Execute($sql, $TBind);
+	return $this->Get_All($mode);
+		
+	
+}
+
+
 function Execute ($sql, $TBind=array()){
         $mt_start = microtime(true)*1000;
 		 

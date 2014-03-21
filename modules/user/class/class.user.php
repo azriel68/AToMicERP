@@ -19,6 +19,29 @@ class TUser extends TContact {
 		
 		$this->rights = array();
 	}
+	
+	static function getUserList(&$db, &$user, $TIdExclude=array()) {
+		//FIXME check group user for entity
+		
+		$sql = "SELECT id FROM ".DB_PREFIX."contact WHERE id_entity IN (".$user->getEntity().")";
+		
+		if(!empty($TIdExclude)) $sql." AND id NOT IN(".implode($TIdExclude).") ";
+		
+		$Tab=array();
+		$Tmp = $db->ExecuteAsArray($sql);
+		foreach($Tmp as $row) {
+			
+			$u=new TUser;
+			$u->load($db, $row->id);
+			$u->save($db);
+			
+			$Tab[] = $u;
+		}
+		
+		return $Tab;
+		
+	}
+	
 	static function checkLoginExist(&$db, $login, $TIdExclude=array()) {
 		
 		$db->Execute("SELECT id FROM ".DB_PREFIX."contact 

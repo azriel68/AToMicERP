@@ -11,6 +11,7 @@
 	
 	$conf->js[] =Tools::getUrl('chat/js/chat.js.php');
 	$conf->js[] =Tools::getUrl('chat/js/jquery.chatjs.js');
-	$conf->js[] =Tools::getUrl('chat/js/jquery.chatjs.longpollingadapter.js');
+	$conf->js[] =Tools::getUrl('chat/js/jquery.chatjs.longpollingadapter.js.php');
+	$conf->js[] = Tools::getUrl('chat/js/jquery.autosize.min.js');
 	
 	$conf->css[] =Tools::getUrl('chat/css/jquery.chatjs.css');

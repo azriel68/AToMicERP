@@ -17,11 +17,11 @@
 		    emptyRoomText: "<?php echo __tr('There\'s no one around here.') ?>",
 		   
 		    adapter: new LongPollingAdapter({
-		    	sendMessageUrl: '<?php echo Tools::getUrl('chat/script/interface.php?put=send-message') ?>'
-       			,sendTypingSignalUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=ping') ?>'
-        		,getMessageHistoryUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=message-history') ?>'
-        		,userInfoUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=user-info') ?>'
-        		,usersListUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=users-list') ?>'
+		    	sendMessageUrl: '<?php echo Tools::getUrl('chat/script/interface.php?put=send-message&json=1&id_user='.$user->id) ?>'
+       			,sendTypingSignalUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=ping&json=1&id_user='.$user->id) ?>'
+        		,getMessageHistoryUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=message-history&json=1&id_user='.$user->id) ?>'
+        		,userInfoUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=user-info&json=1&id_user='.$user->id) ?>'
+        		,usersListUrl: '<?php echo Tools::getUrl('chat/script/interface.php?get=users-list&json=1&id_user='.$user->id) ?>'
 		    	
 		    })
 		});
@@ -45,7 +45,7 @@
 		        // error handling here
 		    }
 		);
-		$.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php') ?>');
+		$.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php&id_user'.$user->id) ?>');
 		
 });
 
