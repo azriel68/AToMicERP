@@ -21,8 +21,8 @@ class TContact extends TObjetStd {
 		return $this->firstname.' '.$this->lastname;
 	}
 	
-	function gravatar($size=100) {
-		return TTemplate::gravatar($this->email, $this->name(), $size);
+	function gravatar($size=100, $justUrl=false) {
+		return TTemplate::gravatar($this->email, $this->name(), $size, 'none', $justUrl);
 	}
 }
 

@@ -33,7 +33,7 @@ class TCompanion {
 		if(!empty($mood)) {
 			?>
 			<script type="text/javascript">
-				$(document).ready(function () { showCompanion('<?=$mood ?>', "<?=addslashes($message)  ?>"); });
+				$(document).ready(function () { showCompanion('<?php echo $mood ?>', "<?php echo addslashes($message)  ?>"); });
 			</script>
 			
 			<?

@@ -99,19 +99,19 @@ class TPsycho extends TContact {
 				 ?><tr><?
 				 
 				 	
-				 	?><td><?=__tr($name) ?></td>
-				 	<td class="psycho-slider" id="<?=$name?>-bg" style="background: #ffffff;" align="center">
-				 		<span id="<?=$name ?>-min-bound" style="width:150px; display:inline-block; text-align:right;"><?=$limits[0]?></span>
-				 		<div rel="<?=$name ?>" init-value="<?=$psycho->{$name}?>" class="slider" style="background-color: #999;display:inline-block; width:200px; margin:0 20px;"></div>
-				 		<span id="<?=$name ?>-max-bound" style="width:150px; display:inline-block; text-align:left;"><?=$limits[1] ?></span>
-				 		<input type="hidden" name="<?=$name ?>" id="<?=$name ?>" value="<?=$psycho->{$name}?>" />
+				 	?><td><?php echo __tr($name) ?></td>
+				 	<td class="psycho-slider" id="<?php echo $name?>-bg" style="background: #ffffff;" align="center">
+				 		<span id="<?php echo $name ?>-min-bound" style="width:150px; display:inline-block; text-align:right;"><?php echo $limits[0]?></span>
+				 		<div rel="<?php echo $name ?>" init-value="<?php echo $psycho->{$name}?>" class="slider" style="background-color: #999;display:inline-block; width:200px; margin:0 20px;"></div>
+				 		<span id="<?php echo $name ?>-max-bound" style="width:150px; display:inline-block; text-align:left;"><?php echo $limits[1] ?></span>
+				 		<input type="hidden" name="<?php echo $name ?>" id="<?php echo $name ?>" value="<?php echo $psycho->{$name}?>" />
 				 		</td><?
 				 		
 				 	if($first) {
 				 		
-						?><td rowspan="<?=count($TMood) ?>" align="center">
+						?><td rowspan="<?php echo count($TMood) ?>" align="center">
 			 			<div id="psycho-profile">
-			 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories).'&id_contact='.$contact->id.'&name_contact='.$contact->name().(isset($_REQUEST['id_company'])?'&id_company='.$_REQUEST['id_company']:'' ) ?>"></script>
+			 				<script type="text/javascript" src="<?php echo HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories).'&id_contact='.$contact->id.'&name_contact='.$contact->name().(isset($_REQUEST['id_company'])?'&id_company='.$_REQUEST['id_company']:'' ) ?>"></script>
 			 			</div>
 			 			</td><?
 					 	$first=false;	
@@ -123,7 +123,7 @@ class TPsycho extends TContact {
 /*
 		 		?><td colspan="3">
 		 			<div id="psycho-profile">
-		 				<script type="text/javascript" src="<?=HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories) ?>"></script>
+		 				<script type="text/javascript" src="<?php echo HTTP.'modules/psycho/js/showSpider.php?values='.urlencode($JSvalues).'&categories='.urlencode($JScategories) ?>"></script>
 		 			</div>
 		 		</td><?
 	*/			 		

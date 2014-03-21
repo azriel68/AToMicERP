@@ -2,6 +2,19 @@
  
 class Tools{
 	
+	static function getUrl($filepath, $type='url') {
+		$pos = strpos($filepath,'?'); //parameters ?
+		if($pos!==false) $file = substr($filepath,0, $pos);
+		else $file = $filepath;
+		
+		if(is_file(ROOT.'modules/'.$file)) {
+			
+			return HTTP.'modules/'.$filepath;
+		}
+		else {
+			return 'fileNotFound';
+		}
+	}
 	
 	static function summarize($texte, $nb=5, $asString=true) {
 
