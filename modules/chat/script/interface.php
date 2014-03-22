@@ -17,17 +17,17 @@ _get($db, $user,$get);
 function _get(&$db,&$user, $case) {
 	switch ($case) {
 		case 'users-list' :
-			__out(_get_users_list($db, $user));
+			__out(TChat::get_users_list($db, $user));
 			
 			break;
 			
 		case 'events' :
-			__out(array());
+			__out(array('Events'=>array()));
 			break;
 			
 		case 'message-history':
 			__out(array(
-				'Messages'=>array()
+				'Messages'=>TChat::get_history($db, $user->id, __get('otherUserId',0,'int'))
 			));
 			
 			break;
@@ -43,10 +43,16 @@ function _put(&$db, &$user,$case) {
 			break;
 		case 'send-message':
 			//otherUserId=2&message=test+2&clientGuid=c55c86ef-06bd-a1ce-7fb3-32a35ba577ad
+			$chat=new TChat;
+			$chat->id_user_from = $user->id;
+			$chat->id_user_to = __get('otherUserId',0,'int');
+			$chat->message = __get('message','','string',256);
+			$chat->id_entity = $user->id_entity;
+			$chat->save($db);
 			
 			break;	
 		case 'start-polling':
-			var_dump($user);
+			
 			$user->chat_last_connection = time();
 			$user->save($db);
 			
@@ -59,22 +65,3 @@ function _put(&$db, &$user,$case) {
 
 }
 
-function _get_users_list(&$db, &$user){
-	
-	$TUser = TUser::getUserList($db, $user, array($user->id));
-	
-	foreach($TUser as &$u) {
-		
-		$u->Id = $u->id;
-		$u->ProfilePictureUrl = $u->gravatar(25, true);
-		$u->Status = ($u->chat_last_connection + 60 > time() ) ? 1 : 0;
-		$u->Name = $u->name();
-	
-		$u->Email = $u->email;
-		$u->RoomId = 'chatjs-room';
-		$u->Url = '';
-
-	}
-	
-	return array('Users'=>$TUser);
-}

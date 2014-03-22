@@ -18,23 +18,23 @@
 
 .chat-window {
     background-color: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid #E8E8E8;
+    border-bottom : 0 none;
     bottom: 0;
-    box-shadow: 0 0 10px #D5D5D5;
     font-family: Arial,Helvetica;
     font-size: 12px;
     line-height: 14.4px;
     position: fixed;
     width: 230px;
-    z-index: 10000;
+    z-index: 500;
 }
 
-    .chat-window .temp-message {
-        color: rgb(176, 176, 176);
-    }
+.chat-window .temp-message {
+    color: rgb(176, 176, 176);
+}
 
 .chat-window-title {
-    background: none repeat scroll 0 0 #6D84B4;
+    background: none repeat scroll 0 0 #2AA8B9;
     border-bottom: 1px solid #D7D7D7;
     color: #FFFFFF;
     cursor: pointer;
@@ -197,16 +197,8 @@ textarea.chat-window-text-box {
     }
 
     .chat-window-content input[type=text] {
-        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-        -moz-box-sizing: border-box; /* Firefox, other Gecko */
-        box-sizing: border-box; /* Opera/IE 8+ */
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
         margin: 0;
-        transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-        border-radius: 0;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
         margin: 0;
-        transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
         height: auto;
     }
 

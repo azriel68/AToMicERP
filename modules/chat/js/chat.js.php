@@ -1,5 +1,10 @@
 <?php
 	require ('../../../inc.php');
+	
+	if(!$user->isLogged()) {
+		exit;
+	}
+	
 ?>
 
 	$(document).ready(function() {

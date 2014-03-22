@@ -208,6 +208,7 @@ LongPollingAdapter.prototype = {
                     type: "GET",
                     async: false,
                     url: _this.opts.getMessageHistoryUrl,
+                    dataType:'json',
                     data: {
                         otherUserId: otherUserId
                     },
