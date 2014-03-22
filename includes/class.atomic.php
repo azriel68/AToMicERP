@@ -349,7 +349,6 @@ class TAtomic {
 	global $conf;
 		
 		$TExtraFields = &$conf->TExtraFields;
-		
 		if($typeObject=='') $typeObject = get_class($object);
 		
 		$Tab = isset($TExtraFields[$typeObject]) ? $TExtraFields[$typeObject] : array();  
@@ -365,7 +364,7 @@ class TAtomic {
 				$type_champs=$info;
 			}
 			
-			$object->add_champs($field, 'type='+$type_champs+';');
+			$object->addFields($field, $info);
 			
 			
 		}

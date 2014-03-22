@@ -52,6 +52,7 @@
                 data: {
                     timestamp: $._longPollingData.lastFetchTimeStamp
                 },
+                dataType:'json',
                 success: function (data, s) {
                     $._longPollingData.lastFetchTimeStamp = data.Timestamp;
                     for (var i = 0; i < data.Events.length; i++) {
@@ -250,6 +251,7 @@ LongPollingAdapter.prototype = {
                     async: false,
                     url: _this.opts.usersListUrl,
                     cache: false,
+                    dataType : 'json',
                     success: function (result) {
                         // fine
                         if (done)
@@ -263,7 +265,7 @@ LongPollingAdapter.prototype = {
         };
 
         // starts to poll the server for events
-        $.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php?get=events&json=1&id_user='.$user->id) ?>');
+        //$.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php?get=events&json=1&id_user='.$user->id) ?>');
 
         // function passed by ChatJS to the adapter to be called when the adapter initialization is completed
         done();

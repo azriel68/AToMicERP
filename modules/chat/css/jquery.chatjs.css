@@ -48,7 +48,7 @@
     }
 
     .chat-window-title .close {
-        background-image: url("/ChatJs/Images/clear.png");
+        background-image: url("../images/clear.png");
         float: right;
         height: 16px;
         width: 16px;
@@ -64,14 +64,14 @@
     }
 
     .chat-window-title.online {
-        background-image: url("/ChatJs/images/chat-online.png");
+        background-image: url("../images/chat-online.png");
         background-position: 8px 10px;
         background-repeat: no-repeat;
         padding-left: 22px;
     }
 
     .chat-window-title.offline {
-        background-image: url("/ChatJs/images/chat-offline.png");
+        background-image: url("../images/chat-offline.png");
         background-position: 8px 10px;
         background-repeat: no-repeat;
         padding-left: 22px;
@@ -85,7 +85,7 @@
 
     .chat-window-inner-content .loading-box {
         padding: 30px;
-        background-image: url("../Images/ajax-loader.gif");
+        background-image: url("../images/ajax-loader.gif");
         background-repeat: no-repeat;
         background-position: center center;
     }
@@ -128,12 +128,12 @@ textarea.chat-window-text-box {
     }
 
         .user-list-item .profile-status.online {
-            background-image: url("/ChatJs/images/chat-online.png");
+            background-image: url("../images/chat-online.png");
             background-repeat: no-repeat;
         }
 
         .user-list-item .profile-status.offline {
-            background-image: url("/ChatJs/images/chat-offline.png");
+            background-image: url("../images/chat-offline.png");
             background-repeat: no-repeat;
         }
 
@@ -142,11 +142,11 @@ textarea.chat-window-text-box {
     }
 
     .user-list-item.offline {
-        background-image: url("/ChatJs/images/chat-offline.png");
+        background-image: url("../images/chat-offline.png");
     }
 
     .user-list-item.online {
-        background-image: url("/ChatJs/images/chat-online.png");
+        background-image: url("../images/chat-online.png");
     }
 
 .user-list-empty {
@@ -214,7 +214,7 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-2.png");
+    background-image: url("../images/Emoticons/smile-2.png");
     vertical-align: top;
 }
 
@@ -222,7 +222,7 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-1.png");
+    background-image: url("../images/Emoticons/smile-1.png");
     vertical-align: top;
 }
 
@@ -230,7 +230,7 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-3.png");
+    background-image: url("../images/Emoticons/smile-3.png");
     vertical-align: top;
 }
 
@@ -238,7 +238,7 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-4.png");
+    background-image: url("../images/Emoticons/smile-4.png");
     vertical-align: top;
 }
 
@@ -246,7 +246,7 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-5.png");
+    background-image: url("../images/Emoticons/smile-5.png");
     vertical-align: top;
 }
 
@@ -254,6 +254,6 @@ textarea.chat-window-text-box {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url("/ChatJs/Images/Emoticons/smile-6.png");
+    background-image: url("../images/Emoticons/smile-6.png");
     vertical-align: top;
 }

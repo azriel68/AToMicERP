@@ -1,15 +1,15 @@
 <?php
 class TContact extends TObjetStd {
 	function __construct() { 
-		parent::set_table(DB_PREFIX.'contact');
-		parent::add_champs('status,id_entity','type=entier;index;');
-		parent::add_champs('civility,lastname,firstname,job,phone,mobile,fax,email,lang,id_manager','type=chaine;');
-		parent::add_champs('birthday','type=date');
+		$this->set_table(DB_PREFIX.'contact');
+		$this->add_champs('status,id_entity','type=entier;index;');
+		$this->add_champs('civility,lastname,firstname,job,phone,mobile,fax,email,lang,id_manager','type=chaine;');
+		$this->add_champs('birthday','type=date');
 		
 		TAtomic::initExtraFields($this);
 		
-		parent::start();
-		parent::_init_vars();
+		$this->start();
+		$this->_init_vars();
 		
 		$this->lang = DEFAULT_LANG;
 		

@@ -4,8 +4,10 @@ class TUser extends TContact {
 	
 	function __construct() {
 		
-		parent::add_champs('isSuperadmin','type=entier;index;');
-		parent::add_champs('login,password,UId','type=chaine;index;');
+		$this->add_champs('isSuperadmin','type=entier;index;');
+		$this->add_champs('login,password,UId','type=chaine;index;');
+		
+		TAtomic::initExtraFields($this);
 		
 		parent::__construct();
 		

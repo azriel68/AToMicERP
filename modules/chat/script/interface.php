@@ -20,14 +20,41 @@ function _get(&$db,&$user, $case) {
 			__out(_get_users_list($db, $user));
 			
 			break;
+			
+		case 'events' :
+			__out(array());
+			break;
+			
+		case 'message-history':
+			__out(array(
+				'Messages'=>array()
+			));
+			
+			break;
 	}
 
 }
-function _put(&$db, $case) {
+function _put(&$db, &$user,$case) {
 	switch ($case) {
-		
+		case 'ping':
+			// tell who typing to otherUserId
 			
 			
+			break;
+		case 'send-message':
+			//otherUserId=2&message=test+2&clientGuid=c55c86ef-06bd-a1ce-7fb3-32a35ba577ad
+			
+			break;	
+		case 'start-polling':
+			var_dump($user);
+			$user->chat_last_connection = time();
+			$user->save($db);
+			
+			__out(array(
+				'Events'=>array()
+			));
+			
+			break;	
 	}
 
 }
@@ -39,8 +66,8 @@ function _get_users_list(&$db, &$user){
 	foreach($TUser as &$u) {
 		
 		$u->Id = $u->id;
-		$u->ProfilePictureUrl = $u->gravatar(100, true);
-		$u->Status = 0;
+		$u->ProfilePictureUrl = $u->gravatar(25, true);
+		$u->Status = ($u->chat_last_connection + 60 > time() ) ? 1 : 0;
 		$u->Name = $u->name();
 	
 		$u->Email = $u->email;
