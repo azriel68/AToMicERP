@@ -31,7 +31,7 @@
 		    })
 		});
 	
-		$.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php?id_user='.$user->id.'&put=start-polling&json=1') ?>');
+		$.startLongPolling('<?php echo Tools::getUrl('chat/script/interface.php?id_user='.$user->id.'&get=events&json=1') ?>');
 		
 });
 

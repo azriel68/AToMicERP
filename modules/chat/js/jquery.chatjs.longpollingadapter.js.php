@@ -1,5 +1,9 @@
 ﻿<?php
 	require ('../../../inc.php');
+	
+	if(!$user->isLogged()) {
+		exit;
+	}
 ?>
 /**
  * ChatJS 1.0 - MIT License
@@ -54,8 +58,10 @@
                 },
                 dataType:'json',
                 success: function (data, s) {
+                	
                     $._longPollingData.lastFetchTimeStamp = data.Timestamp;
                     for (var i = 0; i < data.Events.length; i++) {
+                    	
                         var event = data.Events[i];
                         if (!$._longPollingData.listeners[event.ProviderName])
                             throw "Long polling server sent a message but there is no client listener. Provider FullName: " + event.ProviderName;
@@ -125,9 +131,12 @@ LongPollingAdapter.prototype = {
         $.addLongPollingListener("chat",
                 // success
                 function (event) {
-                    if (event.EventKey == "new-messages")
-                        for (var i = 0; i < event.Data.length; i++)
+                	
+                    if (event.EventKey == "new-messages") {
+                    	for (var i = 0; i < event.Data.length; i++) {
                             chat.client.sendMessage(event.Data[i]);
+                    	}
+                    }
                     else if (event.EventKey == "user-list")
                         chat.client.usersListChanged(event.Data);
                     else if (event.EventKey == "user-typed")

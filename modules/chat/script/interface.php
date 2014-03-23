@@ -22,7 +22,13 @@ function _get(&$db,&$user, $case) {
 			break;
 			
 		case 'events' :
-			__out(array('Events'=>array()));
+			
+			__out(array('Events'=>array(TChat::get_events($db, $user))));
+			
+			$user->chat_last_connection = time(); /* keep alive the current user */
+			$user->save($db);
+			
+			
 			break;
 			
 		case 'message-history':
@@ -49,16 +55,6 @@ function _put(&$db, &$user,$case) {
 			$chat->message = __get('message','','string',256);
 			$chat->id_entity = $user->id_entity;
 			$chat->save($db);
-			
-			break;	
-		case 'start-polling':
-			
-			$user->chat_last_connection = time();
-			$user->save($db);
-			
-			__out(array(
-				'Events'=>array()
-			));
 			
 			break;	
 	}
