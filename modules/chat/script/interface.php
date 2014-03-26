@@ -23,7 +23,24 @@ function _get(&$db,&$user, $case) {
 			
 		case 'events' :
 			
-			__out(array('Events'=>array(TChat::get_events($db, $user))));
+			$_SESSION['chat_typing_to_user'][__get('otherUserId',0,'int')] = $user->id;
+			
+			$Events = array(TChat::get_events($db, $user));
+			
+			if(!empty($_SESSION['chat_typing_to_user'][$user->id])) {
+				
+				foreach($_SESSION['chat_typing_to_user'][$user->id] as $user_id) {
+					
+					$Events[]=array(
+						'EventKey'=>'user-typed'						,'ProviderName'=>'chat'
+					);
+					
+				}	
+				
+			}
+			
+			
+			__out(array('Events'=>$Events));
 			
 			$user->chat_last_connection = time(); /* keep alive the current user */
 			$user->save($db);
@@ -37,6 +54,14 @@ function _get(&$db,&$user, $case) {
 			));
 			
 			break;
+		case 'user-info':
+			
+			$l_user=new TUser;
+			$l_user->load($db, __get('id_user',0,'int'));
+			
+			__out(array('User'=>TChat::get_user($l_user)));
+			
+			break;
 	}
 
 }
@@ -44,7 +69,7 @@ function _put(&$db, &$user,$case) {
 	switch ($case) {
 		case 'ping':
 			// tell who typing to otherUserId
-			
+			$_SESSION['chat_typing_to_user'][__get('otherUserId',0,'int')] = $user->id;
 			
 			break;
 		case 'send-message':

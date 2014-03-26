@@ -1,4 +1,7 @@
-﻿/**
+﻿<?php
+	require ('../../../inc.php');
+?>	
+/**
  * ChatJS 1.0 - MIT License
  * www.chatjs.net
  * 
@@ -504,7 +507,7 @@
                         else
                             _this.chatWindows[message.UserFromId].addMessage(message);
                         if (_this.opts.playSound)
-                            _this.playSound("/chatjs/sounds/chat");
+                            _this.playSound("<?php echo Tools::getUrl('chat/sounds/chat', false); ?>");
 
                         // play sound here
                     } else {

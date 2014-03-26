@@ -13,7 +13,7 @@
 		    user: {
 		        Id: <?php echo $user->id ?>,
 		        Name: '<?php echo addslashes($user->name()) ?>',
-		        ProfilePictureUrl: '<?php echo $user->gravatar(100, true) ?>'
+		        ProfilePictureUrl: '<?php echo $user->gravatar(25, true) ?>'
 		    },
 		    typingText: ' <?php echo __tr('is typing...') ?>',
 		   

@@ -1,3 +1,4 @@
+Based on ChatJS
 ChatJS 1.0 - MIT License
 www.chatjs.net
 Copyright (c) 2013, André Pena All rights reserved.

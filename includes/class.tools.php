@@ -7,7 +7,10 @@ class Tools{
 		if($pos!==false) $file = substr($filepath,0, $pos);
 		else $file = $filepath;
 		
-		if(is_file(ROOT.'modules/'.$file)) {
+		if($type=='url') $test = is_file(ROOT.'modules/'.$file);
+		else $test=true;
+		
+		if($test) {
 			
 			return HTTP.'modules/'.$filepath;
 		}

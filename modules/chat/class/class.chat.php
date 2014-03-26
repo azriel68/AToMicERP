@@ -18,15 +18,17 @@ class TChat extends TObjetStd {
 		
 		$Tmp = $db->ExecuteAsArray("SELECT message,id_user_from,id_user_to FROM ".DB_PREFIX."chat 
 		WHERE 
-		id_user_to IN (".$user->id.")
-		AND dt_cre>='".date('Y-m-d H:i:s',time() - 60). "' ORDER BY id ASC" );
+			
+			(id_user_to IN (".$user->id.") OR id_user_from IN (".$user->id."))
+			
+		AND dt_cre>='".date('Y-m-d H:i:s',time() - 1). "' ORDER BY id ASC" );
 		
 		$Tab=array();
 
 		if(!empty($Tmp)) {
 			$Tab['EventKey']='new-messages';
 			$Tab['Data']=array();
-						
+			$Tab['ProviderName']='chat';			
 		}
 		
 		foreach($Tmp as $row) {
@@ -60,6 +62,15 @@ class TChat extends TObjetStd {
 		
 		foreach($TUser as &$u) {
 			
+			$u = TChat::get_user($u);
+	
+		}
+		
+		return array('Users'=>$TUser);
+	}
+
+	static function get_user($u) {
+		
 			$u->Id = $u->id;
 			$u->ProfilePictureUrl = $u->gravatar(25, true);
 			$u->Status = ($u->chat_last_connection + 60 > time() ) ? 1 : 0;
@@ -68,10 +79,8 @@ class TChat extends TObjetStd {
 			$u->Email = $u->email;
 			$u->RoomId = 'chatjs-room';
 			$u->Url = '';
-	
-		}
 		
-		return array('Users'=>$TUser);
+		return $u;
 	}
 	
 }

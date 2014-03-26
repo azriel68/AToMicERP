@@ -111,11 +111,11 @@ function LongPollingAdapter(options) {
     /// </summary>
 
     this.defaults = {
-        sendMessageUrl: '/chat/sendmessage',
-        sendTypingSignalUrl: '/chat/sendtypingsignal',
-        getMessageHistoryUrl: '/chat/getmessagehistory',
-        userInfoUrl: '/chat/getuserinfo',
-        usersListUrl: '/chat/getuserslist'
+        sendMessageUrl: '/chat/sendmessage'
+        ,sendTypingSignalUrl: '/chat/sendtypingsignal'
+        ,getMessageHistoryUrl: '/chat/getmessagehistory'
+        ,userInfoUrl:'/chat/getuserinfo'
+        ,usersListUrl: '/chat/getuserslist'
     };
 
     //Extending options:
@@ -134,7 +134,7 @@ LongPollingAdapter.prototype = {
                 	
                     if (event.EventKey == "new-messages") {
                     	for (var i = 0; i < event.Data.length; i++) {
-                            chat.client.sendMessage(event.Data[i]);
+                    		chat.client.sendMessage(event.Data[i]);
                     	}
                     }
                     else if (event.EventKey == "user-list")
