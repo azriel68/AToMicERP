@@ -8,7 +8,7 @@
 	/*
 	 * Inclusion des classes & non standart ci-après
 	 */
-	require('fonction.php');
+	require('function.php');
 	 
 	require('class.form.core.php');
 	require('class.tools.php');
