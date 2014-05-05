@@ -38,6 +38,7 @@ if($action!==false ) {
 		,'supplierRef'=>$form->texte('', 'supplierRef', $company->supplierRef, 80)
 		,'isCustomer'=>$form->combo('', 'isCustomer', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isCustomer)
 		,'isSupplier'=>$form->combo('', 'isSupplier', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isSupplier)
+		,'isEntity'=>$form->combo('', 'isEntity', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isEntity)
 		
 		,'logo_input'=>$form->fichier('', 'logo_input', '', 80)
 		
@@ -47,12 +48,15 @@ if($action!==false ) {
 	);
 	$tbs=new TTemplateTBS;
 	
+	$TButtons = TTemplate::buttons($user, $company, $action);
+	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company)
 		,array(
-			'button'=>TTemplate::buttons($user, $company, $action)
+			'button'=>$TButtons
 		)
 		,array(
 			'company'=>$TForm
+			,'user'=>$user
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf, __tr('Company : ').$company->name, $successMsg  )
 				,'footer'=>TTemplate::footer($conf)

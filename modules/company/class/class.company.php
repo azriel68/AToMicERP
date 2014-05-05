@@ -95,7 +95,21 @@ class TEntity extends TCompany {
 		return TRequeteCore::get_keyval_by_sql($db, $sql, 'id', 'name');
 		
 	}
-	
+	static function getEntityTags(&$db, $idIn='', $idOut='') {
+		
+		$sql="SELECT DISTINCT CONCAT(e.id,'. ',e.name) as 'tag' FROM ".DB_PREFIX."company e WHERE isEntity=1";
+		if(!empty($idIn)) $sql.=' AND id IN ('.$idIn.') ';
+		if(!empty($idOut)) $sql.=' AND id NOT IN ('.$idOut.') ';
+		
+		$db->Execute($sql);
+		$Tab=array();
+		
+		while($db->Get_line()) {
+			$Tab[] = $db->Get_field('tag');
+		}
+		
+		return $Tab;
+	}
 	static function getEntityUsers(&$db, $id_entity=0) {
 		$sql = "SELECT u.id FROM ".DB_PREFIX."contact u ";
 		$sql.= "LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact) ";

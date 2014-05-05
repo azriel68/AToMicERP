@@ -5,22 +5,26 @@ ob_start();
 require ('../../../inc.php');
 ob_clean();
 
+$user = TAtomic::getUser($db);
+TAtomic::loadLang($conf, $user->lang);
+		
+
 $db=new TPDOdb;
-_put($db, $conf, __get('put'));
-_get($db, $conf, __get('get'));
+_put($db, $conf, $user, __get('put'));
+_get($db, $conf, $user, __get('get'));
 $db->close();
 
-function _get(&$db,&$conf, $case) {
+function _get(&$db,&$conf, &$user, $case) {
 	switch ($case) {
 		case 'entities' :
-			
-			__out(TUser::getAvailableEntityTags($db, $_REQUEST['id_user']));
+			if($user->isSuperadmin) __out(TEntity::getEntityTags($db));
+			else __out(TUser::getAvailableEntityTags($db, $_REQUEST['id_user']));
 
 			break;
 	}
 
 }
-function _put(&$db,&$conf, $case) {
+function _put(&$db,&$conf, &$user, $case) {
 	switch ($case) {
 		case 'right' :
 			__out(_setRight($db, $_REQUEST['id_group'], $_REQUEST['module'], $_REQUEST['submodule'], $_REQUEST['action']));
