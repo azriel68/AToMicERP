@@ -15,6 +15,16 @@ if($action!==false ) {
 	if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
 	}
+	else if($action=='save') {
+		
+		$TEntity = explode('|', __get('id_entities'));
+		foreach($TEntity as $id_entity) {
+			
+			// TODO
+			
+		}
+		
+	}
 
 	$form=new TFormCore;
 	$form->Set_typeaff($action);

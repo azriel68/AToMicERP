@@ -3,6 +3,7 @@
 	<form name="formTGroup" action="[tpl.self]" method="post">
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="id" value="[group.id]" />
+		<input type="hidden" name="id_entities" value="" />
 		<input type="hidden" name="success" value="__tr(The group has been saved)__" />
 		<div class="content">
 			
@@ -46,41 +47,68 @@ $(document).ready(function() {
 		listEntityAvailable=[];
 		$.each(data, function(i,value) {
 			listEntityAvailable.push(value);
+	});
+		
+	if( "[tpl.mode]" == "edit" ) {
+	
+		 	$("#group_entities").tagit({
+		 		allowSpaces:true
+		 		,availableTags: data
+		 		,caseSensitive: false
+		 		,placeholderText:"__tr(Enter entity name to link it)__"
+		 		,showAutocompleteOnFocus:true
+		 		,fieldName: 'entities'
+		 		,beforeTagRemoved:function(event, ui) {
+		 			
+		 			if($("#group_entities").tagit("assignedTags").length<=1) {
+		 				errorMsg("__tr(The group have to be to at least one entity)__");
+		 				return false;
+		 			}
+		 			
+		 			return true;
+		 			
+		 		}
+		 		,beforeTagAdded: function(event, ui) {
+		 			
+					var company = ui.tagLabel; //$("#group_entities").tagit('tagLabel', ui.tag);
+	
+		 			if(listEntityAvailable.indexOf(company) == -1 ) {
+			        	errorMsg("__tr(You have no rights to add this entity)__ : "+company);
+			        	return false;
+			        }
+			        return true;
+			    }
+			    ,afterTagAdded: function(event, ui) {
+			    	
+			    	putTagInInput($("#group_entities").tagit("assignedTags") );
+			    	
+			    }
+			    ,afterTagRemoved: function(event, ui) {
+			    	
+			    	putTagInInput($("#group_entities").tagit("assignedTags") );
+			    	
+			    }
+		 	});
+		}
 		});
 		
-		
-	 	$("#group_entities").tagit({
-	 		allowSpaces:true
-	 		,availableTags: data
-	 		,placeholderText:"__tr(Enter entity name to link it)__"
-	 		,showAutocompleteOnFocus:true
-	 		,fieldName: 'entities'
-	 		,beforeTagRemoved:function(event, ui) {
-	 			
-	 			if($("#group_entities").tagit("assignedTags").length<=1) {
-	 				errorMsg("__tr(The group have to be to at least one entity)__");
-	 				return false;
-	 			}
-	 			
-	 			return true;
-	 			
-	 		}
-	 		,beforeTagAdded: function(event, ui) {
-	 			
-				var company = ui.tagLabel; //$("#group_entities").tagit('tagLabel', ui.tag);
-
-	 			if(listEntityAvailable.indexOf(company) == -1 ) {
-		        	errorMsg("__tr(You have no rights to add this entity)__ : "+company);
-		        	return false;
-		        }
-		        return true;
-		    }
-	 	});
-		
-	});
 	
 	
 })	;
+	
+function putTagInInput(Tab) {
+	//alert(Tab);
+	var val='';
+	for( x in Tab ) {
+		
+		if(val!="")val+="|";
+		val+=Tab[x].substr(0,Tab[x].indexOf('.'));
+		
+	} 
+	
+	$("input[name=id_entities]").val(val);
+	
+}	
 	
 </script>
 [tpl.footer;strconv=no]

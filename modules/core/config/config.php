@@ -11,7 +11,7 @@
 	$conf->js[] = HTTP.'modules/core/js/jquery-ui.min.js';
 	$conf->js[] = HTTP.'modules/core/js/jquery.dataTables.min.js';
 	$conf->js[] = HTTP.'modules/core/js/jNotify.jquery.min.js';
-	$conf->js[] = HTTP.'modules/core/js/tag-it.min.js';
+	$conf->js[] = HTTP.'modules/core/js/tag-it.js';
 	$conf->js[] = HTTP.'modules/core/js/jquery.cookie.js';
 
 	$conf->js[] = HTTP.'modules/core/js/highcharts/highcharts.js';
