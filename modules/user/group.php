@@ -18,10 +18,10 @@ if($action!==false ) {
 	else if($action=='save') {
 		
 		$TEntity = explode('|', __get('id_entities'));
-		foreach($TEntity as $id_entity) {
+		if($group->setEntities($db, $TEntity)) {
 			
-			// TODO
-			
+			$group->save($db);
+				
 		}
 		
 	}

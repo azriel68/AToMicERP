@@ -16,6 +16,57 @@ class TGroup extends TObjetStd {
 		$this->setChild('TGroupUser', 'id_group');
 		$this->setChild('TGroupEntity', 'id_group');
 	}
+	function setEntities(&$db, $TEntity) {
+		
+		$result = false;
+		
+		foreach($TEntity as $id_entity) {
+			
+			if(!$this->isEntitiesAlreadyLinked($id_entity)) {
+				
+				 $k = $this->addChild($db, 'TGroupEntity');
+				
+				 $this->TGroupEntity[$k]->id_entity = $id_entity;
+				
+				 $result=true;
+			}
+			
+		}
+		
+		if($this->deleteEntitiesLinkNotIn($TEntity)) $result=true;		
+		
+		return $result;
+	}
+	
+	function isEntitiesAlreadyLinked($id_entity) {
+		
+		foreach($this->TGroupEntity as &$e) {
+			if($e->id_entity == $id_entity) return true;
+		}
+		
+		return false;
+	}
+	
+	function deleteEntitiesLinkNotIn($TEntity) {
+		
+		$result = false;
+		
+		foreach($this->TGroupEntity as &$e) {
+			
+			if(!in_array($e->id_entity, $TEntity)) {
+				
+				$e->to_delete = true;
+				
+				$result = true;
+				
+			}
+			
+		}
+		
+		return $result;
+		
+		
+	}
 	
 	function hasRight($module, $submodule, $action) {
 		foreach($this->TRight as $i => $right) {
