@@ -19,7 +19,7 @@
 	}
 	
 	$TUserOut=array();
-	$TUserList=TEntity::getEntityUsers($db, $user->id_entity_c);
+	$TUserList=TEntity::getEntityUsers($db, $user->id_entity_c);//TODO use list of contact linked to entites linked to this group
 	foreach($TUserList as $userid) {
 		if(empty($TUserIn[$userid])) {
 			$u = new TUser;
