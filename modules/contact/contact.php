@@ -18,7 +18,7 @@ if($id_company) {
 	$parent = new TCompany;
 	$parent->load($db, $id_parent);
 	
-	$TManager = $parent->getContactForCombo($db, __get('id',0));
+	$TManager = array_merge( array(0=>' ') , $parent->getContactForCombo($db, __get('id',0)) );
 	
 }
 

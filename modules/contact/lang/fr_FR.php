@@ -4,7 +4,7 @@ $language=array(
 	// Fields
 	'Lastname'=>'Nom'
 	,'Firstname'=>'Prénom'
-	,'Name'=>'Nom complet'
+	,'Name'=>'Nom'
 	,'Phone'=>'Téléphone'
 	,'Fax'=>'Fax'
 	,'Email'=>'E-mail'
