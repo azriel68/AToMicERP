@@ -18,6 +18,8 @@ if($action!==false ) {
 	}
 	else if($action=='save') {
 		$successMsg = __tr('Company saved');
+		
+		// TODO if set as entity, add user group to this entity
 	}
 
 
@@ -71,27 +73,6 @@ if($action!==false ) {
 }
 else {
 	print TTemplate::liste($conf, $user, $db, $company, 'companyList');
-	/*
-	// Data table test
-	$tbs=new TTemplateTBS;
-	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company,'list')
-		,array(
-			'button'=>TTemplate::buttons($user, $company, 'list')
-		)
-		,array(
-			'tpl'=>array(
-				'header'=>TTemplate::header($conf)
-				,'footer'=>TTemplate::footer($conf)
-				,'menu'=>TTemplate::menu($conf, $user)
-				,'http'=>HTTP
-				,'self'=>$_SERVER['PHP_SELF']
-				,'list'=>TTemplate::listeDataTable($conf, $user, $db, $company, 'companyListDT')
-			)
-		)
-	));
-	 * 
-	 */
 }
 
 $db->close();
