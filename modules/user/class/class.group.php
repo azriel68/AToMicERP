@@ -42,6 +42,13 @@ class TGroup extends TObjetStd {
 		return false;
 		
 	}
+	function save(&$db) {
+				
+		parent::save($db);
+		
+		//TODO if no entities linked, link default from $this->id_entity 
+		
+	}
 	
 	static function getEntityTags(&$db, $idGroup) {
 		
