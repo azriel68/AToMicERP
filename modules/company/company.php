@@ -18,6 +18,8 @@ if($action!==false ) {
 	}
 	else if($action=='save') {
 		$successMsg = __tr('Company saved');
+		
+		// TODO if set as entity, add user group to this entity
 	}
 
 
@@ -38,6 +40,7 @@ if($action!==false ) {
 		,'supplierRef'=>$form->texte('', 'supplierRef', $company->supplierRef, 80)
 		,'isCustomer'=>$form->combo('', 'isCustomer', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isCustomer)
 		,'isSupplier'=>$form->combo('', 'isSupplier', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isSupplier)
+		,'isEntity'=>$form->combo('', 'isEntity', TDictionary::get($db, $user, $company->id_entity, 'yesno'), $company->isEntity)
 		
 		,'logo_input'=>$form->fichier('', 'logo_input', '', 80)
 		
@@ -47,12 +50,15 @@ if($action!==false ) {
 	);
 	$tbs=new TTemplateTBS;
 	
+	$TButtons = TTemplate::buttons($user, $company, $action);
+	
 	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company)
 		,array(
-			'button'=>TTemplate::buttons($user, $company, $action)
+			'button'=>$TButtons
 		)
 		,array(
 			'company'=>$TForm
+			,'user'=>$user
 			,'tpl'=>array(
 				'header'=>TTemplate::header($conf, __tr('Company : ').$company->name, $successMsg  )
 				,'footer'=>TTemplate::footer($conf)
@@ -67,27 +73,6 @@ if($action!==false ) {
 }
 else {
 	print TTemplate::liste($conf, $user, $db, $company, 'companyList');
-	/*
-	// Data table test
-	$tbs=new TTemplateTBS;
-	
-	print __tr_view($tbs->render(TTemplate::getTemplate($conf, $company,'list')
-		,array(
-			'button'=>TTemplate::buttons($user, $company, 'list')
-		)
-		,array(
-			'tpl'=>array(
-				'header'=>TTemplate::header($conf)
-				,'footer'=>TTemplate::footer($conf)
-				,'menu'=>TTemplate::menu($conf, $user)
-				,'http'=>HTTP
-				,'self'=>$_SERVER['PHP_SELF']
-				,'list'=>TTemplate::listeDataTable($conf, $user, $db, $company, 'companyListDT')
-			)
-		)
-	));
-	 * 
-	 */
 }
 
 $db->close();

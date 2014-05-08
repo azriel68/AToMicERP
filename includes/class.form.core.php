@@ -273,7 +273,15 @@ function password($pLib,$pName,$pVal,$pTaille,$pTailleMax=0, $plus="" ,$class="t
   if ($pTailleMax==0) 
      $pTailleMax=$pTaille;
   $field = '<input class="'.$class.'" TYPE="PASSWORD" id="'.$pId.'" NAME="'.$pName.'" VALUE="'.$pVal.'" SIZE="'.$pTaille.'" MAXLENGTH="'.$pTailleMax.'"  '.$plus.' />';
-  return $lib." ".$field;
+  
+  if ($this->type_aff =='view'){
+   	return $lib.' **********';
+  }
+  else {
+  	return $lib." ".$field;	
+  }	  
+  
+  
 }
 
 

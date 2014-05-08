@@ -22,6 +22,7 @@
 			}
 			
 		}
+		
 	</script>
 
 	<form name="formTCompany" action="[tpl.self]" method="post" enctype="multipart/form-data">
@@ -68,6 +69,9 @@
 			</tr>
 			<tr>
 				<td>__tr(IsSupplier)__</td><td>[company.isSupplier;htmlconv=no]</td>
+			</tr>
+			<tr>[onshow; block=tr;when [user.isSuperadmin]==1]
+				<td>__tr(IsEntity)__</td><td>[company.isEntity;htmlconv=no]</td>
 			</tr>
 			[onshow; block=begin; when [tpl.mode]=='edit']
 			<tr>

@@ -6,7 +6,7 @@ $language=array(
 	 /*************************************************
 	 * Fields
 	 *************************************************/
-	,'Name'=>'Raison sociale'
+	,'CompanyName'=>'Raison sociale'
 	,'Phone'=>'Téléphone'
 	,'Email'=>'E-mail'
 	,'Web'=>'Site web'

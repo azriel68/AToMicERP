@@ -26,7 +26,7 @@ if($action!==false ) {
 		
 		,'lastname'=>$form->texte('', 'lastname', $u->lastname, 80)
 		,'firstname'=>$form->texte('', 'firstname', $u->firstname, 80)
-		,'password'=>$form->texte('', 'password', $u->password, 80)
+		,'password'=> $form->password('', 'password', $u->password, 80) 
 		,'login'=>$form->texte('', 'login', $u->login, 80)
 		,'email'=>$form->texte('', 'email', $u->email, 80)
 		
