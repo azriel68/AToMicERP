@@ -15,6 +15,30 @@ class TProduct extends TObjetStd {
 		
 		$this->setChild('TPrice','id_product');
 	}
+	
+	function save(&$db) {
+		
+		if($this->isRefUnique($db)) {
+			
+			return parent::save($db);
+		}
+		else {
+			$this->error = 'DuplicateProductReference';	
+			return false;
+		}
+		
+	}
+	
+	function isRefUnique(&$db) {
+		global $user;
+		
+		$db->Execute("SELECT count(*) as nb FROM ".$this->get_table()." WHERE id!=".$this->id." ref=".$db->quote($this->ref)." AND id_entity=".$this->id_entity  );
+		$db->Get_line();
+		
+		return ($db->Get_field('nb')==0);
+		
+	}
+	
 	static function getProductForCombo(&$db, $idEntities='') {
 		$sql="SELECT id,CONCAT('[',ref,'] ',label) as label FROM ".DB_PREFIX."product WHERE 1";
 		if(!empty($idEntities)) $sql.=' AND id_entity IN ('.$idEntities.') ';

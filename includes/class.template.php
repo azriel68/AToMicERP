@@ -46,7 +46,9 @@ class TTemplate {
 						$object->id_entity = $user->id_entity;
 					}
 					
-					$object->save($db);
+					if(!$object->save($db)) {
+						TTemplate::error($object->error);	
+					}
 					return 'save';
 					break;
 					
