@@ -8,6 +8,16 @@ if(!$user->isLogged()) {
 
 $db=new TPDOdb;
 $u = new TUser;
+
+if(__get('action')=='new') {
+	
+	$db->Execute("SELECT id FROM ".DB_PREFIX."group WHERE code='users' AND id_entity=".$user->id_entity_c);
+	$obj = $db->Get_line();
+	
+	header('location:'.Tools::getUrl('user/usergroup.php?id_group='.$obj->id));
+	
+}
+
 $action = TTemplate::actions($db, $user, $u);
 if($action!==false ) {
 
@@ -17,7 +27,7 @@ if($action!==false ) {
 		$user->entity->addContact($u);
 		$user->entity->save($db);
 	}
-
+// TODO put in card local function
 	$form=new TFormCore;
 	$form->Set_typeaff($action);
 	

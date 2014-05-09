@@ -8,7 +8,7 @@
 		,'Password'=>'Mot de passe'
 	
 		// Buttons
-		,'newTUser'=>'Nouvel utilisateur'
+		,'newTUser'=>'Créer un utilisateur depuis un contact'
 		,'editTUser'=>'Modifier'
 		,'deleteTUser'=>'Supprimer'
 		,'saveTUser'=>'Enregistrer'

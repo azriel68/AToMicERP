@@ -53,10 +53,11 @@
 	
 	@$conf->list->TUser->userList=array(
 		'sql'=>"SELECT DISTINCT u.id,u.login, u.firstname,u.lastname FROM ".DB_PREFIX."contact u 
-			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
-			LEFT JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
-			LEFT JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)
-			LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group = gu.id_group)
+			INNER JOIN ".DB_PREFIX."contact_to_object cto ON (u.id = cto.id_contact)
+			INNER JOIN ".DB_PREFIX."company c ON (c.id = cto.id_object AND cto.objectType = 'company')
+			INNER JOIN ".DB_PREFIX."group_user gu ON (u.id = gu.id_user)
+			INNER JOIN ".DB_PREFIX."group g ON (g.id=gu.id_group AND g.code='users')
+			INNER JOIN ".DB_PREFIX."group_entity ge ON (ge.id_group = gu.id_group)
 					WHERE ge.id_entity IN (@getEntity@)"
 		,'param'=>array(
 			'title'=>array(
@@ -76,7 +77,7 @@
 	@$conf->template->TGroup->right = './template/right.html';
 	
 	@$conf->list->TGroup->groupList=array(
-		'sql'=>"SELECT g.id, g.name FROM ".DB_PREFIX."group g 
+		'sql'=>"SELECT DISTINCT g.id, g.name FROM ".DB_PREFIX."group g 
 				LEFT JOIN ".DB_PREFIX."group_entity ge ON (g.id=ge.id_group) 
 				WHERE ge.id_entity IN (@getEntity@)"
 		,'param'=>array(

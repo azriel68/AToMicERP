@@ -115,6 +115,26 @@ class TGroup extends TObjetStd {
 		
 		return $Tab;
 	}
+	/*
+	 * Get available list of user
+	 * I : db, id Group
+	 * O : Array of id User
+	 */
+	static function getAvailableUserList(&$db, $idGroup) {
+		
+		$db->Execute("SELECT DISTINCT u.id FROM ".DB_PREFIX."contact u
+			LEFT JOIN ".DB_PREFIX."contact_to_object cto ON (u.id=cto.id_contact AND objectType='company')
+			LEFT JOIN ".DB_PREFIX."group_entity ge ON (ge.id_entity=cto.id_object)
+		");
+		
+		$Tab=array();
+		while($db->Get_line()) {
+			$Tab[] = $db->Get_field('id');
+		}
+		
+		return $Tab;
+		
+	}
 }
 class TGroupEntity extends TObjetStd {
 	function __construct() {

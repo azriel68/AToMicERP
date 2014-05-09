@@ -653,6 +653,7 @@ td.projectDrag {
 	box-shadow: 1px 1px 1px #999999;
 	border:1px solid #2AA8B9;
 	text-align:center;
+	margin:0 5px 5px 0;
 }
 .userDrag ul li.userDragOut {
 	background: #333;
