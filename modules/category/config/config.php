@@ -20,6 +20,14 @@ TTemplate::addTabs($conf, 'TCompany'
 	)
 ));
 
+TTemplate::addTabs($conf, 'TProduct' 
+	,array(
+		'category'=>array('label'=>'__tr(Categories)__'
+		,'url'=>HTTP.'modules/category/category.php?action=view&id=@id@&object=TProduct'
+	)
+));
+
+
 TTemplate::add($conf, 'TCategory','card', ROOT.'modules/category/template/category.html');
 
 @$conf->list->TCategory->CategoryList=array(

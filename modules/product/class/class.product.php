@@ -1,7 +1,10 @@
 <?
 class TProduct extends TObjetStd {
+	
+	public $objectName = 'product';
+	
 	function __construct() { 
-		parent::set_table(DB_PREFIX.'product');
+		parent::set_table(DB_PREFIX.$this->objectName);
 		parent::add_champs('id_entity,isService','type=entier;index;');
 		parent::add_champs('ref, label, description','type=chaine;');
 		parent::add_champs('price_ht,vat_rate,packaging','type=float;'); // TODO price_ht -> price ?
@@ -14,6 +17,7 @@ class TProduct extends TObjetStd {
 		parent::_init_vars();
 		
 		$this->setChild('TPrice','id_product');
+		$this -> setChild('TCategoryLink', array('id_object', $this->objectName) );
 	}
 	
 	function save(&$db) {

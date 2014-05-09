@@ -15,7 +15,28 @@ class TCategory extends TObjetStd {
 		$this->setChild('TCategoryLink', 'id_category');
 		
 	}
-}
+	
+	function save(&$db) {
+		
+		if($this->isUnique($db)) {
+			return parent::save($db);
+			
+		}
+		else {
+			$this->error = 'DuplicateCategoryLabel';
+			return false;
+		}
+		
+	}
+	
+	private function isUnique(&$db) {
+		$db->Execute("SELECT count(*) as nb FROM ".$this->get_table()." WHERE id!=".$this->id." AND label=".$db->quote($this->label)." AND id_entity=".$this->id_entity);
+		$obj = $db->Get_line();
+		
+		return ($obj->nb==0);
+				
+	}
+ }
 
 class TCategoryLink extends TObjetStd {
 	function __construct() {

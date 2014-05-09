@@ -12,7 +12,7 @@ $className = __get('object');
 
 $object = new $className;
 $object->load($db, __get('id',0,'integer'));
-
+//var_dump($object);
 $objectName = $object->objectName or die("Can't find objectName in object ".$className);
 
 $object->loadChildSubObject($db, 'TCategoryLink_'.$objectName, 'category', 'id_category');
@@ -27,13 +27,16 @@ $object->loadChildSubObject($db, 'TCategoryLink_'.$objectName, 'category', 'id_c
 			//new category
 			
 			$category->label = __get('categoryname');
-			$category->save($db);
+			if($category->save($db)===false) {
+				TTemplate::error($category->error);
+			}
 		}
 		
-		$k = $object->addChild($db, 'TCategoryLink');
-		$object->TCategoryLink[$k]->id_category = $category->id;
+		$k = $object->addChild($db, 'TCategoryLink_'.$object->objectName);
+		$object->{'TCategoryLink_'.$object->objectName}[$k]->id_category = $category->id;
 		$object->save($db);
 	
+		$object->{'TCategoryLink_'.$object->objectName}[$k]->category->label = $category->label;
 	}
 	else if($action=='delete') {
 		header('location:'.$_SERVER['PHP_SELF'].'?delete=ok');
